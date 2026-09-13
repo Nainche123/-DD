@@ -1,1 +1,51 @@
-# -DD
+# VEXO HUB
+
+디스코드 자판기봇, 서버 템플릿, 자동화, 커스텀 제작을 판매하는 웹 주문 사이트입니다.
+
+## 구매 흐름
+1. 웹에서 상품을 선택합니다.
+2. 로그인 후 디스코드 닉네임과 요청사항을 입력합니다.
+3. 주문번호와 영수증 번호가 즉시 발급됩니다.
+4. 구매자는 웹에서 `VEXO 디스코드 서버` 링크를 눌러 서버로 이동합니다.
+5. 디스코드 티켓에 주문번호와 송금 캡처를 보냅니다.
+6. 입금 확인 후 라이선스를 발급하고, 다운로드 상품은 구매자 전용 24시간 1회 다운로드 토큰을 사용할 수 있습니다.
+7. 다운로드 토큰은 구매자 계정에 묶여 있고 첫 다운로드 즉시 사용 처리됩니다.
+8. 라이선스는 최초 활성화한 구매자 계정에 귀속되어 다른 계정에서 사용할 수 없습니다.
+
+## 로컬 실행
+```bash
+npm install
+npm start
+```
+브라우저에서 `http://localhost:3000`으로 접속합니다.
+
+
+## 상품 파일
+다운로드 상품은 프로젝트의 `downloads/` 폴더에 파일을 넣습니다.
+상품의 `downloadFile` 값을 실제 파일명과 똑같이 지정합니다.
+예: `vending-bot.zip`
+
+`downloads/` 폴더는 정적 공개 폴더로 노출하지 않습니다. 다운로드 API가 로그인, 주문 소유권, 토큰, 만료시간, 1회 사용 여부를 확인합니다.
+
+## Render + GitHub
+- Build Command: `npm install`
+- Start Command: `npm start`
+- Node: 20+
+- 환경변수: `BANK_INFO`, `DISCORD_WEBHOOK_URL`, `SESSION_SECRET`
+
+## 데이터
+외부 DB는 사용하지 않습니다. 주문/회원/상품 설정은 `data/db.json`에 저장됩니다.
+Render의 파일 저장소 특성상 재시작/재배포를 고려해 Discord Webhook 백업을 함께 사용하는 것을 권장합니다.
+
+
+## 최신 UI
+첫 화면은 VEXO HUB 브랜딩과 정적 보라색 마켓 UI를 사용하며, `/assets/vexo-hub-mark.png`가 헤더·브라우저 아이콘에 사용됩니다. 무거운 웨이브 애니메이션은 사용하지 않습니다.
+## 이메일 인증 설정
+회원가입은 이메일 6자리 인증을 완료해야 진행됩니다. 메일 발송은 Resend API를 사용합니다.
+
+Render의 **Environment Variables**에 다음 값을 등록하세요.
+
+- `RESEND_API_KEY`: Resend에서 발급한 API 키
+- `RESEND_FROM`: 발신자 주소. 운영에서는 Resend에서 인증한 도메인의 주소를 권장합니다.
+
+기본값은 테스트용 `VEXO HUB <onboarding@resend.dev>`입니다. Resend 공식 Node.js/Express 방식처럼 API 키와 `from/to/subject/html`을 이용해 메일을 발송합니다.

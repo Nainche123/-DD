@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: vexo-hub
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BANK_INFO
+        sync: false
+      - key: DISCORD_INVITE_URL
+        value: https://discord.gg/kq9K7HjSXv
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true

@@ -1,0 +1,1780 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VEXO HUB | 디스코드 판매 자동화</title>
+<meta name="description" content="VEXO HUB - 디스코드 자판기봇, 서버 템플릿, 자동화, 커스텀 봇 제작">
+<link rel="icon" type="image/png" href="/assets/vexo-hub-mark.png">
+<link rel="apple-touch-icon" href="/assets/vexo-hub-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090d;
+  --surface:#11151d;
+  --surface-2:#171c26;
+  --surface-3:#202633;
+  --line:#2a303b;
+  --line-2:#3a4351;
+  --text:#f7f8fb;
+  --soft:#c2c8d3;
+  --muted:#87909f;
+  --blue:#4f8cff;
+  --cyan:#22d3ee;
+  --green:#22c55e;
+  --amber:#8b5cf6;
+  --red:#fb7185;
+  --shadow:0 18px 50px rgba(0,0,0,.35);
+  --radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:Pretendard,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    linear-gradient(145deg,rgba(79,140,255,.08),transparent 34%),
+    linear-gradient(25deg,transparent 50%,rgba(34,197,94,.07)),
+    var(--bg);
+  color:var(--text);
+  line-height:1.55;
+  letter-spacing:0;
+}
+/* ===== lightweight purple atmosphere ===== */
+.atmosphere{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.62;background:radial-gradient(ellipse 58% 34% at 74% 9%,rgba(139,92,246,.16),transparent 70%),radial-gradient(ellipse 52% 30% at 18% 42%,rgba(126,87,194,.075),transparent 72%),radial-gradient(ellipse 72% 36% at 60% 100%,rgba(96,53,160,.08),transparent 72%)}
+.atmosphere:before,.atmosphere:after{content:"";position:absolute;pointer-events:none;border-radius:50%;background:rgba(139,92,246,.05)}
+.atmosphere:before{width:42vw;height:20vw;right:-8vw;top:20vh}.atmosphere:after{width:38vw;height:18vw;left:-8vw;bottom:10vh}
+.value-banner{position:relative;z-index:2;margin-bottom:18px;padding:18px 20px 17px 18px;border:1px solid rgba(167,139,250,.34);border-radius:16px;background:linear-gradient(120deg,rgba(124,58,237,.19),rgba(18,13,31,.94) 48%,rgba(90,48,165,.13));box-shadow:0 18px 48px rgba(60,27,110,.16),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden}.value-banner:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#c084fc,#7c3aed);box-shadow:0 0 18px rgba(168,85,247,.55)}.value-banner:after{content:"";position:absolute;right:-40px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.16),transparent 68%);pointer-events:none}.value-banner .banner-label{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;color:#c9b3ff}.value-banner strong{display:block;margin-top:5px;font-size:16px;font-weight:900;letter-spacing:-.02em}.value-banner span{display:block;margin-top:5px;color:#ddd3ee;font-size:12px;line-height:1.72;max-width:980px}.hero-visual{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(9,6,17,.70),rgba(12,8,20,.92)),url('/assets/vexo-hero-visual.webp') center 28%/cover no-repeat,rgba(17,21,29,.82);background-blend-mode:normal}.hero-visual:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 24%,rgba(168,85,247,.22),transparent 40%),linear-gradient(90deg,rgba(12,8,20,.88),rgba(12,8,20,.48) 56%,rgba(12,8,20,.74));pointer-events:none}.hero-visual>*{position:relative;z-index:1}.hero-visual:after{content:"VEXO HUB";position:absolute;right:18px;bottom:16px;font-size:10px;letter-spacing:.22em;font-weight:900;color:rgba(220,205,255,.72);z-index:2}.hero-image-badge{position:absolute;top:16px;right:16px;z-index:3;padding:7px 10px;border-radius:999px;border:1px solid rgba(196,165,255,.28);background:rgba(9,6,18,.72);color:#e8ddff;font-size:10px;font-weight:900;backdrop-filter:blur(8px)}
+
+.main-content{position:relative;z-index:1}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),transparent 78%);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{width:min(1180px,100%);margin:0 auto;padding:0 20px}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.mini{font-size:12px;color:var(--muted)}
+.top{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(7,9,13,.82);
+  border-bottom:1px solid var(--line);
+  
+}
+.nav{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:max-content;
+  font-size:17px;
+  font-weight:900;
+  text-decoration:none;
+}
+.brand-mark{
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  color:#fff;
+  box-shadow:0 10px 24px rgba(79,140,255,.28);
+}
+.nav-links{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--soft);font-weight:700}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:#fff}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.online-pill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:34px;
+  padding:7px 11px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,.035);
+  color:var(--soft);
+  font-size:12px;
+  font-weight:800;
+}
+.online-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 14px rgba(34,197,94,.7);
+}
+.btn{
+  min-height:40px;
+  border:1px solid transparent;
+  border-radius:8px;
+  padding:10px 15px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:#fff;
+  background:var(--surface-2);
+  font-weight:900;
+  font-size:13px;
+  text-decoration:none;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease;
+}
+.btn:hover{transform:translateY(-1px);border-color:var(--line-2)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:#fff;color:#080a0f;border-color:#fff}
+.btn.primary:hover{box-shadow:0 14px 32px rgba(255,255,255,.16)}
+.btn.blue{background:linear-gradient(135deg,var(--blue),#27b7d7);border-color:rgba(255,255,255,.12)}
+.btn.ghost{background:rgba(255,255,255,.035);border-color:var(--line);color:var(--soft)}
+.btn.ghost:hover{color:#fff;background:rgba(255,255,255,.07)}
+.btn.danger{color:var(--red);border-color:rgba(251,113,133,.28);background:rgba(251,113,133,.08)}
+.btn.block{width:100%}
+.btn.small{min-height:32px;padding:6px 10px;font-size:12px}
+.hero{padding:56px 0 28px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:18px;align-items:stretch}
+.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:rgba(17,21,29,.76);
+  box-shadow:0 1px 0 rgba(255,255,255,.04) inset;
+}
+.hero-copy{
+  padding:42px;
+  overflow:hidden;
+  position:relative;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border:1px solid rgba(34,211,238,.28);
+  border-radius:999px;
+  color:#b9f3ff;
+  background:rgba(34,211,238,.08);
+  font-size:12px;
+  font-weight:900;
+}
+.hero h1{
+  margin-top:20px;
+  max-width:720px;
+  font-size:68px;
+  line-height:.98;
+  font-weight:900;
+}
+.hero h1 span{color:#9ec5ff}
+.hero-desc{
+  margin-top:20px;
+  max-width:640px;
+  color:var(--soft);
+  font-size:16px;
+  line-height:1.82;
+}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.hero-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:28px;
+}
+.metric{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(0,0,0,.18);
+}
+.metric b{display:block;font-size:22px}
+.metric span{display:block;margin-top:4px;color:var(--muted);font-size:12px;font-weight:700}
+.hero-visual{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.preview-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:4px 2px 8px;
+}
+.preview-head b{font-size:15px}
+.ticket-status{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:#bbf7d0;
+  font-size:12px;
+  font-weight:900;
+}
+.ticket-status:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+.preview-screen{
+  min-height:330px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.preview-panel{
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#0c1017;
+  padding:14px;
+}
+.preview-order{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.preview-order strong{display:block;font-size:15px}
+.preview-order span{color:var(--muted);font-size:12px}
+.price-chip{
+  min-width:max-content;
+  border-radius:999px;
+  padding:7px 10px;
+  background:rgba(245,181,68,.12);
+  color:#ffd891;
+  font-size:12px;
+  font-weight:900;
+}
+.preview-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.flow-step{
+  min-height:82px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+  padding:12px;
+}
+.flow-step b{display:block;font-size:13px}
+.flow-step span{display:block;margin-top:7px;color:var(--muted);font-size:12px}
+.preview-note{
+  border-left:3px solid var(--cyan);
+  padding:12px 12px 12px 14px;
+  color:var(--soft);
+  background:rgba(34,211,238,.07);
+  border-radius:8px;
+  font-size:13px;
+}
+.section{padding:44px 0}
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:18px;
+}
+.section-head h2{font-size:30px;font-weight:900}
+.section-head p{margin-top:5px;color:var(--muted);font-size:14px}
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab,.segment{
+  min-height:36px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:8px 13px;
+  color:var(--soft);
+  background:rgba(255,255,255,.035);
+  font-size:13px;
+  font-weight:900;
+}
+.tab:hover,.segment:hover{color:#fff;border-color:var(--line-2)}
+.tab.active,.segment.active{background:#fff;color:#080a0f;border-color:#fff}
+.searchbar{display:flex;gap:8px;flex-wrap:wrap}
+.input,.select,.textarea{
+  width:100%;
+  min-height:42px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#0d1118;
+  color:#fff;
+  padding:10px 12px;
+  outline:none;
+}
+.input:focus,.select:focus,.textarea:focus{border-color:rgba(79,140,255,.7)}
+.textarea{min-height:96px;resize:vertical}
+.searchbar .input{width:220px}
+.searchbar .select{width:150px}
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tool-card{padding:22px;background:rgba(20,24,33,.78)}
+.tool-card.featured{border-color:rgba(79,140,255,.55);box-shadow:0 18px 55px rgba(79,140,255,.13)}
+.tool-kicker{font-size:12px;color:var(--cyan);font-weight:900}
+.tool-card h3{margin-top:8px;font-size:20px}
+.tool-card p{margin-top:8px;color:var(--soft);font-size:14px;line-height:1.7}
+.tool-price{margin:16px 0;font-size:28px;font-weight:900}
+.tool-price span{font-size:13px;color:var(--muted);font-weight:700}
+.recommend-layout{display:grid;grid-template-columns:360px 1fr;gap:14px}
+.choice-panel,.recommend-result{
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(17,21,29,.76);
+  padding:18px;
+}
+.choice-panel h3,.recommend-result h3{font-size:18px}
+.choice-panel p,.recommend-result p{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.7}
+.choice-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.product-card{
+  position:relative;
+  min-height:365px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease;
+}
+.product-card:before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:var(--blue);
+}
+.product-card.tone-template:before{background:var(--green)}
+.product-card.tone-auto:before{background:var(--amber)}
+.product-card.tone-dev:before{background:var(--red)}
+.product-card.tone-guide:before{background:var(--cyan)}
+.product-card.tone-pack:before{background:linear-gradient(to bottom,var(--blue),var(--amber))}
+.product-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--line-2);
+  background:rgba(25,30,41,.92);
+  box-shadow:var(--shadow);
+}
+.product-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  max-width:100%;
+  min-height:26px;
+  border-radius:999px;
+  padding:5px 9px;
+  background:rgba(255,255,255,.06);
+  color:#dce6ff;
+  font-size:11px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.category-mark{
+  min-width:42px;
+  height:34px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  background:#0d1118;
+  color:var(--soft);
+  font-size:11px;
+  font-weight:900;
+}
+.product-card h3{margin-top:16px;font-size:18px;line-height:1.35}
+.desc{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.7;flex:1}
+.feature-mini{margin-top:14px;display:grid;gap:7px}
+.feature-mini span{
+  display:flex;
+  align-items:flex-start;
+  gap:7px;
+  color:var(--soft);
+  font-size:12px;
+  line-height:1.45;
+}
+.feature-mini span:before{content:"";width:6px;height:6px;min-width:6px;margin-top:6px;border-radius:50%;background:var(--cyan)}
+.price{margin-top:16px;font-size:27px;font-weight:900}
+.price small{font-size:12px;color:var(--muted);font-weight:700}
+.product-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.notice-box{
+  padding:16px;
+  background:rgba(245,181,68,.08);
+  border-color:rgba(245,181,68,.24);
+  color:#ffe3a8;
+  font-size:13px;
+  line-height:1.7;
+}
+.guide-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.guide-item{padding:18px;background:rgba(17,21,29,.72)}
+.guide-item b{display:block;color:#fff;font-size:15px}
+.guide-item span{display:block;margin-top:8px;color:var(--muted);font-size:13px;line-height:1.65}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.faq-grid details{
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(17,21,29,.72);
+  padding:16px;
+}
+.faq-grid summary{font-weight:900;cursor:pointer}
+.faq-grid p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.7}
+.orders-wrap{display:grid;gap:10px}
+.order-card{
+  padding:16px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:flex-start;
+}
+.status{
+  display:inline-flex;
+  min-height:26px;
+  align-items:center;
+  border-radius:999px;
+  padding:5px 9px;
+  background:rgba(255,255,255,.07);
+  color:var(--soft);
+  font-size:12px;
+  font-weight:900;
+}
+.status.ok{background:rgba(34,197,94,.12);color:#a7f3d0}
+.status.warn{background:rgba(245,181,68,.12);color:#ffd891}
+.status.stop{background:rgba(251,113,133,.12);color:#fecdd3}
+.empty{
+  min-height:120px;
+  display:grid;
+  place-items:center;
+  border:1px dashed var(--line-2);
+  border-radius:8px;
+  color:var(--muted);
+  text-align:center;
+  padding:22px;
+}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.field label{font-size:12px;color:var(--muted);font-weight:900}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:8px}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th,.table td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;white-space:nowrap}
+.table tr:last-child td{border-bottom:0}
+.table th{background:#0d1118;color:var(--muted);font-size:12px}
+.table .select{min-height:32px;padding:5px 8px}
+.footer{margin-top:24px;padding:36px 0 64px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:rgba(0,0,0,.72);
+  
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(560px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#0e1219;
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.modal-head h3{font-size:22px}
+.x{
+  width:34px;
+  height:34px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+  color:var(--soft);
+  font-size:22px;
+}
+.detail-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.detail-price{font-size:30px;font-weight:900;margin:14px 0 10px}
+.feature-list{list-style:none;margin-top:10px;display:grid;gap:8px}
+.feature-list li{
+  padding:10px 11px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  color:var(--soft);
+  background:rgba(255,255,255,.035);
+  font-size:13px;
+}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%) translateY(12px);
+  z-index:120;
+  max-width:min(460px,calc(100% - 28px));
+  padding:12px 14px;
+  border:1px solid var(--line-2);
+  border-radius:8px;
+  background:#10151d;
+  color:#fff;
+  box-shadow:var(--shadow);
+  opacity:0;
+  pointer-events:none;
+  transition:.18s ease;
+  font-size:13px;
+  font-weight:800;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:980px){
+  .hero-grid,.recommend-layout{grid-template-columns:1fr}
+  .hero h1{font-size:52px}
+  .grid,.offer-grid{grid-template-columns:1fr 1fr}
+  .guide-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+
+/* ===== conversion polish ===== */
+.promo-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:14px}
+.promo-card{border:1px solid rgba(167,139,250,.22);border-radius:12px;background:linear-gradient(135deg,rgba(139,92,246,.14),rgba(17,21,29,.85));padding:20px;box-shadow:0 18px 55px rgba(87,45,160,.10)}
+.promo-card strong{font-size:20px}.promo-card p{margin-top:7px;color:var(--soft);font-size:13px;line-height:1.7}.promo-chip{display:inline-flex;margin-top:12px;padding:7px 10px;border-radius:999px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.2);color:#e6d9ff;font-size:11px;font-weight:900}
+.benefit-line{margin-top:10px;padding:10px 12px;border:1px dashed rgba(167,139,250,.28);background:rgba(139,92,246,.06);border-radius:8px;color:#e4d9ff;font-size:12px}
+.discount-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:13px}.discount-row b{color:#d4b9ff}.order-total-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:10px;border-top:1px solid var(--line)}
+@media(max-width:760px){.promo-grid{grid-template-columns:1fr}}
+
+@media(max-width:640px){
+  .wrap{padding:0 14px}
+  .nav{height:auto;min-height:64px;align-items:flex-start;padding:12px 0;flex-direction:column}
+  .nav-actions{width:100%;justify-content:space-between}
+  .online-pill{display:none}
+  .hero{padding-top:34px}
+  .hero-copy{padding:26px 20px}
+  .hero h1{font-size:42px}
+  .hero-metrics,.grid,.offer-grid,.guide-grid,.faq-grid{grid-template-columns:1fr}
+  .preview-flow{grid-template-columns:1fr}
+  .section-head,.toolbar{align-items:flex-start;flex-direction:column}
+  .searchbar,.searchbar .input,.searchbar .select{width:100%}
+  .product-actions{grid-template-columns:1fr}
+  .order-card{grid-template-columns:1fr}
+}
+
+/* ===== VEXO conversion UI upgrade ===== */
+:root{--brand:#6ea0ff;--brand-2:#35d9ff;--gold:#b794f6}
+.top{box-shadow:0 8px 32px rgba(0,0,0,.18)}
+.brand-mark{position:relative;overflow:hidden}
+.hero-copy{background:radial-gradient(circle at 85% 8%,rgba(79,140,255,.18),transparent 30%),radial-gradient(circle at 20% 100%,rgba(34,211,238,.08),transparent 30%),rgba(17,21,29,.78)}
+.hero h1{letter-spacing:-2.4px}
+.hero h1 span{background:linear-gradient(90deg,#fff,#9ec5ff 52%,#61e8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.trust-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.trust-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03);color:var(--soft);font-size:12px;font-weight:800}
+.trust-chip b{color:#fff}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.hero-badge{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:11px;color:var(--soft);font-weight:900}
+.sticky-buy{position:fixed;left:50%;bottom:15px;transform:translate(-50%,120px);z-index:90;width:min(620px,calc(100% - 24px));display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px 9px 14px;border:1px solid var(--line-2);border-radius:999px;background:rgba(13,17,24,.88);box-shadow:0 18px 60px rgba(0,0,0,.42);opacity:0;transition:.22s ease}
+.sticky-buy.show{transform:translate(-50%,0);opacity:1}
+.sticky-buy .sticky-text{font-size:12px;color:var(--soft);font-weight:800}
+.cart-count{min-width:20px;height:20px;padding:0 6px;border-radius:999px;display:inline-grid;place-items:center;background:#fff;color:#0a0d12;font-size:11px;font-weight:900}
+.cart-fab{position:fixed;right:18px;bottom:18px;z-index:89;width:54px;height:54px;border-radius:50%;border:1px solid var(--line-2);background:#fff;color:#0a0d12;font-size:20px;font-weight:900;box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.cart-fab span{position:absolute;right:-2px;top:-3px}
+.promo{margin:0 0 18px;padding:13px 15px;border:1px solid rgba(110,160,255,.24);border-radius:12px;background:linear-gradient(90deg,rgba(79,140,255,.1),rgba(34,211,238,.06));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.promo b{font-size:13px}.promo span{color:var(--muted);font-size:12px}
+.offer-grid .tool-card{position:relative;overflow:hidden}.tool-card:after{content:"";position:absolute;right:-35px;top:-35px;width:110px;height:110px;border-radius:50%;background:rgba(79,140,255,.08)}
+.tool-card.featured{transform:translateY(-2px)}
+.quick-points{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.quick-point{padding:15px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025)}
+.quick-point b{display:block;font-size:14px}.quick-point span{display:block;margin-top:5px;color:var(--muted);font-size:12px;line-height:1.6}
+.section.alt{padding-top:16px}.price-anchor{margin-top:4px;color:var(--muted);font-size:11px}.price-anchor s{opacity:.65;margin-right:5px}
+.cart-list{display:grid;gap:8px;margin:12px 0}
+.cart-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025)}
+.cart-row small{display:block;color:var(--muted);margin-top:3px}
+.cart-total{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-top:1px solid var(--line);font-weight:900}
+.empty-cart{padding:20px;border:1px dashed var(--line-2);border-radius:10px;text-align:center;color:var(--muted)}
+.order-highlight{margin-top:12px;padding:13px;border-radius:10px;border:1px solid rgba(34,197,94,.22);background:rgba(34,197,94,.07);color:#c9f8d8;font-size:12px}
+.footer-cta{padding:24px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,rgba(79,140,255,.09),rgba(34,211,238,.04));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footer-cta h3{font-size:20px}.footer-cta p{margin-top:5px;color:var(--muted);font-size:13px}
+
+/* ===== lightweight premium polish ===== */
+.catalog-title{display:flex;align-items:center;gap:9px;margin-right:2px;white-space:nowrap}.catalog-title span{font-size:10px;letter-spacing:.18em;color:#b9a0ff;font-weight:900}.catalog-title b{font-size:13px;color:#eee8ff}
+.select-shell{position:relative;display:flex;align-items:center;width:188px}
+.select-shell .select{width:100%;height:46px;min-height:46px;padding:0 38px 0 40px;appearance:none;-webkit-appearance:none;background:linear-gradient(180deg,rgba(31,25,47,.98),rgba(13,11,20,.98));border:1px solid rgba(167,139,250,.34);border-radius:12px;color:#f6f1ff;font-weight:800;box-shadow:0 10px 28px rgba(53,24,90,.18),inset 0 1px 0 rgba(255,255,255,.05);outline:none;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease}
+.select-shell .select:hover{border-color:rgba(196,165,255,.7);box-shadow:0 12px 30px rgba(73,34,120,.24),inset 0 1px 0 rgba(255,255,255,.07);transform:translateY(-1px)}
+.select-shell .select:focus{border-color:rgba(196,165,255,.88);box-shadow:0 0 0 3px rgba(139,92,246,.16),0 12px 30px rgba(73,34,120,.24)}
+.select-shell .select option{background:#171224;color:#f7f2ff;font-weight:700;padding:10px}
+.select-icon{position:absolute;left:13px;z-index:2;color:#b995ff;font-size:15px;font-weight:900;pointer-events:none}
+.select-chevron{position:absolute;right:13px;z-index:2;color:#dbcfff;font-size:16px;font-weight:900;pointer-events:none;top:10px} 
+
+.hero-hook{margin-top:16px;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid rgba(167,139,250,.22);border-radius:13px;background:linear-gradient(100deg,rgba(124,58,237,.11),rgba(22,18,31,.78));box-shadow:0 14px 38px rgba(55,25,93,.10)}.hook-kicker{display:block;color:#b9a0ff;font-size:10px;letter-spacing:.16em;font-weight:900}.hero-hook strong{display:block;margin-top:4px;font-size:13px}.hero-hook p{margin-top:3px;color:var(--muted);font-size:11px}.hero-hook .btn{flex:none}
+.product-card{box-shadow:0 10px 34px rgba(0,0,0,.14),0 1px 0 rgba(255,255,255,.04) inset}.product-card:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.20),0 1px 0 rgba(255,255,255,.04) inset}
+.quick-point,.promo-card,.tool-card{box-shadow:0 10px 32px rgba(0,0,0,.10)}
+@media(max-width:760px){.hero-visual{background-position:center top}.hero-image-badge{top:12px;right:12px}.value-banner{padding:16px 16px 15px 15px}.value-banner strong{font-size:14px}}
+@media(max-width:760px){.catalog-title{width:100%;margin-bottom:2px}.select-shell{width:100%}.hero-hook{align-items:flex-start}.hero-hook .btn{margin-top:2px}}
+
+@media(max-width:640px){
+  .sticky-buy{bottom:10px}.cart-fab{right:12px;bottom:74px}.quick-points{grid-template-columns:1fr}
+  .cart-row{grid-template-columns:1fr auto}.cart-row .btn{grid-column:1 / -1;width:100%}
+}
+
+
+/* ===== VEXO HUB purple visual refresh ===== */
+:root{
+  --brand:#8b5cf6;
+  --brand-2:#c084fc;
+  --cyan:#66557f;
+  --amber:#9b7de6;
+  --gold:#b794f6;
+  --gold-soft:#ddccff;
+  --gold-deep:#6d4cc2;
+  --purple-glow:rgba(139,92,246,.26);
+}
+body{
+  background:
+    radial-gradient(circle at 78% 8%,rgba(139,92,246,.18),transparent 27%),
+    radial-gradient(circle at 12% 32%,rgba(192,132,252,.07),transparent 24%),
+    linear-gradient(145deg,rgba(139,92,246,.055),transparent 38%),
+    var(--bg);
+}
+body:before{
+  background-image:
+    linear-gradient(rgba(168,139,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(168,139,255,.045) 1px,transparent 1px);
+}
+.brand-mark{
+  width:38px;height:38px;border-radius:11px;
+  background:radial-gradient(circle at 50% 45%,rgba(139,92,246,.16),rgba(14,10,22,.96));
+  border:1px solid rgba(167,139,250,.35);
+  box-shadow:0 8px 26px rgba(124,58,237,.26),0 0 0 1px rgba(255,255,255,.03) inset;
+  padding:3px;
+}
+.brand-mark img{width:100%;height:100%;display:block;object-fit:cover;border-radius:9px}
+.hero-copy{
+  background:
+    radial-gradient(circle at 85% 8%,rgba(139,92,246,.22),transparent 30%),
+    radial-gradient(circle at 20% 100%,rgba(192,132,252,.10),transparent 30%),
+    rgba(17,21,29,.78)
+}
+.hero h1 span{
+  background:linear-gradient(90deg,#fff,#d9c7ff 52%,#b98cff);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero-badge.hot{
+  border-color:rgba(167,139,250,.32);
+  background:rgba(139,92,246,.10);
+  color:#e4d7ff
+}
+.btn.primary{
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  color:#fff;
+  border-color:#a78bfa;
+  box-shadow:0 10px 28px rgba(124,58,237,.22)
+}
+.btn.primary:hover{
+  box-shadow:0 16px 36px rgba(124,58,237,.34);
+  border-color:#c4b5fd
+}
+.btn.blue{background:linear-gradient(135deg,#6543b5,#8b5cf6)}
+.price-chip{
+  background:rgba(139,92,246,.14);
+  color:#decfff;
+  border:1px solid rgba(167,139,250,.20)
+}
+.preview-note{
+  border-left-color:#9b7de6;
+  background:rgba(139,92,246,.075)
+}
+.tool-kicker{color:#c4a9ff}
+.product-card.tone-guide:before{background:#8066b6}
+.product-card.tone-auto:before{background:#9b7de6}
+.product-card.tone-pack:before{background:linear-gradient(to bottom,#7c3aed,#c084fc)}
+.feature-mini span:before{background:#a78bfa}
+.tool-card.featured{
+  border-color:rgba(167,139,250,.54);
+  box-shadow:0 18px 55px rgba(124,58,237,.15)
+}
+.badge{
+  background:rgba(139,92,246,.09);
+  color:#e1d3ff;
+  border:1px solid rgba(167,139,250,.15)
+}
+.order-card:after{
+  background:#a78bfa;
+  box-shadow:0 0 15px rgba(167,139,250,.56)
+}
+.footer-cta{
+  background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(192,132,252,.05));
+  border-color:rgba(167,139,250,.18)
+}
+.promo{
+  border-color:rgba(167,139,250,.24);
+  background:linear-gradient(90deg,rgba(139,92,246,.12),rgba(192,132,252,.06))
+}
+/* Remove warm/yellow visual leftovers from earlier versions. */
+.price-anchor s{color:#aaa}
+.preview-head .ticket-status:before{background:#a78bfa}
+
+
+.receipt-shell{padding:4px 2px 0}
+.receipt-paper{max-width:520px;margin:0 auto;background:#fff;color:#1b1724;border:1px solid #ded5ee;border-radius:10px;padding:22px;box-shadow:0 16px 44px rgba(72,36,125,.16)}
+.receipt-brand{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.receipt-kicker{font-size:10px;letter-spacing:.16em;color:#7651cf;font-weight:900}
+.receipt-brand h3{margin:4px 0 0;font-size:22px;line-height:1.2;color:#17131f}
+.receipt-paid{display:inline-flex;align-items:center;padding:6px 9px;border-radius:999px;background:#f0eafe;border:1px solid #ddd0fb;color:#7045c9;font-size:10px;font-weight:900}
+.receipt-divider{height:1px;background:#ebe6f2;margin:16px 0}
+.receipt-row{display:flex;justify-content:space-between;gap:16px;padding:5px 0;font-size:12px}
+.receipt-row span{color:#8c8597}.receipt-row b{text-align:right;word-break:break-word}
+.receipt-item{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:8px 0}
+.receipt-item div{display:flex;flex-direction:column;gap:3px;min-width:0}.receipt-item b{font-size:13px;word-break:break-word}.receipt-item span{font-size:11px;color:#8c8597}.receipt-item strong{font-size:14px;white-space:nowrap}
+.receipt-total{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-top:12px}.receipt-total span{font-size:12px;color:#7d7688}.receipt-total b{font-size:26px;color:#6e45cf;letter-spacing:-.02em}
+.receipt-account{padding:13px;border:1px solid #e4dbf5;background:#faf8ff;border-radius:9px}.receipt-account b{font-size:12px;color:#6b48bd}.receipt-account p{margin:6px 0 0;font-size:13px;font-weight:800;white-space:pre-wrap;word-break:break-word}.receipt-account small{display:block;margin-top:7px;color:#7e778a;line-height:1.55}
+.receipt-foot{margin-top:14px;text-align:center;font-size:10px;color:#9b95a6}
+.receipt-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.order-highlight{border-color:rgba(167,139,250,.24);background:rgba(139,92,246,.075);color:#e7ddff}
+@media(max-width:640px){.receipt-paper{padding:18px}.receipt-actions{grid-template-columns:1fr}.receipt-total b{font-size:22px}}
+
+/* ===== ultra-light premium polish ===== */
+.scroll-progress{position:fixed;top:0;left:0;width:100%;height:2px;background:transparent;z-index:100;pointer-events:none}.scroll-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7c3aed,#c084fc);box-shadow:0 0 14px rgba(168,85,247,.55)}
+.hero-spotlight{margin-top:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.spotlight-card{padding:12px 13px;border:1px solid rgba(167,139,250,.16);border-radius:11px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.018))}.spotlight-card b{display:block;font-size:12px}.spotlight-card span{display:block;margin-top:4px;color:var(--muted);font-size:10px;line-height:1.5}
+.memory-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:6px 9px;border-radius:999px;border:1px solid rgba(167,139,250,.18);background:rgba(139,92,246,.07);color:#d9ccff;font-size:10px;font-weight:900}.memory-chip:before{content:'✦';color:#a78bfa}
+.section-marker{display:inline-flex;align-items:center;gap:7px;color:#bfa8ff;font-size:10px;letter-spacing:.18em;font-weight:900;text-transform:uppercase}.section-marker:before{content:'';width:18px;height:1px;background:#8b5cf6;box-shadow:0 0 10px rgba(139,92,246,.45)}
+.product-card .btn.primary{min-width:0}.product-card .price{letter-spacing:-.02em}
+.back-top{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border:1px solid rgba(167,139,250,.22);border-radius:12px;background:rgba(13,10,20,.86);color:#d9ccff;display:grid;place-items:center;z-index:45;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .18s ease,transform .18s ease,background .18s ease}.back-top.show{opacity:1;transform:none;pointer-events:auto}.back-top:hover{background:rgba(124,58,237,.18)}
+@media(max-width:760px){.hero-spotlight{grid-template-columns:1fr}.back-top{right:12px;bottom:118px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none!important}.back-top{transition:none!important}}
+</style>
+
+<style id="vexo-marketplace-theme">
+:root{--violet:#8b5cf6;--violet2:#a855f7;--violet3:#c084fc;--ink:#050711;--panel:#0c0d19;--panel2:#111226;--line:rgba(151,113,255,.19)}
+html{scroll-behavior:smooth}body{background:#050711!important;color:#f8f7ff!important}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(700px 420px at 82% 8%,rgba(112,53,221,.16),transparent 68%),radial-gradient(620px 460px at 8% 20%,rgba(76,29,149,.10),transparent 70%)}
+.top{height:70px!important;background:rgba(4,6,15,.95)!important;border-bottom:1px solid rgba(139,92,246,.23)!important;box-shadow:0 10px 30px rgba(0,0,0,.18)!important}
+.nav{min-height:70px!important}.brand{gap:10px}.brand-mark{width:38px!important;height:38px!important;border-radius:12px!important;background:linear-gradient(135deg,#6d28d9,#a855f7)!important;box-shadow:0 0 28px rgba(139,92,246,.30)!important}.brand-mark img{width:29px!important;height:29px!important}
+#brandName{font-size:18px!important;letter-spacing:.03em}
+.nav-links{gap:7px!important}.nav-links a{padding:10px 13px!important;border-radius:11px!important;color:#d9d5e7!important;font-weight:800!important}.nav-links a:hover,.nav-links a.active{background:rgba(124,58,237,.12)!important;color:#e8ddff!important;box-shadow:inset 0 -2px 0 #9a6cff}
+.nav-actions{gap:8px!important}.nav-icon{position:relative;width:38px;height:38px;border:1px solid rgba(150,111,255,.16);border-radius:11px;background:rgba(13,14,26,.7);color:#fff;cursor:pointer;font-size:18px}.nav-cart-count{position:absolute;right:-4px;top:-5px;min-width:17px;height:17px;border-radius:99px;background:#a855f7;color:#fff;font-size:10px;display:grid;place-items:center;font-weight:900;border:2px solid #050711}.register-btn{padding:10px 16px!important;border-radius:13px!important}
+.main-content{background:transparent!important}.value-banner{display:none!important}
+.hero{padding:22px 0 18px!important}.hero-grid{display:block!important}.hero-copy{min-height:470px!important;padding:54px 56px!important;border:1px solid rgba(143,95,255,.26)!important;border-radius:24px!important;position:relative!important;overflow:hidden!important;background:linear-gradient(90deg,rgba(4,6,15,.985) 0%,rgba(4,6,15,.96) 38%,rgba(4,6,15,.76) 58%,rgba(4,6,15,.24) 100%),url('/assets/vexo-market-hero.webp') right center/auto 100% no-repeat,#080916!important;box-shadow:0 24px 70px rgba(27,16,62,.28),inset 0 1px 0 rgba(255,255,255,.045)!important}
+.hero-copy:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(4,5,13,.5));pointer-events:none}.hero-copy>*{position:relative;z-index:2}
+.eyebrow{display:inline-flex!important;align-items:center;gap:9px!important;border:1px solid rgba(168,85,247,.32)!important;border-radius:999px!important;padding:8px 13px!important;background:rgba(105,48,177,.09)!important;color:#d8c6ff!important;letter-spacing:.16em!important;font-size:11px!important}.eyebrow span{color:#fff;letter-spacing:.06em}
+.hero h1{font-size:clamp(46px,5vw,72px)!important;line-height:1.04!important;max-width:760px!important;letter-spacing:-.045em!important;margin-top:18px!important}.hero h1 span{color:#c084fc!important;background:linear-gradient(90deg,#fff,#c084fc 52%,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent!important}.hero-desc{max-width:610px!important;color:#d7d1e6!important;font-size:15px!important;line-height:1.8!important}.hero-cta{margin-top:24px!important}.hero-cta .btn{min-height:48px!important;padding:0 20px!important;border-radius:14px!important}.btn.primary{background:linear-gradient(135deg,#7c3aed,#a855f7 58%,#c084fc)!important;box-shadow:0 10px 30px rgba(139,92,246,.25)!important}.btn.ghost{background:rgba(14,12,27,.74)!important;border-color:rgba(165,122,255,.28)!important;color:#eee8ff!important}
+.hero-badges{display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin-top:18px!important}.hero-badge{padding:8px 11px!important;border-radius:99px!important;border:1px solid rgba(168,85,247,.2)!important;background:rgba(8,8,17,.56)!important;color:#e9e1f7!important}.hero-badge.hot{background:rgba(124,58,237,.14)!important;border-color:rgba(192,132,252,.4)!important}
+.hero-visual{display:none!important}.hero-metrics{max-width:630px!important;margin-top:26px!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important}.metric{padding:12px 14px!important;border-radius:13px!important;background:rgba(8,8,17,.55)!important;border:1px solid rgba(168,85,247,.14)!important}.metric b{font-size:16px!important}.metric span{font-size:11px!important;color:#a9a1ba!important}
+/* feature strip styled like the reference */
+.promo-grid{grid-template-columns:1.05fr .95fr!important;gap:0!important;margin-top:0!important;background:linear-gradient(180deg,#0d0e1c,#0a0b15)!important;border:1px solid rgba(138,91,246,.22)!important;border-radius:20px!important;overflow:hidden!important;box-shadow:0 14px 38px rgba(0,0,0,.18)!important}.promo-card{padding:20px 24px!important;border:0!important;border-radius:0!important;background:transparent!important;min-height:120px!important}.promo-card+ .promo-card{border-left:1px solid rgba(138,91,246,.14)!important}.promo-card .mini{color:#b99aff!important;letter-spacing:.14em!important}.promo-card strong{font-size:18px!important}.promo-card p{color:#bdb5cf!important;line-height:1.65!important}
+.section{padding:36px 0!important}.section.alt{background:linear-gradient(180deg,rgba(11,12,24,.60),rgba(7,8,16,.60))!important;border-block:1px solid rgba(139,92,246,.07)!important}.section-head h2{font-size:30px!important;letter-spacing:-.04em!important}.section-head p{color:#a6a0b0!important}.offer-grid,.grid{gap:14px!important}.tool-card,.product-card,.quick-point,.choice-panel,.recommend-result,.notice-box,.guide-item,.faq-grid details{background:linear-gradient(180deg,rgba(16,16,29,.96),rgba(9,10,18,.96))!important;border:1px solid rgba(139,92,246,.15)!important;border-radius:16px!important;box-shadow:0 12px 30px rgba(0,0,0,.12)!important}.tool-card:hover,.product-card:hover{transform:translateY(-2px);border-color:rgba(168,85,247,.38)!important;box-shadow:0 20px 45px rgba(72,33,143,.18)!important}
+.choice-panel{padding:18px!important}.segment{background:#0b0c15!important;border-color:rgba(139,92,246,.14)!important;color:#c9c3d4!important}.segment.active,.category-tab.active{background:linear-gradient(135deg,#7c3aed,#a855f7)!important;color:#fff!important;border-color:rgba(216,180,254,.34)!important}
+.product-card{overflow:hidden!important}.product-card .price{color:#fff!important;font-weight:900!important}.product-card .price small{color:#8e879d!important}.product-card .badge{background:rgba(124,58,237,.13)!important;border-color:rgba(168,85,247,.18)!important;color:#d7c3ff!important}
+/* clean the reference-style shop toolbar */
+.searchbar,.select-shell{border-radius:14px!important}.select-shell{background:linear-gradient(135deg,rgba(124,58,237,.13),rgba(13,13,27,.92))!important;border-color:rgba(168,85,247,.28)!important}.searchbar .input,.searchbar .select{background:#0a0b14!important;border-color:rgba(139,92,246,.15)!important}
+.sticky-buy{background:rgba(7,7,15,.94)!important;border-color:rgba(139,92,246,.2)!important}.cart-fab{background:linear-gradient(135deg,#7c3aed,#a855f7)!important;box-shadow:0 12px 28px rgba(124,58,237,.28)!important}
+@media(max-width:980px){.nav-links{display:none}.hero-copy{min-height:560px!important;padding:46px 34px!important;background-position:72% center!important}.hero h1{font-size:52px!important}.promo-grid{grid-template-columns:1fr!important}.promo-card+ .promo-card{border-left:0!important;border-top:1px solid rgba(138,92,246,.14)!important}}
+@media(max-width:640px){.top,.nav{min-height:64px!important;height:auto!important}.nav-actions .online-pill,.nav-actions .register-btn,.nav-actions .nav-icon:first-child{display:none}.hero{padding-top:14px!important}.hero-copy{min-height:600px!important;padding:34px 22px!important;background:linear-gradient(180deg,rgba(4,6,15,.98),rgba(4,6,15,.88) 42%,rgba(4,6,15,.52) 70%,rgba(4,6,15,.95)),url('/assets/vexo-market-hero.webp') 74% top/auto 60% no-repeat,#080916!important}.hero h1{font-size:42px!important}.hero-desc{font-size:14px!important}.hero-metrics{grid-template-columns:1fr!important}.section{padding:28px 0!important}}
+
+/* Final clean marketplace polish */
+.nav-links{gap:5px!important;padding:5px!important;border:1px solid rgba(139,92,246,.12);border-radius:14px;background:rgba(7,8,18,.52);box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.nav-links a{display:inline-flex;align-items:center;gap:5px;padding:10px 13px!important;border:1px solid transparent;color:#b9b2c9!important;border-radius:10px!important;transition:background .16s ease,border-color .16s ease,color .16s ease,transform .16s ease}
+.nav-links a:hover{background:rgba(124,58,237,.10)!important;border-color:rgba(168,85,247,.16)!important;color:#eee7ff!important;transform:translateY(-1px)}
+.nav-links a.active{background:linear-gradient(180deg,rgba(124,58,237,.20),rgba(124,58,237,.08))!important;border-color:rgba(168,85,247,.24)!important;color:#f3ebff!important;box-shadow:inset 0 -2px 0 #a855f7,0 4px 18px rgba(124,58,237,.10)}
+.nav-actions{gap:8px!important}
+.nav-icon{width:40px!important;height:40px!important;border-radius:12px!important;border:1px solid rgba(139,92,246,.14)!important;background:rgba(10,10,22,.72)!important;color:#e9e1f7!important}
+.nav-icon:hover{border-color:rgba(168,85,247,.34)!important;background:rgba(124,58,237,.10)!important;color:#fff!important}
+.hero-copy{box-shadow:0 24px 70px rgba(27,16,62,.30),inset 0 1px 0 rgba(255,255,255,.05)!important}
+.hero-copy:after{content:"";position:absolute;right:-90px;bottom:-120px;width:360px;height:240px;background:radial-gradient(circle,rgba(139,92,246,.16),transparent 68%);pointer-events:none}
+.hero-badge{backdrop-filter:none!important}
+.hero-hook{border-color:rgba(168,85,247,.20)!important;background:linear-gradient(110deg,rgba(124,58,237,.13),rgba(9,10,18,.82))!important}
+.hero-hook .btn{border-radius:11px!important}
+.section-head{align-items:end}
+.section-marker{font-size:10px;letter-spacing:.18em;color:#ae8cff;font-weight:900}
+.catalog-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.catalog-title span{padding:5px 8px;border:1px solid rgba(168,85,247,.20);border-radius:999px;background:rgba(124,58,237,.08);font-size:9px;letter-spacing:.16em;color:#cdb9ff;font-weight:900}
+.toolbar{padding:14px;border:1px solid rgba(139,92,246,.12);border-radius:18px;background:linear-gradient(180deg,rgba(10,10,20,.84),rgba(8,9,17,.74));box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.tabs{gap:7px!important}
+.tabs .tab{border-radius:11px!important;border-color:rgba(139,92,246,.12)!important;background:rgba(255,255,255,.02)!important;color:#a9a2b4!important}
+.tabs .tab.active{background:linear-gradient(135deg,rgba(124,58,237,.26),rgba(168,85,247,.10))!important;border-color:rgba(168,85,247,.30)!important;color:#f0e7ff!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.searchbar .input{border-radius:12px!important;background:rgba(6,7,15,.72)!important;border-color:rgba(139,92,246,.14)!important}
+.select-shell{border-radius:12px!important;background:rgba(6,7,15,.72)!important;border-color:rgba(139,92,246,.14)!important}
+.product-card{position:relative!important;overflow:hidden!important}
+.product-card:after{content:"";position:absolute;inset:0;background:linear-gradient(130deg,rgba(255,255,255,.025),transparent 34%,rgba(139,92,246,.035));pointer-events:none}
+.product-actions .btn{border-radius:11px!important}
+.faq-section{background:linear-gradient(180deg,rgba(8,9,18,.34),rgba(10,8,20,.66))!important}
+.faq-grid{gap:10px!important}
+.faq-grid details{position:relative!important;padding:18px 20px!important;border-radius:15px!important;background:linear-gradient(180deg,rgba(15,15,28,.96),rgba(8,9,17,.96))!important;border-color:rgba(139,92,246,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important}
+.faq-grid details[open]{border-color:rgba(168,85,247,.28)!important;background:linear-gradient(180deg,rgba(27,18,43,.96),rgba(10,9,19,.96))!important}
+.faq-grid summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-grid summary::-webkit-details-marker{display:none}
+.faq-grid summary:after{content:"+";width:26px;height:26px;display:grid;place-items:center;border:1px solid rgba(168,85,247,.18);border-radius:8px;color:#cdbbff;font-size:17px;flex:none}
+.faq-grid details[open] summary:after{content:"−";background:rgba(124,58,237,.12)}
+.guide-footer{margin-top:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(139,92,246,.12);border-radius:14px;background:rgba(10,10,20,.58);color:#9f98aa;font-size:12px}
+.guide-footer b{color:#e7dfff}
+@media(max-width:760px){.nav-links{display:none!important}.guide-footer{align-items:flex-start;flex-direction:column}.toolbar{padding:12px}.tabs{width:100%;overflow:auto;flex-wrap:nowrap}.tabs .tab{white-space:nowrap}}
+
+
+.email-verify-row{display:grid;grid-template-columns:1fr 118px;gap:8px;align-items:end}
+.email-verify-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.verify-status{margin-top:9px;padding:10px 12px;border:1px solid rgba(139,92,246,.18);border-radius:12px;background:rgba(124,58,237,.06);font-size:12px;color:var(--muted);line-height:1.6}
+.verify-status.success{color:#d9c8ff;border-color:rgba(168,85,247,.35);background:rgba(168,85,247,.08)}
+.verify-status.error{color:#ffb8c7;border-color:rgba(244,63,94,.26);background:rgba(244,63,94,.06)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+@media(max-width:640px){.email-verify-row{grid-template-columns:1fr}.email-verify-actions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="scroll-progress"><i id="scrollProgress"></i></div>
+<button class="back-top" id="backTop" aria-label="맨 위로">↑</button>
+<div class="toast" id="toast"></div>
+<button class="cart-fab" aria-label="장바구니 열기" onclick="openCart()">🛒<span class="cart-count" id="cartFabCount">0</span></button>
+<div class="sticky-buy" id="stickyBuy"><span class="sticky-text">원하는 상품을 골랐다면 장바구니에서 한 번에 주문하세요.</span><button class="btn primary small" onclick="openCart()">장바구니 열기 <span class="cart-count" id="stickyCartCount">0</span></button></div>
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="VEXO HUB 홈">
+      <span class="brand-mark"><img src="/assets/vexo-hub-mark.png" alt="VEXO" /></span>
+      <span id="brandName">VEXO HUB</span>
+    </a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a class="active" href="#top">⌂ 홈</a>
+      <a href="#products">▣ 상품</a>
+      <a href="https://discord.gg/kq9K7HjSXv" target="_blank" rel="noopener">▱ 문의하기</a>
+      <a href="#orders">▤ 주문내역</a>
+      <a href="#faq">? 자주 묻는 질문</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="nav-icon" type="button" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})" aria-label="상품 검색">⌕</button>
+      <button class="nav-icon" type="button" onclick="openCart()" aria-label="장바구니">🛒<span class="nav-cart-count" id="navCartCount">0</span></button>
+      <div class="online-pill"><span class="online-dot"></span><b id="online">0</b>명 접속중</div>
+      <button class="btn ghost" id="accountBtn">로그인</button>
+      <button class="btn primary small register-btn" onclick="openModal('register')">회원가입</button>
+    </div>
+  </div>
+</header>
+
+
+<main id="top" class="main-content">
+  <div class="wrap" style="padding-top:16px"><div class="value-banner"><div class="banner-label">✦ VEXO HUB VALUE</div><strong>VEXO HUB는 완성도 높은 서버 템플릿과 봇으로 더 편하고 오래 운영할 수 있는 환경을 만드는 곳입니다.</strong><span>구매하신 금액 이상의 가치를 느끼실 수 있도록 상품 구성과 업데이트를 계속 다듬고 있습니다. 마음에 드는 상품을 편하게 둘러보세요.</span></div></div>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">✦ PREMIUM DISCORD MARKETPLACE <span>VEXO HUB</span></div>
+        <h1>서버 템플릿과 봇으로<br><span>더 편리한 디스코드 생활을 만드세요.</span></h1>
+        <p class="hero-desc">VEXO HUB는 완성도 높은 서버 템플릿과 봇으로 더 편하고 오래 운영할 수 있는 환경을 만드는 곳입니다. 구매하신 금액 이상의 가치를 느끼실 수 있도록 상품 구성과 업데이트를 계속 다듬고 있습니다.</p>
+        <div class="hero-cta">
+          <button class="btn primary" onclick="document.querySelector('#recommend').scrollIntoView({behavior:'smooth'})">지금 바로 쇼핑하기</button>
+          <button class="btn ghost" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">VEXO HUB 둘러보기</button>
+        </div>
+        <div class="hero-badges">
+          <span class="hero-badge hot">✨ 처음 구매하기 좋은 구성</span>
+          <span class="hero-badge">⚡ 빠른 주문 접수</span>
+          <span class="hero-badge">🛡️ 디스코드 티켓 진행</span>
+        </div>
+        <div class="hero-spotlight">
+          <div class="spotlight-card"><b>⚡ 주문은 빠르게</b><span>상품을 고르고 필요한 정보만 입력해서 주문을 시작하세요.</span></div>
+          <div class="spotlight-card"><b>💬 필요한 건 티켓에서</b><span>입금 확인과 최종 전달은 디스코드에서 진행합니다.</span></div>
+          <div class="spotlight-card"><b>🔁 다시 구매하기 쉽게</b><span>주문내역에서 지난 주문을 확인하고 필요한 상품을 다시 찾을 수 있습니다.</span></div>
+        </div>
+        <span class="memory-chip">VEXO HUB · 한 번 쓰면 기억나는 보라색 스토어</span>
+        <div class="trust-strip">
+          <span class="trust-chip">✓ <b>웹 주문</b> 간편 접수</span>
+          <span class="trust-chip">✓ <b>디스코드</b> 안전한 문의</span>
+          <span class="trust-chip">✓ <b>구매 후</b> 주문내역 확인</span>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric"><b id="productCount">0</b><span>판매 상품</span></div>
+          <div class="metric"><b>1분</b><span>주문 정보 입력</span></div>
+          <div class="metric"><b>24/7</b><span>웹 주문 접수</span></div>
+        </div>
+        <div class="hero-hook">
+          <div><span class="hook-kicker">VEXO HUB PICK</span><strong>처음이라면 PRO부터 가볍게 시작해보세요.</strong><p>부담 없는 가격대부터 필요한 만큼 확장할 수 있습니다.</p></div>
+          <button class="btn primary small" onclick="scrollToProductByName('VEXO 자판기봇 PRO')">PRO 보기</button>
+        </div>
+        <div class="trust-strip">
+          <span class="trust-chip">✓ <b>회원가입 후 즉시 주문</b></span>
+          <span class="trust-chip">✓ <b>주문번호 자동 발급</b></span>
+          <span class="trust-chip">✓ <b>디스코드 연결</b></span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="VEXO 주문 흐름 미리보기">
+        <div class="hero-image-badge">✦ PREMIUM VEXO HUB</div>
+        <div class="preview-head">
+          <b>실시간 주문 흐름</b>
+          <span class="ticket-status" style="color:#d7c4ff">안전한 주문·수령</span>
+        </div>
+        <div class="preview-screen">
+          <div class="preview-panel preview-order">
+            <div>
+              <strong>VEXO 자판기봇 PRO</strong>
+              <span>처음 시작하기 좋은 인기 상품</span>
+            </div>
+            <div class="price-chip">19,900원</div>
+          </div>
+          <div class="preview-flow">
+            <div class="flow-step"><b>주문</b><span>웹에서 상품 선택</span></div>
+            <div class="flow-step"><b>티켓</b><span>디스코드에서 상담</span></div>
+            <div class="flow-step"><b>수령</b><span>확인 후 상품 지급</span></div>
+          </div>
+          <div class="preview-panel">
+            <div class="mini">추천 업셀</div>
+            <div class="preview-order" style="margin-top:8px">
+              <div>
+                <strong>런칭 풀세팅</strong>
+                <span>오픈 전 점검까지 포함</span>
+              </div>
+              <div class="price-chip">79,000원</div>
+            </div>
+          </div>
+          <div class="preview-note" id="noticeText">주문 후 디스코드 티켓에서 입금·수령을 진행합니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section alt" style="padding-top:16px;padding-bottom:12px">
+    <div class="wrap">
+      <div class="promo-grid">
+        <article class="promo-card">
+          <div class="mini">VEXO HUB SPECIAL</div>
+          <strong>첫 구매 고객 혜택</strong>
+          <p>처음 구매하시는 분이 <b>50,000원 이상</b> 주문하면 <b>10% 할인</b>이 자동 적용됩니다. 최대 10,000원까지 할인됩니다.</p>
+          <span class="promo-chip">첫 구매 · 50,000원 이상 · 10% OFF</span>
+        </article>
+        <article class="promo-card">
+          <div class="mini">구매가 처음이라면</div>
+          <strong>작게 시작하고 필요할 때 확장</strong>
+          <p>입문 상품부터 PRO, 올인원까지 단계별로 선택할 수 있습니다.</p>
+          <button class="btn primary small" style="margin-top:12px" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">상품 둘러보기</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="recommend" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>추천 구성</h2>
+          <p>처음 보는 사람도 바로 고를 수 있게 목적별로 정리했습니다.</p>
+        </div>
+      </div>
+      <div class="promo">
+        <div><b>💡 처음이라면 “자판기봇 PRO”부터</b><br><span>운영 기능과 판매 흐름을 갖추고, 필요할 때 올인원으로 업그레이드하기 좋습니다.</span></div>
+        <button class="btn small ghost" onclick="scrollToProductByName('VEXO 자판기봇 PRO')">추천 상품 보기</button>
+      </div>
+      <div class="offer-grid" id="offerGrid"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap recommend-layout">
+      <div class="choice-panel">
+        <h3>무엇이 필요하세요?</h3>
+        <p>상황을 누르면 가장 잘 맞는 상품을 먼저 보여드립니다.</p>
+        <div class="choice-row" id="recommendChoices">
+          <button class="segment active" data-recommend="starter">처음 시작</button>
+          <button class="segment" data-recommend="store">판매 서버</button>
+          <button class="segment" data-recommend="auto">운영 자동화</button>
+          <button class="segment" data-recommend="custom">커스텀 제작</button>
+        </div>
+      </div>
+      <div class="recommend-result" id="recommendResult"></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="quick-points">
+        <div class="quick-point"><b>🚀 바로 시작</b><span>웹에서 상품과 요청사항을 입력하고 주문번호를 바로 받습니다.</span></div>
+        <div class="quick-point"><b>💬 디스코드 연결</b><span>입금 확인과 최종 전달은 티켓에서 진행해 운영 과정을 명확하게 합니다.</span></div>
+        <div class="quick-point"><b>📈 단계별 업그레이드</b><span>가이드 → 단품 → PRO → 올인원으로 필요한 만큼 확장할 수 있습니다.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-marker">SHOP</div><h2 style="margin-top:5px">상품</h2>
+          <p>가벼운 입문 상품부터 한 번에 구축하는 패키지까지 준비했습니다.</p>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="catalog-title"><span>SHOP</span><b>원하는 상품을 골라보세요</b></div>
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-cat="all">전체</button>
+          <button class="tab" data-cat="패키지">패키지</button>
+          <button class="tab" data-cat="자판기봇">자판기봇</button>
+          <button class="tab" data-cat="서버 템플릿">서버 템플릿</button>
+          <button class="tab" data-cat="자동화">자동화</button>
+          <button class="tab" data-cat="개발">개발</button>
+          <button class="tab" data-cat="가이드">가이드</button>
+        </div>
+        <div class="searchbar">
+          <input class="input" id="searchInput" placeholder="상품 검색">
+          <div class="select-shell"><span class="select-icon">⇅</span><select class="select" id="sortSelect" aria-label="상품 정렬"><option value="recommended">추천순</option><option value="priceHigh">높은 가격순</option><option value="priceLow">낮은 가격순</option><option value="name">이름순</option></select><span class="select-chevron">⌄</span></div>
+        </div>
+      </div>
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="section-marker">WHY VEXO HUB</div><h2 style="margin-top:6px">다시 찾아오기 편한 구조</h2><p>처음 방문했을 때도 어디서 무엇을 해야 하는지 한눈에 보이도록 정리했습니다.</p></div>
+      </div>
+      <div class="quick-points">
+        <div class="quick-point"><b>🧾 주문 기록</b><span>주문번호와 상태를 내 주문에서 다시 확인할 수 있습니다.</span></div>
+        <div class="quick-point"><b>🎟️ 디스코드 연결</b><span>주문 후 바로 VEXO HUB 디스코드 서버로 이동할 수 있습니다.</span></div>
+        <div class="quick-point"><b>💜 깔끔한 구매 흐름</b><span>상품 선택부터 주문 확인까지 불필요한 단계를 줄였습니다.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guide" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>구매 방법</h2>
+          <p>웹에서 주문하고, 디스코드 티켓에서 송금 확인과 상품 수령을 진행합니다.</p>
+        </div>
+      </div>
+      <div class="guide-grid">
+        <div class="guide-item"><b>1. 상품 선택</b><span>원하는 상품을 고르고 주문 버튼을 누릅니다.</span></div>
+        <div class="guide-item"><b>2. 주문 정보 입력</b><span>디스코드 닉네임과 요청사항을 남깁니다.</span></div>
+        <div class="guide-item"><b>3. 디스코드 티켓</b><span>주문번호를 티켓에 보내고 입금 안내를 받습니다.</span></div>
+        <div class="guide-item"><b>4. 확인 후 수령</b><span>입금 확인 후 상품 또는 세팅 안내를 받습니다.</span></div>
+      </div>
+      <div class="guide-footer">
+        <span><b>구매 전 궁금한 점이 있다면?</b> 자주 묻는 질문에서 바로 확인해보세요.</span>
+        <button class="btn ghost small" onclick="document.querySelector('#faq').scrollIntoView({behavior:'smooth'})">자주 묻는 질문 보기</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section faq-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-marker">FAQ</div><h2 style="margin-top:6px">자주 묻는 질문</h2>
+          <p>구매 전 헷갈리는 부분만 짧게 정리했습니다.</p>
+        </div>
+      </div>
+      <div class="faq-grid">
+        <details open>
+          <summary>웹에서 바로 결제하나요?</summary>
+          <p>아니요. 웹에서는 주문만 접수하고, 입금 확인과 상품 지급은 디스코드 티켓에서 진행합니다.</p>
+        </details>
+        <details>
+          <summary>상품은 어떻게 받나요?</summary>
+          <p>주문 완료 후 표시되는 디스코드 링크로 입장해서 티켓을 만들면, 주문번호 확인 뒤 상품 링크나 세팅 안내를 받을 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>커스텀 봇은 바로 제작되나요?</summary>
+          <p>커스텀 상품은 티켓에서 기능 범위를 먼저 확인합니다. 범위가 커지면 추가 견적이 필요할 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>환불이나 수정은 어떻게 하나요?</summary>
+          <p>디지털 상품 특성상 수령 후 단순 변심 환불은 어렵습니다. 세팅 오류나 누락은 티켓에서 확인 후 도와드립니다.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="orders" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>내 주문</h2>
+          <p>주문번호와 디스코드 입장 링크를 다시 확인할 수 있습니다.</p>
+        </div>
+        <button class="btn ghost" onclick="loadOrders()">새로고침</button>
+      </div>
+      <div class="orders-wrap" id="ordersBox">
+        <div class="empty">로그인하면 주문 내역을 확인할 수 있습니다.</div>
+      </div>
+    </div>
+  </section>
+
+<div class="footer-cta wrap" style="margin-bottom:12px">
+  <div>
+    <h3>무엇을 골라야 할지 모르겠나요?</h3>
+    <p>처음 시작은 추천 구성에서 고르고, 커스텀 제작은 디스코드에서 범위를 상담해 주세요.</p>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn blue" onclick="document.querySelector('#recommend').scrollIntoView({behavior:'smooth'})">추천 구성 보기</button>
+    <button class="btn ghost" onclick="openCart()">장바구니 <span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">VEXO HUB · 웹 주문 접수 · 입금 확인과 상품 지급은 디스코드 티켓에서 진행</div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="modalTitle">로그인</h3>
+      <button class="x" onclick="closeModal()" aria-label="닫기">&times;</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+let currentUser=null;
+let products=[];
+let siteSettings={};
+let currentCategory='all';
+let currentSort='recommended';
+let currentQuery='';
+let pendingOrderId=null;
+let cart=loadCart();
+
+const won=n=>Number(n||0).toLocaleString('ko-KR')+'원';
+const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const compact=n=>Number(n||0).toLocaleString('ko-KR');
+
+async function api(url,opt={}){
+  const r=await fetch(url,{headers:{'Content-Type':'application/json',...(opt.headers||{})},...opt});
+  let d={};
+  try{d=await r.json()}catch{}
+  if(!r.ok)throw new Error(d.error||'요청에 실패했습니다.');
+  return d;
+}
+function toast(message){
+  const el=$('#toast');
+  el.textContent=message;
+  el.classList.add('show');
+  clearTimeout(toast.timer);
+  toast.timer=setTimeout(()=>el.classList.remove('show'),2600);
+}
+function showModal(title,html){
+  $('#modalTitle').textContent=title;
+  $('#modalBody').innerHTML=html;
+  $('#modal').classList.add('open');
+}
+function closeModal(){$('#modal').classList.remove('open')}
+function productById(id){return products.find(p=>p.id===id)}
+function categoryMark(cat){
+  if(cat==='자판기봇')return'BOT';
+  if(cat==='서버 템플릿')return'TPL';
+  if(cat==='자동화')return'AUTO';
+  if(cat==='개발')return'DEV';
+  if(cat==='가이드')return'DOC';
+  if(cat==='패키지')return'PACK';
+  return'VEXO';
+}
+function toneClass(cat){
+  if(cat==='서버 템플릿')return'tone-template';
+  if(cat==='자동화')return'tone-auto';
+  if(cat==='개발')return'tone-dev';
+  if(cat==='가이드')return'tone-guide';
+  if(cat==='패키지')return'tone-pack';
+  return'tone-bot';
+}
+function scoreProduct(p){
+  const badge=String(p.badge||'').toLowerCase();
+  let score=0;
+  if(p.category==='패키지')score+=70;
+  if(badge.includes('premium')||badge.includes('추천'))score+=45;
+  if(badge.includes('best')||badge.includes('인기'))score+=45;
+  if(badge.includes('hot'))score+=30;
+  if(p.price>=80000)score+=18;
+  return score;
+}
+function visibleProducts(){
+  const q=currentQuery.trim().toLowerCase();
+  let list=products.filter(p=>{
+    const catOk=currentCategory==='all'||p.category===currentCategory;
+    const text=[p.name,p.category,p.badge,p.description,...(p.features||[])].join(' ').toLowerCase();
+    return catOk&&(!q||text.includes(q));
+  });
+  list=[...list];
+  if(currentSort==='priceHigh')list.sort((a,b)=>b.price-a.price);
+  else if(currentSort==='priceLow')list.sort((a,b)=>a.price-b.price);
+  else if(currentSort==='name')list.sort((a,b)=>a.name.localeCompare(b.name,'ko'));
+  else list.sort((a,b)=>scoreProduct(b)-scoreProduct(a)||b.price-a.price);
+  return list;
+}
+function renderProducts(){
+  const list=visibleProducts();
+  $('#productCount').textContent=products.length;
+  $('#productGrid').innerHTML=list.length?list.map(p=>{
+    const features=(p.features||[]).slice(0,3).map(f=>`<span>${esc(f)}</span>`).join('');
+    return `<article class="product-card ${toneClass(p.category)}">
+      <div class="product-top">
+        <span class="badge">${esc(p.badge||p.category)}</span>
+        <span class="category-mark">${categoryMark(p.category)}</span>
+      </div>
+      <h3>${esc(p.name)}</h3>
+      <div class="desc">${esc(p.description)}</div>
+      <div class="feature-mini">${features||'<span>상세 기능은 주문 전 티켓에서 확인 가능합니다.</span>'}</div>
+      <div class="price">${won(p.price)} <small>/ 1개</small></div>
+      <div class="product-actions">
+        <button class="btn ghost" data-detail="${esc(p.id)}">자세히</button>
+        <button class="btn primary" data-order="${esc(p.id)}">주문</button>
+        <button class="btn ghost" data-cart="${esc(p.id)}" style="grid-column:1/-1">🛒 장바구니 담기</button>
+      </div>
+    </article>`;
+  }).join(''):'<div class="empty" style="grid-column:1/-1">조건에 맞는 상품이 없습니다.</div>';
+}
+function renderOffers(){
+  const offers=[
+    {title:'빠른 시작', kicker:'처음 판매 서버', names:['VEXO 디스코드 서버 템플릿','VEXO 자판기봇 BASIC'], main:'VEXO 자판기봇 BASIC', note:'가볍게 시작하고 반응을 보는 구성입니다.'},
+    {title:'판매 운영', kicker:'추천 패키지', names:['VEXO HUB 올인원'], main:'VEXO HUB 올인원', note:'서버, 봇, 자동화를 한 번에 맞추는 가장 깔끔한 구성입니다.', featured:true},
+    {title:'프리미엄 런칭', kicker:'고객 응대까지', names:['VEXO 런칭 풀세팅'], main:'VEXO 런칭 풀세팅', note:'오픈 전 점검과 운영 동선까지 맡기고 싶은 사람에게 맞습니다.'}
+  ];
+  $('#offerGrid').innerHTML=offers.map(o=>{
+    const items=o.names.map(name=>products.find(p=>p.name===name)).filter(Boolean);
+    const main=products.find(p=>p.name===o.main)||items[0];
+    const total=items.reduce((sum,p)=>sum+p.price,0);
+    return `<article class="tool-card ${o.featured?'featured':''}">
+      <div class="tool-kicker">${esc(o.kicker)}</div>
+      <h3>${esc(o.title)}</h3>
+      <p>${esc(o.note)}</p>
+      <div class="tool-price">${won(total||main?.price||0)} <span>${items.length>1?'부터':''}</span></div>
+      <div class="feature-mini">${items.map(p=>`<span>${esc(p.name)}</span>`).join('')}</div>
+      ${main?`<button class="btn primary block" style="margin-top:16px" data-order="${esc(main.id)}">이 구성 주문하기</button>`:''}
+    </article>`;
+  }).join('');
+}
+function renderRecommendation(key='starter'){
+  const map={
+    starter:{title:'처음 시작이라면', name:'VEXO HUB 올인원', text:'서버 구조와 기본 봇 흐름을 같이 잡아야 시행착오가 적습니다.'},
+    store:{title:'판매 서버가 목표라면', name:'VEXO 서버 템플릿 PRO', text:'채널, 역할, 티켓, 후기 동선이 먼저 정리되면 구매자 신뢰가 올라갑니다.'},
+    auto:{title:'운영 시간을 줄이고 싶다면', name:'VEXO 자동화 패키지', text:'반복 공지와 역할 부여, 주문 알림을 줄여 스태프 부담을 낮춥니다.'},
+    custom:{title:'특정 기능이 필요하다면', name:'VEXO 커스텀 봇 제작', text:'기능 범위를 티켓에서 먼저 정리하고 제작하는 방식이 가장 정확합니다.'}
+  };
+  const rec=map[key]||map.starter;
+  const p=products.find(x=>x.name===rec.name)||products[0];
+  $('#recommendResult').innerHTML=p?`
+    <div class="tool-kicker">추천 상품</div>
+    <h3>${esc(rec.title)} · ${esc(p.name)}</h3>
+    <p>${esc(rec.text)}</p>
+    <div class="tool-price">${won(p.price)} <span>/ 기본가</span></div>
+    <div class="feature-mini">${(p.features||[]).slice(0,4).map(f=>`<span>${esc(f)}</span>`).join('')}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+      <button class="btn primary" data-order="${esc(p.id)}">바로 주문</button>
+      <button class="btn ghost" data-detail="${esc(p.id)}">상세 보기</button>
+    </div>`:'<div class="empty">추천할 상품을 불러오는 중입니다.</div>';
+}
+async function loadProducts(){
+  const d=await api('/api/products');
+  products=d.products;
+  renderProducts();
+  renderOffers();
+  renderRecommendation($('#recommendChoices .active')?.dataset.recommend||'starter');
+}
+
+function loadCart(){
+  try{
+    const raw=localStorage.getItem('vexo_cart');
+    const items=raw?JSON.parse(raw):[];
+    return Array.isArray(items)?items.filter(x=>x&&x.id):[];
+  }catch{return []}
+}
+function saveCart(){
+  try{localStorage.setItem('vexo_cart',JSON.stringify(cart.slice(0,20)))}catch{}
+  updateCartUI();
+}
+function cartTotal(){return cart.reduce((s,x)=>s+(Number(x.price)||0)*(Number(x.quantity)||1),0)}
+function cartCount(){return cart.reduce((s,x)=>s+(Number(x.quantity)||1),0)}
+function updateCartUI(){
+  const count=cartCount();
+  ['cartCount','cartFabCount','stickyCartCount'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=count});
+}
+function addToCart(id){
+  const p=productById(id); if(!p)return;
+  const found=cart.find(x=>x.id===id);
+  if(found)found.quantity=Math.min(20,(found.quantity||1)+1);
+  else cart.push({id:p.id,name:p.name,price:p.price,quantity:1});
+  saveCart(); toast(`${p.name}을(를) 장바구니에 담았습니다.`);
+}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();openCart()}
+function changeCartQty(id,delta){
+  const item=cart.find(x=>x.id===id); if(!item)return;
+  item.quantity=Math.max(1,Math.min(20,(item.quantity||1)+delta));saveCart();openCart()
+}
+function clearCart(){cart=[];saveCart();openCart()}
+function scrollToProductByName(name){
+  const p=products.find(x=>x.name===name);
+  if(p)openDetail(p.id);
+}
+function openCart(){
+  if(!cart.length){
+    showModal('장바구니',`<div class="empty-cart">아직 담긴 상품이 없습니다.<br>상품 목록에서 <b>장바구니 담기</b>를 눌러주세요.</div>
+    <button class="btn ghost block" style="margin-top:12px" onclick="closeModal();document.querySelector('#products').scrollIntoView({behavior:'smooth'})">상품 보러가기</button>`);
+    return;
+  }
+  const total=cartTotal();
+  showModal('장바구니',`
+    <div class="cart-list">${cart.map(x=>`
+      <div class="cart-row">
+        <div><b>${esc(x.name)}</b><small>${won(x.price)} × ${x.quantity}</small></div>
+        <div style="display:flex;gap:5px">
+          <button class="btn ghost small" onclick="changeCartQty('${esc(x.id)}',-1)">−</button>
+          <button class="btn ghost small" onclick="changeCartQty('${esc(x.id)}',1)">+</button>
+        </div>
+        <button class="btn danger small" onclick="removeFromCart('${esc(x.id)}')">삭제</button>
+      </div>`).join('')}</div>
+    <div class="cart-total"><span>예상 주문금액</span><b>${won(total)}</b></div>
+    <div class="order-highlight">웹에서는 주문 접수만 진행되며, 입금 확인과 최종 전달은 디스코드 티켓에서 진행됩니다.</div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn ghost" style="flex:1" onclick="clearCart()">비우기</button>
+      <button class="btn primary" style="flex:2" onclick="checkoutCart()">주문 진행</button>
+    </div>`);
+}
+async function checkoutCart(){
+  if(!currentUser){
+    pendingOrderId='__CART__'; openModal('login'); toast('로그인하면 장바구니 주문으로 이어집니다.'); return;
+  }
+  showModal('장바구니 주문',`
+    <p class="mini" style="margin-bottom:12px">상품별 주문번호가 발급됩니다. 같은 디스코드 닉네임으로 묶어 진행할 수 있습니다.</p>
+    <div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="cartDiscordTag" placeholder="예: vexo_user"></div>
+    <div class="field"><label>요청사항</label><textarea class="textarea" id="cartMemo" placeholder="원하는 세팅, 서버 상황, 질문을 적어주세요."></textarea></div>
+    <div class="notice-box"><b>${won(cartTotal())}</b><br>${esc(siteSettings.bankInfo||'입금 계좌는 디스코드 티켓에서 안내받을 수 있습니다.')}</div>
+    <button class="btn primary block" style="margin-top:14px" onclick="submitCartOrders()">주문 접수하기</button>`);
+}
+async function submitCartOrders(){
+  const discordTag=$('#cartDiscordTag').value.trim(), memo=$('#cartMemo').value.trim();
+  if(!discordTag){toast('디스코드 닉네임 또는 아이디를 입력해 주세요.');return}
+  const snapshot=cart.slice();
+  try{
+    const results=[];
+    for(const item of snapshot){
+      const d=await api('/api/orders',{method:'POST',body:JSON.stringify({productId:item.id,quantity:item.quantity,discordTag,memo})});
+      results.push(d.order);
+    }
+    cart=[];saveCart();closeModal();await loadOrders();
+    const link=siteSettings.discordInvite||'';
+    showModal('주문 접수 완료',`
+      <div class="notice-box"><b>${results.length}개 상품</b> 주문이 접수되었습니다.<br>총 금액: <b>${won(results.reduce((s,o)=>s+o.total,0))}</b><br>주문번호: ${results.map(o=>`<b>${esc(o.id)}</b>`).join(' · ')}</div>
+      <p style="margin:14px 0;color:var(--soft);line-height:1.75">디스코드 서버에서 티켓을 만들고 주문번호를 보내 주세요. 입금 확인 후 상품 또는 세팅 안내를 받습니다.</p>
+      ${link?`<a class="btn primary block" target="_blank" rel="noopener" href="${esc(link)}">💬 VEXO 디스코드 서버</a>`:''}`);
+  }catch(e){toast(e.message||'주문 처리 중 오류가 발생했습니다.')}
+}
+
+function openModal(type){
+  if(type==='login'){
+    showModal('로그인',`
+      <div class="field"><label>아이디 또는 이메일</label><input class="input" id="loginId" autocomplete="username"></div>
+      <div class="field"><label>비밀번호</label><input class="input" id="loginPw" type="password" autocomplete="current-password"></div>
+      <button class="btn primary block" onclick="login()">로그인</button>
+      <p class="mini" style="margin-top:14px">계정이 없나요? <a href="#" onclick="openModal('register');return false" style="color:#fff;font-weight:900">회원가입</a></p>`);
+  }else{
+    window.registerEmailVerified = false;
+    window.registerVerificationToken = '';
+    showModal('회원가입',`
+      <div class="field"><label>아이디</label><input class="input" id="regUser" maxlength="20" autocomplete="username" placeholder="2~20자"></div>
+      <div class="field"><label>이메일 인증</label>
+        <div class="email-verify-row">
+          <input class="input" id="regEmail" type="email" autocomplete="email" placeholder="example@email.com">
+          <button class="btn ghost" type="button" id="sendVerifyBtn" onclick="sendRegisterCode()">인증번호 받기</button>
+        </div>
+        <div id="verifyCodeArea" class="hidden" style="margin-top:8px">
+          <div class="email-verify-row">
+            <input class="input" id="regCode" inputmode="numeric" maxlength="6" placeholder="6자리 인증번호">
+            <button class="btn ghost" type="button" id="checkVerifyBtn" onclick="verifyRegisterCode()">인증 확인</button>
+          </div>
+          <div class="verify-status" id="verifyStatus">인증번호가 이메일로 전송됩니다.</div>
+        </div>
+      </div>
+      <div class="field"><label>비밀번호</label><input class="input" id="regPw" type="password" autocomplete="new-password" placeholder="6자 이상"></div>
+      <button class="btn primary block" id="registerBtn" onclick="register()" disabled>이메일 인증 후 회원가입</button>
+      <p class="mini" style="margin-top:12px">인증번호는 10분간 유효합니다.</p>`);
+  }
+}
+async function sendRegisterCode(){
+  const email=$('#regEmail')?.value.trim().toLowerCase();
+  if(!email){toast('이메일을 먼저 입력해 주세요.');return;}
+  const btn=$('#sendVerifyBtn');
+  btn.disabled=true;
+  try{
+    const d=await api('/api/auth/send-code',{method:'POST',body:JSON.stringify({email})});
+    window.registerEmail=email;
+    window.registerEmailVerified=false;
+    window.registerVerificationToken='';
+    $('#verifyCodeArea').classList.remove('hidden');
+    $('#verifyStatus').className='verify-status';
+    $('#verifyStatus').textContent=`${d.email} 주소로 인증번호를 보냈습니다. 이메일을 확인해 주세요.`;
+    toast('인증번호를 보냈습니다.');
+  }catch(e){toast(e.message||'인증번호 전송에 실패했습니다.');}
+  finally{setTimeout(()=>{if($('#sendVerifyBtn'))$('#sendVerifyBtn').disabled=false;},60000);}
+}
+async function verifyRegisterCode(){
+  const email=$('#regEmail')?.value.trim().toLowerCase();
+  const code=$('#regCode')?.value.trim();
+  if(!/^\d{6}$/.test(code)){toast('6자리 인증번호를 입력해 주세요.');return;}
+  if(window.registerEmail && email!==window.registerEmail){toast('인증번호를 받은 이메일과 같은 이메일을 입력해 주세요.');return;}
+  const btn=$('#checkVerifyBtn'); btn.disabled=true;
+  try{
+    const d=await api('/api/auth/verify-code',{method:'POST',body:JSON.stringify({email,code})});
+    window.registerEmailVerified=true;
+    window.registerVerificationToken=d.verificationToken||window.registerVerificationToken;
+    $('#verifyStatus').className='verify-status success';
+    $('#verifyStatus').textContent='✓ 이메일 인증이 완료되었습니다. 이제 회원가입할 수 있습니다.';
+    $('#regEmail').disabled=true;
+    $('#regCode').disabled=true;
+    $('#sendVerifyBtn').disabled=true;
+    $('#checkVerifyBtn').disabled=true;
+    $('#registerBtn').disabled=false;
+    toast('이메일 인증이 완료되었습니다.');
+  }catch(e){toast(e.message||'인증 확인에 실패했습니다.');}
+  finally{if(!window.registerEmailVerified) btn.disabled=false;}
+}
+
+async function afterAuth(){
+  updateAccount();
+  if(pendingOrderId){
+    const id=pendingOrderId;
+    pendingOrderId=null;
+    if(id==='__CART__') openCart();
+    else openOrder(id);
+  }
+  await loadOrders();
+}
+async function login(){
+  try{
+    const d=await api('/api/auth/login',{method:'POST',body:JSON.stringify({identifier:$('#loginId').value,password:$('#loginPw').value})});
+    currentUser=d.user;
+    closeModal();
+    toast('로그인되었습니다.');
+    await afterAuth();
+  }catch(e){toast(e.message)}
+}
+async function register(){
+  if(!window.registerEmailVerified || !window.registerVerificationToken){toast('이메일 인증을 먼저 완료해 주세요.');return;}
+  try{
+    const d=await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:$('#regUser').value,email:$('#regEmail').value,password:$('#regPw').value,verificationToken:window.registerVerificationToken})});
+    currentUser=d.user;
+    window.registerEmailVerified=false;
+    window.registerVerificationToken='';
+    closeModal();
+    toast('가입되었습니다.');
+    await afterAuth();
+  }catch(e){toast(e.message)}
+}
+async function logout(){
+  try{await api('/api/auth/logout',{method:'POST'})}catch{}
+  currentUser=null;
+  updateAccount();
+  loadOrders();
+  toast('로그아웃되었습니다.');
+}
+function updateAccount(){
+  const registerBtn=document.querySelector('.register-btn');
+  if(currentUser){
+    $('#accountBtn').textContent='로그아웃';
+    $('#accountBtn').onclick=logout;
+    if(registerBtn){ registerBtn.classList.add('hidden'); registerBtn.setAttribute('aria-hidden','true'); }
+  }else{
+    $('#accountBtn').textContent='로그인';
+    $('#accountBtn').onclick=()=>openModal('login');
+    if(registerBtn){ registerBtn.classList.remove('hidden'); registerBtn.removeAttribute('aria-hidden'); }
+  }
+}
+function openDetail(id){
+  const p=productById(id);
+  if(!p)return;
+  showModal('상품 상세',`
+    <div class="detail-meta"><span class="badge">${esc(p.category)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:''}</div>
+    <h3 style="font-size:24px;margin-bottom:8px">${esc(p.name)}</h3>
+    <p style="color:var(--soft);line-height:1.75">${esc(p.description)}</p>
+    <div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>
+    <div class="mini" style="font-weight:900;color:var(--cyan)">포함 기능</div>
+    <ul class="feature-list">${(p.features||[]).length?(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join(''):'<li>상세 기능은 티켓에서 확인 가능합니다.</li>'}</ul>
+    <div class="notice-box" style="margin-top:14px">웹에서는 주문만 접수합니다. 입금 확인과 상품 지급은 디스코드 티켓에서 진행합니다.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px">
+      <button class="btn ghost" onclick="addToCart('${esc(p.id)}');closeModal()">장바구니 담기</button>
+      <button class="btn primary" onclick="openOrder('${esc(p.id)}')">바로 주문하기</button>
+    </div>`);
+}
+function openOrder(id){
+  const p=productById(id);
+  if(!p)return;
+  if(!currentUser){
+    pendingOrderId=id;
+    openModal('login');
+    toast('로그인하면 주문창으로 이어집니다.');
+    return;
+  }
+  showModal('주문하기',`
+    <div class="field"><label>상품</label><input class="input" value="${esc(p.name)}" disabled></div>
+    <div class="field"><label>수량</label><input class="input" id="qty" type="number" min="1" max="20" value="1"></div>
+    <div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="discordTag" placeholder="예: vexo_user"></div>
+    <div class="field"><label>입금자명</label><input class="input" id="depositorName" placeholder="실제 입금자명을 입력해 주세요."></div>
+    <div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="원하는 세팅, 서버 상황, 질문을 적어주세요."></textarea></div>
+    <div class="benefit-line">✨ <b>첫 구매 혜택:</b> 50,000원 이상 주문 시 10% 할인(최대 10,000원)이 자동 적용됩니다.</div>
+    <div class="notice-box"><div class="discount-row"><span>상품 금액</span><b>${won(p.price)}</b></div><div class="discount-row"><span>첫 구매 할인</span><b id="orderDiscountPreview">조건 충족 시 자동 적용</b></div><div class="order-total-row"><span>예상 결제금액</span><b id="orderGrandTotal">${won(p.price)}</b></div><div style="margin-top:7px">${esc(siteSettings.bankInfo||'입금 계좌는 디스코드 티켓에서 안내받을 수 있습니다.')}</div></div>
+    <button class="btn primary block" style="margin-top:14px" onclick="createOrder('${esc(p.id)}')">주문하고 디스코드로 이동</button>`);
+  updateOrderPricePreview();
+}
+function updateOrderPricePreview(){
+  const pId=document.querySelector('#modal input[disabled]')?.value;
+  const p=products.find(x=>x.name===pId);
+  const qty=Math.max(1,Math.min(20,Number($('#qty')?.value||1)));
+  if(!p)return;
+  const subtotal=p.price*qty;
+  const discount=subtotal>=50000?Math.min(Math.round(subtotal*.10),10000):0;
+  const dEl=$('#orderDiscountPreview'), tEl=$('#orderGrandTotal');
+  if(dEl)dEl.textContent=discount?`-${won(discount)}`:'조건 충족 시 자동 적용';
+  if(tEl)tEl.textContent=won(subtotal-discount);
+}
+async function createOrder(id){
+  try{
+    const d=await api('/api/orders',{method:'POST',body:JSON.stringify({
+      productId:id,
+      quantity:Number($('#qty').value),
+      discordTag:$('#discordTag').value,
+      depositorName:$('#depositorName')?.value || '',
+      memo:$('#orderMemo').value
+    })});
+    closeModal();
+    await loadOrders();
+    const link=d.discordInvite||(d.order&&d.order.deliveryLink)||siteSettings.discordInvite||'';
+    showReceipt(d.order, d.bankInfo || siteSettings.bankInfo || '', d.paymentGuide || siteSettings.paymentGuide || '', link);
+  }catch(e){toast(e.message)}
+}
+
+let lastReceiptData={order:null,bankInfo:'',guide:'',discordLink:''};
+function showReceipt(order, bankInfo='', guide='', discordLink=''){
+  const o=typeof order==='string'?JSON.parse(order):order;
+  lastReceiptData={order:o,bankInfo:String(bankInfo||''),guide:String(guide||''),discordLink:String(discordLink||'')};
+
+  showModal('주문 완료',`
+    <div class="receipt-shell">
+      <div class="receipt-paper" id="receiptPrintable">
+        <div class="receipt-brand">
+          <div>
+            <div class="receipt-kicker">VEXO HUB</div>
+            <h3>구매 영수증</h3>
+          </div>
+          <span class="receipt-paid">ORDER</span>
+        </div>
+        <div class="receipt-divider"></div>
+        <div class="receipt-row"><span>주문일시</span><b>${esc(o.createdAt?new Date(o.createdAt).toLocaleString('ko-KR'):'-')}</b></div>
+        <div class="receipt-row"><span>주문번호</span><b>${esc(o.id||'-')}</b></div>
+        <div class="receipt-row"><span>영수증 번호</span><b>${esc(o.receiptNo||'-')}</b></div>
+        <div class="receipt-row"><span>구매자</span><b>${esc(o.username||'-')}</b></div>
+        <div class="receipt-row"><span>디스코드</span><b>${esc(o.discordTag||'-')}</b></div>
+        <div class="receipt-divider"></div>
+        <div class="receipt-item">
+          <div><b>${esc(o.productName||'-')}</b><span>${esc(o.quantity||1)}개</span></div>
+          <strong>${won(o.total)}</strong>
+        </div>
+        ${Number(o.discountAmount||0)>0?`<div class="receipt-row"><span>할인</span><b style="color:#7c3aed">-${won(o.discountAmount)} <small>(${esc(o.discountLabel||'할인')})</small></b></div>`:''}
+        <div class="receipt-total"><span>결제 금액</span><b>${won(o.total)}</b></div>
+        <div class="receipt-divider"></div>
+        <div class="receipt-account">
+          <b>입금 안내</b>
+          <p>${esc(bankInfo||'입금 계좌는 디스코드 티켓에서 안내받아 주세요.')}</p>
+          ${guide?`<small>${esc(guide)}</small>`:''}
+        </div>
+        <div class="receipt-foot">본 영수증은 VEXO HUB 웹 주문 접수 확인용입니다.</div>
+      </div>
+    </div>
+    <div class="receipt-actions">
+      <button class="btn ghost" onclick="copyPaymentInfo()">입금정보 복사</button>
+      <button class="btn ghost" onclick="copyText(lastReceiptData.order.id)">주문번호 복사</button>
+      <button class="btn ghost" onclick="printCurrentReceipt()">영수증 인쇄</button>
+    </div>
+    <div class="order-highlight" style="margin-top:12px">① 위 금액 송금 → ② 디스코드 티켓에 주문번호 + 송금 캡처 전송 → ③ 입금 확인 후 상품 전달</div>
+    ${discordLink?`<a class="btn primary block" style="margin-top:10px" target="_blank" rel="noopener" href="${esc(discordLink)}">💜 VEXO 디스코드 서버 입장</a>`:''}
+  `);
+}
+function copyPaymentInfo(){
+  copyText(lastReceiptData.bankInfo||siteSettings.bankInfo||'입금 계좌 정보가 설정되지 않았습니다.');
+}
+function printCurrentReceipt(){
+  const paper=document.getElementById('receiptPrintable');
+  if(!paper){toast('영수증을 찾을 수 없습니다.');return;}
+  const w=window.open('','_blank','width=480,height=820');
+  if(!w){toast('팝업 차단을 해제해 주세요.');return;}
+  const clone=paper.outerHTML;
+  w.document.open();
+  w.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>VEXO HUB 구매 영수증</title><style>
+    *{box-sizing:border-box}body{margin:0;padding:24px;background:#f3f0fb;color:#171522;font-family:Arial,'Malgun Gothic',sans-serif}.receipt-paper{max-width:420px;margin:auto;background:#fff;border:1px solid #ddd7eb;border-radius:8px;padding:24px;box-shadow:0 10px 30px rgba(65,35,120,.10)}.receipt-brand{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.receipt-kicker{font-size:11px;letter-spacing:.12em;color:#7350cf;font-weight:800}.receipt-brand h3{margin:4px 0 0;font-size:22px}.receipt-paid{font-size:10px;padding:6px 8px;border-radius:999px;background:#f0eaff;color:#6d49c8;font-weight:800}.receipt-divider{height:1px;background:#ece8f2;margin:18px 0}.receipt-row{display:flex;justify-content:space-between;gap:16px;padding:5px 0;font-size:12px}.receipt-row span{color:#8a8497}.receipt-row b{text-align:right}.receipt-item{display:flex;justify-content:space-between;gap:12px;padding:8px 0}.receipt-item div{display:flex;flex-direction:column;gap:2px}.receipt-item span{font-size:11px;color:#8a8497}.receipt-total{display:flex;justify-content:space-between;align-items:end;margin-top:14px}.receipt-total b{font-size:24px;color:#6e45cf}.receipt-account{padding:12px;border:1px solid #e8e1f8;background:#faf8ff;border-radius:8px}.receipt-account p{margin:6px 0 0;font-weight:700;font-size:13px;white-space:pre-wrap}.receipt-account small{display:block;margin-top:7px;color:#7d7788}.receipt-foot{margin-top:16px;text-align:center;font-size:10px;color:#9a94a5}@media print{body{padding:0;background:#fff}.receipt-paper{border:0;box-shadow:none;max-width:none}}
+  </style></head><body>${clone}<script>window.onload=()=>window.print();<\/script></body></html>`);
+  w.document.close();
+}
+
+async function copyText(text){
+  const value=String(text??'');
+  if(!value){toast('복사할 내용이 없습니다.');return;}
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(value);
+      toast('복사했습니다.');
+      return;
+    }
+  }catch{}
+  try{
+    const area=document.createElement('textarea');
+    area.value=value;
+    area.setAttribute('readonly','');
+    area.style.position='fixed';
+    area.style.left='-9999px';
+    area.style.top='0';
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    const ok=document.execCommand('copy');
+    area.remove();
+    if(ok){toast('복사했습니다.');return;}
+  }catch{}
+  prompt('아래 내용을 복사해 주세요.',value);
+}
+async function loadOrders(){
+  const box=document.getElementById('ordersBox');
+  if(!box)return;
+  if(!currentUser){
+    box.innerHTML='<div class="empty">로그인하면 주문 내역을 확인할 수 있습니다.</div>';
+    return;
+  }
+  try{
+    box.innerHTML='<div class="empty">주문 내역을 불러오는 중입니다...</div>';
+    const d=await api('/api/orders');
+    const orders=Array.isArray(d.orders)?d.orders:[];
+    if(!orders.length){
+      box.innerHTML='<div class="empty">아직 주문 내역이 없습니다.</div>';
+      return;
+    }
+    const statusMap={
+      '주문접수':'접수 완료',
+      '입금확인요청':'입금 확인 요청',
+      '결제완료':'결제 완료',
+      '처리중':'처리 중',
+      '완료':'완료',
+      '취소':'취소'
+    };
+    box.innerHTML=orders.map(o=>{
+      const status=statusMap[o.status]||o.status||'주문접수';
+      const link=o.deliveryLink||siteSettings.discordInvite||'';
+      const created=o.createdAt?new Date(o.createdAt).toLocaleString('ko-KR'):'-';
+      const discount=Number(o.discountAmount||0);
+      return `<article class="order-card">
+        <div>
+          <div class="order-meta"><span>${esc(o.id||'-')}</span><span>${esc(created)}</span></div>
+          <h3>${esc(o.productName||'상품')}</h3>
+          <p>${esc(o.quantity||1)}개 · ${won(o.total||0)}</p>
+          ${discount?`<div class="mini">첫 구매 할인 -${won(discount)}</div>`:''}
+        </div>
+        <div class="order-side">
+          <span class="status-pill">${esc(status)}</span>
+          <div class="order-buttons">
+            <button class="btn ghost small" onclick="copyText('${esc(o.id||'')}')">주문번호 복사</button>
+            ${link?`<a class="btn primary small" href="${esc(link)}" target="_blank" rel="noopener">디스코드 입장</a>`:''}
+            ${!o.paymentRequested&&o.status!=='완료'&&o.status!=='취소'?`<button class="btn ghost small" onclick="requestPaymentCheck('${esc(o.id||'')}',this)">입금확인 요청</button>`:''}
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+  }catch(e){
+    box.innerHTML=`<div class="empty">주문 내역을 불러오지 못했습니다.<br><button class="btn ghost small" style="margin-top:10px" onclick="loadOrders()">다시 시도</button></div>`;
+  }
+}
+async function requestPaymentCheck(id,btn){
+  if(!id)return;
+  if(btn)btn.disabled=true;
+  try{
+    await api(`/api/orders/${encodeURIComponent(id)}/payment-request`,{method:'POST'});
+    toast('입금 확인 요청을 보냈습니다. 디스코드 티켓에서 주문번호를 함께 보내 주세요.');
+    await loadOrders();
+  }catch(e){
+    if(btn)btn.disabled=false;
+    toast(e.message||'입금 확인 요청에 실패했습니다.');
+  }
+}
+async function heartbeat(){
+  try{
+    const d=await api('/api/heartbeat',{method:'POST'});
+    $('#online').textContent=d.online;
+  }catch{}
+}
+async function loadSite(){
+  const d=await api('/api/site');
+  siteSettings=d.settings||{};
+  const name=siteSettings.siteName||'VEXO HUB';
+  $('#brandName').textContent=name;
+  document.title=name+' | 디스코드 판매 자동화';
+  $('#noticeText').textContent=siteSettings.notice||'주문 후 디스코드 티켓에서 입금·수령을 진행합니다.';
+  $('#online').textContent=d.online||0;
+}
+
+$('#tabs').addEventListener('click',e=>{
+  const btn=e.target.closest('.tab');
+  if(!btn)return;
+  $$('#tabs .tab').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  currentCategory=btn.dataset.cat;
+  renderProducts();
+});
+$('#searchInput').addEventListener('input',e=>{currentQuery=e.target.value;renderProducts()});
+$('#sortSelect').addEventListener('change',e=>{currentSort=e.target.value;renderProducts()});
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='qty')updateOrderPricePreview()});
+document.addEventListener('click',e=>{
+  const detail=e.target.closest('[data-detail]');
+  const order=e.target.closest('[data-order]');
+  const approve=e.target.closest('[data-approve]');
+  const copy=e.target.closest('[data-copy-order]');
+  const addCart=e.target.closest('[data-cart]');
+  if(detail)openDetail(detail.dataset.detail);
+  if(order)openOrder(order.dataset.order);
+  if(addCart)addToCart(addCart.dataset.cart);
+  if(approve)approveOrderPrompt(approve.dataset.approve);
+  if(copy)copyOrderInfo(copy.dataset.copyOrder);
+});
+$('#recommendChoices').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-recommend]');
+  if(!btn)return;
+  $$('#recommendChoices .segment').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  renderRecommendation(btn.dataset.recommend);
+});
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+window.addEventListener('scroll',()=>{
+  const bar=document.getElementById('stickyBuy');
+  if(bar)bar.classList.toggle('show',window.scrollY>520);
+},{passive:true});
+updateCartUI();
+
+async function init(){
+  try{
+    await loadSite();
+    const d=await api('/api/me');
+    currentUser=d.user;
+    updateAccount();
+    await loadProducts();
+    await loadOrders();
+    await heartbeat();
+    setInterval(heartbeat,15000);
+  }catch(e){
+    toast(e.message||'사이트를 불러오지 못했습니다.');
+  }
+}
+init();
+
+
+(function(){
+ const bar=document.getElementById('scrollProgress');
+ const top=document.getElementById('backTop');
+ let ticking=false;
+ function update(){
+   const h=document.documentElement.scrollHeight-window.innerHeight;
+   bar.style.width=(h>0?Math.min(100,Math.max(0,window.scrollY/h*100)):0)+'%';
+   top.classList.toggle('show',window.scrollY>420);
+   ticking=false;
+ }
+ window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true}}, {passive:true});
+ top.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+ update();
+})();
+</script>
+</body>
+</html>
