@@ -809,14 +809,6 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
 .guide-footer b{color:#e7dfff}
 @media(max-width:760px){.nav-links{display:none!important}.guide-footer{align-items:flex-start;flex-direction:column}.toolbar{padding:12px}.tabs{width:100%;overflow:auto;flex-wrap:nowrap}.tabs .tab{white-space:nowrap}}
 
-
-.email-verify-row{display:grid;grid-template-columns:1fr 118px;gap:8px;align-items:end}
-.email-verify-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-.verify-status{margin-top:9px;padding:10px 12px;border:1px solid rgba(139,92,246,.18);border-radius:12px;background:rgba(124,58,237,.06);font-size:12px;color:var(--muted);line-height:1.6}
-.verify-status.success{color:#d9c8ff;border-color:rgba(168,85,247,.35);background:rgba(168,85,247,.08)}
-.verify-status.error{color:#ffb8c7;border-color:rgba(244,63,94,.26);background:rgba(244,63,94,.06)}
-.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}
-@media(max-width:640px){.email-verify-row{grid-template-columns:1fr}.email-verify-actions{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1366,67 +1358,13 @@ function openModal(type){
       <button class="btn primary block" onclick="login()">로그인</button>
       <p class="mini" style="margin-top:14px">계정이 없나요? <a href="#" onclick="openModal('register');return false" style="color:#fff;font-weight:900">회원가입</a></p>`);
   }else{
-    window.registerEmailVerified = false;
-    window.registerVerificationToken = '';
     showModal('회원가입',`
-      <div class="field"><label>아이디</label><input class="input" id="regUser" maxlength="20" autocomplete="username" placeholder="2~20자"></div>
-      <div class="field"><label>이메일 인증</label>
-        <div class="email-verify-row">
-          <input class="input" id="regEmail" type="email" autocomplete="email" placeholder="example@email.com">
-          <button class="btn ghost" type="button" id="sendVerifyBtn" onclick="sendRegisterCode()">인증번호 받기</button>
-        </div>
-        <div id="verifyCodeArea" class="hidden" style="margin-top:8px">
-          <div class="email-verify-row">
-            <input class="input" id="regCode" inputmode="numeric" maxlength="6" placeholder="6자리 인증번호">
-            <button class="btn ghost" type="button" id="checkVerifyBtn" onclick="verifyRegisterCode()">인증 확인</button>
-          </div>
-          <div class="verify-status" id="verifyStatus">인증번호가 이메일로 전송됩니다.</div>
-        </div>
-      </div>
-      <div class="field"><label>비밀번호</label><input class="input" id="regPw" type="password" autocomplete="new-password" placeholder="6자 이상"></div>
-      <button class="btn primary block" id="registerBtn" onclick="register()" disabled>이메일 인증 후 회원가입</button>
-      <p class="mini" style="margin-top:12px">인증번호는 10분간 유효합니다.</p>`);
+      <div class="field"><label>아이디</label><input class="input" id="regUser" maxlength="20" autocomplete="username"></div>
+      <div class="field"><label>이메일</label><input class="input" id="regEmail" type="email" autocomplete="email"></div>
+      <div class="field"><label>비밀번호</label><input class="input" id="regPw" type="password" autocomplete="new-password"></div>
+      <button class="btn primary block" onclick="register()">회원가입</button>`);
   }
 }
-async function sendRegisterCode(){
-  const email=$('#regEmail')?.value.trim().toLowerCase();
-  if(!email){toast('이메일을 먼저 입력해 주세요.');return;}
-  const btn=$('#sendVerifyBtn');
-  btn.disabled=true;
-  try{
-    const d=await api('/api/auth/send-code',{method:'POST',body:JSON.stringify({email})});
-    window.registerEmail=email;
-    window.registerEmailVerified=false;
-    window.registerVerificationToken='';
-    $('#verifyCodeArea').classList.remove('hidden');
-    $('#verifyStatus').className='verify-status';
-    $('#verifyStatus').textContent=`${d.email} 주소로 인증번호를 보냈습니다. 이메일을 확인해 주세요.`;
-    toast('인증번호를 보냈습니다.');
-  }catch(e){toast(e.message||'인증번호 전송에 실패했습니다.');}
-  finally{setTimeout(()=>{if($('#sendVerifyBtn'))$('#sendVerifyBtn').disabled=false;},60000);}
-}
-async function verifyRegisterCode(){
-  const email=$('#regEmail')?.value.trim().toLowerCase();
-  const code=$('#regCode')?.value.trim();
-  if(!/^\d{6}$/.test(code)){toast('6자리 인증번호를 입력해 주세요.');return;}
-  if(window.registerEmail && email!==window.registerEmail){toast('인증번호를 받은 이메일과 같은 이메일을 입력해 주세요.');return;}
-  const btn=$('#checkVerifyBtn'); btn.disabled=true;
-  try{
-    const d=await api('/api/auth/verify-code',{method:'POST',body:JSON.stringify({email,code})});
-    window.registerEmailVerified=true;
-    window.registerVerificationToken=d.verificationToken||window.registerVerificationToken;
-    $('#verifyStatus').className='verify-status success';
-    $('#verifyStatus').textContent='✓ 이메일 인증이 완료되었습니다. 이제 회원가입할 수 있습니다.';
-    $('#regEmail').disabled=true;
-    $('#regCode').disabled=true;
-    $('#sendVerifyBtn').disabled=true;
-    $('#checkVerifyBtn').disabled=true;
-    $('#registerBtn').disabled=false;
-    toast('이메일 인증이 완료되었습니다.');
-  }catch(e){toast(e.message||'인증 확인에 실패했습니다.');}
-  finally{if(!window.registerEmailVerified) btn.disabled=false;}
-}
-
 async function afterAuth(){
   updateAccount();
   if(pendingOrderId){
@@ -1447,12 +1385,9 @@ async function login(){
   }catch(e){toast(e.message)}
 }
 async function register(){
-  if(!window.registerEmailVerified || !window.registerVerificationToken){toast('이메일 인증을 먼저 완료해 주세요.');return;}
   try{
-    const d=await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:$('#regUser').value,email:$('#regEmail').value,password:$('#regPw').value,verificationToken:window.registerVerificationToken})});
+    const d=await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:$('#regUser').value,email:$('#regEmail').value,password:$('#regPw').value})});
     currentUser=d.user;
-    window.registerEmailVerified=false;
-    window.registerVerificationToken='';
     closeModal();
     toast('가입되었습니다.');
     await afterAuth();
@@ -1466,15 +1401,12 @@ async function logout(){
   toast('로그아웃되었습니다.');
 }
 function updateAccount(){
-  const registerBtn=document.querySelector('.register-btn');
   if(currentUser){
     $('#accountBtn').textContent='로그아웃';
     $('#accountBtn').onclick=logout;
-    if(registerBtn){ registerBtn.classList.add('hidden'); registerBtn.setAttribute('aria-hidden','true'); }
   }else{
     $('#accountBtn').textContent='로그인';
     $('#accountBtn').onclick=()=>openModal('login');
-    if(registerBtn){ registerBtn.classList.remove('hidden'); registerBtn.removeAttribute('aria-hidden'); }
   }
 }
 function openDetail(id){

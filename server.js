@@ -45,7 +45,6 @@ const seed = {
     { id: nanoid(), name: '올인원 세팅 가이드', category: '가이드', price: 8900, badge: 'BEST', description: '봇 설치, 호스팅, 서버 세팅, 운영까지 한 번에 담은 통합 가이드입니다.', features: ['설치·호스팅·서버 세팅 통합', '판매 시작 체크리스트', '문제 해결 FAQ', '추천 운영 순서', '개별 가이드 묶음보다 저렴'] }
   ],
   orders: [],
-  emailVerifications: {},
   settings: {
     siteName: 'VEXO HUB',
     notice: '원하는 상품을 선택하고 주문을 완료한 뒤, 디스코드 티켓에서 입금 확인 및 상품 수령을 진행합니다.',
@@ -69,7 +68,6 @@ if (!Array.isArray(db.users)) db.users = [];
 for (const u of db.users) if (u.promoClaimedAt === undefined) u.promoClaimedAt = '';
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
 if (!Array.isArray(db.orders)) db.orders = [];
-if (!db.emailVerifications || typeof db.emailVerifications !== 'object' || Array.isArray(db.emailVerifications)) db.emailVerifications = {};
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; }
 if (!db.settings) db.settings = seed.settings;
 if (db.settings.discordInvite === undefined) db.settings.discordInvite = process.env.DISCORD_INVITE_URL || '';
@@ -139,6 +137,63 @@ app.use(express.json({ limit: '1mb' }));
 app.use(cookieParser());
 
 const online = new Map(); // key -> timestamp; one key per browser session
+
+// Temporary email verification state. Codes/tokens live only in server memory.
+const emailVerifications = new Map();
+const VERIFY_TTL_MS = 10 * 60 * 1000;
+const VERIFY_RESEND_COOLDOWN_MS = 60 * 1000;
+const VERIFY_MAX_ATTEMPTS = 5;
+
+function normalizeEmail(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function makeVerificationCode() {
+  return String(crypto.randomInt(100000, 1000000));
+}
+
+function cleanupVerification(email) {
+  const item = emailVerifications.get(email);
+  if (!item) return null;
+  if (item.expiresAt <= Date.now()) {
+    emailVerifications.delete(email);
+    return null;
+  }
+  return item;
+}
+
+async function sendVerificationEmail(email, code) {
+  const apiKey = String(process.env.RESEND_API_KEY || '').trim();
+  const from = String(process.env.RESEND_FROM || 'VEXO HUB <onboarding@resend.dev>').trim();
+  if (!apiKey) throw new Error('RESEND_API_KEY가 Render 환경변수에 설정되지 않았습니다.');
+
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      subject: '[VEXO HUB] 이메일 인증번호',
+      html: `
+        <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;padding:32px;background:#0b0b12;color:#f7f7fb">
+          <div style="font-size:26px;font-weight:900;color:#a78bfa;margin-bottom:22px">VEXO HUB</div>
+          <div style="font-size:16px;font-weight:700;margin-bottom:10px">이메일 인증번호입니다.</div>
+          <div style="font-size:42px;letter-spacing:10px;font-weight:900;color:#ffffff;margin:20px 0">${code}</div>
+          <div style="font-size:13px;color:#a8adba;line-height:1.7">인증번호는 10분간 유효합니다. 본인이 요청하지 않았다면 이 메일을 무시해 주세요.</div>
+        </div>`
+    })
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    console.error('[VEXO] Resend error:', data);
+    throw new Error(data?.message || data?.error?.message || '이메일 발송에 실패했습니다.');
+  }
+  return data;
+}
 setInterval(() => {
   const cutoff = Date.now() - 45_000;
   for (const [key, ts] of online) if (ts < cutoff) online.delete(key);
@@ -209,115 +264,85 @@ app.get('/api/me', (req, res) => {
   res.json({ user: safeUser(getUser(req)) });
 });
 
-function verificationHash(value) {
-  return crypto.createHash('sha256').update(String(value)).digest('hex');
-}
-function makeVerificationCode() {
-  return String(crypto.randomInt(100000, 1000000));
-}
-function maskEmail(email) {
-  const [local, domain] = String(email).split('@');
-  if (!domain) return email;
-  if (local.length <= 2) return `${local[0] || '*'}*@${domain}`;
-  return `${local.slice(0, 2)}${'*'.repeat(Math.max(1, local.length - 2))}@${domain}`;
-}
-async function sendVerificationEmail(email, code) {
-  const apiKey = String(process.env.RESEND_API_KEY || '').trim();
-  const from = String(process.env.RESEND_FROM || 'VEXO HUB <onboarding@resend.dev>').trim();
-  if (!apiKey) throw new Error('이메일 인증 기능이 아직 설정되지 않았습니다. RESEND_API_KEY를 Render 환경변수에 등록해 주세요.');
-  const html = `<!doctype html><html><body style="margin:0;background:#070811;color:#eef0ff;font-family:Arial,sans-serif"><div style="max-width:560px;margin:0 auto;padding:38px 18px"><div style="border:1px solid #302058;border-radius:22px;background:#10101c;padding:28px"><div style="font-size:13px;letter-spacing:3px;color:#b48cff;font-weight:800">VEXO HUB</div><h1 style="margin:12px 0 8px;font-size:28px">이메일 인증번호</h1><p style="color:#aeb0c8;line-height:1.7">회원가입을 완료하려면 아래 인증번호를 입력해 주세요.</p><div style="margin:24px 0;padding:20px;border-radius:18px;background:linear-gradient(135deg,#24124b,#17152a);text-align:center"><div style="font-size:13px;color:#aaa8c8;margin-bottom:8px">인증번호</div><div style="font-size:36px;letter-spacing:10px;font-weight:900;color:#fff">${code}</div></div><p style="font-size:13px;color:#8f91a8;line-height:1.7">인증번호는 10분간 유효합니다. 본인이 요청하지 않았다면 이 메일을 무시해 주세요.</p></div></div></body></html>`;
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from, to: [email], subject: '[VEXO HUB] 회원가입 인증번호', html, text: `VEXO HUB 회원가입 인증번호: ${code}\n\n10분간 유효합니다.` })
-  });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    console.error('Resend error:', data);
-    throw new Error(data?.message || '인증 이메일을 보내지 못했습니다. 잠시 후 다시 시도해 주세요.');
-  }
-  return data;
-}
-
 app.post('/api/auth/send-code', async (req, res) => {
-  const email = String(req.body.email || '').trim().toLowerCase();
-  if (!/^\S+@\S+\.\S+$/.test(email)) return res.status(400).json({ error: '올바른 이메일 주소를 입력해 주세요.' });
-  if (db.users.some(u => u.email === email)) return res.status(409).json({ error: '이미 가입된 이메일입니다. 로그인해 주세요.' });
-  const existing = db.emailVerifications[email];
-  const now = Date.now();
-  if (existing?.lastSentAt && now - existing.lastSentAt < 60_000) {
-    const remain = Math.ceil((60_000 - (now - existing.lastSentAt)) / 1000);
-    return res.status(429).json({ error: `인증번호는 ${remain}초 후 다시 요청할 수 있습니다.` });
+  const email = normalizeEmail(req.body.email);
+  if (!email || !email.includes('@') || email.length > 160) {
+    return res.status(400).json({ error: '올바른 이메일 주소를 입력해 주세요.' });
   }
+  if (db.users.some(u => normalizeEmail(u.email) === email)) {
+    return res.status(409).json({ error: '이미 가입된 이메일입니다.' });
+  }
+
+  const existing = cleanupVerification(email);
+  if (existing && existing.sentAt + VERIFY_RESEND_COOLDOWN_MS > Date.now()) {
+    const left = Math.ceil((existing.sentAt + VERIFY_RESEND_COOLDOWN_MS - Date.now()) / 1000);
+    return res.status(429).json({ error: `${left}초 후에 인증번호를 다시 요청해 주세요.` });
+  }
+
   const code = makeVerificationCode();
-  const verificationId = nanoid(18);
-  db.emailVerifications[email] = {
-    codeHash: verificationHash(`${verificationId}:${code}`),
-    verificationId,
-    expiresAt: new Date(now + 10 * 60_000).toISOString(),
-    lastSentAt: now,
+  const item = {
+    code,
+    email,
+    sentAt: Date.now(),
+    expiresAt: Date.now() + VERIFY_TTL_MS,
     attempts: 0,
     verified: false,
-    verificationTokenHash: ''
+    verificationToken: ''
   };
+  emailVerifications.set(email, item);
+
   try {
     await sendVerificationEmail(email, code);
-    saveDb();
-    res.json({ ok: true, email: maskEmail(email), expiresIn: 600 });
+    res.json({ ok: true, email, expiresIn: VERIFY_TTL_MS / 1000 });
   } catch (error) {
-    delete db.emailVerifications[email];
-    res.status(502).json({ error: error.message || '인증 이메일 발송에 실패했습니다.' });
+    emailVerifications.delete(email);
+    console.error('[VEXO] send verification code failed:', error);
+    res.status(502).json({ error: error.message || '인증번호 이메일 발송에 실패했습니다.' });
   }
 });
 
 app.post('/api/auth/verify-code', (req, res) => {
-  const email = String(req.body.email || '').trim().toLowerCase();
+  const email = normalizeEmail(req.body.email);
   const code = String(req.body.code || '').trim();
-  if (!email || !/^\d{6}$/.test(code)) return res.status(400).json({ error: '6자리 인증번호를 입력해 주세요.' });
-  const record = db.emailVerifications[email];
-  if (!record) return res.status(400).json({ error: '인증번호를 먼저 요청해 주세요.' });
-  if (record.verified && record.verificationTokenHash) return res.json({ ok: true, verified: true });
-  if (Date.now() > new Date(record.expiresAt).getTime()) {
-    delete db.emailVerifications[email];
-    saveDb();
-    return res.status(410).json({ error: '인증번호가 만료되었습니다. 새 인증번호를 요청해 주세요.' });
+  const item = cleanupVerification(email);
+  if (!item) return res.status(400).json({ error: '인증번호가 없거나 만료되었습니다. 다시 발송해 주세요.' });
+  if (!/^\d{6}$/.test(code)) return res.status(400).json({ error: '6자리 인증번호를 입력해 주세요.' });
+  if (item.attempts >= VERIFY_MAX_ATTEMPTS) {
+    emailVerifications.delete(email);
+    return res.status(429).json({ error: '인증번호 입력 횟수를 초과했습니다. 다시 발송해 주세요.' });
   }
-  if (record.attempts >= 5) return res.status(429).json({ error: '인증번호 입력 횟수를 초과했습니다. 새 인증번호를 요청해 주세요.' });
-  record.attempts += 1;
-  if (verificationHash(`${record.verificationId}:${code}`) !== record.codeHash) {
-    saveDb();
-    return res.status(400).json({ error: `인증번호가 올바르지 않습니다. (${record.attempts}/5)` });
+  item.attempts += 1;
+  if (code !== item.code) {
+    const remaining = VERIFY_MAX_ATTEMPTS - item.attempts;
+    return res.status(400).json({ error: `인증번호가 일치하지 않습니다. 남은 횟수: ${remaining}회` });
   }
-  const verificationToken = crypto.randomBytes(24).toString('hex');
-  record.verified = true;
-  record.verificationTokenHash = verificationHash(verificationToken);
-  record.verifiedAt = new Date().toISOString();
-  saveDb();
-  res.json({ ok: true, verified: true, verificationToken });
+
+  item.verified = true;
+  item.verificationToken = crypto.randomBytes(32).toString('hex');
+  item.verifiedAt = Date.now();
+  item.expiresAt = Date.now() + VERIFY_TTL_MS;
+  res.json({ ok: true, verificationToken: item.verificationToken });
 });
 
 app.post('/api/auth/register', async (req, res) => {
   const username = String(req.body.username || '').trim();
   const email = String(req.body.email || '').trim().toLowerCase();
   const password = String(req.body.password || '');
-  const verificationToken = String(req.body.verificationToken || '').trim();
   const err = validateCredentials(username, email, password);
   if (err) return res.status(400).json({ error: err });
-  if (!verificationToken) return res.status(400).json({ error: '이메일 인증을 먼저 완료해 주세요.' });
-  const verification = db.emailVerifications[email];
-  if (verification?.expiresAt && Date.now() > new Date(verification.expiresAt).getTime()) {
-    delete db.emailVerifications[email];
-    saveDb();
-    return res.status(410).json({ error: '이메일 인증이 만료되었습니다. 새 인증번호를 요청해 주세요.' });
-  }
-  if (!verification?.verified || !verification.verificationTokenHash || verificationHash(verificationToken) !== verification.verificationTokenHash) {
-    return res.status(403).json({ error: '이메일 인증이 확인되지 않았습니다. 인증번호를 다시 확인해 주세요.' });
-  }
   if (db.users.some(u => u.username.toLowerCase() === username.toLowerCase())) return res.status(409).json({ error: '이미 사용 중인 아이디입니다.' });
   if (db.users.some(u => u.email === email)) return res.status(409).json({ error: '이미 가입된 이메일입니다.' });
-  const user = { id: nanoid(16), username, email, passwordHash: await bcrypt.hash(password, 12), role: 'user', createdAt: new Date().toISOString(), emailVerifiedAt: new Date().toISOString() };
+
+  const verificationToken = String(req.body.verificationToken || '');
+  const verification = cleanupVerification(email);
+  if (!verification || !verification.verified || !verification.verificationToken || verification.verificationToken !== verificationToken) {
+    return res.status(400).json({ error: '이메일 인증을 먼저 완료해 주세요.' });
+  }
+  emailVerifications.delete(email);
+
+  // Public signup can never create an admin account.
+  const user = { id: nanoid(16), username, email, passwordHash: await bcrypt.hash(password, 12), role: 'user', createdAt: new Date().toISOString() };
   db.users.push(user);
-  delete db.emailVerifications[email];
   saveDb();
   res.cookie('vexo_session', makeToken(user.id, user.role, false), { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 1000 * 60 * 60 * 24 * 30 });
   res.status(201).json({ user: safeUser(user) });
@@ -434,6 +459,7 @@ app.get('/api/orders', requireAuth, (req, res) => {
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.use('/assets', express.static(path.join(__dirname, 'assets'), { index: false, immutable: true, maxAge: '7d' }));
+app.use('/assets', express.static(path.join(__dirname, 'assets'), { index: false }));
 app.use('/public', express.static(path.join(__dirname, 'public'), { index: false }));
 app.use((req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 

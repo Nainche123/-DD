@@ -39,13 +39,5 @@ Render의 파일 저장소 특성상 재시작/재배포를 고려해 Discord We
 
 
 ## 최신 UI
-첫 화면은 VEXO HUB 브랜딩과 정적 보라색 마켓 UI를 사용하며, `/assets/vexo-hub-mark.png`가 헤더·브라우저 아이콘에 사용됩니다. 무거운 웨이브 애니메이션은 사용하지 않습니다.
-## 이메일 인증 설정
-회원가입은 이메일 6자리 인증을 완료해야 진행됩니다. 메일 발송은 Resend API를 사용합니다.
+첫 화면은 VEXO HUB 브랜딩과 보라색 웨이브 애니메이션을 사용하며, `/assets/vexo-hub-mark.png`가 헤더·브라우저 아이콘에 사용됩니다.
 
-Render의 **Environment Variables**에 다음 값을 등록하세요.
-
-- `RESEND_API_KEY`: Resend에서 발급한 API 키
-- `RESEND_FROM`: 발신자 주소. 운영에서는 Resend에서 인증한 도메인의 주소를 권장합니다.
-
-기본값은 테스트용 `VEXO HUB <onboarding@resend.dev>`입니다. Resend 공식 Node.js/Express 방식처럼 API 키와 `from/to/subject/html`을 이용해 메일을 발송합니다.
