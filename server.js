@@ -31,13 +31,13 @@ const seed = {
   users: [],
   products: [
     { id: nanoid(), name: 'VEXO 자판기봇 BASIC', category: '자판기봇', price: 19000, badge: '입문추천', description: '디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features: ['상품 버튼 주문 UI', '주문 접수 및 로그 기록', '관리자 확인 후 지급 안내', '기본 고객 응대 메시지', '설치·세팅 가이드 포함', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
-    { id: nanoid(), name: 'VEXO 자판기봇 PRO', category: '자판기봇', price: 36000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', '설치·세팅 가이드 포함'] },
+    { id: nanoid(), name: 'VEXO 자판기봇 PRO', category: '자판기봇', price: 39000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', '설치·세팅 가이드 포함'] },
     { id: nanoid(), name: 'VEXO 디스코드 서버 템플릿', category: '서버 템플릿', price: 19000, badge: '빠른시작', description: '판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.', features: ['INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조', 'OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할', '공지·가격표·구매인증 채널', '문의·1대1 티켓용 채널', '관리자 전용 STAFF 카테고리', '서버 템플릿 링크 제공', '기본 세팅 가이드'] },
-    { id: nanoid(), name: 'VEXO 서버 템플릿 PRO', category: '서버 템플릿', price: 32000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '티켓 봇 연동 가이드', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '상세 세팅 설명서'] },
-    { id: nanoid(), name: 'VEXO 자동화 패키지', category: '자동화', price: 45000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '세팅 가이드 제공'] },
-    { id: nanoid(), name: 'VEXO 커스텀 봇 제작', category: '개발', price: 79000, badge: '상담필수', description: '원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.', features: ['요구사항 상담 후 제작', '슬래시/버튼 커맨드 지원', '서버 맞춤 기능 구현', '소스 또는 실행 파일 제공', '기본 설치 지원', '수정 범위 협의 가능'] },
-    { id: nanoid(), name: 'VEXO STORE 올인원', category: '패키지', price: 89000, badge: '목표추천', description: '서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.', features: ['서버 템플릿 PRO급 구조', '자판기봇 BASIC 또는 협의 버전', '자동화 기본 구성', '통합 세팅 가이드', '한 번에 판매 서버 구축', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
-    { id: nanoid(), name: 'VEXO 런칭 풀세팅', category: '패키지', price: 129000, badge: '프리미엄', description: '처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.', features: ['올인원 구성 포함', '판매 채널 문구 기본 작성', '후기·구매인증 동선 세팅', '운영 체크리스트 제공', '오픈 전 점검 1회', '주문 후 디스코드 티켓에서 범위 확정'] },
+    { id: nanoid(), name: 'VEXO 서버 템플릿 PRO', category: '서버 템플릿', price: 34000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '티켓 봇 연동 가이드', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '상세 세팅 설명서'] },
+    { id: nanoid(), name: 'VEXO 자동화 패키지', category: '자동화', price: 49000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '세팅 가이드 제공'] },
+    { id: nanoid(), name: 'VEXO 커스텀 봇 제작', category: '개발', price: 89000, badge: '상담필수', description: '원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.', features: ['요구사항 상담 후 제작', '슬래시/버튼 커맨드 지원', '서버 맞춤 기능 구현', '소스 또는 실행 파일 제공', '기본 설치 지원', '수정 범위 협의 가능'] },
+    { id: nanoid(), name: 'VEXO STORE 올인원', category: '패키지', price: 99000, badge: '목표추천', description: '서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.', features: ['서버 템플릿 PRO급 구조', '자판기봇 BASIC 또는 협의 버전', '자동화 기본 구성', '통합 세팅 가이드', '한 번에 판매 서버 구축', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
+    { id: nanoid(), name: 'VEXO 런칭 풀세팅', category: '패키지', price: 149000, badge: '프리미엄', description: '처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.', features: ['올인원 구성 포함', '판매 채널 문구 기본 작성', '후기·구매인증 동선 세팅', '운영 체크리스트 제공', '오픈 전 점검 1회', '주문 후 디스코드 티켓에서 범위 확정'] },
     { id: nanoid(), name: '봇 설치 가이드', category: '가이드', price: 6000, badge: 'NEW', description: '디스코드 봇을 처음 설치·실행하는 방법을 단계별로 정리한 가이드입니다.', features: ['봇 계정 생성 방법', '토큰 발급·보관', '로컬 실행 방법', '필수 권한 설정', '자주 하는 오류 해결', '문서 형태로 제공'] },
     { id: nanoid(), name: '호스팅 가이드', category: '가이드', price: 7000, badge: '', description: '봇을 24시간 켜 두기 위한 호스팅 선택·세팅 가이드입니다.', features: ['무료/유료 호스팅 비교', 'VPS 기본 세팅', '프로세스 유지(PM2 등)', '재시작·로그 확인', '초보자용 체크리스트'] },
     { id: nanoid(), name: '서버 세팅 가이드', category: '가이드', price: 7000, badge: '', description: '판매용 디스코드 서버 채널·역할·권한을 구성하는 방법입니다.', features: ['역할 계층 설계', '카테고리/채널 구성', '권한 충돌 방지', '티켓·문의 채널 세팅', '구매 인증 채널 운영'] },
@@ -47,7 +47,7 @@ const seed = {
   orders: [],
   settings: {
     siteName: 'VEXO STORE',
-    notice: '',
+    notice: '10월까지 50만원 목표용 구성 · 주문 후 디스코드 티켓에서 입금·수령 진행',
     onlineLabel: '현재 접속자',
     discordInvite: process.env.DISCORD_INVITE_URL || '',
     bankInfo: process.env.BANK_INFO || '디스코드 티켓에서 입금 계좌를 안내받아 주세요.',
@@ -65,28 +65,7 @@ try {
   await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 }
 if (!Array.isArray(db.users)) db.users = [];
-for (const u of db.users) {
-  if (!Array.isArray(u.coupons)) u.coupons = [];
-  if (!Array.isArray(u.benefitHistory)) u.benefitHistory = [];
-}
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
-
-// Price refresh: gently lower only products above 30,000 KRW.
-// Existing db.json entries are updated by product name so deployed sites pick up the new prices too.
-const PRICE_REFRESH = {
-  'VEXO 자판기봇 PRO': 36000,
-  'VEXO 서버 템플릿 PRO': 32000,
-  'VEXO 자동화 패키지': 45000,
-  'VEXO 커스텀 봇 제작': 79000,
-  'VEXO STORE 올인원': 89000,
-  'VEXO 런칭 풀세팅': 129000,
-};
-let pricesChanged = false;
-for (const product of db.products) {
-  const next = PRICE_REFRESH[product.name];
-  if (next && Number(product.price) !== next) { product.price = next; pricesChanged = true; }
-}
-if (pricesChanged) await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 if (!Array.isArray(db.orders)) db.orders = [];
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; }
 if (!db.settings) db.settings = seed.settings;
@@ -246,54 +225,6 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ ok: true });
 });
 
-
-const BENEFIT_TIERS = [
-  { min: 140000, percent: 10, maxDiscount: 20000, label: 'PREMIUM 10%', ttlDays: 30 },
-  { min: 100000, percent: 8, maxDiscount: 10000, label: 'VIP 8%', ttlDays: 30 },
-  { min: 50000, percent: 5, maxDiscount: 5000, label: 'THANKS 5%', ttlDays: 21 },
-];
-function benefitTierForAmount(amount) {
-  return BENEFIT_TIERS.find(t => amount >= t.min) || null;
-}
-function makeBenefitCoupon(user, order) {
-  const tier = benefitTierForAmount(order.total);
-  if (!tier) return null;
-  if (!Array.isArray(user.coupons)) user.coupons = [];
-  if (!Array.isArray(user.benefitHistory)) user.benefitHistory = [];
-  const existing = user.coupons.find(c => c.orderId === order.id && !c.used);
-  if (existing) return existing;
-  const code = `${tier.label.replace(/[^A-Z0-9]/g,'')}-${nanoid(6).toUpperCase()}`;
-  const expiresAt = new Date(Date.now() + tier.ttlDays * 86400000).toISOString();
-  const coupon = {
-    code,
-    orderId: order.id,
-    percent: tier.percent,
-    maxDiscount: tier.maxDiscount,
-    expiresAt,
-    used: false,
-    issuedAt: new Date().toISOString(),
-    label: `다음 구매 ${tier.percent}% 할인`,
-  };
-  user.coupons.unshift(coupon);
-  user.benefitHistory.unshift({ orderId: order.id, amount: order.total, percent: tier.percent, code, issuedAt: coupon.issuedAt });
-  user.coupons = user.coupons.slice(0, 20);
-  user.benefitHistory = user.benefitHistory.slice(0, 20);
-  return coupon;
-}
-function activeCoupons(user) {
-  const now = Date.now();
-  return (user.coupons || []).filter(c => !c.used && Date.parse(c.expiresAt || '') > now);
-}
-function couponForUser(user, code) {
-  const wanted = String(code || '').trim().toUpperCase();
-  if (!wanted) return null;
-  return activeCoupons(user).find(c => String(c.code).toUpperCase() === wanted) || null;
-}
-
-app.get('/api/me/benefits', requireAuth, (req, res) => {
-  res.json({ coupons: activeCoupons(req.user), history: req.user.benefitHistory || [] });
-});
-
 app.post('/api/orders', requireAuth, async (req, res) => {
   const product = db.products.find(p => p.id === req.body.productId);
   if (!product) return res.status(404).json({ error: '상품을 찾을 수 없습니다.' });
@@ -301,14 +232,8 @@ app.post('/api/orders', requireAuth, async (req, res) => {
   if (!Number.isInteger(quantity) || quantity < 1 || quantity > 20) return res.status(400).json({ error: '수량은 1~20개 사이로 입력해 주세요.' });
   const discordTag = String(req.body.discordTag || '').trim().slice(0, 60);
   const memo = String(req.body.memo || '').trim().slice(0, 500);
-  const couponCode = String(req.body.couponCode || '').trim();
   if (!discordTag) return res.status(400).json({ error: '디스코드 닉네임 또는 아이디를 입력해 주세요.' });
   const invite = String(db.settings.discordInvite || process.env.DISCORD_INVITE_URL || '').trim();
-  const baseTotal = product.price * quantity;
-  const coupon = couponForUser(req.user, couponCode);
-  if (couponCode && !coupon) return res.status(400).json({ error: '사용할 수 없거나 만료된 혜택 코드입니다.' });
-  const discountAmount = coupon ? Math.min(Math.floor(baseTotal * coupon.percent / 100), coupon.maxDiscount) : 0;
-  const finalTotal = Math.max(0, baseTotal - discountAmount);
   const order = {
     id: 'VX-' + nanoid(9).toUpperCase(),
     userId: req.user.id,
@@ -318,10 +243,7 @@ app.post('/api/orders', requireAuth, async (req, res) => {
     productName: product.name,
     quantity,
     unitPrice: product.price,
-    baseTotal,
-    discountAmount,
-    couponCode: coupon ? coupon.code : '',
-    total: finalTotal,
+    total: product.price * quantity,
     status: '주문접수',
     paymentRequested: false,
     deliveryLink: invite,
@@ -329,11 +251,6 @@ app.post('/api/orders', requireAuth, async (req, res) => {
     memo,
     createdAt: new Date().toISOString()
   };
-  if (coupon) {
-    coupon.used = true;
-    coupon.usedAt = new Date().toISOString();
-    coupon.usedOrderId = order.id;
-  }
   db.orders.unshift(order);
   saveDb();
   await sendDiscordOrderNotice(order).catch(() => {});
@@ -452,16 +369,8 @@ app.patch('/api/admin/orders/:id', requireAdmin, (req, res) => {
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
   const status = String(req.body.status || '');
   if (!['주문접수','입금확인요청','입금확인완료','처리중','완료','취소'].includes(status)) return res.status(400).json({ error: '상태값이 올바르지 않습니다.' });
-  const wasCompleted = order.status === '완료';
   order.status = status;
   order.updatedAt = new Date().toISOString();
-  if (status === '완료' && !wasCompleted) {
-    const buyer = db.users.find(u => u.id === order.userId);
-    if (buyer) {
-      const benefit = makeBenefitCoupon(buyer, order);
-      if (benefit) order.benefitCode = benefit.code;
-    }
-  }
   saveDb();
   res.json({ order });
 });
