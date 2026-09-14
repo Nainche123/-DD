@@ -47,7 +47,7 @@ const seed = {
   orders: [],
   settings: {
     siteName: 'VEXO STORE',
-    notice: '10월까지 50만원 목표용 구성 · 주문 후 디스코드 티켓에서 입금·수령 진행',
+    notice: '',
     onlineLabel: '현재 접속자',
     discordInvite: process.env.DISCORD_INVITE_URL || '',
     bankInfo: process.env.BANK_INFO || '디스코드 티켓에서 입금 계좌를 안내받아 주세요.',
