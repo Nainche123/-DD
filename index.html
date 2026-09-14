@@ -993,7 +993,7 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
               <div class="price-chip">149,000원</div>
             </div>
           </div>
-          <div class="preview-note" id="noticeText"></div>
+          <div class="preview-note hidden" id="noticeText" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -1426,7 +1426,7 @@ function openDetail(id){
     <div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>
     <div class="mini" style="font-weight:900;color:var(--cyan)">포함 기능</div>
     <ul class="feature-list">${(p.features||[]).length?(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join(''):'<li>상세 기능은 티켓에서 확인 가능합니다.</li>'}</ul>
-    <div class="notice-box" style="margin-top:14px">주문 후 안내되는 절차에 따라 결제와 상품 수령이 진행됩니다.</div>
+    
     <button class="btn primary block" style="margin-top:14px" onclick="openOrder('${esc(p.id)}')">이 상품 주문하기</button>`);
 }
 function openOrder(id){
