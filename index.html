@@ -520,7 +520,7 @@ a{color:inherit}
   font-size:22px;
 }
 .detail-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.detail-sale-price{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.detail-sale-price .old-price{font-size:14px;color:#9d8eae;text-decoration:line-through}.detail-sale-price .sale-row{display:flex;align-items:center;gap:10px}.detail-sale-price strong{font-size:30px}.detail-sale-price .sale-percent{font-size:11px;font-weight:950;padding:5px 8px;border-radius:999px;color:#fbf4ff;background:linear-gradient(135deg,rgba(139,92,246,.95),rgba(192,132,252,.9))}.detail-price{font-size:30px;font-weight:900;margin:14px 0 10px}
+.detail-price{font-size:30px;font-weight:900;margin:14px 0 10px}
 .feature-list{list-style:none;margin-top:10px;display:grid;gap:8px}
 .feature-list li{
   padding:10px 11px;
@@ -923,7 +923,6 @@ body{
 button.btn.primary{background:linear-gradient(135deg,#7c3aed,#c084fc)!important;border-color:rgba(255,255,255,.14)!important;box-shadow:0 12px 32px rgba(124,58,237,.24)!important}
 button.btn.ghost,.glass-login{background:rgba(139,92,246,.08)!important;border-color:rgba(216,180,254,.20)!important}
 input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important;border-color:rgba(216,180,254,.16)!important}
-\n/* ===== ONTOP PURPLE GLASS / SALE THEME ===== */\n:root{\n  --bg:#0b0614;\n  --surface:#160d24;\n  --surface-2:#201132;\n  --surface-3:#2a1742;\n  --line:rgba(205,180,255,.16);\n  --line-2:rgba(215,192,255,.30);\n  --text:#fbf9ff;\n  --soft:#ddd2ee;\n  --muted:#9f91b2;\n  --blue:#9b6cff;\n  --cyan:#b98cff;\n  --green:#b58cff;\n  --amber:#d7b3ff;\n  --red:#ff9edc;\n  --shadow:0 20px 70px rgba(110,55,190,.20);\n  --radius:18px;\n}\nbody{\n  background:\n    radial-gradient(circle at 14% 12%,rgba(153,92,255,.18),transparent 30%),\n    radial-gradient(circle at 86% 18%,rgba(210,145,255,.13),transparent 26%),\n    radial-gradient(circle at 50% 90%,rgba(115,66,210,.10),transparent 35%),\n    var(--bg);\n}\nbody:before{\n  background-image:\n    linear-gradient(rgba(216,193,255,.035) 1px,transparent 1px),\n    linear-gradient(90deg,rgba(216,193,255,.035) 1px,transparent 1px);\n}\n.top{\n  background:rgba(11,6,20,.62);\n  border-bottom:1px solid rgba(214,188,255,.14);\n  backdrop-filter:blur(24px) saturate(130%);\n}\n.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result{\n  border-color:rgba(214,190,255,.15);\n  background:linear-gradient(145deg,rgba(42,22,62,.62),rgba(18,10,30,.58));\n  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 55px rgba(91,46,160,.12);\n  backdrop-filter:blur(18px) saturate(125%);\n}\n.hero h1 span{color:#d9b8ff}\n.eyebrow{\n  color:#e9d8ff;\n  border-color:rgba(183,127,255,.34);\n  background:rgba(150,88,255,.11);\n}\n.btn.primary{\n  color:#fff;\n  border-color:rgba(213,182,255,.30);\n  background:linear-gradient(135deg,#8d51f6,#b16cff);\n  box-shadow:0 10px 28px rgba(132,72,232,.26);\n}\n.btn.primary:hover{filter:brightness(1.06);transform:translateY(-1px)}\n.btn.ghost,.tab,.segment{\n  border-color:rgba(214,190,255,.15);\n  background:rgba(255,255,255,.035);\n}\n.tab.active,.segment.active{\n  background:#f0e8ff;\n  color:#1b0e2b;\n  border-color:#f0e8ff;\n}\n.product-card:before{background:linear-gradient(180deg,#8b5cf6,#c084fc)}\n.product-card.tone-template:before,.product-card.tone-auto:before,.product-card.tone-dev:before,.product-card.tone-guide:before,.product-card.tone-pack:before{background:linear-gradient(180deg,#8b5cf6,#d8a4ff)}\n.tool-card.featured{border-color:rgba(175,116,255,.44);box-shadow:0 20px 65px rgba(124,69,230,.18)}\n.tool-kicker{color:#c6a0ff}\n.preview-note{border-left-color:#a76cff;background:rgba(158,93,255,.08)}\n.price-chip{background:rgba(168,104,255,.13);color:#e6d2ff}\n.modal-backdrop{background:rgba(7,3,14,.62)!important;backdrop-filter:blur(16px)}\n.input,.select,.textarea{\n  border-color:rgba(214,190,255,.15)!important;\n  background:rgba(255,255,255,.035)!important;\n  color:var(--text)!important;\n}\n.input:focus,.select:focus,.textarea:focus{\n  border-color:rgba(181,126,255,.65)!important;\n  box-shadow:0 0 0 3px rgba(151,89,255,.12)!important;\n}\n\n/* Sale price treatment */\n.price-sale{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:auto}\n.price-sale .old-price{font-size:13px;color:#9887aa;text-decoration:line-through;text-decoration-thickness:1px}\n.price-sale .sale-price{font-size:25px;font-weight:950;letter-spacing:-.5px;color:#fff}\n.price-sale .sale-percent{font-size:11px;font-weight:950;padding:5px 8px;border-radius:999px;color:#f8ecff;background:linear-gradient(135deg,rgba(139,92,246,.9),rgba(192,132,252,.85));box-shadow:0 6px 20px rgba(139,92,246,.18)}\n.sale-note{margin-top:6px;font-size:11px;color:#bcaaca}\n
 </style>
 </head>
 <body>
@@ -1291,16 +1290,7 @@ function renderProducts(){
       <h3>${esc(p.name)}</h3>
       <div class="desc">${esc(p.description)}</div>
       <div class="feature-mini">${features||'<span>상세 기능은 주문 전 티켓에서 확인 가능합니다.</span>'}</div>
-      ${p.salePercent>0 ? `
-        <div class="price-sale">
-          <span class="old-price">${won(p.originalPrice)}</span>
-          <div class="sale-row">
-            <span class="sale-price">${won(p.price)}</span>
-            <span class="sale-percent">-${p.salePercent}% SALE</span>
-          </div>
-        </div>
-        <div class="sale-note">지금 구매 시 특가 적용</div>
-      ` : `<div class="price">${won(p.price)} <small>/ 1개</small></div>`}
+      <div class="price">${won(p.price)} <small>/ 1개</small></div>
       <div class="product-actions">
         <button class="btn ghost" data-detail="${esc(p.id)}">자세히</button>
         <button class="btn primary" data-order="${esc(p.id)}">주문</button>
@@ -1433,10 +1423,7 @@ function openDetail(id){
     <div class="detail-meta"><span class="badge">${esc(p.category)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:''}</div>
     <h3 style="font-size:24px;margin-bottom:8px">${esc(p.name)}</h3>
     <p style="color:var(--soft);line-height:1.75">${esc(p.description)}</p>
-    ${p.salePercent>0 ? `<div class="detail-price detail-sale-price">
-      <div class="old-price">${won(p.originalPrice)}</div>
-      <div class="sale-row"><strong>${won(p.price)}</strong><span class="sale-percent">-${p.salePercent}% SALE</span></div>
-    </div>` : `<div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>`}
+    <div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>
     <div class="mini" style="font-weight:900;color:var(--cyan)">포함 기능</div>
     <ul class="feature-list">${(p.features||[]).length?(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join(''):'<li>상세 기능은 티켓에서 확인 가능합니다.</li>'}</ul>
     <div class="notice-box" style="margin-top:14px">주문 후 안내되는 절차에 따라 결제와 상품 수령이 진행됩니다.</div>
@@ -1729,6 +1716,15 @@ async function init(){
     currentUser=d.user;
     updateAccount();
     await loadProducts();
+    const urlProduct = new URLSearchParams(location.search).get('productName');
+    if(urlProduct){
+      const matched = products.find(p => String(p.name).trim().toLowerCase() === String(urlProduct).trim().toLowerCase())
+        || products.find(p => String(p.name).toLowerCase().includes(String(urlProduct).trim().toLowerCase()));
+      if(matched){
+        pendingOrderId = matched.id;
+        if(currentUser) openOrder(matched.id);
+      }
+    }
     if(currentUser?.role==='admin'){
       $('#adminBtn').classList.remove('hidden');
       $('#adminSection').classList.remove('hidden');
