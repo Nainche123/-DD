@@ -520,7 +520,7 @@ a{color:inherit}
   font-size:22px;
 }
 .detail-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.detail-price{font-size:30px;font-weight:900;margin:14px 0 10px}
+.detail-sale-price{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.detail-sale-price .old-price{font-size:14px;color:#9d8eae;text-decoration:line-through}.detail-sale-price .sale-row{display:flex;align-items:center;gap:10px}.detail-sale-price strong{font-size:30px}.detail-sale-price .sale-percent{font-size:11px;font-weight:950;padding:5px 8px;border-radius:999px;color:#fbf4ff;background:linear-gradient(135deg,rgba(139,92,246,.95),rgba(192,132,252,.9))}.detail-price{font-size:30px;font-weight:900;margin:14px 0 10px}
 .feature-list{list-style:none;margin-top:10px;display:grid;gap:8px}
 .feature-list li{
   padding:10px 11px;
@@ -891,100 +891,39 @@ body:before{
   .online-pill{font-size:11px}
   .register-btn,.glass-login{padding:10px 12px!important}
 }
-/* === FINAL PURPLE-ONLY GLASS SYSTEM === */
+
+/* Final VEXO purple glass theme */
 :root{
-  --blue:#9b5cff;
-  --cyan:#c084fc;
-  --purple:#8b5cf6;
-  --purple-2:#c084fc;
-  --purple-3:#f0d9ff;
-  --green:#b78cff;
-  --amber:#d8b4fe;
-  --red:#fb7185;
-  --bg:#07040e;
-  --surface:rgba(20,10,35,.62);
-  --surface-2:rgba(31,16,52,.70);
-  --surface-3:rgba(46,23,76,.74);
-  --line:rgba(216,180,254,.14);
-  --line-2:rgba(192,132,252,.32);
-  --text:#fcf8ff;
-  --soft:#ded4ea;
-  --muted:#ab9dbc;
-  --shadow:0 24px 80px rgba(98,43,178,.24);
+  --bg:#09060f!important;
+  --surface:rgba(24,16,38,.72)!important;
+  --surface-2:rgba(36,24,56,.68)!important;
+  --surface-3:rgba(49,33,74,.66)!important;
+  --line:rgba(196,160,255,.16)!important;
+  --line-2:rgba(196,160,255,.28)!important;
+  --text:#fbf8ff!important;
+  --soft:#ddd0ef!important;
+  --muted:#a99ab9!important;
+  --blue:#a78bfa!important;
+  --cyan:#c084fc!important;
+  --green:#d8b4fe!important;
+  --amber:#d8b4fe!important;
+  --red:#f0abfc!important;
+  --shadow:0 24px 80px rgba(62,18,104,.26)!important;
 }
 body{
   background:
-    radial-gradient(700px 480px at 5% 0%,rgba(124,58,237,.22),transparent 60%),
-    radial-gradient(620px 460px at 95% 8%,rgba(192,132,252,.18),transparent 62%),
-    radial-gradient(700px 520px at 50% 105%,rgba(88,28,135,.18),transparent 68%),
-    #07040e !important;
+    radial-gradient(circle at 12% 8%,rgba(168,85,247,.15),transparent 26%),
+    radial-gradient(circle at 88% 14%,rgba(192,132,252,.12),transparent 24%),
+    radial-gradient(circle at 50% 100%,rgba(126,34,206,.10),transparent 34%),
+    var(--bg)!important;
 }
-body:before{
-  background-image:
-    linear-gradient(rgba(216,180,254,.028) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(216,180,254,.028) 1px,transparent 1px);
+.top,.card,.product-card,.tool-card,.kpi-card,.panel,.modal-box,.preview-screen,.metric,.notice-box,.recommend-box{
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
 }
-.top{
-  background:rgba(9,4,17,.68) !important;
-  border-bottom-color:rgba(216,180,254,.13) !important;
-  box-shadow:0 14px 44px rgba(0,0,0,.24);
-}
-.brand-mark{
-  background:linear-gradient(135deg,#7c3aed,#c084fc) !important;
-  box-shadow:0 14px 38px rgba(139,92,246,.42),0 0 0 1px rgba(255,255,255,.13) inset !important;
-}
-.nav-links a:hover,.tool-kicker,.preview-note{color:#d8b4fe !important}
-.online-dot{background:#c084fc !important;box-shadow:0 0 18px rgba(192,132,252,.85) !important}
-.online-pill{background:rgba(139,92,246,.07) !important;border-color:rgba(216,180,254,.16) !important}
-.btn{
-  background:rgba(255,255,255,.045) !important;
-  border-color:rgba(216,180,254,.15) !important;
-  color:#f6efff !important;
-}
-.btn.primary,.btn.blue{
-  background:linear-gradient(135deg,#7c3aed,#a855f7 55%,#c084fc) !important;
-  color:#fff !important;
-  border-color:rgba(255,255,255,.18) !important;
-  box-shadow:0 14px 36px rgba(124,58,237,.30),inset 0 1px 0 rgba(255,255,255,.18) !important;
-}
-.btn.primary:hover,.btn.blue:hover{box-shadow:0 18px 44px rgba(124,58,237,.40),inset 0 1px 0 rgba(255,255,255,.20) !important}
-.btn.ghost:hover{background:rgba(139,92,246,.12) !important;border-color:rgba(192,132,252,.30) !important}
-.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result,.faq-grid details,.kpi-card{
-  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(139,92,246,.035) 42%,rgba(255,255,255,.022)) !important;
-  border-color:rgba(216,180,254,.16) !important;
-  box-shadow:0 26px 80px rgba(56,24,102,.28),inset 0 1px 0 rgba(255,255,255,.075) !important;
-}
-.hero-copy:before,.hero-visual:before,.product-card:after,.tool-card:after{
-  background:radial-gradient(circle,rgba(168,85,247,.16),transparent 68%) !important;
-}
-.hero h1 span{color:#e9d5ff !important;text-shadow:0 0 38px rgba(192,132,252,.24) !important}
-.eyebrow{color:#f0e8ff !important;background:rgba(139,92,246,.11) !important;border-color:rgba(192,132,252,.28) !important}
-.badge,.category-mark,.metric,.flow-step,.price-chip,.tab,.segment,.searchbar,.filters,.tabbar{
-  background:rgba(139,92,246,.055) !important;
-  border-color:rgba(216,180,254,.14) !important;
-}
-.tab.active,.segment.active{background:linear-gradient(135deg,#7c3aed,#a855f7) !important;color:#fff !important;border-color:rgba(255,255,255,.20) !important}
-.input,.select,.textarea{
-  background:rgba(10,5,18,.46) !important;
-  border-color:rgba(216,180,254,.16) !important;
-}
-.input:focus,.select:focus,.textarea:focus{
-  border-color:rgba(192,132,252,.68) !important;
-  box-shadow:0 0 0 4px rgba(139,92,246,.13),0 1px 0 rgba(255,255,255,.06) inset !important;
-}
-.feature-mini span:before{background:#c084fc !important;box-shadow:0 0 10px rgba(192,132,252,.40) !important}
-.progress i{background:linear-gradient(90deg,#7c3aed,#c084fc) !important}
-.product-card:before{background:linear-gradient(180deg,#a855f7,#7c3aed) !important}
-.product-card.tone-template:before,.product-card.tone-auto:before,.product-card.tone-dev:before,.product-card.tone-guide:before,.product-card.tone-pack:before{background:linear-gradient(180deg,#8b5cf6,#c084fc) !important}
-.modal{background:rgba(6,2,12,.70) !important}
-.modal-card{background:linear-gradient(145deg,rgba(31,15,51,.92),rgba(11,6,19,.88)) !important}
-.footer{background:rgba(12,5,20,.42) !important;border-top-color:rgba(216,180,254,.13) !important}
-.register-btn{display:inline-flex !important}
-.register-btn.hidden{display:none !important}
-@media(max-width:700px){.nav-actions{width:100%;justify-content:flex-end;gap:7px}.register-btn{padding:10px 14px !important}}
-
-.account-register,.account-login,#accountBtn{min-width:88px}
-@media(max-width:700px){.account-register,.account-login,#accountBtn{min-width:auto}}
+button.btn.primary{background:linear-gradient(135deg,#7c3aed,#c084fc)!important;border-color:rgba(255,255,255,.14)!important;box-shadow:0 12px 32px rgba(124,58,237,.24)!important}
+button.btn.ghost,.glass-login{background:rgba(139,92,246,.08)!important;border-color:rgba(216,180,254,.20)!important}
+input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important;border-color:rgba(216,180,254,.16)!important}
+\n/* ===== ONTOP PURPLE GLASS / SALE THEME ===== */\n:root{\n  --bg:#0b0614;\n  --surface:#160d24;\n  --surface-2:#201132;\n  --surface-3:#2a1742;\n  --line:rgba(205,180,255,.16);\n  --line-2:rgba(215,192,255,.30);\n  --text:#fbf9ff;\n  --soft:#ddd2ee;\n  --muted:#9f91b2;\n  --blue:#9b6cff;\n  --cyan:#b98cff;\n  --green:#b58cff;\n  --amber:#d7b3ff;\n  --red:#ff9edc;\n  --shadow:0 20px 70px rgba(110,55,190,.20);\n  --radius:18px;\n}\nbody{\n  background:\n    radial-gradient(circle at 14% 12%,rgba(153,92,255,.18),transparent 30%),\n    radial-gradient(circle at 86% 18%,rgba(210,145,255,.13),transparent 26%),\n    radial-gradient(circle at 50% 90%,rgba(115,66,210,.10),transparent 35%),\n    var(--bg);\n}\nbody:before{\n  background-image:\n    linear-gradient(rgba(216,193,255,.035) 1px,transparent 1px),\n    linear-gradient(90deg,rgba(216,193,255,.035) 1px,transparent 1px);\n}\n.top{\n  background:rgba(11,6,20,.62);\n  border-bottom:1px solid rgba(214,188,255,.14);\n  backdrop-filter:blur(24px) saturate(130%);\n}\n.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result{\n  border-color:rgba(214,190,255,.15);\n  background:linear-gradient(145deg,rgba(42,22,62,.62),rgba(18,10,30,.58));\n  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 55px rgba(91,46,160,.12);\n  backdrop-filter:blur(18px) saturate(125%);\n}\n.hero h1 span{color:#d9b8ff}\n.eyebrow{\n  color:#e9d8ff;\n  border-color:rgba(183,127,255,.34);\n  background:rgba(150,88,255,.11);\n}\n.btn.primary{\n  color:#fff;\n  border-color:rgba(213,182,255,.30);\n  background:linear-gradient(135deg,#8d51f6,#b16cff);\n  box-shadow:0 10px 28px rgba(132,72,232,.26);\n}\n.btn.primary:hover{filter:brightness(1.06);transform:translateY(-1px)}\n.btn.ghost,.tab,.segment{\n  border-color:rgba(214,190,255,.15);\n  background:rgba(255,255,255,.035);\n}\n.tab.active,.segment.active{\n  background:#f0e8ff;\n  color:#1b0e2b;\n  border-color:#f0e8ff;\n}\n.product-card:before{background:linear-gradient(180deg,#8b5cf6,#c084fc)}\n.product-card.tone-template:before,.product-card.tone-auto:before,.product-card.tone-dev:before,.product-card.tone-guide:before,.product-card.tone-pack:before{background:linear-gradient(180deg,#8b5cf6,#d8a4ff)}\n.tool-card.featured{border-color:rgba(175,116,255,.44);box-shadow:0 20px 65px rgba(124,69,230,.18)}\n.tool-kicker{color:#c6a0ff}\n.preview-note{border-left-color:#a76cff;background:rgba(158,93,255,.08)}\n.price-chip{background:rgba(168,104,255,.13);color:#e6d2ff}\n.modal-backdrop{background:rgba(7,3,14,.62)!important;backdrop-filter:blur(16px)}\n.input,.select,.textarea{\n  border-color:rgba(214,190,255,.15)!important;\n  background:rgba(255,255,255,.035)!important;\n  color:var(--text)!important;\n}\n.input:focus,.select:focus,.textarea:focus{\n  border-color:rgba(181,126,255,.65)!important;\n  box-shadow:0 0 0 3px rgba(151,89,255,.12)!important;\n}\n\n/* Sale price treatment */\n.price-sale{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:auto}\n.price-sale .old-price{font-size:13px;color:#9887aa;text-decoration:line-through;text-decoration-thickness:1px}\n.price-sale .sale-price{font-size:25px;font-weight:950;letter-spacing:-.5px;color:#fff}\n.price-sale .sale-percent{font-size:11px;font-weight:950;padding:5px 8px;border-radius:999px;color:#f8ecff;background:linear-gradient(135deg,rgba(139,92,246,.9),rgba(192,132,252,.85));box-shadow:0 6px 20px rgba(139,92,246,.18)}\n.sale-note{margin-top:6px;font-size:11px;color:#bcaaca}\n
 </style>
 </head>
 <body>
@@ -1003,9 +942,8 @@ body:before{
     </nav>
     <div class="nav-actions">
       <div class="online-pill"><span class="online-dot"></span><b id="online">0</b>명 접속중</div>
-      <button class="btn ghost account-register" id="registerBtn" onclick="openModal('register')">회원가입</button>
-      <button class="btn primary account-login" id="loginBtn" onclick="openModal('login')">로그인</button>
-      <button class="btn ghost hidden" id="accountBtn" aria-label="로그아웃">로그아웃</button>
+      <button class="btn glass-login" id="accountBtn">로그인</button>
+      <button class="btn primary register-btn" id="registerBtn" onclick="openModal('register')">회원가입</button>
       <button class="btn primary hidden" id="adminBtn" onclick="document.querySelector('#adminSection').scrollIntoView({behavior:'smooth'})">관리자</button>
     </div>
   </div>
@@ -1017,14 +955,14 @@ body:before{
       <div class="hero-copy">
         <div class="eyebrow">Discord Store System</div>
         <h1>VEXO STORE<br><span>수익형 디스코드 판매 세팅</span></h1>
-        <p class="hero-desc">자판기봇, 서버 템플릿, 자동화, 커스텀 제작까지 한 번에 주문하세요. 웹에서는 빠르게 주문하고, 입금 확인과 상품 수령은 디스코드 티켓에서 안전하게 진행합니다.</p>
+        <p class="hero-desc">자판기봇, 서버 템플릿, 자동화, 커스텀 제작까지 한 번에 주문하세요. 상품을 확인하고 원하는 구성을 간편하게 주문하세요.</p>
         <div class="hero-cta">
           <button class="btn primary" onclick="document.querySelector('#recommend').scrollIntoView({behavior:'smooth'})">내게 맞는 구성 찾기</button>
           <button class="btn ghost" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">상품 바로 보기</button>
         </div>
         <div class="hero-metrics">
           <div class="metric"><b id="productCount">0</b><span>판매 상품</span></div>
-          <div class="metric"><b>티켓</b><span>입금·수령 진행</span></div>
+          <div class="metric"><b>SAFE</b><span>간편한 주문</span></div>
           <div class="metric"><b>24/7</b><span>웹 주문 접수</span></div>
         </div>
       </div>
@@ -1056,7 +994,7 @@ body:before{
               <div class="price-chip">149,000원</div>
             </div>
           </div>
-          <div class="preview-note" id="noticeText">주문 후 디스코드 티켓에서 입금·수령을 진행합니다.</div>
+          <div class="preview-note" id="noticeText"></div>
         </div>
       </div>
     </div>
@@ -1127,13 +1065,13 @@ body:before{
       <div class="section-head">
         <div>
           <h2>구매 방법</h2>
-          <p>웹 주문 후 디스코드 티켓에서 나머지를 진행합니다.</p>
+          <p>주문 후 안내에 따라 결제를 진행합니다.</p>
         </div>
       </div>
       <div class="guide-grid">
         <div class="guide-item"><b>1. 상품 선택</b><span>원하는 상품을 고르고 주문 버튼을 누릅니다.</span></div>
         <div class="guide-item"><b>2. 주문 정보 입력</b><span>디스코드 닉네임과 요청사항을 남깁니다.</span></div>
-        <div class="guide-item"><b>3. 디스코드 티켓</b><span>주문번호를 티켓에 보내고 입금 안내를 받습니다.</span></div>
+        <div class="guide-item"><b>3. 디스코드 티켓</b><span>주문번호를 확인하고 결제를 진행합니다.</span></div>
         <div class="guide-item"><b>4. 확인 후 수령</b><span>관리자 확인 뒤 상품 또는 세팅 안내를 받습니다.</span></div>
       </div>
     </div>
@@ -1150,7 +1088,7 @@ body:before{
       <div class="faq-grid">
         <details open>
           <summary>웹에서 바로 결제하나요?</summary>
-          <p>아니요. 웹에서는 주문만 접수하고, 입금 확인과 상품 지급은 디스코드 티켓에서 진행합니다.</p>
+          <p>아니요. 주문 후 안내되는 절차에 따라 결제를 진행하고 상품을 수령할 수 있습니다.</p>
         </details>
         <details>
           <summary>상품은 어떻게 받나요?</summary>
@@ -1249,7 +1187,7 @@ body:before{
 </main>
 
 <footer class="footer">
-  <div class="wrap">VEXO STORE · 웹 주문 접수 · 입금 확인과 상품 지급은 디스코드 티켓에서 진행</div>
+  <div class="wrap">VEXO STORE · 웹 주문 접수 · 간편하고 안전한 주문</div>
 </footer>
 
 <div class="modal" id="modal">
@@ -1353,7 +1291,16 @@ function renderProducts(){
       <h3>${esc(p.name)}</h3>
       <div class="desc">${esc(p.description)}</div>
       <div class="feature-mini">${features||'<span>상세 기능은 주문 전 티켓에서 확인 가능합니다.</span>'}</div>
-      <div class="price">${won(p.price)} <small>/ 1개</small></div>
+      ${p.salePercent>0 ? `
+        <div class="price-sale">
+          <span class="old-price">${won(p.originalPrice)}</span>
+          <div class="sale-row">
+            <span class="sale-price">${won(p.price)}</span>
+            <span class="sale-percent">-${p.salePercent}% SALE</span>
+          </div>
+        </div>
+        <div class="sale-note">지금 구매 시 특가 적용</div>
+      ` : `<div class="price">${won(p.price)} <small>/ 1개</small></div>`}
       <div class="product-actions">
         <button class="btn ghost" data-detail="${esc(p.id)}">자세히</button>
         <button class="btn primary" data-order="${esc(p.id)}">주문</button>
@@ -1450,10 +1397,11 @@ async function login(){
 }
 async function register(){
   try{
-    await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:$('#regUser').value,email:$('#regEmail').value,password:$('#regPw').value})});
+    const d=await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:$('#regUser').value,email:$('#regEmail').value,password:$('#regPw').value})});
+    currentUser=d.user;
     closeModal();
-    toast('회원가입이 완료되었습니다. 로그인해 주세요.');
-    setTimeout(()=>openModal('login'),250);
+    toast('회원가입이 완료되었습니다. 바로 이용할 수 있습니다.');
+    await afterAuth();
   }catch(e){toast(e.message)}
 }
 async function logout(){
@@ -1467,25 +1415,15 @@ async function logout(){
   toast('로그아웃되었습니다.');
 }
 function updateAccount(){
-  const registerBtn=$('#registerBtn');
-  const loginBtn=$('#loginBtn');
-  const logoutBtn=$('#accountBtn');
-  if(!registerBtn || !loginBtn || !logoutBtn) return;
+  const registerBtn=document.querySelector('.register-btn');
   if(currentUser){
-    registerBtn.classList.add('hidden');
-    loginBtn.classList.add('hidden');
-    logoutBtn.classList.remove('hidden');
-    logoutBtn.textContent='로그아웃';
-    logoutBtn.onclick=logout;
-    logoutBtn.classList.remove('primary');
-    logoutBtn.classList.add('ghost');
-    logoutBtn.setAttribute('aria-label','로그아웃');
+    $('#accountBtn').textContent='로그아웃';
+    $('#accountBtn').onclick=logout;
+    if(registerBtn){registerBtn.classList.add('hidden'); registerBtn.setAttribute('aria-hidden','true');}
   }else{
-    registerBtn.classList.remove('hidden');
-    loginBtn.classList.remove('hidden');
-    logoutBtn.classList.add('hidden');
-    registerBtn.setAttribute('aria-label','회원가입');
-    loginBtn.setAttribute('aria-label','로그인');
+    $('#accountBtn').textContent='로그인';
+    $('#accountBtn').onclick=()=>openModal('login');
+    if(registerBtn){registerBtn.classList.remove('hidden'); registerBtn.removeAttribute('aria-hidden');}
   }
 }
 function openDetail(id){
@@ -1495,10 +1433,13 @@ function openDetail(id){
     <div class="detail-meta"><span class="badge">${esc(p.category)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:''}</div>
     <h3 style="font-size:24px;margin-bottom:8px">${esc(p.name)}</h3>
     <p style="color:var(--soft);line-height:1.75">${esc(p.description)}</p>
-    <div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>
+    ${p.salePercent>0 ? `<div class="detail-price detail-sale-price">
+      <div class="old-price">${won(p.originalPrice)}</div>
+      <div class="sale-row"><strong>${won(p.price)}</strong><span class="sale-percent">-${p.salePercent}% SALE</span></div>
+    </div>` : `<div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>`}
     <div class="mini" style="font-weight:900;color:var(--cyan)">포함 기능</div>
     <ul class="feature-list">${(p.features||[]).length?(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join(''):'<li>상세 기능은 티켓에서 확인 가능합니다.</li>'}</ul>
-    <div class="notice-box" style="margin-top:14px">웹에서는 주문만 접수합니다. 입금 확인과 상품 지급은 디스코드 티켓에서 진행합니다.</div>
+    <div class="notice-box" style="margin-top:14px">주문 후 안내되는 절차에 따라 결제와 상품 수령이 진행됩니다.</div>
     <button class="btn primary block" style="margin-top:14px" onclick="openOrder('${esc(p.id)}')">이 상품 주문하기</button>`);
 }
 function openOrder(id){
@@ -1507,7 +1448,7 @@ function openOrder(id){
   if(!currentUser){
     pendingOrderId=id;
     openModal('login');
-    toast('회원가입 후 주문할 수 있습니다.');
+    toast('로그인하면 주문창으로 이어집니다.');
     return;
   }
   showModal('주문하기',`
@@ -1603,6 +1544,7 @@ async function copyText(text){
   }
 }
 async function heartbeat(){
+  if(document.hidden)return;
   try{
     const d=await api('/api/heartbeat',{method:'POST'});
     $('#online').textContent=d.online;
@@ -1614,7 +1556,7 @@ async function loadSite(){
   const name=siteSettings.siteName||'VEXO STORE';
   $('#brandName').textContent=name;
   document.title=name+' | 디스코드 판매 자동화';
-  $('#noticeText').textContent=siteSettings.notice||'주문 후 디스코드 티켓에서 입금·수령을 진행합니다.';
+  $('#noticeText').textContent=siteSettings.notice||'';
   $('#online').textContent=d.online||0;
 }
 function monthLabel(value){
@@ -1749,7 +1691,12 @@ $('#tabs').addEventListener('click',e=>{
   currentCategory=btn.dataset.cat;
   renderProducts();
 });
-$('#searchInput').addEventListener('input',e=>{currentQuery=e.target.value;renderProducts()});
+let searchTimer=null;
+$('#searchInput').addEventListener('input',e=>{
+  currentQuery=e.target.value;
+  clearTimeout(searchTimer);
+  searchTimer=setTimeout(renderProducts,120);
+});
 $('#sortSelect').addEventListener('change',e=>{currentSort=e.target.value;renderProducts()});
 document.addEventListener('click',e=>{
   const detail=e.target.closest('[data-detail]');
@@ -1789,7 +1736,8 @@ async function init(){
     }
     await loadOrders();
     await heartbeat();
-    setInterval(heartbeat,15000);
+    setInterval(heartbeat,60000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) heartbeat(); });
   }catch(e){
     toast(e.message||'사이트를 불러오지 못했습니다.');
   }
