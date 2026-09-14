@@ -982,6 +982,9 @@ body:before{
 .register-btn{display:inline-flex !important}
 .register-btn.hidden{display:none !important}
 @media(max-width:700px){.nav-actions{width:100%;justify-content:flex-end;gap:7px}.register-btn{padding:10px 14px !important}}
+
+.account-register,.account-login,#accountBtn{min-width:88px}
+@media(max-width:700px){.account-register,.account-login,#accountBtn{min-width:auto}}
 </style>
 </head>
 <body>
@@ -1000,7 +1003,9 @@ body:before{
     </nav>
     <div class="nav-actions">
       <div class="online-pill"><span class="online-dot"></span><b id="online">0</b>명 접속중</div>
-      <button class="btn primary register-btn" id="accountBtn" onclick="openModal('register')">회원가입</button>
+      <button class="btn ghost account-register" id="registerBtn" onclick="openModal('register')">회원가입</button>
+      <button class="btn primary account-login" id="loginBtn" onclick="openModal('login')">로그인</button>
+      <button class="btn ghost hidden" id="accountBtn" aria-label="로그아웃">로그아웃</button>
       <button class="btn primary hidden" id="adminBtn" onclick="document.querySelector('#adminSection').scrollIntoView({behavior:'smooth'})">관리자</button>
     </div>
   </div>
@@ -1445,11 +1450,10 @@ async function login(){
 }
 async function register(){
   try{
-    const d=await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:$('#regUser').value,email:$('#regEmail').value,password:$('#regPw').value})});
-    currentUser=d.user;
+    await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:$('#regUser').value,email:$('#regEmail').value,password:$('#regPw').value})});
     closeModal();
-    toast('가입되었습니다.');
-    await afterAuth();
+    toast('회원가입이 완료되었습니다. 로그인해 주세요.');
+    setTimeout(()=>openModal('login'),250);
   }catch(e){toast(e.message)}
 }
 async function logout(){
@@ -1463,20 +1467,25 @@ async function logout(){
   toast('로그아웃되었습니다.');
 }
 function updateAccount(){
-  const accountBtn=$('#accountBtn');
-  if(!accountBtn)return;
+  const registerBtn=$('#registerBtn');
+  const loginBtn=$('#loginBtn');
+  const logoutBtn=$('#accountBtn');
+  if(!registerBtn || !loginBtn || !logoutBtn) return;
   if(currentUser){
-    accountBtn.textContent='로그아웃';
-    accountBtn.onclick=logout;
-    accountBtn.classList.remove('primary');
-    accountBtn.classList.add('ghost');
-    accountBtn.setAttribute('aria-label','로그아웃');
+    registerBtn.classList.add('hidden');
+    loginBtn.classList.add('hidden');
+    logoutBtn.classList.remove('hidden');
+    logoutBtn.textContent='로그아웃';
+    logoutBtn.onclick=logout;
+    logoutBtn.classList.remove('primary');
+    logoutBtn.classList.add('ghost');
+    logoutBtn.setAttribute('aria-label','로그아웃');
   }else{
-    accountBtn.textContent='회원가입';
-    accountBtn.onclick=()=>openModal('register');
-    accountBtn.classList.remove('ghost');
-    accountBtn.classList.add('primary');
-    accountBtn.setAttribute('aria-label','회원가입');
+    registerBtn.classList.remove('hidden');
+    loginBtn.classList.remove('hidden');
+    logoutBtn.classList.add('hidden');
+    registerBtn.setAttribute('aria-label','회원가입');
+    loginBtn.setAttribute('aria-label','로그인');
   }
 }
 function openDetail(id){
