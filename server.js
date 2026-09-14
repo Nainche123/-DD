@@ -65,6 +65,10 @@ try {
   await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 }
 if (!Array.isArray(db.users)) db.users = [];
+for (const u of db.users) {
+  if (!Array.isArray(u.coupons)) u.coupons = [];
+  if (!Array.isArray(u.benefitHistory)) u.benefitHistory = [];
+}
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
 if (!Array.isArray(db.orders)) db.orders = [];
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; }
@@ -225,6 +229,54 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ ok: true });
 });
 
+
+const BENEFIT_TIERS = [
+  { min: 140000, percent: 10, maxDiscount: 20000, label: 'PREMIUM 10%', ttlDays: 30 },
+  { min: 100000, percent: 8, maxDiscount: 10000, label: 'VIP 8%', ttlDays: 30 },
+  { min: 50000, percent: 5, maxDiscount: 5000, label: 'THANKS 5%', ttlDays: 21 },
+];
+function benefitTierForAmount(amount) {
+  return BENEFIT_TIERS.find(t => amount >= t.min) || null;
+}
+function makeBenefitCoupon(user, order) {
+  const tier = benefitTierForAmount(order.total);
+  if (!tier) return null;
+  if (!Array.isArray(user.coupons)) user.coupons = [];
+  if (!Array.isArray(user.benefitHistory)) user.benefitHistory = [];
+  const existing = user.coupons.find(c => c.orderId === order.id && !c.used);
+  if (existing) return existing;
+  const code = `${tier.label.replace(/[^A-Z0-9]/g,'')}-${nanoid(6).toUpperCase()}`;
+  const expiresAt = new Date(Date.now() + tier.ttlDays * 86400000).toISOString();
+  const coupon = {
+    code,
+    orderId: order.id,
+    percent: tier.percent,
+    maxDiscount: tier.maxDiscount,
+    expiresAt,
+    used: false,
+    issuedAt: new Date().toISOString(),
+    label: `다음 구매 ${tier.percent}% 할인`,
+  };
+  user.coupons.unshift(coupon);
+  user.benefitHistory.unshift({ orderId: order.id, amount: order.total, percent: tier.percent, code, issuedAt: coupon.issuedAt });
+  user.coupons = user.coupons.slice(0, 20);
+  user.benefitHistory = user.benefitHistory.slice(0, 20);
+  return coupon;
+}
+function activeCoupons(user) {
+  const now = Date.now();
+  return (user.coupons || []).filter(c => !c.used && Date.parse(c.expiresAt || '') > now);
+}
+function couponForUser(user, code) {
+  const wanted = String(code || '').trim().toUpperCase();
+  if (!wanted) return null;
+  return activeCoupons(user).find(c => String(c.code).toUpperCase() === wanted) || null;
+}
+
+app.get('/api/me/benefits', requireAuth, (req, res) => {
+  res.json({ coupons: activeCoupons(req.user), history: req.user.benefitHistory || [] });
+});
+
 app.post('/api/orders', requireAuth, async (req, res) => {
   const product = db.products.find(p => p.id === req.body.productId);
   if (!product) return res.status(404).json({ error: '상품을 찾을 수 없습니다.' });
@@ -232,8 +284,14 @@ app.post('/api/orders', requireAuth, async (req, res) => {
   if (!Number.isInteger(quantity) || quantity < 1 || quantity > 20) return res.status(400).json({ error: '수량은 1~20개 사이로 입력해 주세요.' });
   const discordTag = String(req.body.discordTag || '').trim().slice(0, 60);
   const memo = String(req.body.memo || '').trim().slice(0, 500);
+  const couponCode = String(req.body.couponCode || '').trim();
   if (!discordTag) return res.status(400).json({ error: '디스코드 닉네임 또는 아이디를 입력해 주세요.' });
   const invite = String(db.settings.discordInvite || process.env.DISCORD_INVITE_URL || '').trim();
+  const baseTotal = product.price * quantity;
+  const coupon = couponForUser(req.user, couponCode);
+  if (couponCode && !coupon) return res.status(400).json({ error: '사용할 수 없거나 만료된 혜택 코드입니다.' });
+  const discountAmount = coupon ? Math.min(Math.floor(baseTotal * coupon.percent / 100), coupon.maxDiscount) : 0;
+  const finalTotal = Math.max(0, baseTotal - discountAmount);
   const order = {
     id: 'VX-' + nanoid(9).toUpperCase(),
     userId: req.user.id,
@@ -243,7 +301,10 @@ app.post('/api/orders', requireAuth, async (req, res) => {
     productName: product.name,
     quantity,
     unitPrice: product.price,
-    total: product.price * quantity,
+    baseTotal,
+    discountAmount,
+    couponCode: coupon ? coupon.code : '',
+    total: finalTotal,
     status: '주문접수',
     paymentRequested: false,
     deliveryLink: invite,
@@ -251,6 +312,11 @@ app.post('/api/orders', requireAuth, async (req, res) => {
     memo,
     createdAt: new Date().toISOString()
   };
+  if (coupon) {
+    coupon.used = true;
+    coupon.usedAt = new Date().toISOString();
+    coupon.usedOrderId = order.id;
+  }
   db.orders.unshift(order);
   saveDb();
   await sendDiscordOrderNotice(order).catch(() => {});
@@ -369,8 +435,16 @@ app.patch('/api/admin/orders/:id', requireAdmin, (req, res) => {
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
   const status = String(req.body.status || '');
   if (!['주문접수','입금확인요청','입금확인완료','처리중','완료','취소'].includes(status)) return res.status(400).json({ error: '상태값이 올바르지 않습니다.' });
+  const wasCompleted = order.status === '완료';
   order.status = status;
   order.updatedAt = new Date().toISOString();
+  if (status === '완료' && !wasCompleted) {
+    const buyer = db.users.find(u => u.id === order.userId);
+    if (buyer) {
+      const benefit = makeBenefitCoupon(buyer, order);
+      if (benefit) order.benefitCode = benefit.code;
+    }
+  }
   saveDb();
   res.json({ order });
 });
