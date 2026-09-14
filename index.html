@@ -711,6 +711,277 @@ body:after{
   .section{padding:56px 0}
 }
 
+
+/* === VEXO PURPLE GLASS THEME === */
+:root{
+  --blue:#a78bfa;
+  --cyan:#d8b4fe;
+  --purple:#8b5cf6;
+  --purple-2:#c084fc;
+  --purple-3:#e9d5ff;
+  --green:#34d399;
+  --amber:#fbbf24;
+  --red:#fb7185;
+  --bg:#08060f;
+  --surface:rgba(18,13,32,.58);
+  --surface-2:rgba(27,19,46,.68);
+  --surface-3:rgba(39,28,65,.72);
+  --line:rgba(221,214,254,.14);
+  --line-2:rgba(196,181,253,.28);
+  --text:#faf7ff;
+  --soft:#d8d0e8;
+  --muted:#a79bb8;
+  --shadow:0 24px 80px rgba(76,29,149,.22);
+  --radius:18px;
+}
+body{
+  background:
+    radial-gradient(circle at 8% 8%,rgba(139,92,246,.18),transparent 30%),
+    radial-gradient(circle at 92% 12%,rgba(192,132,252,.13),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(91,33,182,.14),transparent 35%),
+    var(--bg);
+}
+body:after{
+  content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;
+  background:radial-gradient(circle at 30% 20%,rgba(167,139,250,.06),transparent 32%),radial-gradient(circle at 70% 65%,rgba(216,180,254,.05),transparent 28%);
+  filter:blur(40px);
+}
+.top{background:rgba(8,6,15,.66);border-bottom:1px solid rgba(221,214,254,.12);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%)}
+.brand-mark{background:linear-gradient(135deg,#8b5cf6,#c084fc);box-shadow:0 12px 34px rgba(139,92,246,.38)}
+.btn{border-radius:14px;background:rgba(255,255,255,.055);border-color:rgba(221,214,254,.13);box-shadow:0 6px 22px rgba(0,0,0,.12);backdrop-filter:blur(14px)}
+.btn.primary{background:linear-gradient(135deg,#a78bfa,#8b5cf6);color:#fff;border-color:rgba(255,255,255,.18);box-shadow:0 14px 34px rgba(139,92,246,.28)}
+.btn.primary:hover{box-shadow:0 18px 40px rgba(139,92,246,.38)}
+.btn.blue{background:linear-gradient(135deg,#8b5cf6,#c084fc)}
+.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result,.faq-grid details,.kpi-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.028));
+  border-color:rgba(221,214,254,.15);
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.07);
+  backdrop-filter:blur(22px) saturate(135%);-webkit-backdrop-filter:blur(22px) saturate(135%);
+}
+.hero-copy:after,.hero-visual:after,.product-card:after,.tool-card:after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(120deg,rgba(255,255,255,.055),transparent 35%,rgba(192,132,252,.05));
+}
+.hero h1 span{color:#ddd6fe;text-shadow:0 0 36px rgba(167,139,250,.24)}
+.eyebrow{color:#ede9fe;background:rgba(139,92,246,.12);border-color:rgba(196,181,253,.28)}
+.tool-kicker,.preview-note{color:#d8b4fe}
+.preview-note{border-left-color:#a78bfa;background:rgba(139,92,246,.09)}
+.input,.select,.textarea{background:rgba(10,7,19,.48);border-color:rgba(221,214,254,.14);border-radius:14px;backdrop-filter:blur(14px)}
+.input:focus,.select:focus,.textarea:focus{border-color:rgba(167,139,250,.75);box-shadow:0 0 0 3px rgba(139,92,246,.14)}
+.tab,.segment,.online-pill,.badge,.category-mark,.metric,.flow-step,.price-chip{background:rgba(255,255,255,.045);border-color:rgba(221,214,254,.12);backdrop-filter:blur(12px)}
+.tab.active,.segment.active{background:linear-gradient(135deg,#a78bfa,#8b5cf6);color:#fff;border-color:rgba(255,255,255,.2)}
+.product-card:before{background:linear-gradient(180deg,#a78bfa,#7c3aed)}
+.product-card.tone-template:before{background:#34d399}.product-card.tone-auto:before{background:#fbbf24}.product-card.tone-dev:before{background:#fb7185}.product-card.tone-guide:before{background:#c084fc}.product-card.tone-pack:before{background:linear-gradient(180deg,#8b5cf6,#c084fc)}
+.feature-mini span:before{background:#c084fc}
+.progress i{background:linear-gradient(90deg,#8b5cf6,#c084fc)}
+.section{position:relative}
+.section-head h2{letter-spacing:-.03em}
+.modal{background:rgba(4,2,10,.62);backdrop-filter:blur(18px) saturate(135%)}
+.modal-card{background:linear-gradient(135deg,rgba(28,19,48,.88),rgba(14,9,25,.82))}
+/* High-value purchase benefits */
+.benefit-banner{margin-top:14px;padding:15px;border:1px solid rgba(196,181,253,.22);border-radius:16px;background:linear-gradient(135deg,rgba(139,92,246,.13),rgba(192,132,252,.07));box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.benefit-banner b{color:#f5efff}.benefit-chip{display:inline-flex;align-items:center;margin:7px 6px 0 0;padding:6px 9px;border-radius:999px;background:rgba(167,139,250,.12);border:1px solid rgba(196,181,253,.17);font-size:11px;font-weight:900;color:#e9ddff}
+.benefit-wallet{margin-top:18px;padding:18px;border:1px solid rgba(196,181,253,.18);border-radius:18px;background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(255,255,255,.035));box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.benefit-wallet h3{font-size:16px}.coupon-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;padding:12px 0;border-top:1px solid rgba(221,214,254,.1)}
+.coupon-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:900;color:#f5efff}.coupon-note{font-size:12px;color:var(--muted)}
+.price-save{font-size:12px;color:#d8b4fe;font-weight:900;margin-top:5px}
+/* === FINAL PURPLE GLASS THEME === */
+:root{
+  --purple:#8b5cf6;
+  --purple-2:#a855f7;
+  --purple-3:#c084fc;
+  --purple-4:#e9d5ff;
+  --blue:#8b5cf6;
+  --cyan:#c084fc;
+  --green:#34d399;
+  --amber:#fbbf24;
+  --red:#fb7185;
+  --bg:#080611;
+  --surface:rgba(21,14,38,.62);
+  --surface-2:rgba(31,20,55,.70);
+  --surface-3:rgba(45,29,78,.76);
+  --line:rgba(216,180,254,.16);
+  --line-2:rgba(196,181,253,.32);
+  --text:#fcfaff;
+  --soft:#ded6ee;
+  --muted:#aaa0bc;
+  --shadow:0 24px 90px rgba(76,29,149,.26);
+}
+body{
+  color:var(--text);
+  background:
+    radial-gradient(circle at 8% 0%,rgba(139,92,246,.22),transparent 30%),
+    radial-gradient(circle at 95% 12%,rgba(168,85,247,.17),transparent 27%),
+    radial-gradient(circle at 50% 100%,rgba(88,28,135,.15),transparent 38%),
+    var(--bg);
+}
+body:before{
+  background-image:
+    linear-gradient(rgba(216,180,254,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(216,180,254,.035) 1px,transparent 1px);
+}
+.top{
+  background:rgba(8,6,17,.68)!important;
+  border-bottom:1px solid rgba(216,180,254,.13)!important;
+  box-shadow:0 10px 35px rgba(60,20,100,.10);
+}
+.brand-mark{
+  background:linear-gradient(135deg,var(--purple),var(--purple-3))!important;
+  box-shadow:0 12px 34px rgba(139,92,246,.38)!important;
+}
+.nav-links a:hover,.tool-kicker,.online-pill b{color:var(--purple-3)!important}
+.btn.primary{
+  background:linear-gradient(135deg,#7c3aed,#a855f7)!important;
+  border-color:rgba(233,213,255,.22)!important;
+  box-shadow:0 12px 32px rgba(124,58,237,.24);
+}
+.btn.primary:hover{box-shadow:0 16px 38px rgba(124,58,237,.34);transform:translateY(-1px)}
+.btn.ghost,.glass-login{
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(216,180,254,.16)!important;
+  color:var(--soft)!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.btn.ghost:hover,.glass-login:hover{
+  background:rgba(139,92,246,.12)!important;
+  border-color:rgba(192,132,252,.34)!important;
+  color:#fff!important;
+}
+.hero-copy,.hero-card,.choice-panel,.recommend-result,.searchbar,.filters,.tabbar,.kpi-card,.product-card,.tool-card,.guide-item,.order-card,.modal-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.028))!important;
+  border-color:rgba(216,180,254,.15)!important;
+  box-shadow:0 24px 80px rgba(42,17,65,.16),0 1px 0 rgba(255,255,255,.055) inset!important;
+  backdrop-filter:blur(22px) saturate(145%);
+  -webkit-backdrop-filter:blur(22px) saturate(145%);
+}
+.hero-copy:after,.hero-card:after{
+  background:linear-gradient(135deg,rgba(192,132,252,.16),transparent 42%)!important;
+}
+.product-card:before{background:linear-gradient(180deg,#8b5cf6,#c084fc)!important}
+.product-card.tone-template:before,.product-card.tone-auto:before,.product-card.tone-dev:before,.product-card.tone-guide:before,.product-card.tone-pack:before{background:linear-gradient(180deg,#7c3aed,#d8b4fe)!important}
+.badge,.category-mark{
+  background:rgba(139,92,246,.075)!important;
+  border-color:rgba(216,180,254,.14)!important;
+  color:#eee7f8!important;
+}
+.input,.select,.textarea{
+  background:rgba(10,7,19,.42)!important;
+  border-color:rgba(216,180,254,.16)!important;
+}
+.input:focus,.select:focus,.textarea:focus{
+  border-color:rgba(192,132,252,.58)!important;
+  box-shadow:0 0 0 4px rgba(139,92,246,.12),0 1px 0 rgba(255,255,255,.06) inset!important;
+}
+.online-pill,.stat,.notice-box,.mini-card{
+  background:rgba(139,92,246,.07)!important;
+  border-color:rgba(216,180,254,.14)!important;
+}
+.online-dot{background:#c084fc!important;box-shadow:0 0 16px rgba(192,132,252,.8)!important}
+.feature-mini span:before{background:#c084fc!important;box-shadow:0 0 10px rgba(192,132,252,.35)}
+.progress i{background:linear-gradient(90deg,#7c3aed,#c084fc)!important}
+.segment.active{background:rgba(139,92,246,.18)!important;border-color:rgba(192,132,252,.32)!important;color:#fff!important}
+.register-btn{display:inline-flex!important}
+.register-btn.hidden{display:none!important}
+.footer{background:rgba(11,7,20,.38)!important;border-top-color:rgba(216,180,254,.12)!important}
+.modal{background:rgba(5,3,10,.68)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+.x{background:rgba(139,92,246,.08)!important;border-color:rgba(216,180,254,.14)!important}
+@media(max-width:700px){
+  .nav-actions{gap:7px}
+  .online-pill{font-size:11px}
+  .register-btn,.glass-login{padding:10px 12px!important}
+}
+/* === FINAL PURPLE-ONLY GLASS SYSTEM === */
+:root{
+  --blue:#9b5cff;
+  --cyan:#c084fc;
+  --purple:#8b5cf6;
+  --purple-2:#c084fc;
+  --purple-3:#f0d9ff;
+  --green:#b78cff;
+  --amber:#d8b4fe;
+  --red:#fb7185;
+  --bg:#07040e;
+  --surface:rgba(20,10,35,.62);
+  --surface-2:rgba(31,16,52,.70);
+  --surface-3:rgba(46,23,76,.74);
+  --line:rgba(216,180,254,.14);
+  --line-2:rgba(192,132,252,.32);
+  --text:#fcf8ff;
+  --soft:#ded4ea;
+  --muted:#ab9dbc;
+  --shadow:0 24px 80px rgba(98,43,178,.24);
+}
+body{
+  background:
+    radial-gradient(700px 480px at 5% 0%,rgba(124,58,237,.22),transparent 60%),
+    radial-gradient(620px 460px at 95% 8%,rgba(192,132,252,.18),transparent 62%),
+    radial-gradient(700px 520px at 50% 105%,rgba(88,28,135,.18),transparent 68%),
+    #07040e !important;
+}
+body:before{
+  background-image:
+    linear-gradient(rgba(216,180,254,.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(216,180,254,.028) 1px,transparent 1px);
+}
+.top{
+  background:rgba(9,4,17,.68) !important;
+  border-bottom-color:rgba(216,180,254,.13) !important;
+  box-shadow:0 14px 44px rgba(0,0,0,.24);
+}
+.brand-mark{
+  background:linear-gradient(135deg,#7c3aed,#c084fc) !important;
+  box-shadow:0 14px 38px rgba(139,92,246,.42),0 0 0 1px rgba(255,255,255,.13) inset !important;
+}
+.nav-links a:hover,.tool-kicker,.preview-note{color:#d8b4fe !important}
+.online-dot{background:#c084fc !important;box-shadow:0 0 18px rgba(192,132,252,.85) !important}
+.online-pill{background:rgba(139,92,246,.07) !important;border-color:rgba(216,180,254,.16) !important}
+.btn{
+  background:rgba(255,255,255,.045) !important;
+  border-color:rgba(216,180,254,.15) !important;
+  color:#f6efff !important;
+}
+.btn.primary,.btn.blue{
+  background:linear-gradient(135deg,#7c3aed,#a855f7 55%,#c084fc) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.18) !important;
+  box-shadow:0 14px 36px rgba(124,58,237,.30),inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+.btn.primary:hover,.btn.blue:hover{box-shadow:0 18px 44px rgba(124,58,237,.40),inset 0 1px 0 rgba(255,255,255,.20) !important}
+.btn.ghost:hover{background:rgba(139,92,246,.12) !important;border-color:rgba(192,132,252,.30) !important}
+.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result,.faq-grid details,.kpi-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(139,92,246,.035) 42%,rgba(255,255,255,.022)) !important;
+  border-color:rgba(216,180,254,.16) !important;
+  box-shadow:0 26px 80px rgba(56,24,102,.28),inset 0 1px 0 rgba(255,255,255,.075) !important;
+}
+.hero-copy:before,.hero-visual:before,.product-card:after,.tool-card:after{
+  background:radial-gradient(circle,rgba(168,85,247,.16),transparent 68%) !important;
+}
+.hero h1 span{color:#e9d5ff !important;text-shadow:0 0 38px rgba(192,132,252,.24) !important}
+.eyebrow{color:#f0e8ff !important;background:rgba(139,92,246,.11) !important;border-color:rgba(192,132,252,.28) !important}
+.badge,.category-mark,.metric,.flow-step,.price-chip,.tab,.segment,.searchbar,.filters,.tabbar{
+  background:rgba(139,92,246,.055) !important;
+  border-color:rgba(216,180,254,.14) !important;
+}
+.tab.active,.segment.active{background:linear-gradient(135deg,#7c3aed,#a855f7) !important;color:#fff !important;border-color:rgba(255,255,255,.20) !important}
+.input,.select,.textarea{
+  background:rgba(10,5,18,.46) !important;
+  border-color:rgba(216,180,254,.16) !important;
+}
+.input:focus,.select:focus,.textarea:focus{
+  border-color:rgba(192,132,252,.68) !important;
+  box-shadow:0 0 0 4px rgba(139,92,246,.13),0 1px 0 rgba(255,255,255,.06) inset !important;
+}
+.feature-mini span:before{background:#c084fc !important;box-shadow:0 0 10px rgba(192,132,252,.40) !important}
+.progress i{background:linear-gradient(90deg,#7c3aed,#c084fc) !important}
+.product-card:before{background:linear-gradient(180deg,#a855f7,#7c3aed) !important}
+.product-card.tone-template:before,.product-card.tone-auto:before,.product-card.tone-dev:before,.product-card.tone-guide:before,.product-card.tone-pack:before{background:linear-gradient(180deg,#8b5cf6,#c084fc) !important}
+.modal{background:rgba(6,2,12,.70) !important}
+.modal-card{background:linear-gradient(145deg,rgba(31,15,51,.92),rgba(11,6,19,.88)) !important}
+.footer{background:rgba(12,5,20,.42) !important;border-top-color:rgba(216,180,254,.13) !important}
+.register-btn{display:inline-flex !important}
+.register-btn.hidden{display:none !important}
+@media(max-width:700px){.nav-actions{width:100%;justify-content:flex-end;gap:7px}.register-btn{padding:10px 14px !important}}
 </style>
 </head>
 <body>
@@ -729,7 +1000,7 @@ body:after{
     </nav>
     <div class="nav-actions">
       <div class="online-pill"><span class="online-dot"></span><b id="online">0</b>명 접속중</div>
-      <button class="btn ghost" id="accountBtn">로그인</button>
+      <button class="btn primary register-btn" id="accountBtn" onclick="openModal('register')">회원가입</button>
       <button class="btn primary hidden" id="adminBtn" onclick="document.querySelector('#adminSection').scrollIntoView({behavior:'smooth'})">관리자</button>
     </div>
   </div>
@@ -907,6 +1178,14 @@ body:after{
     </div>
   </section>
 
+  <section id="benefitsSection" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2>내 구매 혜택</h2><p>고가 상품을 구매하고 완료되면 다음 구매용 할인 혜택이 자동으로 지급됩니다.</p></div>
+      </div>
+      <div id="benefitsBox"><div class="empty">로그인하면 받을 수 있는 혜택을 확인할 수 있습니다.</div></div>
+    </div>
+  </section>
   <section id="adminSection" class="section hidden">
     <div class="wrap">
       <div class="section-head">
@@ -1153,6 +1432,7 @@ async function afterAuth(){
     openOrder(id);
   }
   await loadOrders();
+  await loadBenefits();
 }
 async function login(){
   try{
@@ -1179,15 +1459,24 @@ async function logout(){
   $('#adminSection').classList.add('hidden');
   updateAccount();
   loadOrders();
+  loadBenefits();
   toast('로그아웃되었습니다.');
 }
 function updateAccount(){
+  const accountBtn=$('#accountBtn');
+  if(!accountBtn)return;
   if(currentUser){
-    $('#accountBtn').textContent='로그아웃';
-    $('#accountBtn').onclick=logout;
+    accountBtn.textContent='로그아웃';
+    accountBtn.onclick=logout;
+    accountBtn.classList.remove('primary');
+    accountBtn.classList.add('ghost');
+    accountBtn.setAttribute('aria-label','로그아웃');
   }else{
-    $('#accountBtn').textContent='로그인';
-    $('#accountBtn').onclick=()=>openModal('login');
+    accountBtn.textContent='회원가입';
+    accountBtn.onclick=()=>openModal('register');
+    accountBtn.classList.remove('ghost');
+    accountBtn.classList.add('primary');
+    accountBtn.setAttribute('aria-label','회원가입');
   }
 }
 function openDetail(id){
@@ -1209,7 +1498,7 @@ function openOrder(id){
   if(!currentUser){
     pendingOrderId=id;
     openModal('login');
-    toast('로그인하면 주문창으로 이어집니다.');
+    toast('회원가입 후 주문할 수 있습니다.');
     return;
   }
   showModal('주문하기',`
@@ -1217,16 +1506,39 @@ function openOrder(id){
     <div class="field"><label>수량</label><input class="input" id="qty" type="number" min="1" max="20" value="1"></div>
     <div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="discordTag" placeholder="예: vexo_user"></div>
     <div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="원하는 세팅, 서버 상황, 질문을 적어주세요."></textarea></div>
+    <div id="orderCouponBox"></div>
     <div class="notice-box"><b>${won(p.price)}</b><br>${esc(siteSettings.bankInfo||'입금 계좌는 디스코드 티켓에서 안내받을 수 있습니다.')}</div>
+    <div class="benefit-banner"><b>💜 고가 구매 혜택</b><div class="coupon-note">${p.price>=140000?'완료 후 다음 구매 10% 할인 (최대 20,000원)':p.price>=100000?'완료 후 다음 구매 8% 할인 (최대 10,000원)':p.price>=50000?'완료 후 다음 구매 5% 할인 (최대 5,000원)':'50,000원 이상 구매 시 다음 구매 할인 혜택이 지급됩니다.'}</div></div>
     <button class="btn primary block" style="margin-top:14px" onclick="createOrder('${esc(p.id)}')">주문하고 디스코드로 이동</button>`);
+  loadOrderCouponBox();
 }
+
+async function loadOrderCouponBox(){
+  const box=$('#orderCouponBox'); if(!box || !currentUser) return;
+  try{
+    const d=await api('/api/me/benefits');
+    const coupons=d.coupons||[];
+    box.innerHTML=coupons.length?`<div class="field"><label>보유 혜택 코드</label><select class="select" id="couponCode"><option value="">사용하지 않음</option>${coupons.map(c=>`<option value="${esc(c.code)}">${esc(c.label)} · ${esc(c.code)}</option>`).join('')}</select></div>`:`<div class="benefit-banner"><b>💜 다음 구매 혜택</b><div class="coupon-note">50,000원 이상 구매 후 주문이 완료되면 할인 코드가 자동 지급됩니다.</div></div>`;
+  }catch{box.innerHTML='';}
+}
+async function loadBenefits(){
+  const box=$('#benefitsBox'); if(!box) return;
+  if(!currentUser){ box.innerHTML='<div class="empty">로그인하면 받을 수 있는 혜택을 확인할 수 있습니다.</div>'; return; }
+  try{
+    const d=await api('/api/me/benefits');
+    const coupons=d.coupons||[];
+    box.innerHTML=`<div class="benefit-wallet"><h3>사용 가능한 혜택 <span class="mini">${coupons.length}개</span></h3>${coupons.length?coupons.map(c=>`<div class="coupon-row"><div><div class="coupon-code">${esc(c.code)}</div><div class="coupon-note">${esc(c.label)} · 최대 ${won(c.maxDiscount)} · ${new Date(c.expiresAt).toLocaleDateString('ko-KR')}까지</div></div><button class="btn ghost small" onclick="copyText('${esc(c.code)}')">코드 복사</button></div>`).join(''):'<div class="coupon-note" style="margin-top:10px">현재 사용 가능한 할인 혜택이 없습니다. 50,000원 이상 구매 후 주문이 완료되면 자동 지급됩니다.</div>'}</div>`;
+  }catch(e){box.innerHTML=`<div class="empty">${esc(e.message||'혜택을 불러오지 못했습니다.')}</div>`}
+}
+
 async function createOrder(id){
   try{
     const d=await api('/api/orders',{method:'POST',body:JSON.stringify({
       productId:id,
       quantity:Number($('#qty').value),
       discordTag:$('#discordTag').value,
-      memo:$('#orderMemo').value
+      memo:$('#orderMemo').value,
+      couponCode:$('#couponCode')?.value || ''
     })});
     closeModal();
     await loadOrders();
@@ -1235,7 +1547,7 @@ async function createOrder(id){
       <div class="notice-box">
         <b>${esc(d.order.productName)}</b> 주문이 접수되었습니다.<br>
         주문번호: <b>${esc(d.order.id)}</b><br>
-        금액: <b>${won(d.order.total)}</b>
+        금액: <b>${won(d.order.total)}</b>${d.order.discountAmount?`<br><span class="price-save">혜택 적용 -${won(d.order.discountAmount)}</span>`:''}
       </div>
       <p style="margin:14px 0;color:var(--soft);line-height:1.75">디스코드 서버에 입장한 뒤 티켓을 만들고 주문번호를 보내 주세요. 입금 확인 후 상품을 받을 수 있습니다.</p>
       <button class="btn ghost block" style="margin-bottom:8px" onclick="copyText('${esc(d.order.id)}')">주문번호 복사</button>
