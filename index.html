@@ -19,8 +19,9 @@
   --text:#f7f8fb;
   --soft:#c2c8d3;
   --muted:#87909f;
-  --blue:#4f8cff;
-  --cyan:#22d3ee;
+  --blue:#8b5cf6;
+  --cyan:#c084fc;
+  --violet:#a855f7;
   --green:#22c55e;
   --amber:#f5b544;
   --red:#fb7185;
@@ -33,8 +34,9 @@ body{
   min-height:100vh;
   font-family:Pretendard,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
-    linear-gradient(145deg,rgba(79,140,255,.08),transparent 34%),
-    linear-gradient(25deg,transparent 50%,rgba(34,197,94,.07)),
+    radial-gradient(circle at 12% 8%,rgba(168,85,247,.16),transparent 28%),
+    linear-gradient(145deg,rgba(139,92,246,.09),transparent 38%),
+    linear-gradient(25deg,transparent 50%,rgba(34,197,94,.04)),
     var(--bg);
   color:var(--text);
   line-height:1.55;
@@ -89,9 +91,9 @@ a{color:inherit}
   border-radius:8px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  background:linear-gradient(135deg,var(--blue),var(--violet));
   color:#fff;
-  box-shadow:0 10px 24px rgba(79,140,255,.28);
+  box-shadow:0 10px 28px rgba(168,85,247,.30);
 }
 .nav-links{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--soft);font-weight:700}
 .nav-links a{text-decoration:none}
@@ -135,7 +137,7 @@ a{color:inherit}
 }
 .btn:hover{transform:translateY(-1px);border-color:var(--line-2)}
 .btn:active{transform:translateY(0)}
-.btn.primary{background:#fff;color:#080a0f;border-color:#fff}
+.btn.primary{background:linear-gradient(135deg,#ffffff,#e9d5ff);color:#140a1f;border-color:#ffffff}
 .btn.primary:hover{box-shadow:0 14px 32px rgba(255,255,255,.16)}
 .btn.blue{background:linear-gradient(135deg,var(--blue),#27b7d7);border-color:rgba(255,255,255,.12)}
 .btn.ghost{background:rgba(255,255,255,.035);border-color:var(--line);color:var(--soft)}
@@ -293,7 +295,7 @@ a{color:inherit}
   font-weight:900;
 }
 .tab:hover,.segment:hover{color:#fff;border-color:var(--line-2)}
-.tab.active,.segment.active{background:#fff;color:#080a0f;border-color:#fff}
+.tab.active,.segment.active{background:linear-gradient(135deg,#ffffff,#e9d5ff);color:#140a1f;border-color:#ffffff}
 .searchbar{display:flex;gap:8px;flex-wrap:wrap}
 .input,.select,.textarea{
   width:100%;
@@ -923,6 +925,52 @@ body{
 button.btn.primary{background:linear-gradient(135deg,#7c3aed,#c084fc)!important;border-color:rgba(255,255,255,.14)!important;box-shadow:0 12px 32px rgba(124,58,237,.24)!important}
 button.btn.ghost,.glass-login{background:rgba(139,92,246,.08)!important;border-color:rgba(216,180,254,.20)!important}
 input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important;border-color:rgba(216,180,254,.16)!important}
+
+.hero-copy:after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  right:-120px;
+  top:-110px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(168,85,247,.22),transparent 68%);
+  pointer-events:none;
+}
+.hero-quote{
+  margin-top:24px;
+  padding:16px 18px;
+  border:1px solid rgba(192,132,252,.22);
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(34,211,238,.045));
+  color:#eee7f8;
+  font-size:13px;
+  line-height:1.8;
+  position:relative;
+  z-index:1;
+}
+.hero-quote b{color:#fff}
+.discord-copy-btn{border-color:rgba(192,132,252,.26);background:rgba(168,85,247,.08)}
+.trust-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:16px;
+}
+.trust-card{
+  padding:14px 16px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+}
+.trust-card b{display:block;font-size:13px}
+.trust-card span{display:block;margin-top:4px;color:var(--muted);font-size:12px}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(192,132,252,.28),transparent);margin-top:10px}
+@media(max-width:760px){
+  .hero h1{font-size:46px}
+  .trust-strip{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -952,16 +1000,18 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow">Discord Store System</div>
-        <h1>VEXO STORE<br><span>수익형 디스코드 판매 세팅</span></h1>
-        <p class="hero-desc">자판기봇, 서버 템플릿, 자동화, 커스텀 제작까지 한 번에 주문하세요. 상품을 확인하고 원하는 구성을 간편하게 주문하세요.</p>
+        <div class="eyebrow">VEXO HUB · Discord Commerce</div>
+        <h1>VEXO HUB<br><span>돈을 쓰는 곳이 아니라, 기회를 만드는 곳.</span></h1>
+        <p class="hero-desc">저희 VEXO HUB는 단순히 돈을 쓰고 끝나는 상품이 아니라, 여러분이 더 효율적으로 판매하고 운영할 수 있도록 돕는 템플릿과 성능 좋은 봇을 제공합니다.</p>
+        <div class="hero-quote"><b>“한 번의 구매로 끝나는 게 아니라, 다음 판매를 준비할 수 있게.”</b><br>판매에 필요한 봇 · 서버 템플릿 · 자동화 · 커스텀 제작을 목적에 맞게 골라보세요.</div>
         <div class="hero-cta">
-          <button class="btn primary" onclick="document.querySelector('#recommend').scrollIntoView({behavior:'smooth'})">내게 맞는 구성 찾기</button>
-          <button class="btn ghost" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">상품 바로 보기</button>
+          <button class="btn primary" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">상품 둘러보기</button>
+          <button class="btn ghost" onclick="document.querySelector('#recommend').scrollIntoView({behavior:'smooth'})">내게 맞는 상품 찾기</button>
+          <button class="btn discord-copy-btn" id="discordCopyBtn" onclick="copyDiscordInvite()">💬 디스코드 링크 복사</button>
         </div>
         <div class="hero-metrics">
           <div class="metric"><b id="productCount">0</b><span>판매 상품</span></div>
-          <div class="metric"><b>SAFE</b><span>간편한 주문</span></div>
+          <div class="metric"><b>GUIDE</b><span>설치 · 운영 가이드 별도 판매</span></div>
           <div class="metric"><b>24/7</b><span>웹 주문 접수</span></div>
         </div>
       </div>
@@ -996,6 +1046,12 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
           <div class="preview-note hidden" id="noticeText" aria-hidden="true"></div>
         </div>
       </div>
+    </div>
+    <div class="wrap trust-strip">
+      <div class="trust-card"><b>⚡ 빠른 선택</b><span>목적별 상품 구성</span></div>
+      <div class="trust-card"><b>🛠️ 실사용 중심</b><span>실제로 운영하기 편한 구성</span></div>
+      <div class="trust-card"><b>📘 가이드 별도</b><span>필요한 설치·운영 가이드를 선택</span></div>
+      <div class="trust-card"><b>💜 VEXO 브랜드</b><span>봇과 템플릿을 한 곳에서</span></div>
     </div>
   </section>
 
@@ -1032,7 +1088,7 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
       <div class="section-head">
         <div>
           <h2>상품</h2>
-          <p>저가 가이드는 유입용, 패키지는 빠른 구축용으로 나눴습니다.</p>
+          <p>봇 · 서버 템플릿 · 자동화 · 개발 · 가이드를 목적별로 나눴습니다. 가이드는 상품과 별도로 선택할 수 있습니다.</p>
         </div>
       </div>
       <div class="toolbar">
@@ -1072,6 +1128,7 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
         <div class="guide-item"><b>2. 주문 정보 입력</b><span>디스코드 닉네임과 요청사항을 남깁니다.</span></div>
         <div class="guide-item"><b>3. 디스코드 티켓</b><span>주문번호를 확인하고 결제를 진행합니다.</span></div>
         <div class="guide-item"><b>4. 확인 후 수령</b><span>관리자 확인 뒤 상품 또는 세팅 안내를 받습니다.</span></div>
+        <div class="guide-item"><b>5. 설치가 필요하다면</b><span>봇 설치가 처음이라면 <b>봇 설치 가이드</b>를 별도 상품으로 함께 구매할 수 있습니다.</span></div>
       </div>
     </div>
   </section>
@@ -1092,6 +1149,10 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
         <details>
           <summary>상품은 어떻게 받나요?</summary>
           <p>주문 완료 후 표시되는 디스코드 링크로 입장해서 티켓을 만들면, 주문번호 확인 뒤 상품 링크나 세팅 안내를 받을 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>설치 가이드는 상품에 포함되나요?</summary>
+          <p>기본적으로 봇·서버 상품과 가이드는 분리되어 있습니다. 필요한 경우 상품 목록의 <b>가이드</b> 카테고리에서 별도로 선택할 수 있습니다.</p>
         </details>
         <details>
           <summary>커스텀 봇은 바로 제작되나요?</summary>
@@ -1488,7 +1549,7 @@ async function createOrder(id){
       </div>
       <p style="margin:14px 0;color:var(--soft);line-height:1.75">디스코드 서버에 입장한 뒤 티켓을 만들고 주문번호를 보내 주세요. 입금 확인 후 상품을 받을 수 있습니다.</p>
       <button class="btn ghost block" style="margin-bottom:8px" onclick="copyText('${esc(d.order.id)}')">주문번호 복사</button>
-      ${link?`<a class="btn primary block" target="_blank" href="${esc(link)}">디스코드 서버 입장하기</a>`:'<div class="notice-box">디스코드 초대 링크가 아직 설정되지 않았습니다. 관리자에게 문의해 주세요.</div>'}`);
+      ${link?`<div style="display:grid;gap:8px"><a class="btn primary block" target="_blank" href="${esc(link)}">디스코드 서버 입장하기</a><button class="btn ghost block" onclick="copyText('${esc(link)}')">💬 디스코드 링크 복사</button></div>`:'<div class="notice-box">디스코드 초대 링크가 아직 설정되지 않았습니다. 관리자에게 문의해 주세요.</div>'}`);
   }catch(e){toast(e.message)}
 }
 function statusClass(status){
@@ -1524,10 +1585,29 @@ async function loadOrders(){
 }
 async function copyText(text){
   try{
-    await navigator.clipboard.writeText(text);
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+    }else{
+      const area=document.createElement('textarea');
+      area.value=text; area.setAttribute('readonly','');
+      area.style.position='fixed'; area.style.opacity='0';
+      document.body.appendChild(area); area.select();
+      document.execCommand('copy'); area.remove();
+    }
     toast('복사했습니다.');
+    return true;
   }catch{
-    prompt('복사할 내용입니다.',text);
+    try{ prompt('복사할 내용입니다.',text); }catch{}
+    return false;
+  }
+}
+async function copyDiscordInvite(){
+  const link=String(siteSettings.discordInvite||'').trim();
+  if(!link){ toast('디스코드 초대 링크가 아직 설정되지 않았습니다.'); return; }
+  const ok=await copyText(link);
+  if(ok){
+    const btn=document.querySelector('#discordCopyBtn');
+    if(btn){ const old=btn.textContent; btn.textContent='✅ 디스코드 링크 복사 완료'; setTimeout(()=>btn.textContent=old,1800); }
   }
 }
 async function heartbeat(){
@@ -1740,5 +1820,6 @@ document.addEventListener('visibilitychange',()=>{ if(!document.hidden) heartbea
 }
 init();
 </script>
+<div class="wrap" style="padding:12px 20px 28px;text-align:center;color:var(--muted);font-size:12px">VEXO HUB · 봇 · 템플릿 · 자동화 · 가이드를 한 곳에서.</div>
 </body>
 </html>
