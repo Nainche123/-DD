@@ -30,11 +30,11 @@ const SESSION_SECRET = process.env.SESSION_SECRET || await ensureSecret();
 const seed = {
   users: [],
   products: [
-    { id: nanoid(), name: 'VEXO 자판기봇 BASIC', category: '자판기봇', price: 19000, badge: '입문추천', description: '디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features: ['상품 버튼 주문 UI', '주문 접수 및 로그 기록', '관리자 확인 후 지급 안내', '기본 고객 응대 메시지', '간단한 주문 상태 안내', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
-    { id: nanoid(), name: 'VEXO 자판기봇 PRO', category: '자판기봇', price: 39000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', '운영 확장용 관리 기능'] },
-    { id: nanoid(), name: 'VEXO 디스코드 서버 템플릿', category: '서버 템플릿', price: 19000, badge: '빠른시작', description: '판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.', features: ['INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조', 'OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할', '공지·가격표·구매인증 채널', '문의·1대1 티켓용 채널', '관리자 전용 STAFF 카테고리', '서버 템플릿 링크 제공', '권한 구조가 적용된 즉시 사용형 구성'] },
-    { id: nanoid(), name: 'VEXO 서버 템플릿 PRO', category: '서버 템플릿', price: 34000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '깔끔한 판매 서버 동선', '바로 사용할 수 있는 채널 배치'] },
-    { id: nanoid(), name: 'VEXO 자동화 패키지', category: '자동화', price: 49000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '운영 시간 절약형 구성'] },
+    { id: nanoid(), name: 'VEXO 자판기봇 BASIC', category: '자판기봇', price: 19000, badge: '입문추천', description: '디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features: ['상품 버튼 주문 UI', '주문 접수 및 로그 기록', '관리자 확인 후 지급 안내', '기본 고객 응대 메시지', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
+    { id: nanoid(), name: 'VEXO 자판기봇 PRO', category: '자판기봇', price: 39000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', ] },
+    { id: nanoid(), name: 'VEXO 디스코드 서버 템플릿', category: '서버 템플릿', price: 19000, badge: '빠른시작', description: '판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.', features: ['INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조', 'OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할', '공지·가격표·구매인증 채널', '문의·1대1 티켓용 채널', '관리자 전용 STAFF 카테고리', '서버 템플릿 링크 제공', '기본 세팅 가이드'] },
+    { id: nanoid(), name: 'VEXO 서버 템플릿 PRO', category: '서버 템플릿', price: 34000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '티켓 봇 연동 가이드', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '상세 세팅 설명서'] },
+    { id: nanoid(), name: 'VEXO 자동화 패키지', category: '자동화', price: 49000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '세팅 가이드 제공'] },
     { id: nanoid(), name: 'VEXO 커스텀 봇 제작', category: '개발', price: 89000, badge: '상담필수', description: '원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.', features: ['요구사항 상담 후 제작', '슬래시/버튼 커맨드 지원', '서버 맞춤 기능 구현', '소스 또는 실행 파일 제공', '기본 설치 지원', '수정 범위 협의 가능'] },
     { id: nanoid(), name: 'VEXO STORE 올인원', category: '패키지', price: 99000, badge: '목표추천', description: '서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.', features: ['서버 템플릿 PRO급 구조', '자판기봇 BASIC 또는 협의 버전', '자동화 기본 구성', '통합 세팅 가이드', '한 번에 판매 서버 구축', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
     { id: nanoid(), name: 'VEXO 런칭 풀세팅', category: '패키지', price: 149000, badge: '프리미엄', description: '처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.', features: ['올인원 구성 포함', '판매 채널 문구 기본 작성', '후기·구매인증 동선 세팅', '운영 체크리스트 제공', '오픈 전 점검 1회', '주문 후 디스코드 티켓에서 범위 확정'] },
@@ -76,6 +76,25 @@ if (db.settings.goalAmount === undefined) db.settings.goalAmount = 500000;
 if (db.settings.targetMonth === undefined) db.settings.targetMonth = '2026-10';
 // Older installations may still have stock fields / legacy category names. Stocks are intentionally unlimited now.
 for (const p of db.products) { delete p.stock; if (p.category === '서버') p.category = '서버 템플릿'; }
+
+// VEXO design / feature add-ons. These are separate from existing BOT/TEMPLATE/GUIDE products.
+const VEXO_ADDON_PRODUCTS = [
+  { id: 'vexo-addon-embed-design', name: 'VEXO 임베드 디자인팩', category: '디자인', price: 9900, badge: 'DESIGN', description: '판매봇에 필요한 핵심 임베드를 VEXO 스타일로 통일하는 디자인팩입니다.', features: ['주문 접수 임베드', '입금 안내 임베드', '처리중·완료 임베드', '문의 접수 임베드', '후기 임베드', '다크 퍼플 글로우 테마'] },
+  { id: 'vexo-addon-panel-design', name: 'VEXO 버튼 & 패널 디자인팩', category: '디자인', price: 12900, badge: 'UI', description: '버튼·셀렉트·패널을 하나의 브랜드 UI처럼 보이게 만드는 디자인팩입니다.', features: ['메인 판매 패널', '카테고리 선택 UI', '상품 선택 UI', '문의 패널', '후기 패널', '버튼 라벨·이모지 가이드'] },
+  { id: 'vexo-addon-bot-skin', name: 'VEXO 봇 UI 스킨팩', category: '디자인', price: 14900, badge: 'HOT', description: '봇 전체의 색감·문구·임베드 스타일을 VEXO 전용 테마로 바꾸는 스킨팩입니다.', features: ['Purple Glow 테마', '임베드 타이포그래피 정리', '상태 메시지 디자인', '주문 티켓 디자인', '관리자 알림 디자인', '공통 푸터·브랜딩'] },
+  { id: 'vexo-addon-ticket-ui', name: 'VEXO 티켓 UI 커스텀', category: '디자인', price: 7900, badge: 'TICKET', description: '주문·문의 티켓을 한눈에 읽기 쉬운 화면으로 재구성합니다.', features: ['주문 요약 카드', '결제 안내 영역', '상태 표시 디자인', '관리자 처리 버튼 정리', '닫기·후기 버튼 디자인'] },
+  { id: 'vexo-addon-order-ui', name: 'VEXO 주문 UI 업그레이드', category: '봇 옵션', price: 10900, badge: 'ORDER', description: '주문 티켓의 상품·수량·금액·상태 정보를 더 고급스럽게 표현합니다.', features: ['상품 상세 요약', '수량·단가·총액 강조', '주문 상태 타임라인', '결제 안내 강조', '완료 메시지 디자인'] },
+  { id: 'vexo-addon-feature-pack', name: 'VEXO 봇 기능 확장팩', category: '봇 옵션', price: 14900, badge: 'FEATURE', description: '기존 봇에 적용할 수 있는 소형 기능 옵션을 묶은 추가 기능팩입니다.', features: ['자동 응답 문구 옵션', '추가 관리자 버튼', '주문 알림 옵션', '간단한 운영 보조 기능', '기능별 적용 범위 안내'] },
+  { id: 'vexo-addon-brand-kit', name: 'VEXO 봇 브랜딩팩', category: '디자인', price: 6900, badge: 'BRAND', description: '봇에 표시되는 이름·푸터·상태 문구를 한 브랜드처럼 통일합니다.', features: ['봇 이름 표기 가이드', '임베드 푸터 문구', '버튼 문구 세트', '상태/알림 문구 세트'] }
+];
+const existingIds = new Set(db.products.map(p => p.id));
+for (const p of VEXO_ADDON_PRODUCTS) if (!existingIds.has(p.id)) db.products.push(p);
+for (const p of db.products) {
+  if (!p.features) p.features = [];
+  // Keep installation guides separate from bot/template purchases.
+  if (p.category !== '가이드') p.features = p.features.filter(f => !/설치[·ㆍ]?세팅 가이드|설치.*가이드/i.test(String(f)));
+}
+
 
 // Optional first-admin bootstrap. Set ADMIN_USERNAME, ADMIN_EMAIL and ADMIN_PASSWORD
 // once on the server; the account is created only when no admin currently exists.
