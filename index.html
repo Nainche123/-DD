@@ -931,6 +931,161 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
 .product-card.tone-option:before{background:linear-gradient(180deg,#22d3ee,#8b5cf6)!important}
 .hero-copy{background:radial-gradient(circle at 80% 10%,rgba(168,85,247,.18),transparent 38%),rgba(17,21,29,.82)}
 .hero h1 span{background:linear-gradient(90deg,#c4b5fd,#e9d5ff 45%,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ===== VEXO SERIES + STORE UX REFRESH ===== */
+:root{
+  --vexo-purple:#8b5cf6;
+  --vexo-violet:#a855f7;
+  --vexo-lilac:#d8b4fe;
+}
+body{overflow-x:hidden}
+.hero-copy,.hero-visual,.tool-card,.product-card,.choice-panel,.recommend-result,.guide-item,.faq-grid details,.order-card,.admin-block,.kpi-card,.notice-box{
+  border-color:rgba(216,180,254,.13);
+}
+.hero-copy{
+  border-radius:26px;
+  box-shadow:0 30px 90px rgba(76,29,149,.16),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero-visual{
+  border-radius:26px;
+  box-shadow:0 30px 90px rgba(76,29,149,.14),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero h1{letter-spacing:-.055em}
+.hero-desc strong{color:#f3e8ff}
+.metric{
+  border-radius:15px!important;
+  background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(255,255,255,.025))!important;
+  border-color:rgba(216,180,254,.12)!important;
+}
+.metric b{letter-spacing:-.04em}
+.series-section{padding:26px 0 36px}
+.series-shell{
+  position:relative;
+  overflow:hidden;
+  padding:26px;
+  border:1px solid rgba(216,180,254,.14);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(168,85,247,.18),transparent 34%),
+    radial-gradient(circle at 0% 100%,rgba(124,58,237,.12),transparent 36%),
+    rgba(16,10,28,.60);
+  box-shadow:0 35px 100px rgba(53,19,91,.17),inset 0 1px 0 rgba(255,255,255,.05);
+}
+.series-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:18px}
+.series-head h2{font-size:28px;letter-spacing:-.035em}
+.series-head p{margin-top:6px;color:var(--muted);font-size:13px}
+.series-kicker{font-size:11px;color:#d8b4fe;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.series-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.series-card{
+  position:relative;
+  min-height:250px;
+  padding:20px;
+  border:1px solid rgba(216,180,254,.13);
+  border-radius:22px;
+  background:linear-gradient(155deg,rgba(40,25,61,.72),rgba(14,9,23,.76));
+  overflow:hidden;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.series-card:before{
+  content:"";
+  position:absolute;
+  inset:-70px -50px auto auto;
+  width:170px;height:170px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(168,85,247,.24),transparent 68%);
+  pointer-events:none;
+}
+.series-card:hover{transform:translateY(-5px);border-color:rgba(216,180,254,.30);box-shadow:0 22px 55px rgba(76,29,149,.24)}
+.series-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.series-num{font-size:11px;font-weight:900;color:#bda8d5;letter-spacing:.1em}
+.series-icon{
+  width:48px;height:48px;display:grid;place-items:center;
+  border-radius:16px;
+  font-size:20px;
+  background:linear-gradient(135deg,rgba(124,58,237,.30),rgba(192,132,252,.18));
+  border:1px solid rgba(216,180,254,.18);
+  box-shadow:0 12px 30px rgba(124,58,237,.18);
+}
+.series-card h3{margin-top:18px;font-size:20px;letter-spacing:-.03em}
+.series-card .series-sub{margin-top:6px;color:#d8cce4;font-size:12px;font-weight:800}
+.series-card p{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.7;min-height:65px}
+.series-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.series-tag{
+  padding:5px 8px;border-radius:999px;
+  border:1px solid rgba(216,180,254,.12);
+  background:rgba(139,92,246,.07);
+  color:#d8c8eb;font-size:10px;font-weight:900;
+}
+.series-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}
+.series-price{font-size:18px;font-weight:900}
+.series-note{font-size:10px;color:var(--muted);font-weight:800}
+.series-card.dim{opacity:.88}
+.series-card.dim .series-price{color:#dacfea}
+.series-card.dim .btn{color:#e9ddf9}
+.series-card.highlight{border-color:rgba(192,132,252,.34);box-shadow:0 22px 60px rgba(124,58,237,.15),inset 0 1px 0 rgba(255,255,255,.06)}
+.series-card.highlight:after{
+  content:"POPULAR";
+  position:absolute;right:16px;top:16px;
+  padding:5px 8px;border-radius:999px;
+  background:linear-gradient(135deg,#8b5cf6,#c084fc);
+  color:#fff;font-size:9px;font-weight:900;letter-spacing:.08em;
+}
+.store-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 15px;
+  margin-bottom:14px;
+  border:1px solid rgba(216,180,254,.11);
+  border-radius:18px;
+  background:rgba(255,255,255,.025);
+}
+.store-count{display:flex;align-items:center;gap:8px;color:#ddd0ef;font-size:12px;font-weight:800}
+.store-count b{color:#fff}
+.store-hint{color:var(--muted);font-size:11px}
+.product-card{
+  min-height:390px;
+  padding:21px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(168,85,247,.08),transparent 28%),
+    linear-gradient(155deg,rgba(28,18,42,.84),rgba(11,8,17,.78));
+  box-shadow:0 16px 44px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.045);
+}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 24px 65px rgba(76,29,149,.22),inset 0 1px 0 rgba(255,255,255,.06)}
+.product-card:before{width:3px!important}
+.category-mark{border-radius:12px!important}
+.badge{backdrop-filter:blur(12px)}
+.product-card h3{font-size:19px;letter-spacing:-.028em}
+.desc{font-size:13px}
+.feature-mini{gap:6px}
+.feature-mini span{font-size:11px}
+.price{font-size:28px;letter-spacing:-.04em}
+.product-actions .btn{border-radius:13px}
+.searchbar{padding:6px;border:1px solid rgba(216,180,254,.10)}
+.toolbar{gap:10px}
+.tabs{padding:5px;border:1px solid rgba(216,180,254,.09);border-radius:17px;background:rgba(255,255,255,.018)}
+.tab{border-color:transparent!important}
+.tab.active{box-shadow:0 9px 25px rgba(124,58,237,.20)}
+.section-head h2{letter-spacing:-.04em}
+.section-head p{line-height:1.7}
+.quick-jump{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 10px;border:1px solid rgba(216,180,254,.11);
+  border-radius:999px;background:rgba(139,92,246,.06);
+  color:#d9c9ea;font-size:11px;font-weight:900;text-decoration:none;
+}
+.quick-jump:hover{border-color:rgba(216,180,254,.24);color:#fff}
+@media(max-width:1080px){
+  .series-grid{grid-template-columns:repeat(2,1fr)}
+  .series-card{min-height:235px}
+}
+@media(max-width:700px){
+  .series-shell{padding:18px;border-radius:22px}
+  .series-head{align-items:flex-start;flex-direction:column}
+  .series-grid{grid-template-columns:1fr}
+  .series-card{min-height:0}
+  .store-bar{align-items:flex-start;flex-direction:column}
+  .quick-jump{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
@@ -942,6 +1097,7 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
       <span id="brandName">VEXO STORE</span>
     </a>
     <nav class="nav-links" aria-label="주요 메뉴">
+      <a href="#series">BOT SERIES</a>
       <a href="#recommend">추천</a>
       <a href="#products">상품</a>
       <a href="#addons">디자인·옵션</a>
@@ -963,7 +1119,7 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
       <div class="hero-copy">
         <div class="eyebrow">Discord Commerce Studio · VEXO HUB</div>
         <h1>VEXO HUB<br><span>돈을 쓰는 곳이 아니라, 기회를 만드는 곳.</span></h1>
-        <p class="hero-desc">저희 VEXO HUB는 여러분이 돈을 주고 돈을 날리는 곳이 아니라, **돈을 주고 더 많은 가치를 만들어낼 수 있는 템플릿과 성능 좋은 봇**을 제공합니다. 필요한 제품만 골라 더 깔끔하게, 더 빠르게 운영하세요.</p>
+        <p class="hero-desc">저희 VEXO HUB는 여러분이 돈을 주고 돈을 날리는 곳이 아니라, <strong>돈을 주고 더 많은 가치를 만들어낼 수 있는 템플릿과 성능 좋은 봇</strong>을 제공합니다. 필요한 제품만 골라 더 깔끔하게, 더 빠르게 운영하세요.</p>
         <div class="hero-cta">
           <button class="btn primary" onclick="document.querySelector('#recommend').scrollIntoView({behavior:'smooth'})">내게 맞는 구성 찾기</button>
           <button class="btn ghost" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">상품 바로 보기</button>
@@ -1003,6 +1159,55 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
             </div>
           </div>
           <div class="preview-note hidden" id="noticeText" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="series" class="series-section">
+    <div class="wrap">
+      <div class="series-shell">
+        <div class="series-head">
+          <div>
+            <div class="series-kicker">VEXO BOT SERIES</div>
+            <h2>내 서버에 맞는 봇을 한눈에</h2>
+            <p>BASIC부터 PREMIUM까지, 필요한 운영 수준에 따라 선택할 수 있도록 라인업을 분리했습니다.</p>
+          </div>
+          <a class="quick-jump" href="#products">전체 상품 둘러보기 →</a>
+        </div>
+        <div class="series-grid">
+          <article class="series-card">
+            <div class="series-top"><span class="series-num">01 · ENTRY</span><span class="series-icon">◈</span></div>
+            <h3>BASIC</h3>
+            <div class="series-sub">가볍게 시작하는 기본 자판기봇</div>
+            <p>상품 등록, 주문 접수, 티켓 안내처럼 판매에 필요한 핵심 흐름을 심플하게 시작합니다.</p>
+            <div class="series-tags"><span class="series-tag">주문 UI</span><span class="series-tag">수동 지급</span><span class="series-tag">기본 관리</span></div>
+            <div class="series-bottom"><div class="series-price">19,000원</div><button class="btn small primary" data-series-name="VEXO 자판기봇 BASIC">상세보기</button></div>
+          </article>
+          <article class="series-card">
+            <div class="series-top"><span class="series-num">02 · UI</span><span class="series-icon">✦</span></div>
+            <h3>BASIC PREMIUM</h3>
+            <div class="series-sub">기본 기능 + 프리미엄 화면 구성</div>
+            <p>기본형의 흐름을 유지하면서 자판기 패널과 주문 화면을 더 세련된 VEXO 스타일로 확장합니다.</p>
+            <div class="series-tags"><span class="series-tag">PREMIUM UI</span><span class="series-tag">GLASS EMBED</span><span class="series-tag">브랜딩</span></div>
+            <div class="series-bottom"><div class="series-price">출시 준비중</div><button class="btn small ghost" data-series-scroll="products">라인업 보기</button></div>
+          </article>
+          <article class="series-card highlight">
+            <div class="series-top"><span class="series-num">03 · CONTROL</span><span class="series-icon">◆</span></div>
+            <h3>PRO</h3>
+            <div class="series-sub">판매 서버 운영을 위한 확장형</div>
+            <p>카테고리, 재고, 수량 주문, 관리자 처리와 통계까지 운영 단계를 한 단계 더 확장합니다.</p>
+            <div class="series-tags"><span class="series-tag">재고 관리</span><span class="series-tag">수량 주문</span><span class="series-tag">통계</span></div>
+            <div class="series-bottom"><div class="series-price">39,000원</div><button class="btn small primary" data-series-name="VEXO 자판기봇 PRO">상세보기</button></div>
+          </article>
+          <article class="series-card dim">
+            <div class="series-top"><span class="series-num">04 · ULTIMATE</span><span class="series-icon">✧</span></div>
+            <h3>PRO PREMIUM</h3>
+            <div class="series-sub">PRO 기반의 상위 커머스 구성</div>
+            <p>PRO의 운영 기능에 고급 브랜딩과 UI를 더한 최상위 라인으로 확장할 수 있도록 구성합니다.</p>
+            <div class="series-tags"><span class="series-tag">PRO 전체</span><span class="series-tag">PREMIUM UI</span><span class="series-tag">고급 브랜딩</span></div>
+            <div class="series-bottom"><div class="series-price">출시 준비중</div><button class="btn small ghost" data-series-scroll="products">라인업 보기</button></div>
+          </article>
         </div>
       </div>
     </div>
@@ -1063,6 +1268,10 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
           <h2>상품</h2>
           <p>저가 가이드는 유입용, 패키지는 빠른 구축용으로 나눴습니다.</p>
         </div>
+      </div>
+      <div class="store-bar">
+        <div class="store-count">🛍️ 현재 <b id="filteredProductCount">0</b>개 상품 표시 · 전체 <b id="storeProductTotal">0</b>개</div>
+        <div class="store-hint">카테고리 선택 → 검색 → 정렬 순으로 빠르게 찾아보세요.</div>
       </div>
       <div class="toolbar">
         <div class="tabs" id="tabs">
@@ -1315,23 +1524,26 @@ function visibleProducts(){
 function renderProducts(){
   const list=visibleProducts();
   $('#productCount').textContent=products.length;
+  const countEl=$('#filteredProductCount'); if(countEl) countEl.textContent=list.length;
+  const totalEl=$('#storeProductTotal'); if(totalEl) totalEl.textContent=products.length;
   $('#productGrid').innerHTML=list.length?list.map(p=>{
     const features=(p.features||[]).slice(0,3).map(f=>`<span>${esc(f)}</span>`).join('');
     return `<article class="product-card ${toneClass(p.category)}">
       <div class="product-top">
         <span class="badge">${esc(p.badge||p.category)}</span>
-        <span class="category-mark">${categoryMark(p.category)}</span>
+        <span class="category-mark" aria-label="${esc(p.category)}">${categoryMark(p.category)}</span>
       </div>
+      <div class="mini" style="margin-top:14px;color:#cdbfe0;font-weight:800">${esc(p.category)}</div>
       <h3>${esc(p.name)}</h3>
       <div class="desc">${esc(p.description)}</div>
       <div class="feature-mini">${features||'<span>상세 기능은 주문 전 티켓에서 확인 가능합니다.</span>'}</div>
       <div class="price">${won(p.price)} <small>/ 1개</small></div>
       <div class="product-actions">
         <button class="btn ghost" data-detail="${esc(p.id)}">자세히</button>
-        <button class="btn primary" data-order="${esc(p.id)}">주문</button>
+        <button class="btn primary" data-order="${esc(p.id)}">주문하기</button>
       </div>
     </article>`;
-  }).join(''):'<div class="empty" style="grid-column:1/-1">조건에 맞는 상품이 없습니다.</div>';
+  }).join(''):'<div class="empty" style="grid-column:1/-1">조건에 맞는 상품이 없습니다.<br><span class="mini">검색어나 카테고리를 다시 확인해 주세요.</span></div>';
 }
 function renderAddons(){
   const list=products.filter(p=>p.category==='디자인'||p.category==='봇 옵션').sort((a,b)=>scoreProduct(b)-scoreProduct(a)||a.price-b.price);
@@ -1732,10 +1944,20 @@ document.addEventListener('click',e=>{
   const order=e.target.closest('[data-order]');
   const approve=e.target.closest('[data-approve]');
   const copy=e.target.closest('[data-copy-order]');
+  const seriesName=e.target.closest('[data-series-name]');
+  const seriesScroll=e.target.closest('[data-series-scroll]');
   if(detail)openDetail(detail.dataset.detail);
   if(order)openOrder(order.dataset.order);
   if(approve)approveOrderPrompt(approve.dataset.approve);
   if(copy)copyOrderInfo(copy.dataset.copyOrder);
+  if(seriesName){
+    const p=products.find(x=>x.name===seriesName.dataset.seriesName);
+    if(p) openDetail(p.id);
+    else toast('해당 봇 상품을 준비 중입니다.');
+  }
+  if(seriesScroll){
+    document.querySelector('#'+seriesScroll.dataset.seriesScroll)?.scrollIntoView({behavior:'smooth'});
+  }
 });
 $('#recommendChoices').addEventListener('click',e=>{
   const btn=e.target.closest('[data-recommend]');
