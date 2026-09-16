@@ -30,8 +30,8 @@ const SESSION_SECRET = process.env.SESSION_SECRET || await ensureSecret();
 const seed = {
   users: [],
   products: [
-    { id: nanoid(), name: 'VEXO 자판기봇 BASIC', category: '자판기봇', price: 19000, badge: '입문추천', description: '디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features: ['상품 버튼 주문 UI', '주문 접수 및 로그 기록', '관리자 확인 후 지급 안내', '기본 고객 응대 메시지', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
-    { id: nanoid(), name: 'VEXO 자판기봇 PRO', category: '자판기봇', price: 39000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', ] },
+    { id: nanoid(), name: 'VEXO 자판기봇 BASIC', tier: 'BASIC', category: '자판기봇', price: 19000, badge: '입문추천', description: '디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features: ['상품 버튼 주문 UI', '주문 접수 및 로그 기록', '관리자 확인 후 지급 안내', '기본 고객 응대 메시지', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
+    { id: nanoid(), name: 'VEXO 자판기봇 PRO', tier: 'PRO', category: '자판기봇', price: 39000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', ] },
     { id: nanoid(), name: 'VEXO 디스코드 서버 템플릿', category: '서버 템플릿', price: 19000, badge: '빠른시작', description: '판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.', features: ['INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조', 'OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할', '공지·가격표·구매인증 채널', '문의·1대1 티켓용 채널', '관리자 전용 STAFF 카테고리', '서버 템플릿 링크 제공', '기본 세팅 가이드'] },
     { id: nanoid(), name: 'VEXO 서버 템플릿 PRO', category: '서버 템플릿', price: 34000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '티켓 봇 연동 가이드', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '상세 세팅 설명서'] },
     { id: nanoid(), name: 'VEXO 자동화 패키지', category: '자동화', price: 49000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '세팅 가이드 제공'] },
@@ -78,6 +78,16 @@ if (db.settings.targetMonth === undefined) db.settings.targetMonth = '2026-10';
 for (const p of db.products) { delete p.stock; if (p.category === '서버') p.category = '서버 템플릿'; }
 
 // VEXO design / feature add-ons. These are separate from existing BOT/TEMPLATE/GUIDE products.
+// VEXO BOT SERIES metadata is kept separate from sellable products.
+// BASIC/PRO retain their existing prices. Premium tiers can be published later without
+// forcing an unapproved price into the catalog.
+const VEXO_BOT_SERIES = [
+  { key:'basic', name:'BASIC', productName:'VEXO 자판기봇 BASIC', status:'판매중', subtitle:'가볍게 시작하는 기본 자판기봇' },
+  { key:'basic-premium', name:'BASIC PREMIUM', productName:null, status:'준비중', subtitle:'기본 기능 + 프리미엄 화면 구성' },
+  { key:'pro', name:'PRO', productName:'VEXO 자판기봇 PRO', status:'판매중', subtitle:'판매 서버 운영을 위한 확장형' },
+  { key:'pro-premium', name:'PRO PREMIUM', productName:null, status:'준비중', subtitle:'PRO 기반의 상위 커머스 구성' }
+];
+
 const VEXO_ADDON_PRODUCTS = [
   { id: 'vexo-addon-embed-design', name: 'VEXO 임베드 디자인팩', category: '디자인', price: 9900, badge: 'DESIGN', description: '판매봇에 필요한 핵심 임베드를 VEXO 스타일로 통일하는 디자인팩입니다.', features: ['주문 접수 임베드', '입금 안내 임베드', '처리중·완료 임베드', '문의 접수 임베드', '후기 임베드', '다크 퍼플 글로우 테마'] },
   { id: 'vexo-addon-panel-design', name: 'VEXO 버튼 & 패널 디자인팩', category: '디자인', price: 12900, badge: 'UI', description: '버튼·셀렉트·패널을 하나의 브랜드 UI처럼 보이게 만드는 디자인팩입니다.', features: ['메인 판매 패널', '카테고리 선택 UI', '상품 선택 UI', '문의 패널', '후기 패널', '버튼 라벨·이모지 가이드'] },
@@ -204,6 +214,14 @@ app.post('/api/heartbeat', (req, res) => {
   res.cookie('vexo_visitor', visitor, { httpOnly: true, sameSite: 'lax', maxAge: 1000 * 60 * 60 * 24 * 365 });
   online.set(visitor, Date.now());
   res.json({ online: online.size });
+});
+
+app.get('/api/bot-series', (req, res) => {
+  const items = VEXO_BOT_SERIES.map(series => ({
+    ...series,
+    product: series.productName ? db.products.find(p => p.name === series.productName) || null : null
+  }));
+  res.json({ series: items });
 });
 
 app.get('/api/products', (req, res) => {
