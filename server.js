@@ -130,16 +130,23 @@ const VEOX_UPGRADE_PRODUCTS = [
   { id:'vexo-feature-security', name:'VEOX 보안 강화팩', category:'봇 옵션', price:14900, badge:'SECURITY', description:'권한 분리와 운영 영역 보호를 강화하는 영구 보안 옵션입니다.', features:['관리 기능 접근 보호','위험 권한 차단 보조','스태프 영역 보호','주요 작업 감사 로그 강화','1회 구매 후 영구 적용'] },
   { id:'vexo-feature-statistics', name:'VEOX 통계 대시보드팩', category:'봇 옵션', price:12900, badge:'STATS', description:'판매·주문·매출을 한눈에 확인할 수 있도록 운영 통계를 확장하는 영구 옵션입니다.', features:['주문량 통계','완료 매출 통계','평균 주문액','진행중 주문 현황','1회 구매 후 영구 적용'] },
   { id:'vexo-custom-lite', name:'VEOX 간단 커스텀 옵션', category:'커스텀', price:19900, badge:'LITE', description:'기존 VEOX 봇의 작은 UI·문구·버튼·동작 변경을 위한 1회성 커스텀 상품입니다.', features:['문구 변경','버튼/임베드 수정','소규모 UI 변경','기존 기능 내 간단 동작 수정','주문 전 범위 확인'] },
-  { id:'vexo-custom-standard', name:'VEOX 중급 커스텀 옵션', category:'커스텀', price:39900, badge:'STANDARD', description:'기존 기능을 조합하거나 소규모 신규 자동화를 추가하는 1회성 커스텀 상품입니다.', features:['기능 조합/확장','소규모 신규 자동화','관리자 버튼·패널 추가','기존 데이터 구조 연동','주문 전 범위 확정'] },
-  { id:'vexo-custom-large', name:'VEOX 대형 커스텀 옵션', category:'커스텀', price:79900, badge:'LARGE', description:'기존 VEOX 시스템에 비교적 큰 신규 기능을 제작하는 1회성 커스텀 상품입니다.', features:['대형 기능 추가','복수 기능 연동','고급 관리자 흐름','별도 테스트·검수','주문 전 상세 견적 및 범위 확정'] },
+  { id:'vexo-custom-standard', name:'VEOX 중급 커스텀 옵션', category:'커스텀', price:34900, badge:'STANDARD', description:'기존 기능을 조합하거나 소규모 신규 자동화를 추가하는 1회성 커스텀 상품입니다.', features:['기능 조합/확장','소규모 신규 자동화','관리자 버튼·패널 추가','기존 데이터 구조 연동','주문 전 범위 확정'] },
+  { id:'vexo-custom-large', name:'VEOX 대형 커스텀 옵션', category:'커스텀', price:69900, badge:'LARGE', description:'기존 VEOX 시스템에 비교적 큰 신규 기능을 제작하는 1회성 커스텀 상품입니다.', features:['대형 기능 추가','복수 기능 연동','고급 관리자 흐름','별도 테스트·검수','주문 전 상세 견적 및 범위 확정'] },
   { id:'vexo-major-upgrade', name:'VEOX 메이저 버전 업그레이드', category:'업그레이드', price:19900, badge:'VERSION', description:'VEOX의 새로운 메이저 버전이 출시될 때 기존 구매자가 해당 버전으로 업그레이드하는 영구 업그레이드 상품입니다.', features:['메이저 버전 1회 업그레이드','출시 버전별 적용 범위 공지','기존 구매 정보 확인','업그레이드 안내 제공','기간 제한 없음'] },
-  { id:'vexo-seller-pack', name:'VEOX SELLER PACK', category:'패키지', price:49900, badge:'SELLER', description:'디스코드에서 실제 판매를 운영하는 데 필요한 핵심 기능을 한 번에 묶은 영구 패키지입니다.', features:['티켓 자동화 확장팩','결제 자동화 확장팩','통계 대시보드팩','운영 보조 기능','판매 운영용 관리자 구성','1회 구매 후 영구 적용'] },
-  { id:'vexo-seller-pro', name:'VEOX SELLER PRO', category:'패키지', price:79900, badge:'PRO SELLER', description:'SELLER PACK에 고급 디자인과 보안·운영 옵션을 더한 상위 영구 패키지입니다.', features:['SELLER PACK 구성 포함','보안 강화팩','VEOX DESIGN BUNDLE','고급 운영 UI 구성','브랜딩 일괄 적용','1회 구매 후 영구 적용'] },
-  { id:'vexo-white-label', name:'VEOX 화이트라벨 패키지', category:'개발', price:99000, badge:'WHITE LABEL', description:'VEOX 브랜드 대신 고객의 자체 브랜드로 봇 UI와 표기를 구성하는 영구 화이트라벨 상품입니다.', features:['봇 표시명 브랜딩','임베드·푸터 문구 변경','버튼·패널 브랜딩','기본 색상·문구 일괄 적용','브랜드 기준 맞춤 안내','1회 구매 후 영구 적용'] },
-  { id:'vexo-growth-bundle', name:'VEOX GROWTH BUNDLE', category:'패키지', price:59900, badge:'BUNDLE', description:'티켓·결제·운영·통계를 한 번에 확장하는 실전형 영구 기능 번들입니다.', features:['티켓 자동화 확장팩','결제 자동화 확장팩','운영 자동화 확장팩','통계 대시보드팩','개별 구매 대비 묶음가','1회 구매 후 영구 적용'] }
+  { id:'vexo-seller-pack', name:'VEOX SELLER PACK', category:'패키지', price:44900, badge:'SELLER', description:'디스코드에서 실제 판매를 운영하는 데 필요한 핵심 기능을 한 번에 묶은 영구 패키지입니다.', features:['티켓 자동화 확장팩','결제 자동화 확장팩','통계 대시보드팩','운영 보조 기능','판매 운영용 관리자 구성','1회 구매 후 영구 적용'] },
+  { id:'vexo-seller-pro', name:'VEOX SELLER PRO', category:'패키지', price:69900, badge:'PRO SELLER', description:'SELLER PACK에 고급 디자인과 보안·운영 옵션을 더한 상위 영구 패키지입니다.', features:['SELLER PACK 구성 포함','보안 강화팩','VEOX DESIGN BUNDLE','고급 운영 UI 구성','브랜딩 일괄 적용','1회 구매 후 영구 적용'] },
+  { id:'vexo-white-label', name:'VEOX 화이트라벨 패키지', category:'개발', price:79900, badge:'WHITE LABEL', description:'VEOX 브랜드 대신 고객의 자체 브랜드로 봇 UI와 표기를 구성하는 영구 화이트라벨 상품입니다.', features:['봇 표시명 브랜딩','임베드·푸터 문구 변경','버튼·패널 브랜딩','기본 색상·문구 일괄 적용','브랜드 기준 맞춤 안내','1회 구매 후 영구 적용'] },
+  { id:'vexo-growth-bundle', name:'VEOX GROWTH BUNDLE', category:'패키지', price:49900, badge:'BUNDLE', description:'티켓·결제·운영·통계를 한 번에 확장하는 실전형 영구 기능 번들입니다.', features:['티켓 자동화 확장팩','결제 자동화 확장팩','운영 자동화 확장팩','통계 대시보드팩','개별 구매 대비 묶음가','1회 구매 후 영구 적용'] }
 ];
 const upgradeIds = new Set(db.products.map(p => p.id));
-for (const p of VEOX_UPGRADE_PRODUCTS) if (!upgradeIds.has(p.id)) db.products.push(p);
+for (const p of VEOX_UPGRADE_PRODUCTS) {
+  const existing = db.products.find(item => item.id === p.id);
+  if (existing) {
+    existing.price = p.price;
+  } else {
+    db.products.push(p);
+  }
+}
 for (const p of db.products) {
   if (!p.features) p.features = [];
   // Keep installation guides separate from bot/template purchases.
