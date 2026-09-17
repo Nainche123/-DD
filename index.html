@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VEXO STORE | 디스코드 판매 자동화</title>
 <meta name="description" content="VEXO STORE - 디스코드 자판기봇, 서버 템플릿, 자동화, 커스텀 봇 제작 주문 사이트">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='%230b0715'/%3E%3Crect x='5' y='5' width='54' height='54' rx='16' fill='url(%23g)' opacity='.95'/%3E%3Cpath d='M16 46 28 18h8l12 28h-8l-2.8-7H26.8L24 46h-8Zm14.1-14.1L28.8 33h6.4l-2.3-6.1-2.8 5Z' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -97,6 +96,20 @@ a{color:inherit}
 .nav-links{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--soft);font-weight:700}
 .nav-links a{text-decoration:none}
 .nav-links a:hover{color:#fff}
+ .nav-menu-btn{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:inherit;
+  padding:5px 2px;
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+  transition:color .16s ease,transform .16s ease,text-shadow .16s ease;
+}
+.nav-menu-btn:hover{color:#fff;transform:translateY(-1px);text-shadow:0 0 18px rgba(192,132,252,.32)}
+.nav-menu-btn:focus-visible{outline:2px solid rgba(216,180,254,.6);outline-offset:4px;border-radius:7px}
+.quick-jump{appearance:none;cursor:pointer;font:inherit;}
 .nav-actions{display:flex;align-items:center;gap:10px}
 .online-pill{
   display:flex;
@@ -1091,181 +1104,6 @@ body{overflow-x:hidden}
   .store-bar{align-items:flex-start;flex-direction:column}
   .quick-jump{width:100%;justify-content:center}
 }
-
-/* =========================================================
-   VEXO DISCORD SERVER UI / 2026 RELEASE REFRESH
-   ========================================================= */
-:root{
-  --vexo-purple:#7c3aed;
-  --vexo-purple-2:#a855f7;
-  --vexo-purple-soft:rgba(124,58,237,.16);
-  --vexo-panel:rgba(18,13,29,.78);
-  --vexo-panel-2:rgba(27,19,42,.86);
-  --vexo-border:rgba(196,181,253,.16);
-}
-body{
-  background:
-    radial-gradient(900px 520px at 12% -5%,rgba(124,58,237,.22),transparent 62%),
-    radial-gradient(720px 520px at 92% 8%,rgba(168,85,247,.13),transparent 64%),
-    radial-gradient(560px 420px at 50% 105%,rgba(76,29,149,.18),transparent 66%),
-    #07050d;
-}
-body:before{
-  background-image:
-    linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
-  background-size:34px 34px;
-  opacity:.7;
-}
-.top{background:rgba(7,5,13,.82)!important;border-bottom:1px solid rgba(196,181,253,.12)!important}
-.brand-mark{
-  background:linear-gradient(135deg,var(--vexo-purple),var(--vexo-purple-2))!important;
-  box-shadow:0 14px 36px rgba(124,58,237,.28),0 0 0 1px rgba(255,255,255,.14) inset!important;
-}
-.nav-links a{position:relative;padding:8px 2px}
-.nav-links a:after{
-  content:"";position:absolute;left:0;right:0;bottom:1px;height:2px;
-  transform:scaleX(0);transform-origin:center;
-  background:linear-gradient(90deg,var(--vexo-purple),var(--vexo-purple-2));
-  border-radius:99px;transition:transform .18s ease;
-}
-.nav-links a:hover:after{transform:scaleX(1)}
-.vexo-ribbon{
-  width:min(1180px,calc(100% - 40px));margin:18px auto 0;
-  padding:10px 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
-}
-.vexo-ribbon-line{
-  height:1px;background:linear-gradient(90deg,transparent,rgba(192,132,252,.42),transparent);position:relative;
-}
-.vexo-ribbon-line:before,.vexo-ribbon-line:after{
-  content:"";position:absolute;top:50%;width:7px;height:7px;
-  border:1px solid rgba(216,180,254,.38);transform:translateY(-50%) rotate(45deg);background:#0b0712;
-}
-.vexo-ribbon-line:before{left:12%}.vexo-ribbon-line:after{right:12%}
-.vexo-ribbon-core{
-  min-height:40px;padding:8px 15px;border:1px solid rgba(196,181,253,.18);border-radius:999px;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  background:rgba(18,12,31,.72);box-shadow:0 10px 34px rgba(76,29,149,.18),0 1px 0 rgba(255,255,255,.05) inset;
-  backdrop-filter:blur(18px);
-}
-.ribbon-title{font-size:11px;letter-spacing:.18em;font-weight:1000;color:#ede9fe}
-.ribbon-title b{color:#a78bfa}
-.ribbon-arrow{
-  width:24px;height:24px;border-radius:8px;display:grid;place-items:center;
-  color:#c4b5fd;border:1px solid rgba(196,181,253,.16);background:rgba(124,58,237,.08);
-  font-size:16px;font-weight:900;
-}
-.ribbon-dot{width:5px;height:5px;border-radius:50%;background:#a855f7;box-shadow:0 0 12px rgba(168,85,247,.72)}
-.vexo-server-strip{
-  width:min(1180px,calc(100% - 40px));margin:0 auto 4px;
-  display:flex;gap:7px;flex-wrap:wrap;padding:0 4px;
-}
-.server-pill{
-  display:inline-flex;align-items:center;gap:7px;min-height:33px;padding:7px 11px;
-  border:1px solid rgba(196,181,253,.10);border-radius:11px;background:rgba(18,12,31,.48);
-  color:#9288a9;font-size:10px;font-weight:900;letter-spacing:.06em;
-}
-.server-pill i{font-style:normal}
-.server-pill.active{
-  color:#eee9ff;border-color:rgba(168,85,247,.28);
-  background:linear-gradient(135deg,rgba(124,58,237,.16),rgba(168,85,247,.06));
-  box-shadow:0 10px 24px rgba(76,29,149,.12);
-}
-.discord-status-mini{
-  display:flex;align-items:center;gap:8px;margin-bottom:2px;min-height:30px;padding:0 2px;
-  font-size:10px;letter-spacing:.08em;
-}
-.discord-status-mini b{color:#e9e1ff}
-.discord-status-mini span:last-child{color:#8f86a1;letter-spacing:0}
-.discord-status-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px rgba(34,197,94,.75)}
-.hero{padding-top:34px!important}
-.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item{
-  border-color:var(--vexo-border)!important;
-  background:linear-gradient(180deg,rgba(20,14,33,.84),rgba(12,9,20,.76))!important;
-  box-shadow:0 22px 65px rgba(28,10,48,.22),0 1px 0 rgba(255,255,255,.035) inset!important;
-}
-.hero-copy{position:relative}
-.hero-copy:after{
-  content:"";position:absolute;width:260px;height:260px;right:-130px;top:-120px;
-  background:radial-gradient(circle,rgba(168,85,247,.20),transparent 68%);pointer-events:none;
-}
-.hero h1{letter-spacing:-.055em;text-shadow:0 10px 40px rgba(124,58,237,.16)}
-.hero h1 span{color:#c4b5fd!important}
-.eyebrow{background:rgba(124,58,237,.09)!important;border-color:rgba(168,85,247,.23)!important;color:#e9ddff!important}
-.btn.blue,.btn.primary{
-  background:linear-gradient(135deg,#7c3aed,#a855f7)!important;color:#fff!important;
-  border-color:rgba(255,255,255,.15)!important;box-shadow:0 14px 34px rgba(124,58,237,.24)!important;
-}
-.btn.primary:hover,.btn.blue:hover{filter:brightness(1.08);box-shadow:0 18px 38px rgba(124,58,237,.30)!important}
-.btn.ghost{background:rgba(255,255,255,.03)!important;border-color:rgba(196,181,253,.15)!important}
-.section-head h2{font-size:31px!important}
-.section-head h2:before{
-  content:"";display:inline-block;width:26px;height:3px;margin:0 10px 6px 0;border-radius:99px;
-  background:linear-gradient(90deg,#7c3aed,#c084fc);box-shadow:0 0 18px rgba(168,85,247,.38);
-}
-.tool-card,.product-card,.guide-item,.faq-grid details,.choice-panel,.recommend-result,.kpi-card{border-radius:20px!important}
-.tool-card:hover,.product-card:hover{
-  transform:translateY(-6px)!important;border-color:rgba(196,181,253,.28)!important;
-  box-shadow:0 28px 70px rgba(76,29,149,.25)!important;
-}
-.product-card:before{width:5px!important;background:linear-gradient(180deg,#7c3aed,#a855f7)!important}
-.product-card.tone-template:before{background:linear-gradient(180deg,#22c55e,#4ade80)!important}
-.product-card.tone-auto:before{background:linear-gradient(180deg,#f59e0b,#fbbf24)!important}
-.product-card.tone-dev:before{background:linear-gradient(180deg,#fb7185,#f43f5e)!important}
-.product-card.tone-guide:before{background:linear-gradient(180deg,#22d3ee,#67e8f9)!important}
-.product-card.tone-pack:before{background:linear-gradient(180deg,#7c3aed,#f59e0b)!important}
-.product-top .badge{
-  background:rgba(124,58,237,.10)!important;border:1px solid rgba(168,85,247,.16);color:#e9ddff!important;
-}
-.category-mark{background:rgba(124,58,237,.05)!important;border-color:rgba(196,181,253,.13)!important;color:#c4b5fd!important}
-.store-bar{
-  position:relative;overflow:hidden;padding:11px 14px!important;border:1px solid rgba(196,181,253,.12);
-  border-radius:15px;background:linear-gradient(90deg,rgba(124,58,237,.10),rgba(255,255,255,.02),rgba(168,85,247,.08));
-}
-.store-bar:after{
-  content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.035),transparent);
-  transform:translateX(-100%);animation:vexoShimmer 7s ease-in-out infinite;
-}
-@keyframes vexoShimmer{45%,100%{transform:translateX(100%)}}
-.searchbar{border-radius:15px!important;background:rgba(18,12,31,.66)!important;border-color:rgba(196,181,253,.11)!important}
-.input,.select,.textarea{background:rgba(8,6,14,.82)!important;border-color:rgba(196,181,253,.13)!important}
-.input:focus,.select:focus,.textarea:focus{
-  border-color:rgba(168,85,247,.50)!important;box-shadow:0 0 0 3px rgba(124,58,237,.10);
-}
-.tabs{border-radius:17px!important;background:rgba(18,12,31,.54)!important;border-color:rgba(196,181,253,.10)!important}
-.tab.active,.segment.active{
-  background:linear-gradient(135deg,#7c3aed,#a855f7)!important;color:#fff!important;
-  border-color:transparent!important;box-shadow:0 10px 26px rgba(124,58,237,.26)!important;
-}
-.web-order-hint{
-  display:flex;align-items:center;gap:6px;margin-top:10px;padding-top:9px;
-  border-top:1px solid rgba(196,181,253,.08);color:#8f86a1;font-size:10px;font-weight:800;
-}
-.web-order-hint span{color:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.45)}
-.series-shell{
-  border-color:rgba(168,85,247,.18)!important;
-  background:linear-gradient(180deg,rgba(20,12,35,.90),rgba(11,8,19,.86))!important;
-  box-shadow:0 34px 90px rgba(45,12,82,.22),0 1px 0 rgba(255,255,255,.04) inset!important;
-}
-.series-card{background:linear-gradient(180deg,rgba(26,17,42,.72),rgba(14,10,24,.72))!important;border-color:rgba(196,181,253,.12)!important}
-.series-card:hover{transform:translateY(-5px);border-color:rgba(168,85,247,.28)!important;box-shadow:0 24px 54px rgba(76,29,149,.22)}
-.modal{background:rgba(4,3,8,.82)!important}
-.modal-card{
-  border-color:rgba(196,181,253,.18)!important;border-radius:22px!important;
-  background:linear-gradient(180deg,#151022,#0b0813)!important;
-  box-shadow:0 35px 90px rgba(0,0,0,.55),0 0 0 1px rgba(168,85,247,.05) inset!important;
-}
-.notice-box{
-  background:linear-gradient(135deg,rgba(124,58,237,.10),rgba(168,85,247,.06))!important;
-  border-color:rgba(168,85,247,.19)!important;
-}
-.footer{border-top-color:rgba(196,181,253,.10)!important}
-@media(max-width:700px){
-  .vexo-ribbon,.vexo-server-strip{width:calc(100% - 28px)}
-  .vexo-ribbon{grid-template-columns:1fr}.vexo-ribbon-line{display:none}.vexo-ribbon-core{width:100%}
-  .vexo-server-strip{overflow:auto;flex-wrap:nowrap;padding-bottom:4px}
-  .server-pill{white-space:nowrap}.ribbon-title{font-size:10px}
-}
 </style>
 </head>
 <body>
@@ -1277,42 +1115,23 @@ body:before{
       <span id="brandName">VEXO STORE</span>
     </a>
     <nav class="nav-links" aria-label="주요 메뉴">
-      <a href="#series">BOT SERIES</a>
-      <a href="#recommend">추천</a>
-      <a href="#products">상품</a>
-      <a href="#addons">디자인·옵션</a>
-      <a href="#guide">구매방법</a>
-      <a href="#orders">내 주문</a>
+      <button class="nav-menu-btn" type="button" data-scroll="series">BOT SERIES</button>
+      <button class="nav-menu-btn" type="button" data-scroll="recommend">추천</button>
+      <button class="nav-menu-btn" type="button" data-scroll="products">상품</button>
+      <button class="nav-menu-btn" type="button" data-scroll="addons">디자인·옵션</button>
+      <button class="nav-menu-btn" type="button" data-scroll="guide">구매방법</button>
+      <button class="nav-menu-btn" type="button" data-scroll="orders">내 주문</button>
     </nav>
     <div class="nav-actions">
       <div class="online-pill"><span class="online-dot"></span><b id="online">0</b>명 접속중</div>
-      <button class="btn glass-login" id="accountBtn">로그인</button>
-      <button class="btn primary register-btn" id="registerBtn" onclick="openModal('register')">회원가입</button>
-      <button class="btn primary hidden" id="adminBtn" onclick="document.querySelector('#adminSection').scrollIntoView({behavior:'smooth'})">관리자</button>
+      <button class="btn glass-login" id="accountBtn" type="button">로그인</button>
+      <button class="btn primary register-btn" id="registerBtn" type="button">회원가입</button>
+      <button class="btn primary hidden" id="adminBtn" type="button">관리자</button>
     </div>
   </div>
 </header>
 
 <main id="top">
-
-  <div class="vexo-ribbon" aria-label="VEXO HUB 상단 안내">
-    <div class="vexo-ribbon-line"></div>
-    <div class="vexo-ribbon-core">
-      <span class="ribbon-arrow">‹</span>
-      <span class="ribbon-dot"></span>
-      <span class="ribbon-title">VEXO HUB <b>·</b> DISCORD COMMERCE</span>
-      <span class="ribbon-dot"></span>
-      <span class="ribbon-arrow">›</span>
-    </div>
-    <div class="vexo-ribbon-line"></div>
-  </div>
-  <div class="vexo-server-strip" aria-label="Discord 스타일 빠른 이동">
-    <span class="server-pill active"><i>📢</i> INFORMATION</span>
-    <span class="server-pill"><i>🛒</i> STORE</span>
-    <span class="server-pill"><i>🎫</i> ORDER CENTER</span>
-    <span class="server-pill"><i>💬</i> SUPPORT</span>
-    <span class="server-pill"><i>⭐</i> COMMUNITY</span>
-  </div>
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
@@ -1320,8 +1139,8 @@ body:before{
         <h1>VEXO HUB<br><span>돈을 쓰는 곳이 아니라, 기회를 만드는 곳.</span></h1>
         <p class="hero-desc">저희 VEXO HUB는 여러분이 돈을 주고 돈을 날리는 곳이 아니라, <strong>돈을 주고 더 많은 가치를 만들어낼 수 있는 템플릿과 성능 좋은 봇</strong>을 제공합니다. 필요한 제품만 골라 더 깔끔하게, 더 빠르게 운영하세요.</p>
         <div class="hero-cta">
-          <button class="btn primary" onclick="document.querySelector('#recommend').scrollIntoView({behavior:'smooth'})">내게 맞는 구성 찾기</button>
-          <button class="btn ghost" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">상품 바로 보기</button>
+          <button class="btn primary" type="button" data-scroll="recommend">내게 맞는 구성 찾기</button>
+          <button class="btn ghost" type="button" data-scroll="products">상품 바로 보기</button>
         </div>
         <div class="hero-metrics">
           <div class="metric"><b id="productCount">0</b><span>판매 상품</span></div>
@@ -1330,13 +1149,6 @@ body:before{
         </div>
       </div>
       <div class="hero-visual" aria-label="VEXO 주문 흐름 미리보기">
-
-           <div class="discord-status-mini">
-             <span class="discord-status-dot"></span>
-             <b>VEXO SERVER ONLINE</b>
-             <span>웹에서 주문 접수 가능</span>
-           </div>
-
         <div class="preview-head">
           <b>실시간 주문 흐름</b>
           <span class="ticket-status">티켓 연결 준비</span>
@@ -1379,7 +1191,7 @@ body:before{
             <h2>같은 자판기봇이 아닙니다.</h2>
             <p>기본형은 판매를 시작하기 위한 구성, PREMIUM은 구매자가 체감하는 화면과 운영 경험까지 확장한 구성입니다.</p>
           </div>
-          <a class="quick-jump" href="#products">전체 상품 둘러보기 →</a>
+          <button class="quick-jump" type="button" data-scroll="products">전체 상품 둘러보기 →</button>
         </div>
         <div class="series-grid">
           <article class="series-card">
@@ -1517,8 +1329,8 @@ body:before{
       </div>
       <div class="guide-grid">
         <div class="guide-item"><b>1. 상품 선택</b><span>원하는 상품을 고르고 주문 버튼을 누릅니다.</span></div>
-        <div class="guide-item"><b>2. 웹 주문 접수</b><span>로그인 후 디스코드 닉네임과 요청사항을 입력하면 바로 주문번호가 발급됩니다.</span></div>
-        <div class="guide-item"><b>3. 디스코드 티켓</b><span>주문번호를 들고 서버에 입장해 비공개 구매 티켓에서 결제를 진행합니다.</span></div>
+        <div class="guide-item"><b>2. 주문 정보 입력</b><span>디스코드 닉네임과 요청사항을 남깁니다.</span></div>
+        <div class="guide-item"><b>3. 디스코드 티켓</b><span>주문번호를 확인하고 결제를 진행합니다.</span></div>
         <div class="guide-item"><b>4. 확인 후 수령</b><span>관리자 확인 뒤 상품 또는 세팅 안내를 받습니다.</span></div>
       </div>
     </div>
@@ -1535,7 +1347,7 @@ body:before{
       <div class="faq-grid">
         <details open>
           <summary>웹에서 바로 결제하나요?</summary>
-          <p>웹에서 상품을 선택하고 주문을 먼저 접수할 수 있습니다. 주문번호를 받은 뒤 디스코드 티켓에서 입금 확인과 상품 수령 절차를 진행합니다.</p>
+          <p>아니요. 주문 후 안내되는 절차에 따라 결제를 진행하고 상품을 수령할 수 있습니다.</p>
         </details>
         <details>
           <summary>상품은 어떻게 받나요?</summary>
@@ -1907,7 +1719,7 @@ function openOrder(id){
     <div id="orderCouponBox"></div>
     <div class="notice-box"><b>${won(p.price)}</b><br>${esc(siteSettings.bankInfo||'입금 계좌는 디스코드 티켓에서 안내받을 수 있습니다.')}</div>
     <div class="benefit-banner"><b>💜 고가 구매 혜택</b><div class="coupon-note">${p.price>=140000?'완료 후 다음 구매 10% 할인 (최대 20,000원)':p.price>=100000?'완료 후 다음 구매 8% 할인 (최대 10,000원)':p.price>=50000?'완료 후 다음 구매 5% 할인 (최대 5,000원)':'50,000원 이상 구매 시 다음 구매 할인 혜택이 지급됩니다.'}</div></div>
-    <button class="btn primary block" style="margin-top:14px" onclick="createOrder('${esc(p.id)}')">🛒 웹에서 주문 접수하기</button>`);
+    <button class="btn primary block" style="margin-top:14px" onclick="createOrder('${esc(p.id)}')">주문하고 디스코드로 이동</button>`);
   loadOrderCouponBox();
 }
 
@@ -1998,6 +1810,19 @@ async function heartbeat(){
     $('#online').textContent=d.online;
   }catch{}
 }
+function scrollToSection(id){
+  const target=document.getElementById(id);
+  if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function bindTopControls(){
+  const accountBtn=document.getElementById('accountBtn');
+  const registerBtn=document.getElementById('registerBtn');
+  const adminBtn=document.getElementById('adminBtn');
+  if(accountBtn && !accountBtn.dataset.bound){ accountBtn.dataset.bound='1'; accountBtn.onclick=()=> currentUser ? logout() : openModal('login'); }
+  if(registerBtn && !registerBtn.dataset.bound){ registerBtn.dataset.bound='1'; registerBtn.onclick=()=>openModal('register'); }
+  if(adminBtn && !adminBtn.dataset.bound){ adminBtn.dataset.bound='1'; adminBtn.onclick=()=>scrollToSection('adminSection'); }
+}
+bindTopControls();
 async function loadSite(){
   const d=await api('/api/site');
   siteSettings=d.settings||{};
@@ -2147,6 +1972,15 @@ $('#searchInput').addEventListener('input',e=>{
   searchTimer=setTimeout(renderProducts,120);
 });
 $('#sortSelect').addEventListener('change',e=>{currentSort=e.target.value;renderProducts()});
+document.addEventListener('click',e=>{
+  const scrollTarget=e.target.closest('[data-scroll]');
+  if(scrollTarget){
+    e.preventDefault();
+    scrollToSection(scrollTarget.dataset.scroll);
+    return;
+  }
+});
+
 document.addEventListener('click',e=>{
   const detail=e.target.closest('[data-detail]');
   const order=e.target.closest('[data-order]');
