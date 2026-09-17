@@ -297,14 +297,14 @@ app.post('/api/orders', requireAuth, async (req, res) => {
   db.orders.unshift(order);
   saveDb();
   await sendDiscordOrderNotice(order).catch(() => {});
-  res.status(201).json({ order, discordInvite: invite, bankInfo: db.settings.bankInfo || '' });
+  res.status(201).json({ order, webOrder: true, discordInvite: invite, bankInfo: db.settings.bankInfo || '' });
 });
 
 async function sendDiscordOrderNotice(order) {
   const url = getWebhookUrl();
   if (!url) return;
   const memoLine = order.memo ? `\n요청사항: ${order.memo}` : '';
-  const payload = { content: `🛒 **VEXO STORE 주문 접수**\n주문번호: ${order.id}\n구매자: ${order.username}\n디스코드: ${order.discordTag}\n상품: ${order.productName} × ${order.quantity}\n금액: ${order.total.toLocaleString('ko-KR')}원${memoLine}\n\n고객이 디스코드 티켓으로 입금·수령 진행합니다. 서버에서 티켓을 확인해 주세요.` };
+  const payload = { content: `🛒 **VEXO STORE 웹 주문 접수**\n주문번호: ${order.id}\n구매자: ${order.username}\n디스코드: ${order.discordTag}\n상품: ${order.productName} × ${order.quantity}\n금액: ${order.total.toLocaleString('ko-KR')}원${memoLine}\n\n고객이 디스코드 티켓으로 입금·수령 진행합니다. 서버에서 티켓을 확인해 주세요.` };
   await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
 }
 
