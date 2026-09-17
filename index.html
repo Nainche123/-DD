@@ -938,6 +938,16 @@ button.btn.primary{background:linear-gradient(135deg,#7c3aed,#c084fc)!important;
 button.btn.ghost,.glass-login{background:rgba(139,92,246,.08)!important;border-color:rgba(216,180,254,.20)!important}
 input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important;border-color:rgba(216,180,254,.16)!important}
 
+/* VEXO service / maintenance storefront */
+.service-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.service-card{position:relative;padding:22px;border-radius:22px;overflow:hidden;border:1px solid rgba(216,180,254,.16);background:linear-gradient(145deg,rgba(139,92,246,.10),rgba(255,255,255,.028));box-shadow:0 22px 70px rgba(63,25,95,.14),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(18px)}
+.service-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#8b5cf6,#d8b4fe)}
+.service-card h3{font-size:20px;margin:7px 0}
+.service-card p{color:var(--soft);line-height:1.7}
+.service-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.service-price{font-weight:950;color:#f4edff;letter-spacing:-.03em}
+@media(max-width:900px){.service-rail{grid-template-columns:1fr}}
+
 /* VEXO HUB premium storefront layer */
 .addon-section{margin-top:10px}
 #addons .product-card{min-height:330px}
@@ -1119,6 +1129,7 @@ body{overflow-x:hidden}
       <button class="nav-menu-btn" type="button" data-scroll="recommend">추천</button>
       <button class="nav-menu-btn" type="button" data-scroll="products">상품</button>
       <button class="nav-menu-btn" type="button" data-scroll="addons">디자인·옵션</button>
+      <button class="nav-menu-btn" type="button" data-scroll="services">기능·업그레이드</button>
       <button class="nav-menu-btn" type="button" data-scroll="guide">구매방법</button>
       <button class="nav-menu-btn" type="button" data-scroll="orders">내 주문</button>
     </nav>
@@ -1144,7 +1155,8 @@ body{overflow-x:hidden}
         </div>
         <div class="hero-metrics">
           <div class="metric"><b id="productCount">0</b><span>판매 상품</span></div>
-          <div class="metric"><b>SAFE</b><span>간편한 주문</span></div>
+          <div class="metric"><b>UPGRADE</b><span>영구 기능 확장</span></div>
+          <div class="metric"><b>1-TIME</b><span>1회 구매·영구 사용</span></div>
           <div class="metric"><b>24/7</b><span>웹 주문 접수</span></div>
         </div>
       </div>
@@ -1239,7 +1251,7 @@ body{overflow-x:hidden}
         <article class="tool-card"><div class="tool-kicker">01 · PRODUCT</div><h3>실사용 중심</h3><p>실제로 판매 서버에서 자주 쓰는 기능과 디자인을 중심으로 구성합니다.</p></article>
         <article class="tool-card"><div class="tool-kicker">02 · UI</div><h3>VEXO 스타일</h3><p>보라색 글로우와 정돈된 임베드로 봇과 사이트의 인상을 통일합니다.</p></article>
         <article class="tool-card"><div class="tool-kicker">03 · ADD-ON</div><h3>필요한 것만 추가</h3><p>봇 전체를 다시 살 필요 없이 디자인·UI·기능 옵션만 골라 확장할 수 있습니다.</p></article>
-        <article class="tool-card"><div class="tool-kicker">04 · SEPARATE</div><h3>가이드는 별도</h3><p>가이드 상품은 별도 판매하며, 본상품에 무리하게 포함하지 않습니다.</p></article>
+        <article class="tool-card"><div class="tool-kicker">04 · UPGRADES</div><h3>구매 후 필요한 것만 추가</h3><p>기능 확장·디자인·커스텀·화이트라벨 상품을 1회 구매로 추가할 수 있습니다.</p></article>
       </div>
     </div>
   </section>
@@ -1272,6 +1284,18 @@ body{overflow-x:hidden}
     </div>
   </section>
 
+  <section id="services" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>기능 · 업그레이드</h2>
+          <p>기능 확장, 커스텀, 패키지, 화이트라벨을 필요한 만큼 1회 구매하세요.</p>
+        </div>
+      </div>
+      <div class="service-rail" id="serviceGrid"></div>
+    </div>
+  </section>
+
   <section id="addons" class="section">
     <div class="wrap">
       <div class="section-head">
@@ -1286,7 +1310,7 @@ body{overflow-x:hidden}
       <div class="section-head">
         <div>
           <h2>상품</h2>
-          <p>저가 가이드는 유입용, 패키지는 빠른 구축용으로 나눴습니다.</p>
+          <p>입문 상품부터 봇·디자인·기능 확장·커스텀·패키지까지 필요한 단계만 골라 구성할 수 있습니다.</p>
         </div>
       </div>
       <div class="store-bar">
@@ -1303,6 +1327,8 @@ body{overflow-x:hidden}
           <button class="tab" data-cat="개발">개발</button>
           <button class="tab" data-cat="디자인">디자인</button>
           <button class="tab" data-cat="봇 옵션">봇 옵션</button>
+          <button class="tab" data-cat="업그레이드">업그레이드</button>
+          <button class="tab" data-cat="커스텀">커스텀</button>
           <button class="tab" data-cat="가이드">가이드</button>
         </div>
         <div class="searchbar">
@@ -1332,6 +1358,7 @@ body{overflow-x:hidden}
         <div class="guide-item"><b>2. 주문 정보 입력</b><span>디스코드 닉네임과 요청사항을 남깁니다.</span></div>
         <div class="guide-item"><b>3. 디스코드 티켓</b><span>주문번호를 확인하고 결제를 진행합니다.</span></div>
         <div class="guide-item"><b>4. 확인 후 수령</b><span>관리자 확인 뒤 상품 또는 세팅 안내를 받습니다.</span></div>
+        <div class="guide-item"><b>5. 추가 구성</b><span>기능·디자인·커스텀·화이트라벨이 필요하면 추가 상품을 선택하거나 티켓에서 문의할 수 있습니다.</span></div>
       </div>
     </div>
   </section>
@@ -1351,7 +1378,7 @@ body{overflow-x:hidden}
         </details>
         <details>
           <summary>상품은 어떻게 받나요?</summary>
-          <p>주문 완료 후 표시되는 디스코드 링크로 입장해서 티켓을 만들면, 주문번호 확인 뒤 상품 링크나 세팅 안내를 받을 수 있습니다.</p>
+          <p>주문 완료 후 표시되는 디스코드 링크로 입장해서 티켓을 만들면, 주문번호 확인 뒤 상품 링크 또는 적용 안내를 받을 수 있습니다.</p>
         </details>
         <details>
           <summary>커스텀 봇은 바로 제작되나요?</summary>
@@ -1504,6 +1531,8 @@ function categoryMark(cat){
   if(cat==='가이드')return'DOC';
   if(cat==='디자인')return'UI';
   if(cat==='봇 옵션')return'ADD';
+  if(cat==='업그레이드')return'UP';
+  if(cat==='커스텀')return'CSTM';
   if(cat==='패키지')return'PACK';
   return'VEXO';
 }
@@ -1514,6 +1543,8 @@ function toneClass(cat){
   if(cat==='가이드')return'tone-guide';
   if(cat==='디자인')return'tone-design';
   if(cat==='봇 옵션')return'tone-option';
+  if(cat==='업그레이드')return'tone-pack';
+  if(cat==='커스텀')return'tone-dev';
   if(cat==='패키지')return'tone-pack';
   return'tone-bot';
 }
@@ -1564,6 +1595,22 @@ function renderProducts(){
       </div>
     </article>`;
   }).join(''):'<div class="empty" style="grid-column:1/-1">조건에 맞는 상품이 없습니다.<br><span class="mini">검색어나 카테고리를 다시 확인해 주세요.</span></div>';
+}
+function renderServices(){
+  const list=products.filter(p=>p.category==='업그레이드'||p.category==='커스텀'||p.category==='개발'||['VEOX SELLER PACK','VEOX SELLER PRO','VEOX GROWTH BUNDLE','VEOX 화이트라벨 패키지'].includes(p.name)).sort((a,b)=>a.price-b.price);
+  const el=$('#serviceGrid'); if(!el)return;
+  el.innerHTML=list.map(p=>`
+    <article class="service-card">
+      <div class="service-top"><span class="badge">${esc(p.badge||'SERVICE')}</span><span class="service-price">${won(p.price)}</span></div>
+      <div class="tool-kicker">${esc(p.category)}</div>
+      <h3>${esc(p.name)}</h3>
+      <p>${esc(p.description)}</p>
+      <div class="feature-mini">${(p.features||[]).slice(0,4).map(f=>`<span>${esc(f)}</span>`).join('')}</div>
+      <div class="product-actions">
+        <button class="btn ghost" data-detail="${esc(p.id)}">자세히</button>
+        <button class="btn primary" data-order="${esc(p.id)}">바로 주문</button>
+      </div>
+    </article>`).join('') || '<div class="empty">서비스 상품을 준비 중입니다.</div>';
 }
 function renderAddons(){
   const list=products.filter(p=>p.category==='디자인'||p.category==='봇 옵션').sort((a,b)=>scoreProduct(b)-scoreProduct(a)||a.price-b.price);
@@ -1616,6 +1663,7 @@ async function loadProducts(){
   renderProducts();
   renderOffers();
   renderAddons();
+  renderServices();
   renderRecommendation($('#recommendChoices .active')?.dataset.recommend||'starter');
 }
 function openModal(type){
@@ -1689,9 +1737,27 @@ function updateAccount(){
     if(registerBtn){registerBtn.classList.remove('hidden'); registerBtn.removeAttribute('aria-hidden');}
   }
 }
+function productByName(name){return products.find(x=>x.name===name)}
+function upsellForProduct(p){
+  const map={
+    'VEXO 자판기봇 BASIC':['VEXO 자판기봇 BASIC PREMIUM','VEOX 티켓 자동화 확장팩','VEOX 임베드 디자인팩'],
+    'VEXO 자판기봇 BASIC PREMIUM':['VEXO 봇 기능 확장팩','VEOX DESIGN BUNDLE','VEOX 메이저 버전 업그레이드'],
+    'VEXO 자판기봇 PRO':['VEXO 자판기봇 PRO PREMIUM','VEOX 운영 자동화 확장팩','VEOX SELLER PACK'],
+    'VEXO 자판기봇 PRO PREMIUM':['VEOX SELLER PRO','VEOX 보안 강화팩','VEOX GROWTH BUNDLE'],
+    'VEXO 디스코드 서버 템플릿':['VEOX 임베드 디자인팩','VEOX 티켓 자동화 확장팩','VEOX GROWTH BUNDLE'],
+    'VEXO 서버 템플릿 PRO':['VEOX DESIGN BUNDLE','VEOX SELLER PACK','VEOX GROWTH BUNDLE'],
+    'VEXO 자동화 패키지':['VEOX 운영 자동화 확장팩','VEOX 통계 대시보드팩','VEOX SELLER PACK'],
+    'VEXO STORE 올인원':['VEOX SELLER PRO','VEOX DESIGN BUNDLE','VEOX 화이트라벨 패키지'],
+    'VEXO 런칭 풀세팅':['VEOX SELLER PRO','VEOX 화이트라벨 패키지','VEOX 메이저 버전 업그레이드'],
+    'VEOX 커스텀 봇 제작':['VEOX 화이트라벨 패키지','VEOX 메이저 버전 업그레이드']
+  };
+  return (map[p?.name]||[]).map(productByName).filter(Boolean);
+}
 function openDetail(id){
   const p=productById(id);
   if(!p)return;
+  const ups=upsellForProduct(p);
+  const upsellHtml=ups.length?`<div class="benefit-banner"><b>✨ 함께 구성하기</b><div class="coupon-note">기능·디자인·커스텀·패키지를 필요한 만큼 영구 추가할 수 있습니다.</div><div class="feature-mini">${ups.map(x=>`<span>${esc(x.name)} · ${won(x.price)}</span>`).join('')}</div></div>`:'';
   showModal('상품 상세',`
     <div class="detail-meta"><span class="badge">${esc(p.category)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:''}</div>
     <h3 style="font-size:24px;margin-bottom:8px">${esc(p.name)}</h3>
@@ -1699,7 +1765,7 @@ function openDetail(id){
     <div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>
     <div class="mini" style="font-weight:900;color:var(--cyan)">포함 기능</div>
     <ul class="feature-list">${(p.features||[]).length?(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join(''):'<li>상세 기능은 티켓에서 확인 가능합니다.</li>'}</ul>
-    
+    ${upsellHtml}
     <button class="btn primary block" style="margin-top:14px" onclick="openOrder('${esc(p.id)}')">이 상품 주문하기</button>`);
 }
 function openOrder(id){
@@ -1891,6 +1957,7 @@ async function loadAdmin(){
     renderProducts();
     renderOffers();
     renderAddons();
+    renderServices();
   }catch(e){toast(e.message)}
 }
 async function updateOrderStatus(id,status){
