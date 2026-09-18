@@ -1114,6 +1114,14 @@ body{overflow-x:hidden}
   .store-bar{align-items:flex-start;flex-direction:column}
   .quick-jump{width:100%;justify-content:center}
 }
+
+.room-shell{display:flex;flex-direction:column;gap:14px}
+.room-summary{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding:16px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035)}
+.room-summary h3{margin:8px 0 5px;font-size:20px}.room-price{font-size:22px;font-weight:1000;white-space:nowrap}
+.room-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.room-step{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:10px;text-align:center}.room-step i{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;border:1px solid var(--line);font-style:normal;font-weight:900}.room-step.done,.room-step.current{color:var(--text)}.room-step.done i,.room-step.current i{border-color:var(--cyan);background:rgba(125,92,255,.16)}
+.room-meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.room-meta-grid>div{padding:11px 12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.room-meta-grid span{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.room-meta-grid b{display:block;line-height:1.5;word-break:break-word}
+.room-messages{max-height:370px;overflow:auto;padding:6px 2px;display:flex;flex-direction:column;gap:9px;border:1px solid var(--line);border-radius:16px;background:rgba(0,0,0,.12)}.room-msg{max-width:88%;padding:11px 13px;border-radius:15px 15px 15px 5px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.room-msg.mine{margin-left:auto;border-radius:15px 15px 5px 15px;background:rgba(120,80,255,.12)}.room-msg.system{max-width:100%;text-align:center;background:rgba(90,170,255,.06);border-style:dashed}.room-msg-head{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted);margin-bottom:5px}.room-msg-head b{color:var(--text)}.room-msg-text{line-height:1.55;word-break:break-word}.room-attachment{display:flex;align-items:center;gap:9px;margin-top:9px;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:inherit;text-decoration:none}.room-attachment small{display:block;color:var(--muted);margin-top:2px}.room-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px}.room-file-label{cursor:pointer}.room-actions{display:flex;gap:8px;flex-wrap:wrap}.room-cancel{padding:12px 14px;border-radius:14px;border:1px solid rgba(255,80,110,.35);background:rgba(255,80,110,.08)}
+@media(max-width:700px){.room-summary{flex-direction:column}.room-price{font-size:18px}.room-meta-grid{grid-template-columns:1fr}.room-msg{max-width:95%}.room-step{font-size:9px}}
 </style>
 </head>
 <body>
@@ -1373,8 +1381,8 @@ body{overflow-x:hidden}
       </div>
       <div class="faq-grid">
         <details open>
-          <summary>웹에서 바로 결제하나요?</summary>
-          <p>아니요. 주문 후 안내되는 절차에 따라 결제를 진행하고 상품을 수령할 수 있습니다.</p>
+          <summary>웹에서 어디까지 진행하나요?</summary>
+          <p>주문 후 사이트 주문실에서 입금 확인 요청, 관리자 확인, 문의, 사진·파일 전달, 상품 수령까지 진행할 수 있습니다.</p>
         </details>
         <details>
           <summary>상품은 어떻게 받나요?</summary>
@@ -1397,7 +1405,7 @@ body{overflow-x:hidden}
       <div class="section-head">
         <div>
           <h2>내 주문</h2>
-          <p>주문번호와 디스코드 입장 링크를 다시 확인할 수 있습니다.</p>
+          <p>입금 확인부터 사진·파일 전달까지 주문실에서 바로 진행합니다.</p>
         </div>
         <button class="btn ghost" onclick="loadOrders()">새로고침</button>
       </div>
@@ -1825,9 +1833,10 @@ async function createOrder(id){
         주문번호: <b>${esc(d.order.id)}</b><br>
         금액: <b>${won(d.order.total)}</b>${d.order.discountAmount?`<br><span class="price-save">혜택 적용 -${won(d.order.discountAmount)}</span>`:''}
       </div>
-      <p style="margin:14px 0;color:var(--soft);line-height:1.75">디스코드 서버에 입장한 뒤 티켓을 만들고 주문번호를 보내 주세요. 입금 확인 후 상품을 받을 수 있습니다.</p>
+      <p style="margin:14px 0;color:var(--soft);line-height:1.75">이제 <b>사이트 주문실</b>에서 입금 확인 요청, 문의, 사진·파일 전달, 상품 수령까지 진행할 수 있습니다.</p>
+      <button class="btn primary block" style="margin-bottom:8px" onclick="openOrderRoom('${esc(d.order.id)}')">💬 주문실 열기</button>
       <button class="btn ghost block" style="margin-bottom:8px" onclick="copyText('${esc(d.order.id)}')">주문번호 복사</button>
-      ${link?`<a class="btn primary block" target="_blank" href="${esc(link)}">디스코드 서버 입장하기</a>`:'<div class="notice-box">디스코드 초대 링크가 아직 설정되지 않았습니다. 관리자에게 문의해 주세요.</div>'}`);
+      ${link?`<a class="btn ghost block" target="_blank" href="${esc(link)}">디스코드 서버</a>`:''}`);
   }catch(e){toast(e.message)}
 }
 function statusClass(status){
@@ -1852,8 +1861,8 @@ async function loadOrders(){
           ${o.discordTag?`<div class="mini" style="margin-top:4px">디스코드: ${esc(o.discordTag)}</div>`:''}
           ${o.memo?`<div class="mini" style="margin-top:4px">요청사항: ${esc(o.memo)}</div>`:''}
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn primary small" onclick="openOrderRoom('${esc(o.id)}')">💬 주문실</button>
             <button class="btn ghost small" onclick="copyText('${esc(o.id)}')">주문번호 복사</button>
-            ${link?`<a class="btn primary small" target="_blank" href="${esc(link)}">디스코드 입장</a>`:''}
           </div>
         </div>
         <span class="status ${statusClass(o.status)}">${esc(o.status)}</span>
@@ -1861,6 +1870,71 @@ async function loadOrders(){
     }).join(''):'<div class="empty">아직 주문 내역이 없습니다.</div>';
   }catch(e){$('#ordersBox').innerHTML=`<div class="empty">${esc(e.message)}</div>`}
 }
+
+function roomStatusStep(status){
+  const map={'주문접수':1,'입금확인요청':2,'입금확인완료':3,'처리중':4,'완료':5,'취소':0};
+  return map[status]||1;
+}
+function renderOrderRoom(order){
+  const isAdmin=currentUser?.role==='admin';
+  const step=roomStatusStep(order.status);
+  const steps=['주문접수','입금확인요청','입금확인완료','상품 준비','상품 지급'];
+  const thread=(order.messages||[]).map(m=>{
+    const system=m.senderRole==='system';
+    const mine=!system && m.senderId===currentUser?.id;
+    const att=m.attachment?`<a class="room-attachment" href="/api/attachments/${encodeURIComponent(m.attachment.id)}" target="_blank"><span>📎</span><span><b>${esc(m.attachment.name)}</b><small>${compact(m.attachment.size)} bytes · 열기/다운로드</small></span></a>`:'';
+    return `<div class="room-msg ${system?'system':''} ${mine?'mine':''}"><div class="room-msg-head"><b>${esc(m.senderName||'VEXO STORE')}</b><span>${new Date(m.createdAt).toLocaleString('ko-KR')}</span></div>${m.text?`<div class="room-msg-text">${esc(m.text).replace(/\n/g,'<br>')}</div>`:''}${att}</div>`;
+  }).join('');
+  const progress=order.status==='취소'?'<div class="room-cancel">🛑 취소된 주문입니다.</div>':`<div class="room-progress">${steps.map((x,i)=>`<div class="room-step ${step>i?'done':''} ${step===i+1?'current':''}"><i>${step>i?'✓':i+1}</i><span>${x}</span></div>`).join('')}</div>`;
+  return `<div class="room-shell">
+    <div class="room-summary"><div><span class="badge">${esc(order.status)}</span><h3>${esc(order.productName)} <span class="muted">× ${esc(order.quantity)}</span></h3><div class="mini">${esc(order.id)} · ${won(order.total)} · ${new Date(order.createdAt).toLocaleString('ko-KR')}</div></div><div class="room-price">${won(order.total)}</div></div>
+    ${progress}
+    <div class="room-meta-grid"><div><span>구매자</span><b>${esc(order.username)}</b></div><div><span>디스코드</span><b>${esc(order.discordTag||'-')}</b></div><div><span>요청사항</span><b>${esc(order.memo||'-')}</b></div><div><span>입금 계좌</span><b>${esc(siteSettings.bankInfo||'관리자 안내')}</b></div></div>
+    <div class="room-messages" id="roomMessages">${thread||'<div class="empty">아직 메시지가 없습니다.</div>'}</div>
+    <div class="room-composer"><textarea class="textarea" id="roomText" maxlength="2000" placeholder="주문 관련 문의나 전달할 내용을 입력해 주세요."></textarea><div class="room-tools"><label class="btn ghost small room-file-label">📎 사진/파일 첨부<input id="roomFile" type="file" hidden></label><span class="mini" id="roomFileName">선택된 파일 없음</span><button class="btn primary small" onclick="sendOrderRoomMessage('${esc(order.id)}')">보내기</button></div></div>
+    <div class="room-actions">
+      ${!isAdmin && !['입금확인요청','입금확인완료','처리중','완료','취소'].includes(order.status)?`<button class="btn primary" onclick="requestPayment('${esc(order.id)}')">💳 입금 확인 요청</button>`:''}
+      ${isAdmin && ['주문접수','입금확인요청'].includes(order.status)?`<button class="btn primary" onclick="approveOrder('${esc(order.id)}')">✅ 입금 확인</button>`:''}
+      ${isAdmin && ['입금확인완료','처리중'].includes(order.status)?`<button class="btn primary" onclick="completeOrder('${esc(order.id)}')">📦 상품 지급 완료</button>`:''}
+      <button class="btn ghost" onclick="openOrderRoom('${esc(order.id)}')">↻ 새로고침</button>
+    </div>
+    ${!isAdmin && order.status==='완료'?'<div class="notice-box" style="margin-top:12px"><b>✅ 상품 지급 완료</b><br>아래 주문실에서 파일·사진·링크를 확인해주세요.</div>':''}
+  </div>`;
+}
+async function openOrderRoom(id){
+  if(!currentUser){openModal('login');toast('로그인 후 주문실을 이용할 수 있습니다.');return;}
+  try{
+    const d=await api('/api/orders/'+encodeURIComponent(id)+'/room');
+    showModal('💬 주문실',renderOrderRoom(d.order));
+    setTimeout(()=>{const el=$('#roomMessages');if(el)el.scrollTop=el.scrollHeight;const f=$('#roomFile');if(f)f.onchange=()=>$('#roomFileName').textContent=f.files?.[0]?.name||'선택된 파일 없음';},30);
+  }catch(e){toast(e.message)}
+}
+async function sendOrderRoomMessage(id){
+  const text=$('#roomText')?.value.trim()||''; const file=$('#roomFile')?.files?.[0]||null;
+  if(!text&&!file){toast('메시지 또는 파일을 선택해 주세요.');return;}
+  try{
+    let attachment=null;
+    if(file){
+      if(file.size>7*1024*1024){toast('파일은 7MB 이하만 첨부할 수 있습니다.');return;}
+      const buf=await file.arrayBuffer();const bytes=new Uint8Array(buf);let bin='';const chunk=0x8000;
+      for(let i=0;i<bytes.length;i+=chunk)bin+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+      attachment={name:file.name,mime:file.type||'application/octet-stream',dataBase64:btoa(bin)};
+    }
+    await api('/api/orders/'+encodeURIComponent(id)+'/messages',{method:'POST',body:JSON.stringify({text,attachment})});
+    await openOrderRoom(id);
+  }catch(e){toast(e.message)}
+}
+async function requestPayment(id){
+  try{await api('/api/orders/'+encodeURIComponent(id)+'/payment-request',{method:'POST'});toast('입금 확인 요청을 보냈습니다.');await loadOrders();await openOrderRoom(id);}catch(e){toast(e.message)}
+}
+async function approveOrder(id){
+  try{await api('/api/admin/orders/'+encodeURIComponent(id)+'/approve',{method:'POST',body:JSON.stringify({})});toast('입금 확인 완료.');await loadAdmin();await openOrderRoom(id);}catch(e){toast(e.message)}
+}
+async function completeOrder(id){
+  if(!confirm('상품 파일·사진·링크·안내를 주문실에 먼저 전달했는지 확인했나요?\n확인하면 주문 상태가 완료로 바뀝니다.'))return;
+  try{await api('/api/admin/orders/'+encodeURIComponent(id)+'/complete',{method:'POST'});toast('상품 지급 완료 처리했습니다.');await loadAdmin();await openOrderRoom(id);}catch(e){toast(e.message)}
+}
+
 async function copyText(text){
   try{
     await navigator.clipboard.writeText(text);
@@ -1922,7 +1996,7 @@ function renderAdminOrders(){
       <td>${esc(o.productName)}<div class="mini">수량 ${esc(o.quantity)}</div></td>
       <td>${won(o.total)}</td>
       <td><select class="select" data-status="${esc(o.id)}">${statuses.map(st=>`<option ${st===o.status?'selected':''}>${st}</option>`).join('')}</select></td>
-      <td><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn primary small" data-approve="${esc(o.id)}">확정</button><button class="btn ghost small" data-copy-order="${esc(o.id)}">복사</button></div></td>
+      <td><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn primary small" data-order-room="${esc(o.id)}">💬 주문실</button><button class="btn ghost small" data-approve="${esc(o.id)}">입금확인</button><button class="btn ghost small" data-copy-order="${esc(o.id)}">복사</button></div></td>
     </tr>`).join(''):'<tr><td colspan="7"><div class="empty">주문이 없습니다.</div></td></tr>';
 }
 function renderAdminProducts(list){
@@ -1968,13 +2042,8 @@ async function updateOrderStatus(id,status){
   }catch(e){toast(e.message)}
 }
 async function approveOrderPrompt(id){
-  const link=prompt('구매자에게 제공할 디스코드 초대 링크를 입력하세요. 비우면 기본 링크를 사용합니다.',siteSettings.discordInvite||'');
-  if(link===null)return;
-  try{
-    await api('/api/admin/orders/'+encodeURIComponent(id)+'/approve',{method:'POST',body:JSON.stringify({deliveryLink:link})});
-    toast('구매확정 처리했습니다.');
-    await loadAdmin();
-  }catch(e){toast(e.message)}
+  if(!confirm('입금이 실제로 확인되었나요? 확인하면 주문 상태가 입금확인완료로 바뀝니다.'))return;
+  await approveOrder(id);
 }
 function copyOrderInfo(id){
   const o=adminOrders.find(x=>x.id===id);
@@ -2052,12 +2121,14 @@ document.addEventListener('click',e=>{
   const detail=e.target.closest('[data-detail]');
   const order=e.target.closest('[data-order]');
   const approve=e.target.closest('[data-approve]');
+  const orderRoom=e.target.closest('[data-order-room]');
   const copy=e.target.closest('[data-copy-order]');
   const seriesName=e.target.closest('[data-series-name]');
   const seriesScroll=e.target.closest('[data-series-scroll]');
   if(detail)openDetail(detail.dataset.detail);
   if(order)openOrder(order.dataset.order);
   if(approve)approveOrderPrompt(approve.dataset.approve);
+  if(orderRoom)openOrderRoom(orderRoom.dataset.orderRoom);
   if(copy)copyOrderInfo(copy.dataset.copyOrder);
   if(seriesName){
     const target=seriesName.dataset.seriesName;
