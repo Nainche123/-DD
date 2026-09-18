@@ -67,7 +67,7 @@ try {
 if (!Array.isArray(db.users)) db.users = [];
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
 if (!Array.isArray(db.orders)) db.orders = [];
-for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; }
+for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; if (!Array.isArray(o.messages)) o.messages = []; if (!o.updatedAt) o.updatedAt = o.createdAt || new Date().toISOString(); }
 if (!db.settings) db.settings = seed.settings;
 if (db.settings.discordInvite === undefined) db.settings.discordInvite = process.env.DISCORD_INVITE_URL || '';
 if (db.settings.bankInfo === undefined) db.settings.bankInfo = process.env.BANK_INFO || '관리자에게 입금 계좌를 안내받아 주세요.';
@@ -197,7 +197,7 @@ function saveDb() {
 
 const app = express();
 app.disable('x-powered-by');
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
 const online = new Map(); // key -> timestamp; one key per browser session
@@ -354,7 +354,9 @@ app.post('/api/orders', requireAuth, async (req, res) => {
     deliveryLink: invite,
     discordTag,
     memo,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    messages: []
   };
   db.orders.unshift(order);
   saveDb();
@@ -370,15 +372,105 @@ async function sendDiscordOrderNotice(order) {
   await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
 }
 
+function normalizeOrder(order) {
+  if (!Array.isArray(order.messages)) order.messages = [];
+  if (!order.updatedAt) order.updatedAt = order.createdAt || new Date().toISOString();
+  return order;
+}
+for (const order of db.orders) normalizeOrder(order);
+
+function orderAccess(req) {
+  const id = String(req.params.id || '');
+  const order = db.orders.find(o => o.id === id);
+  if (!order) return { order: null, allowed: false };
+  normalizeOrder(order);
+  return { order, allowed: req.user?.role === 'admin' || order.userId === req.user?.id };
+}
+
+function cleanFileName(name) {
+  const clean = path.basename(String(name || 'attachment')).replace(/[^a-zA-Z0-9._()\-가-힣 ]/g, '_').trim();
+  return (clean || 'attachment').slice(0, 120);
+}
+
+const MAX_ATTACHMENT_BYTES = 7 * 1024 * 1024;
+const ATTACHMENT_DIR = path.join(DATA_DIR, 'uploads');
+await fs.mkdir(ATTACHMENT_DIR, { recursive: true });
+const INLINE_IMAGE_TYPES = new Set(['image/jpeg','image/png','image/gif','image/webp']);
+
+async function saveAttachment(input) {
+  if (!input || typeof input !== 'object') return null;
+  const raw = String(input.dataBase64 || '');
+  if (!raw) return null;
+  const comma = raw.indexOf(',');
+  const b64 = comma >= 0 ? raw.slice(comma + 1) : raw;
+  let buffer;
+  try { buffer = Buffer.from(b64, 'base64'); } catch { throw new Error('첨부 파일을 읽지 못했습니다.'); }
+  if (!buffer.length) throw new Error('빈 파일은 첨부할 수 없습니다.');
+  if (buffer.length > MAX_ATTACHMENT_BYTES) throw new Error('파일은 7MB 이하만 첨부할 수 있습니다.');
+  const id = 'att_' + crypto.randomBytes(12).toString('hex');
+  const name = cleanFileName(input.name);
+  const ext = path.extname(name).slice(0, 10);
+  const storedName = id + (ext || '');
+  await fs.writeFile(path.join(ATTACHMENT_DIR, storedName), buffer);
+  return { id, name, mime: String(input.mime || 'application/octet-stream').slice(0, 120), size: buffer.length, storedName };
+}
+
 app.post('/api/orders/:id/payment-request', requireAuth, async (req, res) => {
-  const order = db.orders.find(o => o.id === req.params.id && o.userId === req.user.id);
+  const { order, allowed } = orderAccess(req);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
+  if (!allowed || req.user.role === 'admin') return res.status(403).json({ error: '구매자만 입금 확인 요청을 할 수 있습니다.' });
+  if (['완료','취소'].includes(order.status)) return res.status(400).json({ error: '현재 주문 상태에서는 입금 확인 요청을 할 수 없습니다.' });
   order.paymentRequested = true;
   order.status = '입금확인요청';
   order.paymentRequestedAt = new Date().toISOString();
+  order.updatedAt = order.paymentRequestedAt;
+  order.messages.push({ id: 'SYS-' + nanoid(10).toUpperCase(), senderId: 'system', senderName: 'VEXO STORE', senderRole: 'system', text: '💳 구매자가 입금 확인을 요청했습니다. 관리자 확인을 기다려 주세요.', attachment: null, createdAt: order.paymentRequestedAt });
   saveDb();
   await sendDiscordPaymentNotice(order).catch(() => {});
   res.json({ order });
+});
+
+app.get('/api/orders/:id/room', requireAuth, (req, res) => {
+  const { order, allowed } = orderAccess(req);
+  if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
+  if (!allowed) return res.status(403).json({ error: '이 주문실을 볼 권한이 없습니다.' });
+  res.json({ order });
+});
+
+app.post('/api/orders/:id/messages', requireAuth, async (req, res) => {
+  const { order, allowed } = orderAccess(req);
+  if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
+  if (!allowed) return res.status(403).json({ error: '이 주문실에 메시지를 보낼 권한이 없습니다.' });
+  if (order.status === '취소') return res.status(400).json({ error: '취소된 주문에는 메시지를 보낼 수 없습니다.' });
+  const text = String(req.body.text || '').trim().slice(0, 2000);
+  let attachment = null;
+  try { attachment = await saveAttachment(req.body.attachment); } catch (e) { return res.status(400).json({ error: e.message || '첨부 파일을 저장하지 못했습니다.' }); }
+  if (!text && !attachment) return res.status(400).json({ error: '메시지 또는 파일을 입력해 주세요.' });
+  const now = new Date().toISOString();
+  const message = { id:'MSG-' + nanoid(10).toUpperCase(), senderId:req.user.id, senderName:req.user.username, senderRole:req.user.role, text, attachment, createdAt:now };
+  order.messages.push(message);
+  order.updatedAt = now;
+  saveDb();
+  res.status(201).json({ message, order });
+});
+
+app.get('/api/attachments/:id', requireAuth, async (req, res) => {
+  const id = String(req.params.id || '');
+  const order = db.orders.find(o => Array.isArray(o.messages) && o.messages.some(m => m.attachment?.id === id));
+  if (!order) return res.status(404).send('첨부 파일을 찾을 수 없습니다.');
+  if (req.user.role !== 'admin' && order.userId !== req.user.id) return res.status(403).send('권한이 없습니다.');
+  const message = order.messages.find(m => m.attachment?.id === id);
+  const file = message?.attachment;
+  if (!file?.storedName) return res.status(404).send('첨부 파일을 찾을 수 없습니다.');
+  const filePath = path.join(ATTACHMENT_DIR, file.storedName);
+  try {
+    await fs.access(filePath);
+    res.setHeader('Content-Type', file.mime || 'application/octet-stream');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    const disposition = INLINE_IMAGE_TYPES.has(file.mime) ? 'inline' : 'attachment';
+    res.setHeader('Content-Disposition', `${disposition}; filename*=UTF-8''${encodeURIComponent(file.name || 'attachment')}`);
+    res.sendFile(filePath);
+  } catch { res.status(404).send('첨부 파일이 없습니다.'); }
 });
 
 async function sendDiscordPaymentNotice(order) {
@@ -472,10 +564,14 @@ app.delete('/api/admin/products/:id', requireAdmin, (req, res) => {
 app.patch('/api/admin/orders/:id', requireAdmin, (req, res) => {
   const order = db.orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
+  normalizeOrder(order);
   const status = String(req.body.status || '');
   if (!['주문접수','입금확인요청','입금확인완료','처리중','완료','취소'].includes(status)) return res.status(400).json({ error: '상태값이 올바르지 않습니다.' });
+  const now = new Date().toISOString();
   order.status = status;
-  order.updatedAt = new Date().toISOString();
+  order.updatedAt = now;
+  if (status === '취소') order.cancelledAt = now;
+  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEXO STORE', senderRole:'system', text:`주문 상태가 \`${status}\`(으)로 변경되었습니다.`, attachment:null, createdAt:now });
   saveDb();
   res.json({ order });
 });
@@ -483,17 +579,32 @@ app.patch('/api/admin/orders/:id', requireAdmin, (req, res) => {
 app.post('/api/admin/orders/:id/approve', requireAdmin, (req, res) => {
   const order = db.orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
-  const link = String(req.body.deliveryLink || db.settings.discordInvite || '').trim();
-  if (!link) return res.status(400).json({ error: '구매자에게 전달할 디스코드 초대 링크가 필요합니다.' });
+  normalizeOrder(order);
+  if (order.status === '취소') return res.status(400).json({ error: '취소된 주문은 승인할 수 없습니다.' });
+  const now = new Date().toISOString();
   order.status = '입금확인완료';
-  order.deliveryLink = link;
-  order.approvedAt = new Date().toISOString();
-  order.receiptText = `${order.username}님, ${new Date(order.createdAt).toLocaleDateString('ko-KR')} ${order.productName} 구매가 확인되었습니다.`;
+  order.paymentApprovedAt = now;
+  order.updatedAt = now;
+  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEXO STORE', senderRole:'system', text:'✅ 입금이 확인되었습니다. 상품 지급을 준비해 주세요.', attachment:null, createdAt:now });
   saveDb();
   res.json({ order });
 });
 
-app.patch('/api/admin/settings', requireAdmin, (req, res) => {
+app.post('/api/admin/orders/:id/complete', requireAdmin, (req, res) => {
+  const order = db.orders.find(o => o.id === req.params.id);
+  if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
+  normalizeOrder(order);
+  if (!['입금확인완료','처리중'].includes(order.status)) return res.status(400).json({ error: '먼저 입금을 확인해 주세요.' });
+  const now = new Date().toISOString();
+  order.status = '완료';
+  order.completedAt = now;
+  order.updatedAt = now;
+  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEXO STORE', senderRole:'system', text:'✅ 상품 지급이 완료되었습니다. 아래 주문실의 파일·사진·링크를 확인해 주세요.', attachment:null, createdAt:now });
+  saveDb();
+  res.json({ order });
+});
+
+app.patch('/api/admin/settings' , requireAdmin, (req, res) => {
   if (req.body.siteName !== undefined) db.settings.siteName = String(req.body.siteName).slice(0, 60);
   if (req.body.notice !== undefined) db.settings.notice = String(req.body.notice).slice(0, 180);
   if (req.body.discordInvite !== undefined) db.settings.discordInvite = String(req.body.discordInvite).slice(0, 300);
