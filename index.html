@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VEOXHUB | 디스코드 판매 자동화</title>
 <meta name="description" content="VEOXHUB - 디스코드 자판기봇, 서버 템플릿, 자동화, 커스텀 봇 제작 주문 사이트">
-<link rel="icon" href="/assets/veox-favicon.png" type="image/png">
+<link rel="icon" href="/assets/veox-favicon.png" type="image/svg+xml">
 <meta name="theme-color" content="#2563eb">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1576,13 +1576,13 @@ body{background:linear-gradient(180deg,#f8fbff 0%,#f2f6fb 42%,#edf3f9 100%)!impo
       </div>
       <div class="hero-visual" aria-label="VEOXHUB 실시간 판매 대시보드">
         <div class="preview-head"><b>VEOXHUB STORE DASHBOARD</b><span class="ticket-status">실시간 운영</span></div>
-        <div class="hero-media"><img src="/assets/veox-hero-banner-bots.svg" alt="VEOXHUB 블루 대시보드 배너" loading="eager"><div class="hero-media-overlay"><span class="hero-media-chip">⚡ 빠른 지급</span><span class="hero-media-chip">🛡️ 안전한 거래</span><span class="hero-media-chip">💬 주문실 채팅</span></div></div>
+        <div class="hero-media"><img src="/assets/veox-hero-banner-bots.png" alt="VEOXHUB 블루 대시보드 배너" loading="eager"><div class="hero-media-overlay"><span class="hero-media-chip">⚡ 빠른 지급</span><span class="hero-media-chip">🛡️ 안전한 거래</span><span class="hero-media-chip">💬 주문실 채팅</span></div></div>
         <div class="dashboard-strip">
           <div class="dash-panel"><div class="dash-panel-title"><b>🔥 인기 상품</b><span>실제 상품 UI</span></div><div class="dash-products">
-            <article class="dash-product"><img src="/assets/veox-product-basic.svg" alt="VEOX 자판기봇 BASIC"><div>VEOX BASIC<small>19,000원</small></div></article>
-            <article class="dash-product"><img src="/assets/veox-product-pro.svg" alt="VEOX 자판기봇 PRO"><div>VEOX PRO<small>39,000원</small></div></article>
-            <article class="dash-product"><img src="/assets/veox-product-basic-premium.svg" alt="VEOX 자판기봇 BASIC PREMIUM"><div>BASIC PREMIUM<small>29,000원</small></div></article>
-            <article class="dash-product"><img src="/assets/veox-product-pro-premium.svg" alt="VEOX 자판기봇 PRO PREMIUM"><div>PRO PREMIUM<small>59,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-basic.png" alt="VEOX 자판기봇 BASIC"><div>VEOX BASIC<small>19,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-pro.png" alt="VEOX 자판기봇 PRO"><div>VEOX PRO<small>39,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-basic-premium.png" alt="VEOX 자판기봇 BASIC PREMIUM"><div>BASIC PREMIUM<small>29,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-pro-premium.png" alt="VEOX 자판기봇 PRO PREMIUM"><div>PRO PREMIUM<small>59,000원</small></div></article>
           </div></div>
           <div class="dash-panel"><div class="dash-panel-title"><b>📊 운영 상태</b><span>자동 갱신</span></div><div class="dash-status"><div class="dash-stat"><b>24/7</b><span>주문 접수</span></div><div class="dash-stat"><b>1-TIME</b><span>영구 상품</span></div><div class="dash-stat"><b>VEOX</b><span>브랜드 운영</span></div><div class="dash-stat"><b>LIVE</b><span>주문실</span></div></div></div>
           <div class="dash-panel"><div class="dash-panel-title"><b>💬 주문실 채팅</b><span>관리자 ↔ 구매자</span></div><div class="dash-chat"><div class="dash-bubble">안녕하세요! VEOXHUB입니다.<br>입금 확인을 도와드릴게요.</div><div class="dash-bubble mine">네! 입금했습니다 🙌</div><div class="dash-bubble">확인 후 상품을 바로 지급해드릴게요.</div></div></div>
@@ -2087,14 +2087,14 @@ function visibleProducts(){
 function productImageFor(p){
   const n=String(p?.name||'').toLowerCase();
   const c=String(p?.category||'').toLowerCase();
-  if(n.includes('pro premium'))return'/assets/veox-product-pro-premium.svg';
-  if(n.includes('basic premium'))return'/assets/veox-product-basic-premium.svg';
-  if(n.includes('자판기봇 pro'))return'/assets/veox-product-pro.svg';
-  if(n.includes('자판기봇 basic'))return'/assets/veox-product-basic.svg';
-  if(c.includes('서버')||c.includes('자동화')||c.includes('개발'))return'/assets/veox-order-preview-bots.svg';
-  if(c.includes('디자인')||c.includes('옵션')||c.includes('업그레이드'))return'/assets/veox-product-basic-premium.svg';
-  if(c.includes('패키지')||c.includes('커스텀'))return'/assets/veox-product-pro-premium.svg';
-  return'/assets/veox-product-basic.svg';
+  if(n.includes('pro premium'))return'/assets/veox-product-pro-premium.png';
+  if(n.includes('basic premium'))return'/assets/veox-product-basic-premium.png';
+  if(n.includes('자판기봇 pro'))return'/assets/veox-product-pro.png';
+  if(n.includes('자판기봇 basic'))return'/assets/veox-product-basic.png';
+  if(c.includes('서버')||c.includes('자동화')||c.includes('개발'))return'/assets/veox-order-preview-bots.png';
+  if(c.includes('디자인')||c.includes('옵션')||c.includes('업그레이드'))return'/assets/veox-product-basic-premium.png';
+  if(c.includes('패키지')||c.includes('커스텀'))return'/assets/veox-product-pro-premium.png';
+  return'/assets/veox-product-basic.png';
 }
 
 function renderProducts(){
