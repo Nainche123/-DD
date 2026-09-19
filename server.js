@@ -65,6 +65,27 @@ try {
 } catch {
   db = seed;
   
+// VEOX 5.1 permanent seller-operation products requested by the store owner.
+// Deliberately exclude the previously discussed #2 security, #3/4 customer-management items.
+const VEOX_51_PRODUCTS = [
+  { id:'vexo-digital-auto-delivery', name:'VEOX 디지털 자동지급팩', category:'봇 옵션', price:19900, badge:'DELIVERY PRO', description:'구매 완료 후 디지털 상품을 빠르게 전달할 수 있도록 자동 지급 흐름을 확장하는 영구 기능팩입니다.', features:['디지털 상품 자동 지급 흐름','다운로드 횟수 제한 옵션','재다운로드 지원','지급 이력 기록','지급 완료 처리 연동','1회 구매 후 영구 적용'] },
+  { id:'vexo-alert-automation', name:'VEOX 알림 자동화팩', category:'봇 옵션', price:9900, badge:'ALERT', description:'주문·입금확인·문의·지급 완료 같은 운영 이벤트를 한눈에 확인하고 빠르게 알릴 수 있는 영구 알림 확장팩입니다.', features:['새 주문 알림','입금 확인 요청 알림','문의 도착 알림','지급 완료 알림','Discord 웹훅 알림 연동','1회 구매 후 영구 적용'] },
+  { id:'vexo-seller-dashboard', name:'VEOX SELLER DASHBOARD', category:'패키지', price:29900, badge:'DASHBOARD', description:'판매자가 주문·매출·상품 성과를 한 화면에서 확인할 수 있도록 운영 대시보드를 강화하는 영구 패키지입니다.', features:['실시간 주문 현황','일/월 매출 요약','상품별 판매량·매출','진행 단계별 주문 분석','최근 운영 활동 위젯','CSV 운영 데이터 내보내기','1회 구매 후 영구 적용'] }
+];
+const existing51 = new Set(db.products.map(p => p.id));
+for (const p of VEOX_51_PRODUCTS) {
+  const existing = db.products.find(item => item.id === p.id);
+  if (existing) {
+    existing.price = p.price;
+    existing.badge = p.badge;
+    existing.description = p.description;
+    existing.features = p.features;
+  } else if (!existing51.has(p.id)) {
+    db.products.push(p);
+  }
+}
+
+await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 }
 if (!Array.isArray(db.users)) db.users = [];
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
@@ -187,31 +208,6 @@ for (const product of VEOX_35_PRODUCTS) {
   if (existing) existing.price = product.price;
   else if (!existing35.has(product.id)) db.products.push(product);
 }
-await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
-
-// VEOX 5.1 permanent seller-operation products requested by the store owner.
-// Deliberately exclude the previously discussed #2 security, #3/4 customer-management items.
-const VEOX_51_PRODUCTS = [
-  { id:'vexo-digital-auto-delivery', name:'VEOX 디지털 자동지급팩', category:'봇 옵션', price:19900, badge:'DELIVERY PRO', description:'구매 완료 후 디지털 상품을 빠르게 전달할 수 있도록 자동 지급 흐름을 확장하는 영구 기능팩입니다.', features:['디지털 상품 자동 지급 흐름','다운로드 횟수 제한 옵션','재다운로드 지원','지급 이력 기록','지급 완료 처리 연동','1회 구매 후 영구 적용'] },
-  { id:'vexo-alert-automation', name:'VEOX 알림 자동화팩', category:'봇 옵션', price:9900, badge:'ALERT', description:'주문·입금확인·문의·지급 완료 같은 운영 이벤트를 한눈에 확인하고 빠르게 알릴 수 있는 영구 알림 확장팩입니다.', features:['새 주문 알림','입금 확인 요청 알림','문의 도착 알림','지급 완료 알림','Discord 웹훅 알림 연동','1회 구매 후 영구 적용'] },
-  { id:'vexo-seller-dashboard', name:'VEOX SELLER DASHBOARD', category:'패키지', price:29900, badge:'DASHBOARD', description:'판매자가 주문·매출·상품 성과를 한 화면에서 확인할 수 있도록 운영 대시보드를 강화하는 영구 패키지입니다.', features:['실시간 주문 현황','일/월 매출 요약','상품별 판매량·매출','진행 단계별 주문 분석','최근 운영 활동 위젯','CSV 운영 데이터 내보내기','1회 구매 후 영구 적용'] }
-];
-const existing51 = new Set(db.products.map(p => p.id));
-for (const p of VEOX_51_PRODUCTS) {
-  const existing = db.products.find(item => item.id === p.id);
-  if (existing) {
-    existing.price = p.price;
-    existing.badge = p.badge;
-    existing.description = p.description;
-    existing.features = p.features;
-  } else if (!existing51.has(p.id)) {
-    db.products.push(p);
-  }
-}
-
-await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
-
-// Persist all startup migrations on every boot so permanent catalog items survive restarts.
 await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 
 // Optional first-admin bootstrap. Set ADMIN_USERNAME, ADMIN_EMAIL and ADMIN_PASSWORD
@@ -842,11 +838,7 @@ app.patch('/api/admin/products/:id', requireAdmin, (req, res) => {
   res.json({ product });
 });
 
-const PROTECTED_PRODUCT_NAMES = new Set(["VEOX 자판기봇 BASIC", "VEOX 자판기봇 PRO", "VEOX 디스코드 서버 템플릿", "VEOX 서버 템플릿 PRO", "VEOX 자동화 패키지", "VEOX 커스텀 봇 제작", "VEOX STORE 올인원", "VEOX 런칭 풀세팅", "봇 설치 가이드", "호스팅 가이드", "서버 세팅 가이드", "자판기봇 운영 가이드", "올인원 세팅 가이드", "VEOX 자판기봇 BASIC PREMIUM", "VEOX 자판기봇 PRO PREMIUM", "VEOX 디지털 자동지급팩", "VEOX 알림 자동화팩", "VEOX SELLER DASHBOARD"]);
 app.delete('/api/admin/products/:id', requireAdmin, (req, res) => {
-  const target = db.products.find(p => p.id === req.params.id);
-  if (!target) return res.status(404).json({ error: '상품을 찾을 수 없습니다.' });
-  if (PROTECTED_PRODUCT_NAMES.has(String(target.name))) return res.status(400).json({ error: '기본 VEOX 상품은 삭제할 수 없습니다.' });
   db.products = db.products.filter(p => p.id !== req.params.id);
   saveDb();
   res.json({ ok: true });
