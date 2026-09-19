@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VEOXHUB | 디스코드 판매 자동화</title>
 <meta name="description" content="VEOXHUB - 디스코드 자판기봇, 서버 템플릿, 자동화, 커스텀 봇 제작 주문 사이트">
+<link rel="icon" href="/assets/veox-favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#2563eb">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -588,7 +590,7 @@ a{color:inherit}
 }
 
 /* =========================
-   VEXO GLASS UI REFRESH
+   VEOX GLASS UI REFRESH
    ========================= */
 :root{
   --bg:#06070b;
@@ -726,7 +728,7 @@ body:after{
 }
 
 
-/* === VEXO PURPLE GLASS THEME === */
+/* === VEOX PURPLE GLASS THEME === */
 :root{
   --blue:#a78bfa;
   --cyan:#d8b4fe;
@@ -906,7 +908,7 @@ body:before{
   .register-btn,.glass-login{padding:10px 12px!important}
 }
 
-/* Final VEXO purple glass theme */
+/* Final VEOX purple glass theme */
 :root{
   --bg:#09060f!important;
   --surface:rgba(24,16,38,.72)!important;
@@ -938,7 +940,7 @@ button.btn.primary{background:linear-gradient(135deg,#7c3aed,#c084fc)!important;
 button.btn.ghost,.glass-login{background:rgba(139,92,246,.08)!important;border-color:rgba(216,180,254,.20)!important}
 input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important;border-color:rgba(216,180,254,.16)!important}
 
-/* VEXO service / maintenance storefront */
+/* VEOX service / maintenance storefront */
 .service-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .service-card{position:relative;padding:22px;border-radius:22px;overflow:hidden;border:1px solid rgba(216,180,254,.16);background:linear-gradient(145deg,rgba(139,92,246,.10),rgba(255,255,255,.028));box-shadow:0 22px 70px rgba(63,25,95,.14),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(18px)}
 .service-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#8b5cf6,#d8b4fe)}
@@ -948,7 +950,7 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
 .service-price{font-weight:950;color:#f4edff;letter-spacing:-.03em}
 @media(max-width:900px){.service-rail{grid-template-columns:1fr}}
 
-/* VEXO HUB premium storefront layer */
+/* VEOX HUB premium storefront layer */
 .addon-section{margin-top:10px}
 #addons .product-card{min-height:330px}
 .product-card.tone-design:before{background:linear-gradient(180deg,#a78bfa,#e9d5ff)!important}
@@ -956,11 +958,11 @@ input.input,select.select,textarea.input{background:rgba(17,10,28,.58)!important
 .hero-copy{background:radial-gradient(circle at 80% 10%,rgba(168,85,247,.18),transparent 38%),rgba(17,21,29,.82)}
 .hero h1 span{background:linear-gradient(90deg,#c4b5fd,#e9d5ff 45%,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* ===== VEXO SERIES + STORE UX REFRESH ===== */
+/* ===== VEOX SERIES + STORE UX REFRESH ===== */
 :root{
-  --vexo-purple:#8b5cf6;
-  --vexo-violet:#a855f7;
-  --vexo-lilac:#d8b4fe;
+  --veox-purple:#8b5cf6;
+  --veox-violet:#a855f7;
+  --veox-lilac:#d8b4fe;
 }
 body{overflow-x:hidden}
 .hero-copy,.hero-visual,.tool-card,.product-card,.choice-panel,.recommend-result,.guide-item,.faq-grid details,.order-card,.admin-block,.kpi-card,.notice-box{
@@ -1297,6 +1299,236 @@ body{overflow-x:hidden}
   .order-reopen-copy span{font-size:10px}
 }
 </style>
+
+<style id="veox40-final-blue-ui">
+:root{
+  --bg:#f4f7fb;
+  --surface:#ffffff;
+  --surface-2:#f8fafc;
+  --line:#e3e9f2;
+  --line-2:#cdd8e8;
+  --text:#0f172a;
+  --soft:#334155;
+  --muted:#718096;
+  --blue:#2563eb;
+  --blue-2:#3b82f6;
+  --blue-3:#60a5fa;
+  --blue-4:#dbeafe;
+  --cyan:#38bdf8;
+  --green:#16a34a;
+  --shadow:0 18px 55px rgba(31,59,103,.12);
+  --shadow-soft:0 8px 25px rgba(31,59,103,.07);
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  color:var(--text)!important;
+  background:
+    radial-gradient(circle at 3% 0%,rgba(59,130,246,.10),transparent 26%),
+    radial-gradient(circle at 97% 7%,rgba(96,165,250,.08),transparent 24%),
+    linear-gradient(180deg,#f8fbff 0%,#f4f7fb 45%,#eef3f9 100%)!important;
+}
+body.modal-lock,html.modal-lock{overflow:hidden!important;height:100%!important}
+.top{
+  background:rgba(255,255,255,.94)!important;
+  border-bottom:1px solid rgba(203,213,225,.78)!important;
+  box-shadow:0 8px 28px rgba(31,59,103,.07)!important;
+}
+.brand{color:#0f172a!important}
+.brand-mark{
+  background:linear-gradient(135deg,var(--blue),var(--blue-2))!important;
+  box-shadow:0 8px 22px rgba(37,99,235,.20)!important;
+}
+.nav a,.nav button{color:#64748b!important}
+.nav a:hover,.nav button:hover{color:var(--blue)!important}
+.card,.panel,.searchbar,.filters,.kpi-card,.guide-item,.service-card,.tool-card,.offer-card,.product-card,.order-card,.notice-box,.recommend-box,.recommend-result,.faq-grid details{
+  background:rgba(255,255,255,.96)!important;
+  border-color:var(--line)!important;
+  box-shadow:var(--shadow-soft)!important;
+  color:var(--text)!important;
+}
+.hero-copy,.hero-visual{background:rgba(255,255,255,.97)!important;border-color:var(--line)!important;box-shadow:var(--shadow)!important}
+.hero h1,.section-head h2,.section-head h3,.product-card h3,.service-card h3,.tool-card h3{color:#0f172a!important}
+.hero-desc,.mini,.desc,.muted,.product-card .desc,.tool-card p,.service-card p{color:var(--soft)!important}
+.btn.primary,.btn.blue,.order-reopen-btn,.room-chat-compose .btn.primary,.room-delivery-actions .btn.blue,.room-admin-actions .btn.blue{
+  background:linear-gradient(135deg,var(--blue),var(--blue-2))!important;
+  border-color:var(--blue)!important;
+  color:#fff!important;
+  box-shadow:0 8px 18px rgba(37,99,235,.20)!important;
+}
+.btn.primary:hover,.btn.blue:hover,.order-reopen-btn:hover,.room-chat-compose .btn.primary:hover,.room-delivery-actions .btn.blue:hover,.room-admin-actions .btn.blue:hover{background:linear-gradient(135deg,#1d4ed8,#2563eb)!important}
+.btn.ghost,.btn.secondary,.room-quick-btn,.room-file-label{background:#fff!important;color:#475569!important;border-color:#d9e2ee!important}
+.btn.ghost:hover,.room-quick-btn:hover,.room-file-label:hover{color:var(--blue)!important;border-color:#9fc0f3!important;background:#f7fbff!important}
+.badge,.category-mark{background:#eff6ff!important;border-color:#bfdbfe!important;color:#1d4ed8!important}
+.badge{font-weight:900!important}
+.product-card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important;border-radius:20px!important}
+.product-card:hover{transform:translateY(-3px)!important;border-color:#b9cff1!important;box-shadow:0 16px 35px rgba(37,99,235,.12)!important}
+.product-card .price,.series-price,.detail-price{color:var(--blue)!important}
+.feature-mini span{background:#f7fbff!important;border-color:#e0eafa!important;color:#475569!important}
+.input,.select,.textarea,.room-chat-compose .textarea,.room-delivery-fields input,.room-delivery-fields textarea{
+  background:#fff!important;color:#0f172a!important;border-color:#d8e1ed!important;box-shadow:none!important;
+}
+.input:focus,.select:focus,.textarea:focus,.room-chat-compose .textarea:focus,.room-delivery-fields input:focus,.room-delivery-fields textarea:focus{
+  border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(37,99,235,.10)!important;outline:none!important
+}
+.modal{
+  background:rgba(15,23,42,.44)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  padding:clamp(8px,2vw,18px)!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  touch-action:auto!important;
+}
+.modal.open{display:flex!important}
+.modal-card{
+  width:min(720px,100%)!important;
+  max-height:calc(100dvh - 24px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  background:#fff!important;
+  border:1px solid #e1e8f2!important;
+  border-radius:22px!important;
+  color:var(--text)!important;
+  box-shadow:0 28px 85px rgba(15,23,42,.22)!important;
+}
+.modal-head{position:sticky!important;top:0!important;z-index:3!important;background:rgba(255,255,255,.96)!important;border-bottom:1px solid #edf1f6!important;padding-bottom:12px!important}
+.modal-head h3{color:#0f172a!important}
+.x{background:#f8fafc!important;color:#475569!important;border-color:#dbe4ef!important}
+.modal:has(.room-app){align-items:center!important}
+.modal-card.room-wide{
+  width:min(1180px,100%)!important;
+  height:min(92dvh,920px)!important;
+  max-height:min(92dvh,920px)!important;
+  overflow:hidden!important;
+  padding:0!important;
+  border-radius:24px!important;
+}
+.room-app{
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+  background:#f4f7fb!important;
+  grid-template-columns:minmax(360px,.92fr) minmax(420px,1.08fr)!important;
+  overflow:hidden!important;
+}
+.room-side{
+  min-width:0!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  padding:20px!important;
+  background:#f7f9fc!important;
+  border-right:1px solid #e2e8f0!important;
+}
+.room-detail-card,.room-progress-card,.room-order-hero{
+  background:#fff!important;
+  border-color:#dde6f0!important;
+  box-shadow:0 4px 14px rgba(31,59,103,.05)!important;
+}
+.room-order-hero{border-radius:18px!important}
+.room-order-hero h4,.room-info-cell b,.room-detail-title{color:#0f172a!important}
+.room-order-price{color:var(--blue)!important;font-size:24px!important}
+.room-bank-box{background:#eff6ff!important;border-color:#bfdbfe!important}
+.room-bank-row b{color:#1d4ed8!important}
+.room-progress-line{background:#e5edf7!important}
+.room-progress-line i{background:linear-gradient(90deg,var(--blue),var(--blue-2))!important}
+.room-step.done i,.room-step.current i{background:#eff6ff!important;border-color:#93c5fd!important;color:#1d4ed8!important}
+.room-step.done,.room-step.current{color:#1e3a8a!important}
+.room-chat{
+  min-width:0!important;min-height:0!important;height:100%!important;
+  display:flex!important;flex-direction:column!important;
+  background:#fff!important;border-left:0!important;
+}
+.room-chat-head{background:#fff!important;border-bottom:1px solid #e3eaf2!important;padding:17px 19px!important}
+.room-chat-avatar{background:linear-gradient(135deg,#dbeafe,#bfdbfe)!important;color:#1d4ed8!important;box-shadow:none!important}
+.room-chat-title b{color:#0f172a!important}
+.room-chat-messages{
+  flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;
+  overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  background:#f5f8fc!important;padding:18px!important;
+}
+.room-chat-messages .room-msg{background:#fff!important;color:#1e293b!important;border:1px solid #e1e8f0!important;box-shadow:0 4px 12px rgba(31,59,103,.055)!important;border-radius:16px 16px 16px 6px!important}
+.room-chat-messages .room-msg.mine{background:linear-gradient(135deg,#3b82f6,#2563eb)!important;border-color:#2563eb!important;color:#fff!important;border-radius:16px 16px 6px 16px!important;box-shadow:0 7px 18px rgba(37,99,235,.16)!important}
+.room-chat-messages .room-msg.mine .room-msg-head,.room-chat-messages .room-msg.mine .room-msg-head b,.room-chat-messages .room-msg.mine .room-msg-head span{color:rgba(255,255,255,.84)!important}
+.room-chat-messages .room-msg.system{background:#eef2f7!important;border:1px dashed #d5deea!important;color:#64748b!important}
+.room-chat-messages .room-attachment{background:#f8fbff!important;border-color:#d8e5f3!important;color:#334155!important}
+.room-chat-compose{background:#fff!important;border-top:1px solid #e3eaf2!important;padding:12px 14px 14px!important;flex:0 0 auto!important}
+.room-quick-btn{padding:7px 11px!important;border-radius:999px!important}
+.room-delivery-box{background:#eff6ff!important;border-color:#cfe0f5!important}
+.room-delivery-head b{color:#1d4ed8!important}
+.order-reopen{background:#fff!important;border-color:#dbe4ef!important;box-shadow:0 18px 40px rgba(31,59,103,.14)!important}
+.order-reopen-icon{background:#eff6ff!important;border-color:#bfdbfe!important}
+.order-reopen-copy b{color:#0f172a!important}
+.order-reopen-copy span{color:#64748b!important}
+.footer{color:#64748b!important;border-top-color:#e1e8f0!important}
+@media(max-width:840px){
+  .modal:has(.room-app){align-items:flex-start!important;padding:8px!important}
+  .modal-card.room-wide{height:94dvh!important;max-height:94dvh!important;border-radius:18px!important}
+  .room-app{grid-template-columns:1fr!important;grid-template-rows:minmax(0,1fr) minmax(360px,.9fr)!important;overflow:hidden!important}
+  .room-side{border-right:0!important;border-bottom:1px solid #e2e8f0!important;max-height:none!important}
+  .room-chat{min-height:0!important}
+  .room-chat-messages{min-height:0!important}
+}
+@media(max-width:560px){
+  .modal{padding:6px!important}
+  .modal-card{max-height:calc(100dvh - 12px)!important;border-radius:18px!important}
+  .modal-card.room-wide{height:96dvh!important;max-height:96dvh!important;border-radius:15px!important}
+  .room-app{grid-template-rows:minmax(320px,1fr) minmax(380px,1fr)!important}
+  .room-side{padding:14px!important}
+  .room-chat-head{padding:14px!important}
+  .room-chat-messages{padding:14px 12px 10px!important}
+  .room-chat-messages .room-msg{max-width:88%!important}
+  .room-compose-bottom{gap:7px!important}
+}
+</style>
+
+
+<style id="veox40-image-dashboard-ui">
+/* VEOXHUB Image-backed dashboard storefront */
+:root{
+  --dash-navy:#0b1a3a;
+  --dash-blue:#2563eb;
+  --dash-sky:#60a5fa;
+  --dash-pale:#eaf3ff;
+  --dash-bg:#f3f7fc;
+  --dash-card:#ffffff;
+}
+body{background:linear-gradient(180deg,#f8fbff 0%,#f2f6fb 42%,#edf3f9 100%)!important;color:#10213d!important}
+.top{background:rgba(255,255,255,.92)!important;border-bottom:1px solid #e2e8f0!important;box-shadow:0 8px 24px rgba(15,23,42,.07)!important}
+.brand-mark{position:relative;overflow:hidden;font-size:0;background:#0b1a3a!important;box-shadow:0 8px 22px rgba(37,99,235,.18)!important}
+.brand-mark:after{content:'V';font-size:19px;font-weight:1000;color:#fff;text-shadow:0 0 14px rgba(96,165,250,.8)}
+.nav-links{gap:16px}.nav-menu-btn{color:#475569!important}.nav-menu-btn:hover{color:var(--dash-blue)!important}
+.hero{padding:34px 0 24px}.hero-grid{grid-template-columns:1fr!important;gap:16px}
+.hero-copy{padding:0!important;background:#fff!important;border:1px solid #dce6f2!important;border-radius:24px!important;overflow:hidden!important;box-shadow:0 20px 55px rgba(31,59,103,.10)!important}
+.hero-copy .eyebrow{margin:28px 32px 0}.hero-copy h1,.hero-copy .hero-desc,.hero-copy .hero-cta,.hero-copy .hero-metrics{margin-left:32px;margin-right:32px}
+.hero-copy h1{margin-top:16px!important;font-size:clamp(42px,6vw,72px)!important;color:#0f172a!important}
+.hero-copy h1 span{background:linear-gradient(90deg,#2563eb,#60a5fa)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;text-shadow:none!important}
+.hero-copy .hero-desc{color:#475569!important;max-width:840px}
+.hero-media{position:relative;margin-top:26px;border-top:1px solid #e5edf6;background:#eef5fc}
+.hero-media img{display:block;width:100%;height:auto;max-height:330px;object-fit:cover;object-position:center 23%;filter:saturate(.97) contrast(1.02)}
+.hero-media-overlay{position:absolute;left:20px;bottom:18px;display:flex;gap:8px;flex-wrap:wrap}
+.hero-media-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid rgba(191,219,254,.95);color:#1d4ed8;font-size:11px;font-weight:900;box-shadow:0 6px 16px rgba(37,99,235,.11)}
+.dashboard-strip{display:grid;grid-template-columns:1.25fr .95fr .95fr;gap:12px;padding:18px 22px 22px;background:#f8fbff;border-top:1px solid #e5edf6}
+.dash-panel{background:#fff;border:1px solid #dfe8f3;border-radius:18px;padding:14px;box-shadow:0 7px 20px rgba(31,59,103,.05);min-width:0}
+.dash-panel-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.dash-panel-title b{font-size:13px}.dash-panel-title span{font-size:10px;color:#64748b}
+.dash-products{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.dash-product{overflow:hidden;border:1px solid #e1eaf5;border-radius:14px;background:#fff}.dash-product img{display:block;width:100%;height:70px;object-fit:cover}.dash-product div{padding:7px 8px;font-size:10px;font-weight:900;color:#1e3a5f}.dash-product small{display:block;color:#2563eb;font-size:10px;margin-top:3px}
+.dash-status{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.dash-stat{padding:11px;border:1px solid #e4ebf4;border-radius:13px;background:#f8fbff}.dash-stat b{display:block;font-size:18px;color:#1d4ed8}.dash-stat span{display:block;margin-top:3px;color:#64748b;font-size:10px}
+.dash-chat{display:flex;flex-direction:column;gap:8px;min-height:120px}.dash-bubble{max-width:88%;padding:8px 10px;border-radius:13px;background:#f1f5f9;border:1px solid #e2e8f0;font-size:10px;line-height:1.55;color:#334155}.dash-bubble.mine{margin-left:auto;background:linear-gradient(135deg,#3b82f6,#2563eb);border-color:#2563eb;color:#fff}
+.product-card{background:#fff!important;border-color:#dfe8f3!important;box-shadow:0 12px 32px rgba(31,59,103,.07)!important;border-radius:20px!important}.product-card:hover{border-color:#b9cff1!important;box-shadow:0 18px 40px rgba(37,99,235,.11)!important}
+.product-art{position:relative;margin:-21px -21px 16px;height:145px;overflow:hidden;background:#edf5ff;border-bottom:1px solid #e1eaf5}.product-art img{width:100%;height:100%;object-fit:cover;display:block}.product-art:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(15,23,42,.08));pointer-events:none}.product-art .product-art-badge{position:absolute;z-index:2;left:10px;top:10px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid #bfdbfe;color:#1d4ed8;font-size:9px;font-weight:1000}
+.product-card h3{color:#10213d!important}.product-card .desc{color:#52647b!important}.product-card .price{color:#2563eb!important}.feature-mini span{background:#f8fbff!important;border-color:#e2eaf4!important;color:#475569!important}
+.service-card,.tool-card,.guide-item,.order-card,.kpi-card,.admin-block,.notice-box,.recommend-result,.choice-panel{background:#fff!important;border-color:#dfe8f3!important;box-shadow:0 10px 28px rgba(31,59,103,.06)!important}
+.service-card:before{background:linear-gradient(180deg,#2563eb,#60a5fa)!important}.tool-kicker{color:#2563eb!important}
+.modal{background:rgba(15,23,42,.36)!important}.modal-card{background:#fff!important;border-color:#dfe7f1!important;color:#10213d!important}
+.modal-card .notice-box{background:#f7fbff!important}.modal-card .benefit-banner{background:#eff6ff!important;border-color:#bfdbfe!important}.modal-card .benefit-banner b{color:#1d4ed8!important}
+@media(max-width:1000px){.dashboard-strip{grid-template-columns:1fr}.dash-products{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:720px){.hero-copy .eyebrow{margin-left:18px;margin-right:18px}.hero-copy h1,.hero-copy .hero-desc,.hero-copy .hero-cta,.hero-copy .hero-metrics{margin-left:18px;margin-right:18px}.hero-copy h1{font-size:42px!important}.hero-media img{height:210px}.dashboard-strip{padding:14px}.dash-products{grid-template-columns:repeat(2,1fr)}.product-art{height:125px}}
+</style>
+
 </head>
 <body>
 <div class="toast" id="toast"></div>
@@ -1330,7 +1562,7 @@ body{overflow-x:hidden}
       <div class="hero-copy">
         <div class="eyebrow">Discord Seller Automation · VEOXHUB</div>
         <h1>VEOXHUB<br><span>돈을 쓰는 곳이 아니라, 기회를 만드는 곳.</span></h1>
-        <p class="hero-desc">저희 VEXO HUB는 여러분이 돈을 주고 돈을 날리는 곳이 아니라, <strong>돈을 주고 더 많은 가치를 만들어낼 수 있는 템플릿과 성능 좋은 봇</strong>을 제공합니다. 필요한 제품만 골라 더 깔끔하게, 더 빠르게 운영하세요.</p>
+        <p class="hero-desc">저희 VEOX HUB는 여러분이 돈을 주고 돈을 날리는 곳이 아니라, <strong>돈을 주고 더 많은 가치를 만들어낼 수 있는 템플릿과 성능 좋은 봇</strong>을 제공합니다. 필요한 제품만 골라 더 깔끔하게, 더 빠르게 운영하세요.</p>
         <div class="hero-cta">
           <button class="btn primary" type="button" data-scroll="recommend">내게 맞는 구성 찾기</button>
           <button class="btn ghost" type="button" data-scroll="products">상품 바로 보기</button>
@@ -1342,36 +1574,20 @@ body{overflow-x:hidden}
           <div class="metric"><b>24/7</b><span>웹 주문 접수</span></div>
         </div>
       </div>
-      <div class="hero-visual" aria-label="VEXO 주문 흐름 미리보기">
-        <div class="preview-head">
-          <b>실시간 주문 흐름</b>
-          <span class="ticket-status">티켓 연결 준비</span>
+      <div class="hero-visual" aria-label="VEOXHUB 실시간 판매 대시보드">
+        <div class="preview-head"><b>VEOXHUB STORE DASHBOARD</b><span class="ticket-status">실시간 운영</span></div>
+        <div class="hero-media"><img src="/assets/veox-hero-banner-bots.svg" alt="VEOXHUB 블루 대시보드 배너" loading="eager"><div class="hero-media-overlay"><span class="hero-media-chip">⚡ 빠른 지급</span><span class="hero-media-chip">🛡️ 안전한 거래</span><span class="hero-media-chip">💬 주문실 채팅</span></div></div>
+        <div class="dashboard-strip">
+          <div class="dash-panel"><div class="dash-panel-title"><b>🔥 인기 상품</b><span>실제 상품 UI</span></div><div class="dash-products">
+            <article class="dash-product"><img src="/assets/veox-product-basic.svg" alt="VEOX 자판기봇 BASIC"><div>VEOX BASIC<small>19,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-pro.svg" alt="VEOX 자판기봇 PRO"><div>VEOX PRO<small>39,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-basic-premium.svg" alt="VEOX 자판기봇 BASIC PREMIUM"><div>BASIC PREMIUM<small>29,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-pro-premium.svg" alt="VEOX 자판기봇 PRO PREMIUM"><div>PRO PREMIUM<small>59,000원</small></div></article>
+          </div></div>
+          <div class="dash-panel"><div class="dash-panel-title"><b>📊 운영 상태</b><span>자동 갱신</span></div><div class="dash-status"><div class="dash-stat"><b>24/7</b><span>주문 접수</span></div><div class="dash-stat"><b>1-TIME</b><span>영구 상품</span></div><div class="dash-stat"><b>VEOX</b><span>브랜드 운영</span></div><div class="dash-stat"><b>LIVE</b><span>주문실</span></div></div></div>
+          <div class="dash-panel"><div class="dash-panel-title"><b>💬 주문실 채팅</b><span>관리자 ↔ 구매자</span></div><div class="dash-chat"><div class="dash-bubble">안녕하세요! VEOXHUB입니다.<br>입금 확인을 도와드릴게요.</div><div class="dash-bubble mine">네! 입금했습니다 🙌</div><div class="dash-bubble">확인 후 상품을 바로 지급해드릴게요.</div></div></div>
         </div>
-        <div class="preview-screen">
-          <div class="preview-panel preview-order">
-            <div>
-              <strong>VEXO STORE 올인원</strong>
-              <span>서버 템플릿 + 자판기봇 + 자동화</span>
-            </div>
-            <div class="price-chip">99,000원</div>
-          </div>
-          <div class="preview-flow">
-            <div class="flow-step"><b>주문</b><span>웹에서 상품 선택</span></div>
-            <div class="flow-step"><b>티켓</b><span>디스코드에서 상담</span></div>
-            <div class="flow-step"><b>수령</b><span>확인 후 상품 지급</span></div>
-          </div>
-          <div class="preview-panel">
-            <div class="mini">추천 업셀</div>
-            <div class="preview-order" style="margin-top:8px">
-              <div>
-                <strong>런칭 풀세팅</strong>
-                <span>오픈 전 점검까지 포함</span>
-              </div>
-              <div class="price-chip">149,000원</div>
-            </div>
-          </div>
-          <div class="preview-note hidden" id="noticeText" aria-hidden="true"></div>
-        </div>
+        <div class="preview-note hidden" id="noticeText" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -1381,7 +1597,7 @@ body{overflow-x:hidden}
       <div class="series-shell">
         <div class="series-head">
           <div>
-            <div class="series-kicker">VEXO BOT SERIES · NOW SELLING</div>
+            <div class="series-kicker">VEOX BOT SERIES · NOW SELLING</div>
             <h2>같은 자판기봇이 아닙니다.</h2>
             <p>기본형은 판매를 시작하기 위한 구성, PREMIUM은 구매자가 체감하는 화면과 운영 경험까지 확장한 구성입니다.</p>
           </div>
@@ -1394,7 +1610,7 @@ body{overflow-x:hidden}
             <div class="series-sub">가볍게 시작하는 기본 자판기봇</div>
             <p>상품 등록, 주문 접수, 개인 티켓, 입금 확인, 수동 지급 등 판매를 시작하는 데 필요한 핵심 기능에 집중합니다.</p>
             <div class="series-tags"><span class="series-tag">주문 UI</span><span class="series-tag">수동 지급</span><span class="series-tag">기본 관리</span></div>
-            <div class="series-bottom"><div class="series-price">19,000원</div><button class="btn small primary" data-series-name="VEXO 자판기봇 BASIC">상세보기</button></div>
+            <div class="series-bottom"><div class="series-price">19,000원</div><button class="btn small primary" data-series-name="VEOX 자판기봇 BASIC">상세보기</button></div>
           </article>
           <article class="series-card premium-card">
             <div class="series-top"><span class="series-num">02 · PREMIUM</span><span class="series-icon">✦</span></div>
@@ -1403,7 +1619,7 @@ body{overflow-x:hidden}
             <p>상품 상세, 자판기 패널, 주문 티켓, 완료 메시지까지 Discord에서 실제로 구현 가능한 UI를 더 촘촘하게 구성합니다.</p>
             <div class="series-tags"><span class="series-tag">고급 자판기 UI</span><span class="series-tag">주문 티켓 UI</span><span class="series-tag">브랜딩</span></div>
             <div class="series-premium-note">BASIC의 핵심 기능은 그대로 + 구매자 체감 UI 강화</div>
-            <div class="series-bottom"><div class="series-price">29,000원</div><button class="btn small primary" data-series-name="VEXO 자판기봇 BASIC PREMIUM">상세보기</button></div>
+            <div class="series-bottom"><div class="series-price">29,000원</div><button class="btn small primary" data-series-name="VEOX 자판기봇 BASIC PREMIUM">상세보기</button></div>
           </article>
           <article class="series-card highlight">
             <div class="series-top"><span class="series-num">03 · CONTROL</span><span class="series-icon">◆</span></div>
@@ -1411,7 +1627,7 @@ body{overflow-x:hidden}
             <div class="series-sub">판매 서버 운영을 위한 확장형</div>
             <p>BASIC보다 많은 상품을 체계적으로 운영하고 싶다면 카테고리, 페이지형 탐색, 재고, 수량, 통계까지 사용할 수 있습니다.</p>
             <div class="series-tags"><span class="series-tag">재고 관리</span><span class="series-tag">수량 주문</span><span class="series-tag">통계</span></div>
-            <div class="series-bottom"><div class="series-price">39,000원</div><button class="btn small primary" data-series-name="VEXO 자판기봇 PRO">상세보기</button></div>
+            <div class="series-bottom"><div class="series-price">39,000원</div><button class="btn small primary" data-series-name="VEOX 자판기봇 PRO">상세보기</button></div>
           </article>
           <article class="series-card premium-card ultimate">
             <div class="series-top"><span class="series-num">04 · ULTIMATE</span><span class="series-icon">✧</span></div>
@@ -1420,7 +1636,7 @@ body{overflow-x:hidden}
             <p>카테고리·재고·수량·통계 같은 PRO 기능 위에 주문 UI, 관리자 화면, 완료 로그, 브랜딩까지 하나의 판매 시스템처럼 묶습니다.</p>
             <div class="series-tags"><span class="series-tag">PRO 전체</span><span class="series-tag">고급 주문 UI</span><span class="series-tag">관리자 편의</span></div>
             <div class="series-premium-note">많이 판매하는 서버라면 BASIC보다 PRO PREMIUM까지 한 번에</div>
-            <div class="series-bottom"><div class="series-price">59,000원</div><button class="btn small primary" data-series-name="VEXO 자판기봇 PRO PREMIUM">상세보기</button></div>
+            <div class="series-bottom"><div class="series-price">59,000원</div><button class="btn small primary" data-series-name="VEOX 자판기봇 PRO PREMIUM">상세보기</button></div>
           </article>
         </div>
       </div>
@@ -1481,7 +1697,7 @@ body{overflow-x:hidden}
   <section id="addons" class="section">
     <div class="wrap">
       <div class="section-head">
-        <div><h2>디자인 · 봇 옵션</h2><p>기존 상품에 필요한 부분만 추가해 VEXO 스타일로 완성하세요.</p></div>
+        <div><h2>디자인 · 봇 옵션</h2><p>기존 상품에 필요한 부분만 추가해 VEOX 스타일로 완성하세요.</p></div>
       </div>
       <div class="grid" id="addonGrid"></div>
     </div>
@@ -1688,7 +1904,7 @@ body{overflow-x:hidden}
 </main>
 
 <footer class="footer">
-  <div class="wrap">VEXO STORE · 웹 주문 접수 · 간편하고 안전한 주문</div>
+  <div class="wrap">VEOXHUB · 웹 주문 접수 · 간편하고 안전한 주문</div>
 </footer>
 
 <div class="modal" id="modal">
@@ -1744,6 +1960,8 @@ function toast(message){
   toast.timer=setTimeout(()=>el.classList.remove('show'),2600);
 }
 function showModal(title,html){
+  document.documentElement.classList.add('modal-lock');
+  document.body.classList.add('modal-lock');
   stopOrderRoomPolling();
   const modal=$('#modal');
   delete modal.dataset.orderRoom;
@@ -1768,6 +1986,8 @@ function hideOrderReopen(){
   bar.setAttribute('aria-hidden','true');
 }
 function closeModal(){
+  document.documentElement.classList.remove('modal-lock');
+  document.body.classList.remove('modal-lock');
   stopOrderRoomPolling();
   const modal=$('#modal');
   const orderId=modal.dataset.orderRoom||'';
@@ -1828,7 +2048,7 @@ function categoryMark(cat){
   if(cat==='업그레이드')return'UP';
   if(cat==='커스텀')return'CSTM';
   if(cat==='패키지')return'PACK';
-  return'VEXO';
+  return'VEOX';
 }
 function toneClass(cat){
   if(cat==='서버 템플릿')return'tone-template';
@@ -1864,6 +2084,19 @@ function visibleProducts(){
   else list.sort((a,b)=>scoreProduct(b)-scoreProduct(a)||b.price-a.price);
   return list;
 }
+function productImageFor(p){
+  const n=String(p?.name||'').toLowerCase();
+  const c=String(p?.category||'').toLowerCase();
+  if(n.includes('pro premium'))return'/assets/veox-product-pro-premium.svg';
+  if(n.includes('basic premium'))return'/assets/veox-product-basic-premium.svg';
+  if(n.includes('자판기봇 pro'))return'/assets/veox-product-pro.svg';
+  if(n.includes('자판기봇 basic'))return'/assets/veox-product-basic.svg';
+  if(c.includes('서버')||c.includes('자동화')||c.includes('개발'))return'/assets/veox-order-preview-bots.svg';
+  if(c.includes('디자인')||c.includes('옵션')||c.includes('업그레이드'))return'/assets/veox-product-basic-premium.svg';
+  if(c.includes('패키지')||c.includes('커스텀'))return'/assets/veox-product-pro-premium.svg';
+  return'/assets/veox-product-basic.svg';
+}
+
 function renderProducts(){
   const list=visibleProducts();
   $('#productCount').textContent=products.length;
@@ -1872,6 +2105,7 @@ function renderProducts(){
   $('#productGrid').innerHTML=list.length?list.map(p=>{
     const features=(p.features||[]).slice(0,3).map(f=>`<span>${esc(f)}</span>`).join('');
     return `<article class="product-card ${toneClass(p.category)}">
+      <div class="product-art"><img src="${productImageFor(p)}" alt="${esc(p.name)} 이미지" loading="lazy"><span class="product-art-badge">${esc(p.badge||p.category)}</span></div>
       <div class="product-top">
         <span class="badge">${esc(p.badge||p.category)}</span>
         <span class="category-mark" aria-label="${esc(p.category)}">${categoryMark(p.category)}</span>
@@ -1911,9 +2145,9 @@ function renderAddons(){
 }
 function renderOffers(){
   const offers=[
-    {title:'빠른 시작', kicker:'처음 판매 서버', names:['VEXO 디스코드 서버 템플릿','VEXO 자판기봇 BASIC'], main:'VEXO 자판기봇 BASIC', note:'가볍게 시작하고 반응을 보는 구성입니다.'},
-    {title:'판매 운영', kicker:'추천 패키지', names:['VEXO STORE 올인원'], main:'VEXO STORE 올인원', note:'서버, 봇, 자동화를 한 번에 맞추는 가장 깔끔한 구성입니다.', featured:true},
-    {title:'프리미엄 런칭', kicker:'고객 응대까지', names:['VEXO 런칭 풀세팅'], main:'VEXO 런칭 풀세팅', note:'오픈 전 점검과 운영 동선까지 맡기고 싶은 사람에게 맞습니다.'}
+    {title:'빠른 시작', kicker:'처음 판매 서버', names:['VEOX 디스코드 서버 템플릿','VEOX 자판기봇 BASIC'], main:'VEOX 자판기봇 BASIC', note:'가볍게 시작하고 반응을 보는 구성입니다.'},
+    {title:'판매 운영', kicker:'추천 패키지', names:['VEOX 자판기봇 PRO','VEOX 티켓 자동화 확장팩','VEOX 통계 대시보드팩'], main:'VEOX 자판기봇 PRO', note:'실제 디스코드 판매 운영에 필요한 봇과 운영 기능을 한 번에 확장합니다.', featured:true},
+    {title:'프리미엄 런칭', kicker:'고객 응대까지', names:['VEOX 런칭 풀세팅'], main:'VEOX 런칭 풀세팅', note:'오픈 전 점검과 운영 동선까지 맡기고 싶은 사람에게 맞습니다.'}
   ];
   $('#offerGrid').innerHTML=offers.map(o=>{
     const items=o.names.map(name=>products.find(p=>p.name===name)).filter(Boolean);
@@ -1931,10 +2165,10 @@ function renderOffers(){
 }
 function renderRecommendation(key='starter'){
   const map={
-    starter:{title:'처음 시작이라면', name:'VEXO STORE 올인원', text:'서버 구조와 기본 봇 흐름을 같이 잡아야 시행착오가 적습니다.'},
-    store:{title:'판매 서버가 목표라면', name:'VEXO 서버 템플릿 PRO', text:'채널, 역할, 티켓, 후기 동선이 먼저 정리되면 구매자 신뢰가 올라갑니다.'},
-    auto:{title:'운영 시간을 줄이고 싶다면', name:'VEXO 자동화 패키지', text:'반복 공지와 역할 부여, 주문 알림을 줄여 스태프 부담을 낮춥니다.'},
-    custom:{title:'특정 기능이 필요하다면', name:'VEXO 커스텀 봇 제작', text:'기능 범위를 티켓에서 먼저 정리하고 제작하는 방식이 가장 정확합니다.'}
+    starter:{title:'처음 시작이라면', name:'VEOX 자판기봇 BASIC', text:'처음 판매를 시작할 때 필요한 주문·티켓·관리 흐름을 가볍게 시작할 수 있습니다.'},
+    store:{title:'판매 서버가 목표라면', name:'VEOX 서버 템플릿 PRO', text:'채널, 역할, 티켓, 후기 동선이 먼저 정리되면 구매자 신뢰가 올라갑니다.'},
+    auto:{title:'운영 시간을 줄이고 싶다면', name:'VEOX 자동화 패키지', text:'반복 공지와 역할 부여, 주문 알림을 줄여 스태프 부담을 낮춥니다.'},
+    custom:{title:'특정 기능이 필요하다면', name:'VEOX 커스텀 봇 제작', text:'기능 범위를 티켓에서 먼저 정리하고 제작하는 방식이 가장 정확합니다.'}
   };
   const rec=map[key]||map.starter;
   const p=products.find(x=>x.name===rec.name)||products[0];
@@ -2035,15 +2269,15 @@ function updateAccount(){
 function productByName(name){return products.find(x=>x.name===name)}
 function upsellForProduct(p){
   const map={
-    'VEXO 자판기봇 BASIC':['VEXO 자판기봇 BASIC PREMIUM','VEOX 티켓 자동화 확장팩','VEOX 임베드 디자인팩'],
-    'VEXO 자판기봇 BASIC PREMIUM':['VEXO 봇 기능 확장팩','VEOX DESIGN BUNDLE','VEOX 메이저 버전 업그레이드'],
-    'VEXO 자판기봇 PRO':['VEXO 자판기봇 PRO PREMIUM','VEOX 운영 자동화 확장팩','VEOX SELLER PACK'],
-    'VEXO 자판기봇 PRO PREMIUM':['VEOX SELLER PRO','VEOX 보안 강화팩','VEOX GROWTH BUNDLE'],
-    'VEXO 디스코드 서버 템플릿':['VEOX 임베드 디자인팩','VEOX 티켓 자동화 확장팩','VEOX GROWTH BUNDLE'],
-    'VEXO 서버 템플릿 PRO':['VEOX DESIGN BUNDLE','VEOX SELLER PACK','VEOX GROWTH BUNDLE'],
-    'VEXO 자동화 패키지':['VEOX 운영 자동화 확장팩','VEOX 통계 대시보드팩','VEOX SELLER PACK'],
-    'VEXO STORE 올인원':['VEOX SELLER PRO','VEOX DESIGN BUNDLE','VEOX 화이트라벨 패키지'],
-    'VEXO 런칭 풀세팅':['VEOX SELLER PRO','VEOX 화이트라벨 패키지','VEOX 메이저 버전 업그레이드'],
+    'VEOX 자판기봇 BASIC':['VEOX 자판기봇 BASIC PREMIUM','VEOX 티켓 자동화 확장팩','VEOX 임베드 디자인팩'],
+    'VEOX 자판기봇 BASIC PREMIUM':['VEOX 봇 기능 확장팩','VEOX DESIGN BUNDLE','VEOX 메이저 버전 업그레이드'],
+    'VEOX 자판기봇 PRO':['VEOX 자판기봇 PRO PREMIUM','VEOX 운영 자동화 확장팩','VEOX SELLER PACK'],
+    'VEOX 자판기봇 PRO PREMIUM':['VEOX SELLER PRO','VEOX 보안 강화팩','VEOX GROWTH BUNDLE'],
+    'VEOX 디스코드 서버 템플릿':['VEOX 임베드 디자인팩','VEOX 티켓 자동화 확장팩','VEOX GROWTH BUNDLE'],
+    'VEOX 서버 템플릿 PRO':['VEOX DESIGN BUNDLE','VEOX SELLER PACK','VEOX GROWTH BUNDLE'],
+    'VEOX 자동화 패키지':['VEOX 운영 자동화 확장팩','VEOX 통계 대시보드팩','VEOX SELLER PACK'],
+    'VEOX STORE 올인원':['VEOX SELLER PRO','VEOX DESIGN BUNDLE','VEOX 화이트라벨 패키지'],
+    'VEOX 런칭 풀세팅':['VEOX SELLER PRO','VEOX 화이트라벨 패키지','VEOX 메이저 버전 업그레이드'],
     'VEOX 커스텀 봇 제작':['VEOX 화이트라벨 패키지','VEOX 메이저 버전 업그레이드','VEOX 고객관리 확장팩'],
     'VEOX SELLER PACK':['VEOX 고객관리 확장팩','VEOX 백업·복구 강화팩','VEOX 멀티서버 관리팩'],
     'VEOX SELLER PRO':['VEOX 멀티서버 관리팩','VEOX 고객관리 확장팩','VEOX 백업·복구 강화팩']
@@ -2057,6 +2291,7 @@ function openDetail(id){
   const upsellHtml=ups.length?`<div class="benefit-banner"><b>✨ 함께 구성하기</b><div class="coupon-note">기능·디자인·커스텀·패키지를 필요한 만큼 영구 추가할 수 있습니다.</div><div class="feature-mini">${ups.map(x=>`<span>${esc(x.name)} · ${won(x.price)}</span>`).join('')}</div></div>`:'';
   showModal('상품 상세',`
     <div class="detail-meta"><span class="badge">${esc(p.category)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:''}</div>
+    <div style="margin:12px 0;border:1px solid #dfe8f3;border-radius:16px;overflow:hidden;background:#eef5fc"><img src="${productImageFor(p)}" alt="${esc(p.name)} 이미지" style="display:block;width:100%;height:180px;object-fit:cover"></div>
     <h3 style="font-size:24px;margin-bottom:8px">${esc(p.name)}</h3>
     <p style="color:var(--soft);line-height:1.75">${esc(p.description)}</p>
     <div class="detail-price">${won(p.price)} <span style="font-size:13px;color:var(--muted)">/ 기본가</span></div>
@@ -2078,7 +2313,7 @@ function openOrder(id){
   showModal('주문하기',`
     <div class="field"><label>상품</label><input class="input" value="${esc(p.name)}" disabled></div>
     <div class="field"><label>수량</label><input class="input" id="qty" type="number" min="1" max="20" value="1"></div>
-    <div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="discordTag" placeholder="예: vexo_user"></div>
+    <div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="discordTag" placeholder="예: veox_user"></div>
     <div class="field"><label>입금자명 <span class="required-dot">*</span></label><input class="input" id="payerName" maxlength="40" autocomplete="name" placeholder="실제로 송금할 이름을 입력해 주세요"><div class="mini">입금 확인을 위해 실제 송금자명과 동일하게 적어주세요.</div></div>
     <div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="원하는 세팅, 서버 상황, 질문을 적어주세요."></textarea></div>
     <div id="orderCouponBox"></div>
@@ -2292,7 +2527,7 @@ bindTopControls();
 async function loadSite(){
   const d=await api('/api/site');
   siteSettings=d.settings||{};
-  const name=(siteSettings.siteName && siteSettings.siteName!=='VEXO STORE')?siteSettings.siteName:'VEOXHUB';
+  const name=(siteSettings.siteName && siteSettings.siteName!=='VEOX STORE')?siteSettings.siteName:'VEOXHUB';
   $('#brandName').textContent=name;
   document.title=name+' | 디스코드 판매 자동화';
   $('#noticeText').textContent=siteSettings.notice||'';
@@ -2523,11 +2758,11 @@ document.addEventListener('click',e=>{
     if(p){ openDetail(p.id); }
     else {
       const premiumCatalog={
-        'VEXO 자판기봇 BASIC PREMIUM':{name:'BASIC PREMIUM',price:'29,000원',desc:'BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 브랜딩을 더한 프리미엄형입니다.',features:['BASIC 핵심 기능 전체','고급 자판기 패널','상품 상세 / 선택 UI 강화','주문 티켓 화면 정리','완료·구매 감사 로그 디자인','VEXO 브랜딩 구성']},
-        'VEXO 자판기봇 PRO PREMIUM':{name:'PRO PREMIUM',price:'59,000원',desc:'PRO의 상품·재고·수량·통계 기능에 관리자 운영 편의와 고급 주문 화면을 더한 상위형입니다.',features:['PRO 핵심 기능 전체','페이지형 카테고리 / 상품 탐색','재고 / 수량 / 통계','고급 주문 티켓 UI','구매 완료 로그 / 후기 흐름','관리자 화면 편의성 강화','VEXO 브랜딩 구성']}
+        'VEOX 자판기봇 BASIC PREMIUM':{name:'BASIC PREMIUM',price:'29,000원',desc:'BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 브랜딩을 더한 프리미엄형입니다.',features:['BASIC 핵심 기능 전체','고급 자판기 패널','상품 상세 / 선택 UI 강화','주문 티켓 화면 정리','완료·구매 감사 로그 디자인','VEOX 브랜딩 구성']},
+        'VEOX 자판기봇 PRO PREMIUM':{name:'PRO PREMIUM',price:'59,000원',desc:'PRO의 상품·재고·수량·통계 기능에 관리자 운영 편의와 고급 주문 화면을 더한 상위형입니다.',features:['PRO 핵심 기능 전체','페이지형 카테고리 / 상품 탐색','재고 / 수량 / 통계','고급 주문 티켓 UI','구매 완료 로그 / 후기 흐름','관리자 화면 편의성 강화','VEOX 브랜딩 구성']}
       };
       const q=premiumCatalog[target];
-      if(q){ showModal('BOT SERIES 상세',`<div class="detail-meta"><span class="badge">VEXO BOT SERIES</span><span class="badge">PREMIUM</span></div><h3 style="font-size:24px;margin-bottom:8px">${q.name}</h3><p style="color:var(--soft);line-height:1.75">${esc(q.desc)}</p><div class="detail-price">${q.price}</div><div class="mini" style="font-weight:900;color:var(--cyan)">주요 기능</div><ul class="feature-list">${q.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><div class="notice-box" style="margin-top:14px"><b>💜 PREMIUM 추천</b><br>판매 화면의 첫인상과 주문 흐름까지 중요하다면 PREMIUM 구성을 확인해보세요.</div>`); }
+      if(q){ showModal('BOT SERIES 상세',`<div class="detail-meta"><span class="badge">VEOX BOT SERIES</span><span class="badge">PREMIUM</span></div><h3 style="font-size:24px;margin-bottom:8px">${q.name}</h3><p style="color:var(--soft);line-height:1.75">${esc(q.desc)}</p><div class="detail-price">${q.price}</div><div class="mini" style="font-weight:900;color:var(--cyan)">주요 기능</div><ul class="feature-list">${q.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><div class="notice-box" style="margin-top:14px"><b>💜 PREMIUM 추천</b><br>판매 화면의 첫인상과 주문 흐름까지 중요하다면 PREMIUM 구성을 확인해보세요.</div>`); }
     }
   }
   if(seriesScroll){
