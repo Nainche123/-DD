@@ -137,11 +137,31 @@ function migrateBrandText() {
 migrateBrandText();
 // Older installations may still have stock fields / legacy category names. Stocks are intentionally unlimited now.
 for (const p of db.products) { delete p.stock; if (p.category === '서버') p.category = '서버 템플릿'; }
-// Retire discontinued items from older deployments.
-db.products = db.products.filter(p => !['VEXO 멀티서버 관리팩','VEXO UPDATE PASS 1개월','VEXO UPDATE PASS 6개월','VEXO 봇 설치 & 기본 세팅'].includes(p.name));
-// Remove any legacy game-only SKUs from older deployments. VEXOHUB sells Discord bots, templates and seller tools.
+// Retire discontinued items from older deployments, but report the exact removals.
+const RETIRED_LEGACY_NAMES = new Set([
+  'VEXO 멀티서버 관리팩',
+  'VEXO UPDATE PASS 1개월',
+  'VEXO UPDATE PASS 6개월',
+  'VEXO 봇 설치 & 기본 세팅'
+]);
+const retiredLegacy = db.products.filter(p => RETIRED_LEGACY_NAMES.has(String(p.name || '')));
+db.products = db.products.filter(p => !RETIRED_LEGACY_NAMES.has(String(p.name || '')));
+
+// Remove legacy game-only SKUs from older deployments and report them instead of failing silently.
 const LEGACY_GAME_TERMS = ['냥코','battle cats','555 패키지','999 패키지','81주년','광복절'];
-db.products = db.products.filter(p => !LEGACY_GAME_TERMS.some(term => String(p.name||'').toLowerCase().includes(term.toLowerCase())));
+const retiredGame = db.products.filter(p =>
+  LEGACY_GAME_TERMS.some(term => String(p.name || '').toLowerCase().includes(term.toLowerCase()))
+);
+db.products = db.products.filter(p =>
+  !LEGACY_GAME_TERMS.some(term => String(p.name || '').toLowerCase().includes(term.toLowerCase()))
+);
+
+if (retiredLegacy.length || retiredGame.length) {
+  console.log(`[VEXO] 카탈로그에서 제외된 레거시 상품: ${retiredLegacy.length + retiredGame.length}개`);
+  for (const product of [...retiredLegacy, ...retiredGame]) {
+    console.log(`  - ${product.name} (${product.id})`);
+  }
+}
 
 // VEXO design / feature add-ons. These are separate from existing BOT/TEMPLATE/GUIDE products.
 // VEXO BOT SERIES metadata is shown as currently selling.
@@ -205,7 +225,6 @@ const VEXO_UPGRADE_PRODUCTS = [
   { id:'vexo-white-label', name:'VEXO 화이트라벨 패키지', category:'개발', price:79900, badge:'WHITE LABEL', description:'VEXO 브랜드 대신 고객의 자체 브랜드로 봇 UI와 표기를 구성하는 영구 화이트라벨 상품입니다.', features:['봇 표시명 브랜딩','임베드·푸터 문구 변경','버튼·패널 브랜딩','기본 색상·문구 일괄 적용','브랜드 기준 맞춤 안내','1회 구매 후 영구 적용'] },
   { id:'vexo-growth-bundle', name:'VEXO GROWTH BUNDLE', category:'패키지', price:49900, badge:'BUNDLE', description:'티켓·결제·운영·통계를 한 번에 확장하는 실전형 영구 기능 번들입니다.', features:['티켓 자동화 확장팩','결제 자동화 확장팩','운영 자동화 확장팩','통계 대시보드팩','개별 구매 대비 묶음가','1회 구매 후 영구 적용'] }
 ];
-const upgradeIds = new Set(db.products.map(p => p.id));
 for (const p of VEXO_UPGRADE_PRODUCTS) {
   const existing = db.products.find(item => item.id === p.id);
   if (existing) {
@@ -243,6 +262,7 @@ for (const product of VEXO_35_PRODUCTS) {
   else if (!existing35.has(product.id)) db.products.push(product);
 }
 await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
+console.log(`[VEXO] 상품 카탈로그 준비 완료: ${db.products.length}개`);
 
 // Optional first-admin bootstrap. Set ADMIN_USERNAME, ADMIN_EMAIL and ADMIN_PASSWORD
 // once on the server; the account is created only when no admin currently exists.
@@ -326,7 +346,12 @@ function requireAdmin(req, res, next) {
 function siteSettingsFor(req) {
   const settings = { ...db.settings };
   const user = getUser(req);
-  if (!user || user.role !== 'admin') delete settings.webhookUrl;
+
+  // Seller-only payment/webhook values must not be exposed on the public site API.
+  if (!user || user.role !== 'admin') {
+    delete settings.webhookUrl;
+    delete settings.bankInfo;
+  }
   return settings;
 }
 function getWebhookUrl() {
@@ -349,7 +374,12 @@ app.get('/api/site', (req, res) => {
 
 app.post('/api/heartbeat', (req, res) => {
   const visitor = req.cookies.vexo_visitor || nanoid(18);
-  res.cookie('vexo_visitor', visitor, { httpOnly: true, sameSite: 'lax', maxAge: 1000 * 60 * 60 * 24 * 365 });
+  res.cookie('vexo_visitor', visitor, {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 1000 * 60 * 60 * 24 * 365
+  });
   online.set(visitor, Date.now());
   res.json({ online: online.size });
 });
@@ -389,8 +419,16 @@ app.get('/api/bot-series', (req, res) => {
 
 app.get('/api/products', (req, res) => {
   const category = String(req.query.category || 'all');
-  const products = category === 'all' ? db.products : db.products.filter(p => p.category === category);
-  res.json({ products });
+  const products = (category === 'all' ? db.products : db.products.filter(p => p.category === category))
+    .slice()
+    .sort((a, b) => {
+      const priceDiff = Number(a.price || 0) - Number(b.price || 0);
+      if (priceDiff !== 0) return priceDiff;
+      const categoryDiff = String(a.category || '').localeCompare(String(b.category || ''), 'ko');
+      if (categoryDiff !== 0) return categoryDiff;
+      return String(a.name || '').localeCompare(String(b.name || ''), 'ko');
+    });
+  res.json({ products, count: products.length });
 });
 
 app.get('/api/me', (req, res) => res.json({ user: safeUser(getUser(req)) }));
