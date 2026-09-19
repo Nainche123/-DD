@@ -1529,355 +1529,6 @@ body{background:linear-gradient(180deg,#f8fbff 0%,#f2f6fb 42%,#edf3f9 100%)!impo
 @media(max-width:720px){.hero-copy .eyebrow{margin-left:18px;margin-right:18px}.hero-copy h1,.hero-copy .hero-desc,.hero-copy .hero-cta,.hero-copy .hero-metrics{margin-left:18px;margin-right:18px}.hero-copy h1{font-size:42px!important}.hero-media img{height:210px}.dashboard-strip{padding:14px}.dash-products{grid-template-columns:repeat(2,1fr)}.product-art{height:125px}}
 </style>
 
-
-<style>
-/* VEOXHUB 3.8 — clean white / grey / blue storefront + order room redesign */
-:root{
-  --bg:#f4f7fb!important;
-  --surface:#ffffff!important;
-  --surface-2:#f8fafc!important;
-  --surface-3:#eef4fb!important;
-  --line:#dfe6ee!important;
-  --line-2:#c8d4e2!important;
-  --text:#172033!important;
-  --soft:#4b5563!important;
-  --muted:#7b8798!important;
-  --blue:#2563eb!important;
-  --blue-2:#3b82f6!important;
-  --cyan:#60a5fa!important;
-  --green:#10b981!important;
-  --shadow:0 18px 45px rgba(31,53,83,.08)!important;
-  --radius:14px!important;
-}
-html{background:var(--bg)!important}
-body{
-  color:var(--text)!important;
-  background:
-    radial-gradient(circle at 8% 0%,rgba(37,99,235,.08),transparent 28%),
-    radial-gradient(circle at 92% 8%,rgba(96,165,250,.07),transparent 24%),
-    linear-gradient(180deg,#f8fafc 0%,#f4f7fb 52%,#eef3f8 100%)!important;
-}
-body:before{
-  background-image:
-    linear-gradient(rgba(37,99,235,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(37,99,235,.035) 1px,transparent 1px)!important;
-  background-size:52px 52px!important;
-  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 78%)!important;
-}
-body:after{display:none!important}
-.top{
-  background:rgba(255,255,255,.90)!important;
-  border-bottom:1px solid #dfe6ee!important;
-  box-shadow:0 8px 28px rgba(37,53,74,.05)!important;
-  backdrop-filter:blur(18px) saturate(130%)!important;
-  -webkit-backdrop-filter:blur(18px) saturate(130%)!important;
-}
-.brand{color:#162033!important}
-.brand-mark{
-  position:relative!important;
-  width:38px!important;height:38px!important;
-  border-radius:11px!important;
-  background:linear-gradient(135deg,#2563eb,#60a5fa)!important;
-  color:#fff!important;
-  border:1px solid rgba(255,255,255,.65)!important;
-  box-shadow:0 10px 24px rgba(37,99,235,.24)!important;
-  font-size:19px!important;font-weight:1000!important;
-}
-.brand-mark:before{
-  content:""!important;
-  position:absolute!important;inset:4px!important;
-  border:1px solid rgba(255,255,255,.34)!important;
-  border-radius:8px!important;
-  pointer-events:none!important;
-}
-.nav-links{color:#5b6778!important}
-.nav-menu-btn:hover{color:#2563eb!important;text-shadow:0 0 16px rgba(37,99,235,.12)!important}
-.nav-menu-btn:focus-visible{outline:2px solid rgba(37,99,235,.28)!important}
-.online-pill{
-  background:#fff!important;border-color:#dfe6ee!important;color:#64748b!important;
-  box-shadow:0 4px 14px rgba(31,53,83,.04)!important;
-}
-.online-dot{background:#10b981!important;box-shadow:0 0 10px rgba(16,185,129,.28)!important}
-.btn{
-  color:#334155!important;
-  background:#fff!important;
-  border:1px solid #d9e2ec!important;
-  border-radius:10px!important;
-  box-shadow:0 3px 12px rgba(31,53,83,.04)!important;
-}
-.btn:hover{border-color:#b8c7d8!important;box-shadow:0 8px 20px rgba(31,53,83,.07)!important}
-.btn.primary,.btn.blue,button.btn.primary{
-  color:#fff!important;
-  background:linear-gradient(135deg,#2563eb,#3b82f6)!important;
-  border-color:#2563eb!important;
-  box-shadow:0 10px 24px rgba(37,99,235,.20)!important;
-}
-.btn.primary:hover,.btn.blue:hover{box-shadow:0 14px 28px rgba(37,99,235,.26)!important}
-.btn.ghost,.glass-login{
-  background:#fff!important;
-  color:#475569!important;
-  border-color:#d9e2ec!important;
-}
-.btn.ghost:hover,.glass-login:hover{background:#f5f9ff!important;color:#2563eb!important;border-color:#bcd0ea!important}
-.hero{padding-top:44px!important}
-.hero-grid{gap:16px!important}
-.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result,.faq-grid details,.kpi-card,.searchbar,.filters,.tabbar{
-  color:var(--text)!important;
-  background:#fff!important;
-  border:1px solid #dfe6ee!important;
-  border-radius:16px!important;
-  box-shadow:0 16px 42px rgba(31,53,83,.065),inset 0 1px 0 rgba(255,255,255,.9)!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-.hero-copy{position:relative!important;overflow:hidden!important}
-.hero-copy:after{
-  content:"";position:absolute;right:-130px;top:-120px;width:360px;height:360px;border-radius:50%;
-  background:radial-gradient(circle,rgba(37,99,235,.12),rgba(96,165,250,.035) 45%,transparent 70%)!important;
-  pointer-events:none;
-}
-.hero h1{color:#111827!important;letter-spacing:-.055em!important}
-.hero h1 span{
-  background:linear-gradient(90deg,#2563eb,#60a5fa)!important;
-  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
-  text-shadow:none!important;
-}
-.hero-desc{color:#5b6675!important}
-.hero-desc strong{color:#1e40af!important}
-.eyebrow{color:#2563eb!important;background:#eff6ff!important;border-color:#bfdbfe!important}
-.hero-metrics .metric,.metric{
-  background:#f8fafc!important;border-color:#e4ebf3!important;border-radius:12px!important;
-}
-.metric b{color:#172033!important}
-.metric span{color:#7b8798!important}
-.hero-visual{background:#f8fafc!important}
-.preview-panel{background:#fff!important;border-color:#dfe6ee!important;border-radius:12px!important;box-shadow:none!important}
-.preview-note{color:#2563eb!important;background:#eff6ff!important;border-left-color:#3b82f6!important}
-.preview-screen,.flow-step,.price-chip,.badge,.category-mark{
-  background:#f8fafc!important;border-color:#dfe6ee!important;color:#334155!important;
-}
-.tab,.segment{background:#fff!important;color:#64748b!important;border-color:#dfe6ee!important}
-.tab.active,.segment.active{
-  background:#eff6ff!important;color:#2563eb!important;border-color:#93c5fd!important;
-}
-.section-head h2{color:#172033!important}
-.section-head p,.tool-card p,.series-card p{color:#6b7687!important}
-.tool-kicker,.online-pill b{color:#2563eb!important}
-.product-card:before,.product-card.tone-template:before,.product-card.tone-auto:before,.product-card.tone-dev:before,.product-card.tone-guide:before,.product-card.tone-pack:before,.product-card.tone-design:before,.product-card.tone-option:before{
-  background:linear-gradient(180deg,#2563eb,#93c5fd)!important;
-}
-.product-card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important}
-.product-card:hover{transform:translateY(-3px)!important;border-color:#bfd2e8!important;box-shadow:0 22px 48px rgba(37,99,235,.10)!important}
-.feature-mini span:before{background:#3b82f6!important;box-shadow:none!important}
-.progress i{background:linear-gradient(90deg,#2563eb,#60a5fa)!important}
-.service-card{
-  border:1px solid #dfe6ee!important;background:#fff!important;border-radius:16px!important;
-  box-shadow:0 16px 40px rgba(31,53,83,.06)!important;
-}
-.service-card:before{background:linear-gradient(180deg,#2563eb,#60a5fa)!important}
-.service-price,.series-price,.price{color:#172033!important}
-.series-shell{
-  background:linear-gradient(145deg,#ffffff,#f4f8fd)!important;
-  border:1px solid #dfe6ee!important;border-radius:18px!important;
-  box-shadow:0 18px 46px rgba(31,53,83,.06)!important;
-}
-.series-card{
-  border:1px solid #dfe6ee!important;border-radius:15px!important;
-  background:linear-gradient(160deg,#ffffff,#f7faff)!important;
-  box-shadow:0 12px 30px rgba(31,53,83,.045)!important;
-}
-.series-card:before{background:radial-gradient(circle,rgba(37,99,235,.12),transparent 68%)!important}
-.series-num,.series-sub{color:#64748b!important}
-.series-icon{background:#eff6ff!important;border:1px solid #cfe0f5!important;color:#2563eb!important;box-shadow:none!important}
-.series-tag{background:#f8fafc!important;border:1px solid #dfe6ee!important;color:#526173!important}
-.series-premium-note{background:#eff6ff!important;border-color:#cfe0f5!important;color:#1d4ed8!important}
-.modal{background:rgba(15,23,42,.36)!important;backdrop-filter:blur(7px)!important}
-.modal-card{background:#fff!important}
-.input,.select,.textarea,.room-chat-compose .textarea{
-  background:#fff!important;color:#1f2937!important;border-color:#d7e0e9!important;
-  box-shadow:none!important;
-}
-.input::placeholder,.textarea::placeholder{color:#98a3b1!important}
-.input:focus,.select:focus,.textarea:focus,.room-chat-compose .textarea:focus{
-  border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(37,99,235,.10)!important;outline:none!important;
-}
-.store-bar,.toolbar{border-color:#dfe6ee!important}
-.footer{background:#fff!important;border-top:1px solid #dfe6ee!important}
-/* ===== clean order room: white/grey/blue, close to dashboard screenshot ===== */
-.modal:has(.room-app){background:rgba(15,23,42,.36)!important;padding:18px!important}
-.modal-card.room-wide{
-  width:min(1180px,96vw)!important;max-height:min(92vh,900px)!important;padding:0!important;
-  overflow:hidden!important;border:1px solid #d8e2ec!important;border-radius:18px!important;
-  background:#eef2f6!important;box-shadow:0 26px 70px rgba(15,23,42,.22)!important;
-}
-.room-app{grid-template-columns:minmax(0,54%) minmax(0,46%)!important;min-height:min(760px,92vh)!important;max-height:min(92vh,900px)!important;background:#eef2f6!important}
-.room-side{padding:22px!important;background:#f3f5f7!important;border-right:1px solid #dbe3eb!important}
-.room-side-head .mini,.room-chat-title span,.room-order-id,.room-detail-title,.room-progress-label,.room-mini-label,.room-info-cell span,.room-compose-meta,.room-delivery-note{color:#8591a1!important}
-.room-side-head h3{color:#182232!important;font-size:20px!important}
-.room-stat-pill{color:#64748b!important;background:#fff!important;border:1px solid #dbe3eb!important;border-radius:999px!important}
-.room-order-hero{background:#fff!important;border:1px solid #dbe3eb!important;border-radius:15px!important;box-shadow:0 6px 18px rgba(31,53,83,.045)!important}
-.room-order-hero h4{color:#182232!important}
-.room-order-price{color:#2563eb!important;font-size:24px!important}
-.room-detail-card,.room-progress-card{background:#fff!important;border:1px solid #dfe6ee!important;border-radius:14px!important;box-shadow:0 5px 16px rgba(31,53,83,.035)!important}
-.room-info-cell{background:#f8fafc!important;border:1px solid #e9eef3!important}
-.room-info-cell b{color:#273449!important}
-.room-bank-box{background:#eff6ff!important;border:1px solid #cfe0f5!important}
-.room-bank-row b{color:#1d4ed8!important}
-.room-progress-line{background:#e7edf4!important}
-.room-progress-line i{background:linear-gradient(90deg,#2563eb,#60a5fa)!important}
-.room-step{color:#9aa6b3!important}
-.room-step.done,.room-step.current{color:#273449!important}
-.room-step i{background:#fff!important;border:1px solid #dbe3eb!important;color:#94a3b8!important}
-.room-step.done i,.room-step.current i{border-color:#93c5fd!important;background:#eff6ff!important;color:#2563eb!important}
-.room-chat{background:#fff!important;border-left:0!important}
-.room-chat-head{padding:17px 20px!important;background:#fff!important;border-bottom:1px solid #e1e7ee!important}
-.room-chat-avatar{width:38px!important;height:38px!important;border-radius:12px!important;background:#eff6ff!important;color:#2563eb!important;box-shadow:none!important}
-.room-chat-title b{color:#1e293b!important}
-.room-online-dot{background:#10b981!important;box-shadow:none!important}
-.room-chat-head .btn.ghost{background:#fff!important;color:#64748b!important;border-color:#dbe3eb!important}
-.room-chat-messages{padding:18px 18px 12px!important;background:#f8fafc!important;gap:10px!important}
-.room-chat-messages .room-msg{background:#fff!important;color:#273449!important;border:1px solid #e2e8f0!important;box-shadow:0 3px 10px rgba(31,53,83,.045)!important;border-radius:15px 15px 15px 6px!important}
-.room-chat-messages .room-msg.mine{background:#dbeafe!important;border-color:#93c5fd!important;color:#1e3a8a!important;border-radius:15px 15px 6px 15px!important;box-shadow:none!important}
-.room-chat-messages .room-msg.mine .room-msg-head,.room-chat-messages .room-msg.mine .room-msg-head b,.room-chat-messages .room-msg.mine .room-msg-head span{color:#365d99!important}
-.room-chat-messages .room-msg-head{color:#94a3b8!important}.room-chat-messages .room-msg-head b{color:#526173!important}
-.room-chat-messages .room-msg.system{background:#f3f5f7!important;border:1px dashed #d8e1ea!important;color:#7a8796!important}
-.room-chat-messages .room-attachment{background:#f8fafc!important;border-color:#dce5ee!important;color:#334155!important}
-.room-chat-compose{padding:12px 14px 14px!important;background:#fff!important;border-top:1px solid #e1e7ee!important}
-.room-quick-btn{background:#fff!important;color:#66758a!important;border:1px solid #dce4ec!important;border-radius:999px!important}
-.room-quick-btn:hover{color:#2563eb!important;border-color:#93c5fd!important;background:#eff6ff!important}
-.room-chat-compose .textarea{background:#f9fbfd!important}
-.room-file-label{background:#fff!important;color:#64748b!important;border-color:#dce4ec!important}
-.room-chat-compose .btn.primary,.room-delivery-actions .btn.blue,.room-admin-actions .btn.blue{background:#2563eb!important;border-color:#2563eb!important;box-shadow:0 7px 16px rgba(37,99,235,.15)!important}
-.room-chat-compose .btn.primary:hover,.room-delivery-actions .btn.blue:hover,.room-admin-actions .btn.blue:hover{background:#1d4ed8!important}
-.room-admin-actions .btn.ghost,.room-delivery-actions .btn.ghost{background:#fff!important;color:#64748b!important;border-color:#dce4ec!important}
-.room-delivery-box{background:#eff6ff!important;border:1px solid #cfe0f5!important;border-radius:14px!important}
-.room-delivery-head b{color:#1d4ed8!important}
-.room-delivery-fields input,.room-delivery-fields textarea{background:#fff!important;color:#273449!important;border:1px solid #dce4ec!important}
-.room-delivery-fields input:focus,.room-delivery-fields textarea:focus{border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(37,99,235,.08)!important}
-.order-reopen{background:#fff!important;border:1px solid #dce4ec!important;box-shadow:0 15px 35px rgba(31,53,83,.12)!important}
-.order-reopen-icon{background:#eff6ff!important;border-color:#cfe0f5!important}
-.order-reopen-copy b{color:#273449!important}.order-reopen-copy span{color:#7d8998!important}
-.order-reopen-btn{background:#2563eb!important;box-shadow:none!important}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr!important}.room-app{grid-template-columns:1fr!important}.room-side{border-right:0!important;border-bottom:1px solid #dbe3eb!important}}
-@media(max-width:700px){.hero-copy{padding:28px!important}.hero h1{font-size:45px!important}.nav-links{display:none!important}.section{padding:56px 0!important}}
-</style>
-
-<style id="veox42-final-hardening">
-/* VEOX 4.2 — final dashboard + modal scroll hardening */
-html,body{min-height:100%;}
-html{scroll-behavior:smooth;}
-body{min-height:100vh;overflow-x:hidden;}
-/* Never allow the page underneath a dialog to capture wheel/touch scroll. */
-html.modal-lock,body.modal-lock{overflow:hidden!important;height:100%!important;overscroll-behavior:none!important;}
-.modal{
-  position:fixed!important;
-  inset:0!important;
-  display:none!important;
-  align-items:center!important;
-  justify-content:center!important;
-  padding:16px!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  overscroll-behavior:contain!important;
-  -webkit-overflow-scrolling:touch!important;
-  box-sizing:border-box!important;
-  z-index:9999!important;
-}
-.modal.open{display:flex!important;}
-.modal-card{
-  width:min(680px,100%)!important;
-  max-height:calc(100dvh - 32px)!important;
-  margin:auto!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  overscroll-behavior:contain!important;
-  -webkit-overflow-scrolling:touch!important;
-  box-sizing:border-box!important;
-}
-/* Full order room: fixed frame, independently scrollable left/right panes. */
-.modal:has(.room-app){align-items:center!important;padding:14px!important;}
-.modal-card.room-wide{
-  width:min(1220px,96vw)!important;
-  height:min(92dvh,900px)!important;
-  max-height:calc(100dvh - 28px)!important;
-  min-height:0!important;
-  padding:0!important;
-  overflow:hidden!important;
-  display:flex!important;
-  flex-direction:column!important;
-}
-.room-app{
-  display:grid!important;
-  grid-template-columns:minmax(360px,46%) minmax(0,54%)!important;
-  width:100%!important;
-  height:100%!important;
-  min-height:0!important;
-  max-height:none!important;
-  overflow:hidden!important;
-}
-.room-side{
-  min-width:0!important;
-  min-height:0!important;
-  height:100%!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  overscroll-behavior:contain!important;
-  -webkit-overflow-scrolling:touch!important;
-}
-.room-chat{
-  min-width:0!important;
-  min-height:0!important;
-  height:100%!important;
-  overflow:hidden!important;
-  display:flex!important;
-  flex-direction:column!important;
-}
-.room-chat-messages{
-  flex:1 1 auto!important;
-  min-height:0!important;
-  max-height:none!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  overscroll-behavior:contain!important;
-  -webkit-overflow-scrolling:touch!important;
-}
-.room-chat-compose{flex:0 0 auto!important;}
-/* Images: no broken glyphs, consistent crop, and clean loading surface. */
-img{max-width:100%;}
-.hero-media,.product-art,.dash-product{background:#eef5ff!important;}
-.hero-media img,.product-art img,.dash-product img{
-  display:block!important;
-  width:100%!important;
-  max-width:100%!important;
-  object-fit:cover!important;
-}
-.hero-media img{height:auto!important;aspect-ratio:1400/420!important;}
-.product-art img{height:145px!important;}
-.dash-product img{height:78px!important;}
-.hero-media{overflow:hidden!important;border-radius:14px!important;}
-.product-art{overflow:hidden!important;border-radius:15px 15px 0 0!important;}
-/* Slightly stronger screenshot-like polish. */
-.brand-mark{box-shadow:0 10px 26px rgba(37,99,235,.22)!important;}
-.product-card,.tool-card,.service-card,.series-card,.kpi-card,.order-card,.admin-block{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important;}
-.btn.primary{background:linear-gradient(135deg,#2563eb,#3b82f6)!important;}
-.section-head h2,.series-head h2{letter-spacing:-.03em!important;}
-@media(max-width:840px){
-  .modal{padding:8px!important;align-items:flex-start!important;}
-  .modal-card.room-wide{width:100%!important;height:calc(100dvh - 16px)!important;max-height:calc(100dvh - 16px)!important;border-radius:16px!important;}
-  .room-app{grid-template-columns:1fr!important;grid-template-rows:minmax(260px,1fr) minmax(420px,1fr)!important;overflow:hidden!important;}
-  .room-side{height:auto!important;min-height:0!important;border-right:0!important;border-bottom:1px solid #dbe4ed!important;overflow-y:auto!important;}
-  .room-chat{height:auto!important;min-height:0!important;}
-}
-@media(max-width:560px){
-  .modal{padding:6px!important;}
-  .modal-card{max-height:calc(100dvh - 12px)!important;border-radius:16px!important;}
-  .modal-card.room-wide{height:calc(100dvh - 12px)!important;max-height:calc(100dvh - 12px)!important;border-radius:14px!important;}
-  .room-app{grid-template-rows:minmax(230px,.9fr) minmax(420px,1.1fr)!important;}
-  .product-art img{height:125px!important;}
-  .dash-product img{height:70px!important;}
-}
-</style>
-
 </head>
 <body>
 <div class="toast" id="toast"></div>
@@ -1925,13 +1576,13 @@ img{max-width:100%;}
       </div>
       <div class="hero-visual" aria-label="VEOXHUB 실시간 판매 대시보드">
         <div class="preview-head"><b>VEOXHUB STORE DASHBOARD</b><span class="ticket-status">실시간 운영</span></div>
-        <div class="hero-media"><img src="/assets/veox-hero-banner-bots.png" alt="VEOXHUB 블루 대시보드 배너" loading="eager"><div class="hero-media-overlay"><span class="hero-media-chip">⚡ 빠른 지급</span><span class="hero-media-chip">🛡️ 안전한 거래</span><span class="hero-media-chip">💬 주문실 채팅</span></div></div>
+        <div class="hero-media"><img src="/assets/veox-hero-banner-bots.svg" alt="VEOXHUB 블루 대시보드 배너" loading="eager"><div class="hero-media-overlay"><span class="hero-media-chip">⚡ 빠른 지급</span><span class="hero-media-chip">🛡️ 안전한 거래</span><span class="hero-media-chip">💬 주문실 채팅</span></div></div>
         <div class="dashboard-strip">
           <div class="dash-panel"><div class="dash-panel-title"><b>🔥 인기 상품</b><span>실제 상품 UI</span></div><div class="dash-products">
-            <article class="dash-product"><img src="/assets/veox-product-basic.png" alt="VEOX 자판기봇 BASIC"><div>VEOX BASIC<small>19,000원</small></div></article>
-            <article class="dash-product"><img src="/assets/veox-product-pro.png" alt="VEOX 자판기봇 PRO"><div>VEOX PRO<small>39,000원</small></div></article>
-            <article class="dash-product"><img src="/assets/veox-product-basic-premium.png" alt="VEOX 자판기봇 BASIC PREMIUM"><div>BASIC PREMIUM<small>29,000원</small></div></article>
-            <article class="dash-product"><img src="/assets/veox-product-pro-premium.png" alt="VEOX 자판기봇 PRO PREMIUM"><div>PRO PREMIUM<small>59,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-basic.svg" alt="VEOX 자판기봇 BASIC"><div>VEOX BASIC<small>19,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-pro.svg" alt="VEOX 자판기봇 PRO"><div>VEOX PRO<small>39,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-basic-premium.svg" alt="VEOX 자판기봇 BASIC PREMIUM"><div>BASIC PREMIUM<small>29,000원</small></div></article>
+            <article class="dash-product"><img src="/assets/veox-product-pro-premium.svg" alt="VEOX 자판기봇 PRO PREMIUM"><div>PRO PREMIUM<small>59,000원</small></div></article>
           </div></div>
           <div class="dash-panel"><div class="dash-panel-title"><b>📊 운영 상태</b><span>자동 갱신</span></div><div class="dash-status"><div class="dash-stat"><b>24/7</b><span>주문 접수</span></div><div class="dash-stat"><b>1-TIME</b><span>영구 상품</span></div><div class="dash-stat"><b>VEOX</b><span>브랜드 운영</span></div><div class="dash-stat"><b>LIVE</b><span>주문실</span></div></div></div>
           <div class="dash-panel"><div class="dash-panel-title"><b>💬 주문실 채팅</b><span>관리자 ↔ 구매자</span></div><div class="dash-chat"><div class="dash-bubble">안녕하세요! VEOXHUB입니다.<br>입금 확인을 도와드릴게요.</div><div class="dash-bubble mine">네! 입금했습니다 🙌</div><div class="dash-bubble">확인 후 상품을 바로 지급해드릴게요.</div></div></div>
@@ -2436,14 +2087,14 @@ function visibleProducts(){
 function productImageFor(p){
   const n=String(p?.name||'').toLowerCase();
   const c=String(p?.category||'').toLowerCase();
-  if(n.includes('pro premium'))return'/assets/veox-product-pro-premium.png';
-  if(n.includes('basic premium'))return'/assets/veox-product-basic-premium.png';
-  if(n.includes('자판기봇 pro'))return'/assets/veox-product-pro.png';
-  if(n.includes('자판기봇 basic'))return'/assets/veox-product-basic.png';
-  if(c.includes('서버')||c.includes('자동화')||c.includes('개발'))return'/assets/veox-order-preview-bots.png';
-  if(c.includes('디자인')||c.includes('옵션')||c.includes('업그레이드'))return'/assets/veox-product-basic-premium.png';
-  if(c.includes('패키지')||c.includes('커스텀'))return'/assets/veox-product-pro-premium.png';
-  return'/assets/veox-product-basic.png';
+  if(n.includes('pro premium'))return'/assets/veox-product-pro-premium.svg';
+  if(n.includes('basic premium'))return'/assets/veox-product-basic-premium.svg';
+  if(n.includes('자판기봇 pro'))return'/assets/veox-product-pro.svg';
+  if(n.includes('자판기봇 basic'))return'/assets/veox-product-basic.svg';
+  if(c.includes('서버')||c.includes('자동화')||c.includes('개발'))return'/assets/veox-order-preview-bots.svg';
+  if(c.includes('디자인')||c.includes('옵션')||c.includes('업그레이드'))return'/assets/veox-product-basic-premium.svg';
+  if(c.includes('패키지')||c.includes('커스텀'))return'/assets/veox-product-pro-premium.svg';
+  return'/assets/veox-product-basic.svg';
 }
 
 function renderProducts(){
@@ -2459,7 +2110,7 @@ function renderProducts(){
         <span class="badge">${esc(p.badge||p.category)}</span>
         <span class="category-mark" aria-label="${esc(p.category)}">${categoryMark(p.category)}</span>
       </div>
-      <div class="mini" style="margin-top:14px;color:#64748b;font-weight:800">${esc(p.category)}</div>
+      <div class="mini" style="margin-top:14px;color:#cdbfe0;font-weight:800">${esc(p.category)}</div>
       <h3>${esc(p.name)}</h3>
       <div class="desc">${esc(p.description)}</div>
       <div class="feature-mini">${features||'<span>상세 기능은 주문 전 티켓에서 확인 가능합니다.</span>'}</div>
@@ -2667,7 +2318,7 @@ function openOrder(id){
     <div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="원하는 세팅, 서버 상황, 질문을 적어주세요."></textarea></div>
     <div id="orderCouponBox"></div>
     <div class="notice-box"><b>${won(p.price)}</b><br>${esc(siteSettings.bankInfo||'입금 계좌는 디스코드 티켓에서 안내받을 수 있습니다.')}</div>
-    <div class="benefit-banner"><b>💙 고가 구매 혜택</b><div class="coupon-note">${p.price>=140000?'완료 후 다음 구매 10% 할인 (최대 20,000원)':p.price>=100000?'완료 후 다음 구매 8% 할인 (최대 10,000원)':p.price>=50000?'완료 후 다음 구매 5% 할인 (최대 5,000원)':'50,000원 이상 구매 시 다음 구매 할인 혜택이 지급됩니다.'}</div></div>
+    <div class="benefit-banner"><b>💜 고가 구매 혜택</b><div class="coupon-note">${p.price>=140000?'완료 후 다음 구매 10% 할인 (최대 20,000원)':p.price>=100000?'완료 후 다음 구매 8% 할인 (최대 10,000원)':p.price>=50000?'완료 후 다음 구매 5% 할인 (최대 5,000원)':'50,000원 이상 구매 시 다음 구매 할인 혜택이 지급됩니다.'}</div></div>
     <button class="btn primary block" style="margin-top:14px" onclick="createOrder('${esc(p.id)}')">주문 생성하고 주문실 열기</button>`);
   loadOrderCouponBox();
   setTimeout(()=>{ const q=$('#qty'); if(q) q.addEventListener('input',()=>{ if($('#couponCode')?.value.trim()) previewCoupon(); }); },0);
@@ -3111,7 +2762,7 @@ document.addEventListener('click',e=>{
         'VEOX 자판기봇 PRO PREMIUM':{name:'PRO PREMIUM',price:'59,000원',desc:'PRO의 상품·재고·수량·통계 기능에 관리자 운영 편의와 고급 주문 화면을 더한 상위형입니다.',features:['PRO 핵심 기능 전체','페이지형 카테고리 / 상품 탐색','재고 / 수량 / 통계','고급 주문 티켓 UI','구매 완료 로그 / 후기 흐름','관리자 화면 편의성 강화','VEOX 브랜딩 구성']}
       };
       const q=premiumCatalog[target];
-      if(q){ showModal('BOT SERIES 상세',`<div class="detail-meta"><span class="badge">VEOX BOT SERIES</span><span class="badge">PREMIUM</span></div><h3 style="font-size:24px;margin-bottom:8px">${q.name}</h3><p style="color:var(--soft);line-height:1.75">${esc(q.desc)}</p><div class="detail-price">${q.price}</div><div class="mini" style="font-weight:900;color:var(--cyan)">주요 기능</div><ul class="feature-list">${q.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><div class="notice-box" style="margin-top:14px"><b>💙 PREMIUM 추천</b><br>판매 화면의 첫인상과 주문 흐름까지 중요하다면 PREMIUM 구성을 확인해보세요.</div>`); }
+      if(q){ showModal('BOT SERIES 상세',`<div class="detail-meta"><span class="badge">VEOX BOT SERIES</span><span class="badge">PREMIUM</span></div><h3 style="font-size:24px;margin-bottom:8px">${q.name}</h3><p style="color:var(--soft);line-height:1.75">${esc(q.desc)}</p><div class="detail-price">${q.price}</div><div class="mini" style="font-weight:900;color:var(--cyan)">주요 기능</div><ul class="feature-list">${q.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><div class="notice-box" style="margin-top:14px"><b>💜 PREMIUM 추천</b><br>판매 화면의 첫인상과 주문 흐름까지 중요하다면 PREMIUM 구성을 확인해보세요.</div>`); }
     }
   }
   if(seriesScroll){
@@ -3164,4 +2815,649 @@ document.addEventListener('visibilitychange',()=>{ if(!document.hidden) heartbea
 init();
 </script>
 </body>
+
+<style>
+/* VEOXHUB 3.8 — clean white / grey / blue storefront + order room redesign */
+:root{
+  --bg:#f4f7fb!important;
+  --surface:#ffffff!important;
+  --surface-2:#f8fafc!important;
+  --surface-3:#eef4fb!important;
+  --line:#dfe6ee!important;
+  --line-2:#c8d4e2!important;
+  --text:#172033!important;
+  --soft:#4b5563!important;
+  --muted:#7b8798!important;
+  --blue:#2563eb!important;
+  --blue-2:#3b82f6!important;
+  --cyan:#60a5fa!important;
+  --green:#10b981!important;
+  --shadow:0 18px 45px rgba(31,53,83,.08)!important;
+  --radius:14px!important;
+}
+html{background:var(--bg)!important}
+body{
+  color:var(--text)!important;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(37,99,235,.08),transparent 28%),
+    radial-gradient(circle at 92% 8%,rgba(96,165,250,.07),transparent 24%),
+    linear-gradient(180deg,#f8fafc 0%,#f4f7fb 52%,#eef3f8 100%)!important;
+}
+body:before{
+  background-image:
+    linear-gradient(rgba(37,99,235,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,.035) 1px,transparent 1px)!important;
+  background-size:52px 52px!important;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 78%)!important;
+}
+body:after{display:none!important}
+.top{
+  background:rgba(255,255,255,.90)!important;
+  border-bottom:1px solid #dfe6ee!important;
+  box-shadow:0 8px 28px rgba(37,53,74,.05)!important;
+  backdrop-filter:blur(18px) saturate(130%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(130%)!important;
+}
+.brand{color:#162033!important}
+.brand-mark{
+  position:relative!important;
+  width:38px!important;height:38px!important;
+  border-radius:11px!important;
+  background:linear-gradient(135deg,#2563eb,#60a5fa)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.65)!important;
+  box-shadow:0 10px 24px rgba(37,99,235,.24)!important;
+  font-size:19px!important;font-weight:1000!important;
+}
+.brand-mark:before{
+  content:""!important;
+  position:absolute!important;inset:4px!important;
+  border:1px solid rgba(255,255,255,.34)!important;
+  border-radius:8px!important;
+  pointer-events:none!important;
+}
+.nav-links{color:#5b6778!important}
+.nav-menu-btn:hover{color:#2563eb!important;text-shadow:0 0 16px rgba(37,99,235,.12)!important}
+.nav-menu-btn:focus-visible{outline:2px solid rgba(37,99,235,.28)!important}
+.online-pill{
+  background:#fff!important;border-color:#dfe6ee!important;color:#64748b!important;
+  box-shadow:0 4px 14px rgba(31,53,83,.04)!important;
+}
+.online-dot{background:#10b981!important;box-shadow:0 0 10px rgba(16,185,129,.28)!important}
+.btn{
+  color:#334155!important;
+  background:#fff!important;
+  border:1px solid #d9e2ec!important;
+  border-radius:10px!important;
+  box-shadow:0 3px 12px rgba(31,53,83,.04)!important;
+}
+.btn:hover{border-color:#b8c7d8!important;box-shadow:0 8px 20px rgba(31,53,83,.07)!important}
+.btn.primary,.btn.blue,button.btn.primary{
+  color:#fff!important;
+  background:linear-gradient(135deg,#2563eb,#3b82f6)!important;
+  border-color:#2563eb!important;
+  box-shadow:0 10px 24px rgba(37,99,235,.20)!important;
+}
+.btn.primary:hover,.btn.blue:hover{box-shadow:0 14px 28px rgba(37,99,235,.26)!important}
+.btn.ghost,.glass-login{
+  background:#fff!important;
+  color:#475569!important;
+  border-color:#d9e2ec!important;
+}
+.btn.ghost:hover,.glass-login:hover{background:#f5f9ff!important;color:#2563eb!important;border-color:#bcd0ea!important}
+.hero{padding-top:44px!important}
+.hero-grid{gap:16px!important}
+.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result,.faq-grid details,.kpi-card,.searchbar,.filters,.tabbar{
+  color:var(--text)!important;
+  background:#fff!important;
+  border:1px solid #dfe6ee!important;
+  border-radius:16px!important;
+  box-shadow:0 16px 42px rgba(31,53,83,.065),inset 0 1px 0 rgba(255,255,255,.9)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.hero-copy{position:relative!important;overflow:hidden!important}
+.hero-copy:after{
+  content:"";position:absolute;right:-130px;top:-120px;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(37,99,235,.12),rgba(96,165,250,.035) 45%,transparent 70%)!important;
+  pointer-events:none;
+}
+.hero h1{color:#111827!important;letter-spacing:-.055em!important}
+.hero h1 span{
+  background:linear-gradient(90deg,#2563eb,#60a5fa)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
+  text-shadow:none!important;
+}
+.hero-desc{color:#5b6675!important}
+.hero-desc strong{color:#1e40af!important}
+.eyebrow{color:#2563eb!important;background:#eff6ff!important;border-color:#bfdbfe!important}
+.hero-metrics .metric,.metric{
+  background:#f8fafc!important;border-color:#e4ebf3!important;border-radius:12px!important;
+}
+.metric b{color:#172033!important}
+.metric span{color:#7b8798!important}
+.hero-visual{background:#f8fafc!important}
+.preview-panel{background:#fff!important;border-color:#dfe6ee!important;border-radius:12px!important;box-shadow:none!important}
+.preview-note{color:#2563eb!important;background:#eff6ff!important;border-left-color:#3b82f6!important}
+.preview-screen,.flow-step,.price-chip,.badge,.category-mark{
+  background:#f8fafc!important;border-color:#dfe6ee!important;color:#334155!important;
+}
+.tab,.segment{background:#fff!important;color:#64748b!important;border-color:#dfe6ee!important}
+.tab.active,.segment.active{
+  background:#eff6ff!important;color:#2563eb!important;border-color:#93c5fd!important;
+}
+.section-head h2{color:#172033!important}
+.section-head p,.tool-card p,.series-card p{color:#6b7687!important}
+.tool-kicker,.online-pill b{color:#2563eb!important}
+.product-card:before,.product-card.tone-template:before,.product-card.tone-auto:before,.product-card.tone-dev:before,.product-card.tone-guide:before,.product-card.tone-pack:before,.product-card.tone-design:before,.product-card.tone-option:before{
+  background:linear-gradient(180deg,#2563eb,#93c5fd)!important;
+}
+.product-card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important}
+.product-card:hover{transform:translateY(-3px)!important;border-color:#bfd2e8!important;box-shadow:0 22px 48px rgba(37,99,235,.10)!important}
+.feature-mini span:before{background:#3b82f6!important;box-shadow:none!important}
+.progress i{background:linear-gradient(90deg,#2563eb,#60a5fa)!important}
+.service-card{
+  border:1px solid #dfe6ee!important;background:#fff!important;border-radius:16px!important;
+  box-shadow:0 16px 40px rgba(31,53,83,.06)!important;
+}
+.service-card:before{background:linear-gradient(180deg,#2563eb,#60a5fa)!important}
+.service-price,.series-price,.price{color:#172033!important}
+.series-shell{
+  background:linear-gradient(145deg,#ffffff,#f4f8fd)!important;
+  border:1px solid #dfe6ee!important;border-radius:18px!important;
+  box-shadow:0 18px 46px rgba(31,53,83,.06)!important;
+}
+.series-card{
+  border:1px solid #dfe6ee!important;border-radius:15px!important;
+  background:linear-gradient(160deg,#ffffff,#f7faff)!important;
+  box-shadow:0 12px 30px rgba(31,53,83,.045)!important;
+}
+.series-card:before{background:radial-gradient(circle,rgba(37,99,235,.12),transparent 68%)!important}
+.series-num,.series-sub{color:#64748b!important}
+.series-icon{background:#eff6ff!important;border:1px solid #cfe0f5!important;color:#2563eb!important;box-shadow:none!important}
+.series-tag{background:#f8fafc!important;border:1px solid #dfe6ee!important;color:#526173!important}
+.series-premium-note{background:#eff6ff!important;border-color:#cfe0f5!important;color:#1d4ed8!important}
+.modal{background:rgba(15,23,42,.36)!important;backdrop-filter:blur(7px)!important}
+.modal-card{background:#fff!important}
+.input,.select,.textarea,.room-chat-compose .textarea{
+  background:#fff!important;color:#1f2937!important;border-color:#d7e0e9!important;
+  box-shadow:none!important;
+}
+.input::placeholder,.textarea::placeholder{color:#98a3b1!important}
+.input:focus,.select:focus,.textarea:focus,.room-chat-compose .textarea:focus{
+  border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(37,99,235,.10)!important;outline:none!important;
+}
+.store-bar,.toolbar{border-color:#dfe6ee!important}
+.footer{background:#fff!important;border-top:1px solid #dfe6ee!important}
+/* ===== clean order room: white/grey/blue, close to dashboard screenshot ===== */
+.modal:has(.room-app){background:rgba(15,23,42,.36)!important;padding:18px!important}
+.modal-card.room-wide{
+  width:min(1180px,96vw)!important;max-height:min(92vh,900px)!important;padding:0!important;
+  overflow:hidden!important;border:1px solid #d8e2ec!important;border-radius:18px!important;
+  background:#eef2f6!important;box-shadow:0 26px 70px rgba(15,23,42,.22)!important;
+}
+.room-app{grid-template-columns:minmax(0,54%) minmax(0,46%)!important;min-height:min(760px,92vh)!important;max-height:min(92vh,900px)!important;background:#eef2f6!important}
+.room-side{padding:22px!important;background:#f3f5f7!important;border-right:1px solid #dbe3eb!important}
+.room-side-head .mini,.room-chat-title span,.room-order-id,.room-detail-title,.room-progress-label,.room-mini-label,.room-info-cell span,.room-compose-meta,.room-delivery-note{color:#8591a1!important}
+.room-side-head h3{color:#182232!important;font-size:20px!important}
+.room-stat-pill{color:#64748b!important;background:#fff!important;border:1px solid #dbe3eb!important;border-radius:999px!important}
+.room-order-hero{background:#fff!important;border:1px solid #dbe3eb!important;border-radius:15px!important;box-shadow:0 6px 18px rgba(31,53,83,.045)!important}
+.room-order-hero h4{color:#182232!important}
+.room-order-price{color:#2563eb!important;font-size:24px!important}
+.room-detail-card,.room-progress-card{background:#fff!important;border:1px solid #dfe6ee!important;border-radius:14px!important;box-shadow:0 5px 16px rgba(31,53,83,.035)!important}
+.room-info-cell{background:#f8fafc!important;border:1px solid #e9eef3!important}
+.room-info-cell b{color:#273449!important}
+.room-bank-box{background:#eff6ff!important;border:1px solid #cfe0f5!important}
+.room-bank-row b{color:#1d4ed8!important}
+.room-progress-line{background:#e7edf4!important}
+.room-progress-line i{background:linear-gradient(90deg,#2563eb,#60a5fa)!important}
+.room-step{color:#9aa6b3!important}
+.room-step.done,.room-step.current{color:#273449!important}
+.room-step i{background:#fff!important;border:1px solid #dbe3eb!important;color:#94a3b8!important}
+.room-step.done i,.room-step.current i{border-color:#93c5fd!important;background:#eff6ff!important;color:#2563eb!important}
+.room-chat{background:#fff!important;border-left:0!important}
+.room-chat-head{padding:17px 20px!important;background:#fff!important;border-bottom:1px solid #e1e7ee!important}
+.room-chat-avatar{width:38px!important;height:38px!important;border-radius:12px!important;background:#eff6ff!important;color:#2563eb!important;box-shadow:none!important}
+.room-chat-title b{color:#1e293b!important}
+.room-online-dot{background:#10b981!important;box-shadow:none!important}
+.room-chat-head .btn.ghost{background:#fff!important;color:#64748b!important;border-color:#dbe3eb!important}
+.room-chat-messages{padding:18px 18px 12px!important;background:#f8fafc!important;gap:10px!important}
+.room-chat-messages .room-msg{background:#fff!important;color:#273449!important;border:1px solid #e2e8f0!important;box-shadow:0 3px 10px rgba(31,53,83,.045)!important;border-radius:15px 15px 15px 6px!important}
+.room-chat-messages .room-msg.mine{background:#dbeafe!important;border-color:#93c5fd!important;color:#1e3a8a!important;border-radius:15px 15px 6px 15px!important;box-shadow:none!important}
+.room-chat-messages .room-msg.mine .room-msg-head,.room-chat-messages .room-msg.mine .room-msg-head b,.room-chat-messages .room-msg.mine .room-msg-head span{color:#365d99!important}
+.room-chat-messages .room-msg-head{color:#94a3b8!important}.room-chat-messages .room-msg-head b{color:#526173!important}
+.room-chat-messages .room-msg.system{background:#f3f5f7!important;border:1px dashed #d8e1ea!important;color:#7a8796!important}
+.room-chat-messages .room-attachment{background:#f8fafc!important;border-color:#dce5ee!important;color:#334155!important}
+.room-chat-compose{padding:12px 14px 14px!important;background:#fff!important;border-top:1px solid #e1e7ee!important}
+.room-quick-btn{background:#fff!important;color:#66758a!important;border:1px solid #dce4ec!important;border-radius:999px!important}
+.room-quick-btn:hover{color:#2563eb!important;border-color:#93c5fd!important;background:#eff6ff!important}
+.room-chat-compose .textarea{background:#f9fbfd!important}
+.room-file-label{background:#fff!important;color:#64748b!important;border-color:#dce4ec!important}
+.room-chat-compose .btn.primary,.room-delivery-actions .btn.blue,.room-admin-actions .btn.blue{background:#2563eb!important;border-color:#2563eb!important;box-shadow:0 7px 16px rgba(37,99,235,.15)!important}
+.room-chat-compose .btn.primary:hover,.room-delivery-actions .btn.blue:hover,.room-admin-actions .btn.blue:hover{background:#1d4ed8!important}
+.room-admin-actions .btn.ghost,.room-delivery-actions .btn.ghost{background:#fff!important;color:#64748b!important;border-color:#dce4ec!important}
+.room-delivery-box{background:#eff6ff!important;border:1px solid #cfe0f5!important;border-radius:14px!important}
+.room-delivery-head b{color:#1d4ed8!important}
+.room-delivery-fields input,.room-delivery-fields textarea{background:#fff!important;color:#273449!important;border:1px solid #dce4ec!important}
+.room-delivery-fields input:focus,.room-delivery-fields textarea:focus{border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(37,99,235,.08)!important}
+.order-reopen{background:#fff!important;border:1px solid #dce4ec!important;box-shadow:0 15px 35px rgba(31,53,83,.12)!important}
+.order-reopen-icon{background:#eff6ff!important;border-color:#cfe0f5!important}
+.order-reopen-copy b{color:#273449!important}.order-reopen-copy span{color:#7d8998!important}
+.order-reopen-btn{background:#2563eb!important;box-shadow:none!important}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr!important}.room-app{grid-template-columns:1fr!important}.room-side{border-right:0!important;border-bottom:1px solid #dbe3eb!important}}
+@media(max-width:700px){.hero-copy{padding:28px!important}.hero h1{font-size:45px!important}.nav-links{display:none!important}.section{padding:56px 0!important}}
+</style>
+
+
+<style id="veox39-dashboard-ui">
+:root{
+  --bg:#f5f7fb; --surface:#ffffff; --surface-2:#f8fafc; --surface-3:#eef4ff;
+  --line:#dfe6ef; --line-strong:#cbd8e8; --text:#172033; --soft:#58677b; --muted:#8a97a8;
+  --blue:#3b82f6; --blue-strong:#2563eb; --blue-soft:#eaf2ff; --cyan:#60a5fa; --green:#22c55e;
+  --shadow:0 10px 30px rgba(31,53,83,.06); --radius:14px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg)!important;color:var(--text)!important;line-height:1.58!important}
+body:before{display:none!important}
+.wrap{width:min(1280px,100%)!important;padding:0 28px!important}
+.top{
+  position:fixed!important;left:0;top:0;bottom:0;width:236px;height:100vh!important;
+  background:#fff!important;border-right:1px solid var(--line)!important;
+  box-shadow:8px 0 28px rgba(31,53,83,.035)!important;backdrop-filter:none!important;
+}
+.nav{height:100%;min-height:0!important;width:100%!important;padding:20px 16px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:16px!important}
+.brand{font-size:18px!important;color:#142033!important;padding:4px 5px 14px!important}
+.brand-mark{width:38px!important;height:38px!important;border-radius:12px!important;background:linear-gradient(135deg,#2563eb,#60a5fa)!important;box-shadow:0 10px 25px rgba(37,99,235,.18)!important;font-weight:1000}
+.nav-links{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important;color:#66758a!important;font-size:13px!important;flex:1!important;min-height:0!important}
+.nav-menu-btn{display:flex!important;align-items:center!important;gap:10px!important;width:100%!important;text-align:left!important;padding:11px 13px!important;border-radius:11px!important;color:#64748b!important;border:1px solid transparent!important}
+.nav-menu-btn:before{content:'•';color:#b5c3d4;font-size:16px;line-height:1}
+.nav-menu-btn:hover{color:#1d4ed8!important;background:#eff6ff!important;text-shadow:none!important;transform:none!important}
+.nav-actions{margin-top:auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important}
+.nav-actions .online-pill{grid-column:1/-1!important;justify-content:center!important;background:#f8fafc!important;border-color:var(--line)!important;color:#65758a!important}
+.online-dot{background:#22c55e!important;box-shadow:none!important}
+.btn{border-radius:11px!important}
+.btn.primary{background:#2563eb!important;color:#fff!important;border-color:#2563eb!important;box-shadow:0 8px 18px rgba(37,99,235,.12)!important}
+.btn.primary:hover{background:#1d4ed8!important;color:#fff!important;box-shadow:0 12px 24px rgba(37,99,235,.16)!important}
+.btn.blue{background:#2563eb!important;border-color:#2563eb!important;box-shadow:0 8px 18px rgba(37,99,235,.12)!important}
+.btn.ghost{background:#fff!important;color:#5f6f84!important;border-color:#d9e2ec!important}
+.btn.ghost:hover{background:#f8fbff!important;color:#2563eb!important;border-color:#b9cef0!important}
+main{margin-left:236px!important;min-height:100vh!important}
+.hero{padding:46px 0 24px!important}
+.hero-grid{grid-template-columns:minmax(0,1.12fr) minmax(380px,.88fr)!important;gap:18px!important}
+.hero-copy,.hero-visual,.product-card,.tool-card,.order-card,.modal-card,.admin-block,.notice-box,.guide-item,.choice-panel,.recommend-result,.faq-grid details,.kpi-card{
+  border:1px solid var(--line)!important;background:#fff!important;box-shadow:var(--shadow)!important;color:var(--text)!important;border-radius:18px!important
+}
+.hero-copy,.hero-visual{overflow:hidden!important;position:relative!important}
+.hero-copy:before,.hero-copy:after,.hero-visual:before,.hero-visual:after,.product-card:after,.tool-card:after{display:none!important}
+.hero-copy{padding:46px!important}
+.hero .eyebrow{color:#2563eb!important;background:#eff6ff!important;border:1px solid #d7e7ff!important;border-radius:999px!important;display:inline-flex!important;padding:6px 10px!important}
+.hero h1{color:#101827!important;text-shadow:none!important}
+.hero h1 span{color:#2563eb!important;text-shadow:none!important;background:none!important}
+.hero-desc{color:#657286!important}
+.hero-desc strong{color:#1d4ed8!important}
+.hero-metrics .metric{background:#f8fafc!important;border-color:#e4eaf1!important}
+.metric b{color:#1e293b!important}
+.metric span{color:#7a8899!important}
+.hero-visual{padding:0!important;background:#f9fbfe!important}
+.preview-head{background:#fff!important;border-bottom:1px solid var(--line)!important;color:#263348!important}
+.preview-screen{background:#f7faff!important}
+.preview-panel{background:#fff!important;border:1px solid #e1e8f2!important;box-shadow:none!important;color:#273449!important}
+.preview-order span,.preview-note,.flow-step span{color:#8190a2!important}
+.price-chip{background:#eff6ff!important;color:#2563eb!important;border-color:#cfe0f5!important}
+.series-section{padding:10px 0 30px!important}
+.series-shell{background:#fff!important;border:1px solid var(--line)!important;border-radius:18px!important;box-shadow:var(--shadow)!important}
+.series-head h2,.section-head h2{color:#172033!important}
+.series-head p,.section-head p{color:#7b899a!important}
+.series-card{background:linear-gradient(155deg,#fff,#f9fbfe)!important;border:1px solid var(--line)!important;box-shadow:none!important}
+.series-card:hover,.tool-card:hover,.product-card:hover,.order-card:hover,.guide-item:hover{border-color:#bfd3ee!important;box-shadow:0 14px 32px rgba(31,53,83,.08)!important;transform:translateY(-2px)!important}
+.series-icon{background:#eff6ff!important;border-color:#d2e3fb!important;color:#2563eb!important;box-shadow:none!important}
+.series-tag{background:#f8fafc!important;border-color:#dfe7ef!important;color:#607086!important}
+.series-premium-note{background:#eff6ff!important;border-color:#d3e3fb!important;color:#2563eb!important}
+.tool-card{background:#fff!important}
+.tool-kicker,.series-num{color:#6d7d91!important}
+.choice-panel,.recommend-result{background:#fff!important}
+.toolbar,.store-bar,.tabs,.searchbar,.filters{background:#fff!important;border:1px solid var(--line)!important;box-shadow:0 5px 18px rgba(31,53,83,.04)!important}
+.input,.select,.textarea{background:#fff!important;color:#223047!important;border-color:#d7e0ea!important;border-radius:11px!important}
+.input:focus,.select:focus,.textarea:focus{border-color:#7aa9e8!important;box-shadow:0 0 0 3px rgba(37,99,235,.10)!important}
+.product-card{background:#fff!important}
+.product-card:before{background:linear-gradient(180deg,#2563eb,#60a5fa)!important}
+.product-card h3{color:#1a2638!important}
+.product-card p,.product-card .desc{color:#728197!important}
+.price,.service-price,.series-price{color:#172033!important}
+.badge{background:#eff6ff!important;color:#2563eb!important;border-color:#d2e3fb!important}
+.order-card{background:#fff!important}
+.order-card .status{background:#eff6ff!important;color:#2563eb!important}
+.admin-block{background:#fff!important}
+.kpi-card{background:#fff!important}
+.footer{margin-left:0!important;background:#fff!important;border-top:1px solid var(--line)!important;color:#8794a6!important}
+.modal{background:rgba(15,23,42,.34)!important;backdrop-filter:blur(6px)!important}
+.modal-card{background:#fff!important}
+/* Screenshot-like order room */
+.modal:has(.room-app){padding:14px!important}
+.modal-card.room-wide{width:min(1240px,96vw)!important;max-height:min(94vh,940px)!important;background:#eef3f8!important;border:1px solid #d6e0ea!important;border-radius:18px!important;box-shadow:0 28px 80px rgba(15,23,42,.20)!important}
+.room-app{grid-template-columns:minmax(390px,46%) minmax(0,54%)!important;min-height:min(760px,94vh)!important;max-height:min(94vh,940px)!important;background:#eef3f8!important}
+.room-side{padding:22px!important;background:#f3f6f9!important;border-right:1px solid #dbe4ed!important}
+.room-side-head h3{color:#172033!important}
+.room-stat-pill{background:#fff!important;border-color:#d8e2ec!important;color:#66758a!important}
+.room-order-hero,.room-detail-card,.room-progress-card{background:#fff!important;border:1px solid #dde6ef!important;box-shadow:0 5px 16px rgba(31,53,83,.045)!important}
+.room-order-hero h4{color:#172033!important}
+.room-order-price{color:#2563eb!important}
+.room-info-cell{background:#f8fafc!important;border:1px solid #e7edf3!important}
+.room-info-cell b{color:#2a3648!important}
+.room-bank-box{background:#eef6ff!important;border-color:#d2e3fb!important}
+.room-bank-row b{color:#1d4ed8!important}
+.room-progress-line{background:#e5ebf2!important}
+.room-progress-line i{background:linear-gradient(90deg,#2563eb,#60a5fa)!important}
+.room-step i{background:#fff!important;border-color:#d9e2ec!important;color:#96a4b4!important}
+.room-step.done i,.room-step.current i{background:#eff6ff!important;border-color:#9bc0f1!important;color:#2563eb!important}
+.room-step.done,.room-step.current{color:#34445a!important}
+.room-chat{background:#fff!important;border-left:0!important}
+.room-chat-head{padding:16px 20px!important;background:#fff!important;border-bottom:1px solid #e3e8ee!important}
+.room-chat-avatar{background:#eff6ff!important;color:#2563eb!important;box-shadow:none!important}
+.room-chat-title b{color:#172033!important}
+.room-chat-messages{background:#f8fafc!important;padding:18px 18px 12px!important}
+.room-chat-messages .room-msg{background:#fff!important;border:1px solid #e2e8f0!important;color:#273449!important;border-radius:15px 15px 15px 5px!important;box-shadow:0 3px 10px rgba(31,53,83,.045)!important}
+.room-chat-messages .room-msg.mine{background:#dbeafe!important;border-color:#93c5fd!important;color:#1e3a8a!important;border-radius:15px 15px 5px 15px!important}
+.room-chat-messages .room-msg.system{background:#f2f5f8!important;border:1px dashed #d7e0e8!important;color:#758397!important}
+.room-chat-messages .room-attachment{background:#f8fbff!important;border-color:#d6e1ed!important;color:#324257!important}
+.room-quick-btn{background:#fff!important;border-color:#dce5ee!important;color:#64758a!important}
+.room-quick-btn:hover{background:#eff6ff!important;border-color:#9cc0ef!important;color:#2563eb!important}
+.room-chat-compose{background:#fff!important;border-top:1px solid #e3e8ee!important}
+.room-chat-compose .textarea{background:#f8fafc!important;border-color:#d9e2eb!important}
+.room-chat-compose .btn.primary,.room-delivery-actions .btn.blue,.room-admin-actions .btn.blue{background:#2563eb!important;border-color:#2563eb!important}
+.room-file-label{background:#fff!important;border-color:#dfe6ee!important;color:#63748a!important}
+.room-delivery-box{background:#eef6ff!important;border-color:#cfe0f5!important}
+.room-delivery-head b{color:#1d4ed8!important}
+.room-delivery-fields input,.room-delivery-fields textarea{background:#fff!important;border-color:#d7e0ea!important;color:#263449!important}
+.order-reopen{background:#fff!important;border-color:#dce4ec!important;box-shadow:0 15px 35px rgba(31,53,83,.12)!important}
+.order-reopen-icon{background:#eff6ff!important;border-color:#d1e2f7!important}
+.order-reopen-btn{background:#2563eb!important}
+@media(max-width:980px){
+  .top{position:sticky!important;left:auto;top:0;bottom:auto;width:100%!important;height:auto!important;border-right:0!important;border-bottom:1px solid var(--line)!important;box-shadow:none!important}
+  .nav{height:auto!important;padding:11px 14px!important;flex-direction:row!important;align-items:center!important;gap:10px!important}
+  .brand{padding:0!important}.brand-mark{width:34px!important;height:34px!important}
+  .nav-links{display:none!important}.nav-actions{display:flex!important;margin:0 0 0 auto!important;align-items:center!important}.nav-actions .online-pill{display:none!important}
+  .nav-actions .btn{min-height:34px!important;padding:7px 10px!important}
+  main{margin-left:0!important}
+  .wrap{padding:0 18px!important}
+}
+@media(max-width:720px){
+  .hero{padding:26px 0 18px!important}.hero-grid{grid-template-columns:1fr!important}.hero-copy{padding:28px!important}.hero h1{font-size:44px!important}
+  .series-grid{grid-template-columns:1fr!important}.offer-grid{grid-template-columns:1fr!important}.product-grid{grid-template-columns:1fr!important}
+  .modal-card.room-wide{width:100%!important;max-height:96vh!important;border-radius:15px!important}.room-app{grid-template-columns:1fr!important;max-height:96vh!important;overflow:auto!important}.room-side{border-right:0!important;border-bottom:1px solid #dbe4ed!important}.room-chat{min-height:480px!important}
+}
+</style>
 </html>
+<style>
+/* VEOX 3.7 — Clean Order Room UI inspired by modern order/chat dashboards */
+.modal:has(.room-app){
+  background:rgba(28,32,36,.52)!important;
+  padding:18px!important;
+}
+.modal-card.room-wide{
+  width:min(1180px,96vw)!important;
+  max-height:min(92vh,900px)!important;
+  border:0!important;
+  border-radius:18px!important;
+  background:#f4f5f6!important;
+  color:#24282d!important;
+  box-shadow:0 24px 70px rgba(22,27,31,.24)!important;
+}
+.room-app{
+  grid-template-columns:minmax(0,46%) minmax(0,54%)!important;
+  min-height:min(760px,92vh)!important;
+  max-height:min(92vh,900px)!important;
+  background:#f4f5f6!important;
+}
+.room-side{
+  padding:22px!important;
+  background:#f1f2f3!important;
+  border-right:1px solid #dde1e4!important;
+  overflow:auto!important;
+}
+.room-side-head{
+  margin-bottom:16px!important;
+  align-items:center!important;
+}
+.room-side-head .mini,.room-chat-title span,.room-order-id,
+.room-detail-title,.room-progress-label,.room-mini-label,
+.room-info-cell span,.room-compose-meta,.room-delivery-note{
+  color:#8b949e!important;
+}
+.room-side-head h3{
+  color:#202428!important;
+  font-size:20px!important;
+  font-weight:900!important;
+  letter-spacing:-.03em!important;
+}
+.room-stat-pill{
+  color:#63707a!important;
+  background:#fff!important;
+  border:1px solid #dce1e4!important;
+  border-radius:999px!important;
+  padding:7px 10px!important;
+  font-weight:800!important;
+}
+.room-order-hero{
+  display:grid!important;
+  gap:10px!important;
+  margin-bottom:12px!important;
+  padding:17px 18px!important;
+  border:1px solid #d9e7e7!important;
+  border-radius:16px!important;
+  background:#ffffff!important;
+  box-shadow:0 5px 18px rgba(33,43,48,.05)!important;
+}
+.room-order-hero:before{display:none!important}
+.room-order-hero h4{
+  color:#1f2529!important;
+  font-size:18px!important;
+  letter-spacing:-.02em!important;
+}
+.room-order-price{
+  color:#007f7a!important;
+  font-size:24px!important;
+  font-weight:1000!important;
+}
+.room-detail-card,
+.room-progress-card{
+  margin-bottom:10px!important;
+  padding:15px!important;
+  border:1px solid #e0e4e6!important;
+  border-radius:15px!important;
+  background:#fff!important;
+  box-shadow:0 3px 12px rgba(33,43,48,.035)!important;
+}
+.room-info-grid{gap:7px!important}
+.room-info-cell{
+  padding:10px 11px!important;
+  border:1px solid #eef0f1!important;
+  border-radius:11px!important;
+  background:#fafbfb!important;
+}
+.room-info-cell b{color:#2b3035!important;font-weight:800!important}
+.room-bank-box{
+  padding:12px 13px!important;
+  border:1px solid #cce7e5!important;
+  border-radius:12px!important;
+  background:#f0fbfa!important;
+}
+.room-bank-row b{color:#165b59!important}
+.room-progress-card{padding:14px 15px!important}
+.room-progress-line{height:6px!important;background:#e7ecee!important}
+.room-progress-line i{background:linear-gradient(90deg,#66d4d0,#45bbb7)!important}
+.room-step{color:#a0a7ad!important;font-weight:700!important}
+.room-step.done,.room-step.current{color:#1d292d!important}
+.room-step i{
+  width:28px!important;height:28px!important;
+  border:1px solid #dfe4e6!important;
+  background:#fff!important;
+  color:#8f979d!important;
+}
+.room-step.done i,.room-step.current i{
+  border-color:#68cfcb!important;
+  background:#dcf5f3!important;
+  color:#057d79!important;
+}
+.room-chat{
+  border-left:0!important;
+  background:#fff!important;
+  display:flex!important;
+}
+.room-chat-head{
+  padding:17px 20px!important;
+  border-bottom:1px solid #e3e6e8!important;
+  background:#fff!important;
+  align-items:center!important;
+}
+.room-chat-avatar{
+  width:38px!important;height:38px!important;
+  border-radius:12px!important;
+  background:#dff5f3!important;
+  color:#087d79!important;
+  box-shadow:none!important;
+}
+.room-chat-title b{color:#1f2529!important;font-size:14px!important}
+.room-chat-title span{font-size:11px!important}
+.room-online-dot{width:7px!important;height:7px!important;background:#32b58f!important;box-shadow:none!important}
+.room-chat-head .btn.ghost{
+  color:#67737b!important;
+  background:#fff!important;
+  border-color:#dfe4e6!important;
+}
+.room-chat-messages{
+  padding:18px 18px 12px!important;
+  background:#f8f9fa!important;
+  gap:10px!important;
+}
+.room-chat-messages .room-msg{
+  max-width:76%!important;
+  padding:11px 13px!important;
+  border:1px solid #e4e7e9!important;
+  border-radius:15px 15px 15px 6px!important;
+  background:#fff!important;
+  color:#2a3035!important;
+  box-shadow:0 3px 10px rgba(40,48,53,.045)!important;
+}
+.room-chat-messages .room-msg.mine{
+  margin-left:auto!important;
+  border-color:#8fdcd8!important;
+  border-radius:15px 15px 6px 15px!important;
+  background:#74d1cd!important;
+  color:#fff!important;
+  box-shadow:none!important;
+}
+.room-chat-messages .room-msg.mine .room-msg-head,
+.room-chat-messages .room-msg.mine .room-msg-head b,
+.room-chat-messages .room-msg.mine .room-msg-head span{color:rgba(255,255,255,.82)!important}
+.room-chat-messages .room-msg-head{font-size:10px!important;margin-bottom:5px!important;color:#9aa2a8!important}
+.room-chat-messages .room-msg-head b{color:#5b656d!important}
+.room-chat-messages .room-msg-text{font-size:13px!important;line-height:1.6!important}
+.room-chat-messages .room-msg.system{
+  max-width:100%!important;
+  border:1px dashed #d9dfe2!important;
+  background:#f3f5f6!important;
+  color:#7f8991!important;
+  box-shadow:none!important;
+}
+.room-chat-messages .room-attachment{
+  border-color:#dfe5e7!important;
+  background:#f8fafb!important;
+  color:#344049!important;
+}
+.room-chat-compose{
+  padding:12px 14px 14px!important;
+  border-top:1px solid #e4e7e9!important;
+  background:#fff!important;
+}
+.room-quick-row{gap:6px!important;margin-bottom:8px!important}
+.room-quick-btn{
+  border:1px solid #dfe5e7!important;
+  background:#fff!important;
+  color:#65727a!important;
+  border-radius:999px!important;
+  padding:7px 10px!important;
+}
+.room-quick-btn:hover{
+  color:#007d78!important;
+  border-color:#9bd8d5!important;
+  background:#effbfa!important;
+}
+.room-chat-compose .textarea{
+  min-height:58px!important;
+  padding:12px 13px!important;
+  border:1px solid #d9e0e3!important;
+  border-radius:13px!important;
+  background:#f9fafb!important;
+  color:#2a3035!important;
+  box-shadow:none!important;
+}
+.room-chat-compose .textarea:focus{
+  border-color:#77cfc9!important;
+  box-shadow:0 0 0 3px rgba(71,193,187,.10)!important;
+}
+.room-compose-bottom{margin-top:8px!important}
+.room-file-label{
+  color:#637078!important;
+  border:1px solid #e0e5e7!important;
+  background:#fff!important;
+}
+.room-chat-compose .btn.primary,
+.room-delivery-actions .btn.blue,
+.room-admin-actions .btn.blue{
+  color:#fff!important;
+  background:#168f89!important;
+  border-color:#168f89!important;
+  box-shadow:0 5px 14px rgba(22,143,137,.16)!important;
+}
+.room-chat-compose .btn.primary:hover,
+.room-delivery-actions .btn.blue:hover,
+.room-admin-actions .btn.blue:hover{background:#117d78!important}
+.room-admin-actions .btn.ghost,
+.room-delivery-actions .btn.ghost{
+  color:#56636b!important;
+  background:#fff!important;
+  border-color:#dfe4e6!important;
+}
+.room-delivery-box{
+  margin-top:10px!important;
+  padding:13px!important;
+  border:1px solid #cfe7e5!important;
+  border-radius:14px!important;
+  background:#f2fbfa!important;
+}
+.room-delivery-head b{color:#176b68!important;font-size:12px!important}
+.room-delivery-fields input,.room-delivery-fields textarea{
+  border:1px solid #dce4e6!important;
+  background:#fff!important;
+  color:#2c3236!important;
+}
+.room-delivery-fields input:focus,.room-delivery-fields textarea:focus{
+  border-color:#78cbc6!important;
+  box-shadow:0 0 0 3px rgba(71,193,187,.08)!important;
+}
+.order-reopen{
+  border:1px solid #dce4e6!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 15px 35px rgba(26,34,39,.14)!important;
+}
+.order-reopen-icon{background:#effbfa!important;border-color:#cae9e7!important}
+.order-reopen-copy b{color:#2a3035!important}
+.order-reopen-copy span{color:#7e8890!important}
+.order-reopen-btn{background:#168f89!important;box-shadow:none!important}
+@media(max-width:840px){
+  .modal:has(.room-app){padding:8px!important}
+  .modal-card.room-wide{width:100%!important;border-radius:16px!important}
+  .room-app{grid-template-columns:1fr!important;max-height:94vh!important;overflow:auto!important}
+  .room-side{border-right:0!important;border-bottom:1px solid #dfe3e5!important}
+  .room-chat{min-height:500px!important}
+}
+@media(max-width:560px){
+  .room-side{padding:14px!important}
+  .room-chat-head{padding:14px!important}
+  .room-chat-messages{padding:14px 12px 10px!important}
+  .room-chat-messages .room-msg{max-width:88%!important}
+  .room-order-price{font-size:21px!important}
+}
+</style>
