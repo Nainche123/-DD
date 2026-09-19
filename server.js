@@ -98,7 +98,7 @@ for (const p of VEOX_51_PRODUCTS) {
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; if (o.payerName === undefined) o.payerName = ''; if (!Array.isArray(o.messages)) o.messages = []; if (!o.updatedAt) o.updatedAt = o.createdAt || new Date().toISOString(); }
 if (!db.settings) db.settings = seed.settings;
 if (db.settings.siteName === 'VEOX STORE') { db.settings.siteName = 'VEOXHUB'; }
-if (db.settings.discordInvite === undefined) db.settings.discordInvite = process.env.DISCORD_INVITE_URL || '';
+if (db.settings.discordInvite === undefined || db.settings.discordInvite === '') { if (process.env.DISCORD_INVITE_URL) db.settings.discordInvite = process.env.DISCORD_INVITE_URL; }
 if (db.settings.bankInfo === undefined) db.settings.bankInfo = process.env.BANK_INFO || '관리자에게 입금 계좌를 안내받아 주세요.';
 if (db.settings.webhookUrl === undefined) db.settings.webhookUrl = process.env.DISCORD_WEBHOOK_URL || '';
 if (db.settings.goalAmount === undefined) db.settings.goalAmount = 500000;
@@ -116,21 +116,10 @@ db.products = db.products.filter(p => !LEGACY_GAME_TERMS.some(term => String(p.n
 // Premium tiers are presented without inventing a price; the website routes buyers to Discord for final purchase details.
 const VEOX_PREMIUM_PRODUCTS = [
   { id:'vexo-bot-basic-premium', name:'VEOX 자판기봇 BASIC PREMIUM', category:'자판기봇', price:29000, badge:'PREMIUM', description:'BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 VEOX 브랜딩을 더한 프리미엄형입니다.', features:['BASIC 전체 기능 포함','고급 자판기 패널','상품 상세·선택 UI 강화','주문 티켓 UI 강화','지급 완료·구매 감사 로그 디자인','VEOX 브랜딩 구성'] },
-  { id:'vexo-bot-pro-premium', name:'VEOX 자판기봇 PRO PREMIUM', category:'자판기봇', price:59000, badge:'인기 ULTIMATE', description:'PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.', features:['PRO 전체 기능 포함','페이지형 카테고리·상품 탐색','재고·수량·통계 운영','고급 주문 티켓 UI','지급 완료·구매 감사 로그','관리자 운영 편의 강화','VEOX 프리미엄 브랜딩'] }
+  { id:'vexo-bot-pro-premium', name:'VEOX 자판기봇 PRO PREMIUM', category:'자판기봇', price:59000, badge:'ULTIMATE', description:'PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.', features:['PRO 전체 기능 포함','페이지형 카테고리·상품 탐색','재고·수량·통계 운영','고급 주문 티켓 UI','지급 완료·구매 감사 로그','관리자 운영 편의 강화','VEOX 프리미엄 브랜딩'] }
 ];
-// id(이름은 폴백) 기준으로 매번 배지/가격/설명을 동기화합니다. 예전처럼 "이미 있으면 skip"만
-// 하면 이미 운영 중인 스토어의 db.json에는 새 배지가 절대 반영되지 않습니다.
-for (const p of VEOX_PREMIUM_PRODUCTS) {
-  const existing = db.products.find(item => item.id === p.id) || db.products.find(item => item.name === p.name);
-  if (existing) {
-    existing.badge = p.badge;
-    existing.price = p.price;
-    existing.description = p.description;
-    existing.features = p.features;
-  } else {
-    db.products.push(p);
-  }
-}
+const premiumExisting = new Set(db.products.map(p => p.name));
+for (const p of VEOX_PREMIUM_PRODUCTS) if (!premiumExisting.has(p.name)) db.products.push(p);
 
 const VEOX_BOT_SERIES = [
   { key:'basic', name:'BASIC', productName:'VEOX 자판기봇 BASIC', status:'판매중', subtitle:'가볍게 시작하는 기본 자판기봇' },
@@ -965,17 +954,12 @@ app.patch('/api/admin/orders/:id', requireAdmin, async (req, res) => {
   const result = transitionOrder(order, status, req.user.id, req.user.username);
   if (!result.ok) return res.status(400).json({ error: result.error });
   appendSystemMessage(order, `주문 상태가 \`${status}\`(으)로 변경되었습니다.`, result.now);
-  let rewardCoupon = null;
   if (status === '지급완료') {
-    // Was missing here before: the quick status-dropdown path never called issueCompletionCoupon,
-    // so orders completed this way (as opposed to via /complete or /deliver) silently got no coupon.
-    rewardCoupon = issueCompletionCoupon(order);
-    if (rewardCoupon) { order.rewardCouponCode = rewardCoupon.code; appendSystemMessage(order, rewardCouponMessage(rewardCoupon), result.now); }
     createPurchaseLog(order);
     await sendDiscordCompletionNotice(order).catch(() => {});
   }
   saveDb();
-  res.json({ order, rewardCoupon });
+  res.json({ order });
 });
 
 app.post('/api/admin/orders/:id/approve', requireAdmin, (req, res) => {
@@ -1005,14 +989,6 @@ function issueCompletionCoupon(order) {
   return coupon;
 }
 
-// Surfaces the reward coupon in the order room itself (not just the quiet "쿠폰·혜택"
-// page the buyer may never open) and asks for a review in the same breath, since
-// completion is the moment they're most likely to notice and act on it.
-function rewardCouponMessage(coupon) {
-  const expires = coupon.expiresAt ? new Date(coupon.expiresAt).toLocaleDateString('ko-KR') : '';
-  return `🎁 구매해 주셔서 감사합니다! 후기를 남겨주시면 큰 힘이 됩니다 :) 다음 구매에 바로 쓰실 수 있는 5% 할인 쿠폰도 이미 발급해 드렸어요 → 쿠폰 코드 \`${coupon.code}\`${expires ? ` (${expires}까지)` : ''} · 상단 "쿠폰·혜택" 메뉴에서도 확인하실 수 있어요.`;
-}
-
 app.post('/api/admin/orders/:id/complete', requireAdmin, async (req, res) => {
   const order = db.orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
@@ -1020,7 +996,7 @@ app.post('/api/admin/orders/:id/complete', requireAdmin, async (req, res) => {
   if (!result.ok) return res.status(400).json({ error: result.error });
   appendSystemMessage(order, '✅ 상품 지급이 완료되었습니다. 아래 주문실의 파일·사진·링크를 확인해 주세요.', result.now);
   const rewardCoupon = issueCompletionCoupon(order);
-  if (rewardCoupon) { order.rewardCouponCode = rewardCoupon.code; appendSystemMessage(order, rewardCouponMessage(rewardCoupon), result.now); }
+  if (rewardCoupon) order.rewardCouponCode = rewardCoupon.code;
   createPurchaseLog(order);
   saveDb();
   await sendDiscordCompletionNotice(order).catch(() => {});
@@ -1075,7 +1051,6 @@ app.post('/api/admin/orders/:id/deliver', requireAdmin, async (req, res) => {
       attachment:null,
       createdAt:now
     });
-    if (rewardCoupon) appendSystemMessage(order, rewardCouponMessage(rewardCoupon), now);
   }
   saveDb();
   if (shouldComplete) await sendDiscordCompletionNotice(order).catch(() => {});
@@ -1096,7 +1071,7 @@ app.patch('/api/admin/settings' , requireAdmin, (req, res) => {
 
 function fallbackSvg(res, label = 'VEOXHUB') {
   const safe = String(label).replace(/[<>&"']/g, ' ').trim().slice(0, 28) || 'VEOXHUB';
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6d28d9"/><stop offset="0.55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#c084fc"/></linearGradient><radialGradient id="r" cx="70%" cy="20%"><stop offset="0" stop-color="#f5eefe" stop-opacity=".55"/><stop offset="1" stop-color="#f5eefe" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="700" fill="#160d24"/><rect width="1200" height="700" fill="url(#g)" opacity=".88"/><circle cx="920" cy="100" r="300" fill="url(#r)"/><circle cx="170" cy="580" r="240" fill="#4c1d95" opacity=".42"/><rect x="85" y="92" width="1030" height="516" rx="42" fill="#120b1b" fill-opacity=".32" stroke="#f5eefe" stroke-opacity=".2"/><text x="100" y="255" fill="#fff" font-family="Arial, sans-serif" font-size="78" font-weight="800">VEOXHUB</text><text x="104" y="325" fill="#efe4ff" font-family="Arial, sans-serif" font-size="28" font-weight="700">DISCORD SELLER AUTOMATION</text><text x="104" y="405" fill="#eadcff" font-family="Arial, sans-serif" font-size="22">${safe}</text><circle cx="1030" cy="500" r="54" fill="#fff" fill-opacity=".12"/><path d="M1005 500h50M1030 475v50" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="0.55" stop-color="#2563eb"/><stop offset="1" stop-color="#60a5fa"/></linearGradient><radialGradient id="r" cx="70%" cy="20%"><stop offset="0" stop-color="#eaf2ff" stop-opacity=".55"/><stop offset="1" stop-color="#eaf2ff" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="700" fill="#0b1a33"/><rect width="1200" height="700" fill="url(#g)" opacity=".88"/><circle cx="920" cy="100" r="300" fill="url(#r)"/><circle cx="170" cy="580" r="240" fill="#1d4ed8" opacity=".42"/><rect x="85" y="92" width="1030" height="516" rx="42" fill="#0b1a33" fill-opacity=".32" stroke="#eaf2ff" stroke-opacity=".2"/><text x="100" y="255" fill="#fff" font-family="Arial, sans-serif" font-size="78" font-weight="800">VEOXHUB</text><text x="104" y="325" fill="#dbeafe" font-family="Arial, sans-serif" font-size="28" font-weight="700">DISCORD SELLER AUTOMATION</text><text x="104" y="405" fill="#eaf2ff" font-family="Arial, sans-serif" font-size="22">${safe}</text><circle cx="1030" cy="500" r="54" fill="#fff" fill-opacity=".12"/><path d="M1005 500h50M1030 475v50" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>`;
   res.type('svg').send(svg);
 }
 
