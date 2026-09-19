@@ -87,74 +87,6 @@ for (const p of VEOX_51_PRODUCTS) {
 
 await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 }
-
-// VEOX catalog self-healing: keep the permanent storefront catalog available even
-// when the persistent DB was reset, missing, or created from an older deployment.
-// Existing custom products are preserved; only missing canonical VEOX SKUs are added.
-const CANONICAL_VEOX_PRODUCTS = [
-  { id:'vexo-bot-basic', name:'VEOX 자판기봇 BASIC', category:'자판기봇', price:19000, badge:'입문추천', description:'디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features:['상품 버튼 주문 UI','주문 접수 및 로그 기록','관리자 확인 후 지급 안내','기본 고객 응대 메시지'] },
-  { id:'vexo-bot-pro', name:'VEOX 자판기봇 PRO', category:'자판기봇', price:39000, badge:'인기', description:'상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features:['BASIC 전체 기능 포함','상품 추가·수정·삭제 관리','주문 상태 관리 패널','구매자 역할 부여 지원','상세 주문 로그','스태프 권한 분리'] },
-  { id:'vexo-bot-basic-premium', name:'VEOX 자판기봇 BASIC PREMIUM', category:'자판기봇', price:29000, badge:'PREMIUM', description:'BASIC의 핵심 판매 기능에 고급 자판기·주문·티켓 UI와 VEOX 브랜딩을 더한 프리미엄형입니다.', features:['BASIC 전체 기능 포함','고급 자판기 패널','상품 상세·선택 UI 강화','주문 티켓 UI 강화','완료 로그 디자인','VEOX 브랜딩'] },
-  { id:'vexo-bot-pro-premium', name:'VEOX 자판기봇 PRO PREMIUM', category:'자판기봇', price:59000, badge:'ULTIMATE', description:'PRO의 상품·주문·통계 기능에 고급 주문 UI, 관리자 편의와 브랜딩을 결합한 상위형입니다.', features:['PRO 전체 기능 포함','페이지형 상품 탐색','주문·통계 운영','고급 주문 티켓 UI','완료 로그','관리자 운영 편의','VEOX 프리미엄 브랜딩'] },
-  { id:'vexo-server-template', name:'VEOX 디스코드 서버 템플릿', category:'서버 템플릿', price:19000, badge:'빠른시작', description:'판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.', features:['INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY','OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할','공지·가격표·구매인증 채널','문의·1대1 티켓 구조'] },
-  { id:'vexo-server-template-pro', name:'VEOX 서버 템플릿 PRO', category:'서버 템플릿', price:34000, badge:'BEST', description:'고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features:['기본 템플릿 전체 포함','세분화된 권한 구조','티켓 운영 가이드','주문·고객·상품 관리 구조','후기·파트너 구성'] },
-  { id:'vexo-automation', name:'VEOX 자동화 패키지', category:'자동화', price:49000, badge:'업무절약', description:'반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features:['환영·역할 자동화 지원','반복 공지 자동화','주문 알림 연동','스태프 업무 보조','세팅 가이드'] },
-  { id:'vexo-custom-bot', name:'VEOX 커스텀 봇 제작', category:'개발', price:89000, badge:'상담필수', description:'원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.', features:['요구사항 상담 후 제작','슬래시/버튼 커맨드','서버 맞춤 기능','소스 또는 실행 파일 제공'] },
-  { id:'vexo-store-all-in-one', name:'VEOX STORE 올인원', category:'패키지', price:99000, badge:'목표추천', description:'서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 영구 패키지입니다.', features:['서버 템플릿 PRO급 구조','자판기봇 구성','자동화 기본 구성','통합 세팅 가이드'] },
-  { id:'vexo-launch-full', name:'VEOX 런칭 풀세팅', category:'패키지', price:149000, badge:'프리미엄', description:'처음 판매 서버를 여는 사람을 위한 봇 연결과 운영 동선 세팅 상품입니다.', features:['올인원 구성 포함','판매 채널 문구 기본 작성','후기·구매인증 동선','운영 체크리스트','오픈 전 점검'] },
-  { id:'vexo-guide-install', name:'봇 설치 가이드', category:'가이드', price:6000, badge:'NEW', description:'디스코드 봇을 처음 설치·실행하는 방법을 단계별로 정리한 가이드입니다.', features:['봇 계정 생성','토큰 보관','로컬 실행','필수 권한','오류 해결'] },
-  { id:'vexo-guide-hosting', name:'호스팅 가이드', category:'가이드', price:7000, badge:'', description:'봇을 24시간 켜 두기 위한 호스팅 선택·세팅 가이드입니다.', features:['무료/유료 비교','VPS 기본 세팅','프로세스 유지','재시작·로그 확인'] },
-  { id:'vexo-guide-server', name:'서버 세팅 가이드', category:'가이드', price:7000, badge:'', description:'판매용 디스코드 서버 채널·역할·권한을 구성하는 방법입니다.', features:['역할 계층 설계','카테고리/채널 구성','권한 충돌 방지','티켓·문의 세팅'] },
-  { id:'vexo-guide-operation', name:'자판기봇 운영 가이드', category:'가이드', price:9000, badge:'HOT', description:'자판기봇으로 실제 판매할 때 필요한 운영 흐름을 정리한 가이드입니다.', features:['상품 등록 예시','입금 확인 포인트','지급 전 확인','분쟁 예방','후기 활용'] },
-  { id:'vexo-guide-all-in-one', name:'올인원 세팅 가이드', category:'가이드', price:19000, badge:'BEST', description:'봇 설치, 호스팅, 서버 세팅, 운영까지 한 번에 담은 통합 가이드입니다.', features:['설치·호스팅·서버 세팅 통합','판매 시작 체크리스트','문제 해결 FAQ','운영 순서'] },
-  { id:'vexo-addon-embed-design', name:'VEOX 임베드 디자인팩', category:'디자인', price:9900, badge:'DESIGN', description:'판매봇에 필요한 핵심 임베드를 VEOX 스타일로 통일하는 디자인팩입니다.', features:['주문 임베드','입금 안내','처리중·완료','문의·후기 임베드'] },
-  { id:'vexo-addon-panel-design', name:'VEOX 버튼 & 패널 디자인팩', category:'디자인', price:12900, badge:'UI', description:'버튼·셀렉트·패널을 하나의 브랜드 UI처럼 보이게 만드는 디자인팩입니다.', features:['메인 판매 패널','카테고리 선택','상품 선택','문의 패널','후기 패널'] },
-  { id:'vexo-addon-bot-skin', name:'VEOX 봇 UI 스킨팩', category:'디자인', price:14900, badge:'HOT', description:'봇 전체의 색감·문구·임베드 스타일을 VEOX 전용 테마로 바꾸는 스킨팩입니다.', features:['Purple Glow 테마','임베드 정리','상태 메시지','주문 티켓','관리자 알림'] },
-  { id:'vexo-addon-ticket-ui', name:'VEOX 티켓 UI 커스텀', category:'디자인', price:7900, badge:'TICKET', description:'주문·문의 티켓을 한눈에 읽기 쉬운 화면으로 재구성합니다.', features:['주문 요약','결제 안내','상태 표시','처리 버튼','닫기·후기'] },
-  { id:'vexo-addon-order-ui', name:'VEOX 주문 UI 업그레이드', category:'봇 옵션', price:10900, badge:'ORDER', description:'주문 티켓의 상품·수량·금액·상태 정보를 더 고급스럽게 표현합니다.', features:['상품 상세','수량·단가·총액','주문 타임라인','결제 안내','완료 메시지'] },
-  { id:'vexo-feature-ticket-automation', name:'VEOX 티켓 자동화 확장팩', category:'봇 옵션', price:9900, badge:'TICKET', description:'주문·문의 티켓의 반복 작업을 줄이는 영구 확장팩입니다.', features:['자동 제목','상태 안내','자동 정리 옵션','접근 보호'] },
-  { id:'vexo-feature-payment-automation', name:'VEOX 결제 자동화 확장팩', category:'봇 옵션', price:14900, badge:'PAYMENT', description:'입금확인 요청과 결제 상태 전달을 체계적으로 관리합니다.', features:['입금확인 요청','관리자 알림','결제 상태','미처리 주문 보조'] },
-  { id:'vexo-feature-operations-automation', name:'VEOX 운영 자동화 확장팩', category:'봇 옵션', price:19900, badge:'AUTO', description:'반복 운영 업무를 줄이는 실전형 자동화 기능입니다.', features:['주문 자동화 보조','운영 알림','자동 정리','백업 보조'] },
-  { id:'vexo-feature-statistics', name:'VEOX 통계 대시보드팩', category:'봇 옵션', price:12900, badge:'STATS', description:'판매·주문·매출을 한눈에 확인할 수 있도록 통계를 확장합니다.', features:['주문량','완료 매출','평균 주문액','진행중 주문'] },
-  { id:'vexo-customer-management', name:'VEOX 고객관리 확장팩', category:'봇 옵션', price:19900, badge:'CRM', description:'구매자·주문·후속 응대를 더 편하게 관리하기 위한 영구 확장팩입니다.', features:['구매자별 주문 이력','고객 메모','고객 검색','재구매 고객 확인'] },
-  { id:'vexo-coupon-promo', name:'VEOX 쿠폰 & 프로모션 팩', category:'봇 옵션', price:14900, badge:'COUPON', description:'할인 코드와 프로모션 운영을 편하게 만드는 영구 상점 운영 확장팩입니다.', features:['퍼센트/정액 쿠폰','사용기간·횟수','최소주문금액','관리자 발급·회수'] },
-  { id:'vexo-sales-analytics', name:'VEOX 주문·매출 분석팩', category:'봇 옵션', price:19900, badge:'ANALYTICS', description:'주문·매출·상품 판매 흐름을 한눈에 볼 수 있도록 운영 통계를 확장합니다.', features:['일/월 매출','완료 주문','상품별 판매량','평균 객단가'] },
-  { id:'vexo-advanced-ticket', name:'VEOX 고급 티켓팩', category:'봇 옵션', price:19900, badge:'TICKET PRO', description:'주문 티켓을 더 깔끔하고 빠르게 운영할 수 있도록 고급 UI와 처리 흐름을 추가합니다.', features:['고급 주문 카드','상태 타임라인','담당자/상태','완료 화면'] },
-  { id:'vexo-digital-auto-delivery', name:'VEOX 디지털 자동지급팩', category:'봇 옵션', price:19900, badge:'DELIVERY PRO', description:'구매 완료 후 디지털 상품을 빠르게 전달할 수 있도록 자동 지급 흐름을 확장합니다.', features:['디지털 상품 자동 지급','다운로드 제한','재다운로드','지급 이력','완료 연동'] },
-  { id:'vexo-alert-automation', name:'VEOX 알림 자동화팩', category:'봇 옵션', price:9900, badge:'ALERT', description:'주문·입금확인·문의·지급 완료 같은 운영 이벤트를 빠르게 알립니다.', features:['새 주문','입금 확인','문의 도착','지급 완료','Discord 웹훅'] },
-  { id:'vexo-seller-dashboard', name:'VEOX SELLER DASHBOARD', category:'패키지', price:29900, badge:'DASHBOARD', description:'주문·매출·상품 성과를 한 화면에서 확인할 수 있는 영구 운영 대시보드입니다.', features:['실시간 주문 현황','일/월 매출','상품별 판매량·매출','진행 단계 분석','최근 활동'] },
-  { id:'vexo-seller-pack', name:'VEOX SELLER PACK', category:'패키지', price:44900, badge:'SELLER', description:'디스코드에서 실제 판매를 운영하는 데 필요한 핵심 기능을 묶은 영구 패키지입니다.', features:['티켓 자동화','결제 자동화','통계','운영 보조','관리자 구성'] },
-  { id:'vexo-seller-pro', name:'VEOX SELLER PRO', category:'패키지', price:69900, badge:'PRO SELLER', description:'SELLER PACK에 고급 디자인과 운영 옵션을 더한 상위 영구 패키지입니다.', features:['SELLER PACK','고급 디자인','보안 운영','브랜딩 일괄 적용'] },
-  { id:'vexo-growth-bundle', name:'VEOX GROWTH BUNDLE', category:'패키지', price:49900, badge:'BUNDLE', description:'티켓·결제·운영·통계를 한 번에 확장하는 실전형 영구 번들입니다.', features:['티켓 자동화','결제 자동화','운영 자동화','통계 대시보드'] },
-  { id:'vexo-white-label', name:'VEOX 화이트라벨 패키지', category:'개발', price:79900, badge:'WHITE LABEL', description:'VEOX 브랜드 대신 자체 브랜드로 봇 UI와 표기를 구성하는 영구 상품입니다.', features:['표시명 브랜딩','임베드·푸터 변경','버튼·패널 브랜딩','색상·문구 일괄 적용'] },
-  { id:'vexo-custom-lite', name:'VEOX 간단 커스텀 옵션', category:'커스텀', price:19900, badge:'LITE', description:'기존 VEOX 봇의 작은 UI·문구·버튼·동작 변경을 위한 1회성 상품입니다.', features:['문구 변경','버튼 수정','소규모 UI','간단 동작 수정'] },
-  { id:'vexo-custom-standard', name:'VEOX 중급 커스텀 옵션', category:'커스텀', price:34900, badge:'STANDARD', description:'기존 기능 조합 및 소규모 신규 자동화를 위한 1회성 커스텀 상품입니다.', features:['기능 조합','신규 자동화','관리자 버튼','데이터 연동'] },
-  { id:'vexo-custom-large', name:'VEOX 대형 커스텀 옵션', category:'커스텀', price:69900, badge:'LARGE', description:'비교적 큰 신규 기능을 제작하는 1회성 커스텀 상품입니다.', features:['대형 기능','복수 기능 연동','고급 관리자 흐름','테스트·검수'] },
-  { id:'vexo-major-upgrade', name:'VEOX 메이저 버전 업그레이드', category:'업그레이드', price:19900, badge:'VERSION', description:'새 메이저 버전 출시 시 기존 구매자가 업그레이드하는 영구 상품입니다.', features:['메이저 버전 업그레이드','출시 범위 공지','기존 구매 확인','기간 제한 없음'] },
-  { id:'vexo-feature-security', name:'VEOX 보안 강화팩', category:'봇 옵션', price:14900, badge:'SECURITY', description:'권한 분리와 운영 영역 보호를 강화하는 영구 보안 옵션입니다.', features:['관리 보호','위험 권한 차단','스태프 영역 보호','감사 로그'] },
-  { id:'vexo-backup-restore', name:'VEOX 백업·복구 강화팩', category:'봇 옵션', price:12900, badge:'BACKUP', description:'판매 데이터와 운영 기록을 안전하게 보관·복구하기 위한 영구 백업 강화팩입니다.', features:['주기적 백업','백업 보존','복구 절차','운영 기록 보호'] }
-];
-
-function mergeCanonicalCatalog() {
-  if (!Array.isArray(db.products)) db.products = [];
-  const byId = new Map(db.products.map(p => [String(p.id), p]));
-  const byName = new Map(db.products.map(p => [String(p.name || '').trim(), p]));
-  for (const canonical of CANONICAL_VEOX_PRODUCTS) {
-    const existing = byId.get(canonical.id) || byName.get(canonical.name);
-    if (existing) {
-      existing.id = canonical.id;
-      existing.category = canonical.category;
-      existing.price = canonical.price;
-      existing.badge = canonical.badge;
-      existing.description = canonical.description;
-      existing.features = canonical.features;
-    } else {
-      db.products.push({ ...canonical });
-    }
-  }
-}
-
-mergeCanonicalCatalog();
 if (!Array.isArray(db.users)) db.users = [];
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
 if (!Array.isArray(db.orders)) db.orders = [];
@@ -422,7 +354,6 @@ app.get('/api/bot-series', (req, res) => {
 });
 
 app.get('/api/products', (req, res) => {
-  mergeCanonicalCatalog();
   const category = String(req.query.category || 'all');
   const products = category === 'all' ? db.products : db.products.filter(p => p.category === category);
   res.json({ products });
