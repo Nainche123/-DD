@@ -67,6 +67,8 @@ try {
 if (!Array.isArray(db.users)) db.users = [];
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
 if (!Array.isArray(db.orders)) db.orders = [];
+if (!Array.isArray(db.supportInquiries)) db.supportInquiries = [];
+for (const q of db.supportInquiries) { if (!Array.isArray(q.replies)) q.replies=[]; if (!q.status) q.status='open'; if (!q.createdAt) q.createdAt=new Date().toISOString(); }
 if (!Array.isArray(db.coupons)) db.coupons = [];
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; if (o.payerName === undefined) o.payerName = ''; if (!Array.isArray(o.messages)) o.messages = []; if (!o.updatedAt) o.updatedAt = o.createdAt || new Date().toISOString(); }
 if (!db.settings) db.settings = seed.settings;
@@ -583,6 +585,36 @@ async function sendDiscordPaymentNotice(order) {
 app.get('/api/orders', requireAuth, (req, res) => {
   const orders = db.orders.filter(o => o.userId === req.user.id);
   res.json({ orders });
+});
+
+
+if (!Array.isArray(db.supportInquiries)) db.supportInquiries = [];
+async function sendDiscordSupportNotice(item) {
+  const url = getWebhookUrl();
+  if (!url) return;
+  const payload = { content: `💬 **VEOXHUB 고객 문의 접수**\n회원: ${item.username} (${item.email})\n문의: ${item.text}` };
+  await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+}
+
+app.post('/api/support/inquiries', requireAuth, async (req, res) => {
+  const text = String(req.body?.text || '').trim();
+  if (!text) return res.status(400).json({error:'문의 내용을 입력해 주세요.'});
+  if (text.length > 2000) return res.status(400).json({error:'문의 내용은 2,000자 이하로 작성해 주세요.'});
+  const user = getUser(req);
+  const item = { id:nanoid(), userId:user.id, username:user.username, email:user.email, text, status:'open', createdAt:new Date().toISOString(), replies:[] };
+  db.supportInquiries.push(item); await saveDb();
+  await sendDiscordSupportNotice(item).catch(() => {});
+  res.json({ok:true,message:'문의가 접수되었습니다. 관리자 답변을 확인해 주세요.', inquiry:safeInquiry(item)});
+});
+app.get('/api/support/inquiries', requireAuth, (req,res) => {
+  const user=getUser(req); res.json({inquiries:db.supportInquiries.filter(x=>x.userId===user.id).map(safeInquiry)});
+});
+function safeInquiry(x){ return {id:x.id,userId:x.userId,username:x.username,email:x.email,text:x.text,status:x.status,createdAt:x.createdAt,replies:(x.replies||[]).map(r=>({id:r.id,text:r.text,createdAt:r.createdAt,by:r.by}))}; }
+app.get('/api/admin/support/inquiries', requireAdmin, (req,res) => res.json({inquiries:db.supportInquiries.map(safeInquiry).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)))}));
+app.post('/api/admin/support/inquiries/:id/reply', requireAdmin, async (req,res) => {
+  const item=db.supportInquiries.find(x=>x.id===req.params.id); if(!item) return res.status(404).json({error:'문의를 찾을 수 없습니다.'});
+  const text=String(req.body?.text||'').trim(); if(!text) return res.status(400).json({error:'답변 내용을 입력해 주세요.'});
+  const reply={id:nanoid(),text,createdAt:new Date().toISOString(),by:'admin'}; item.replies=item.replies||[]; item.replies.push(reply); item.status='answered'; await saveDb(); res.json({ok:true,inquiry:safeInquiry(item)});
 });
 
 app.get('/api/admin/summary', requireAdmin, (req, res) => {
