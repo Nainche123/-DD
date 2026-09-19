@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420"><defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071633"/><stop offset=".55" stop-color="#0c43a5"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+      <radialGradient id="r" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#4f8cff" stop-opacity=".9"/><stop offset="1" stop-color="#4f8cff" stop-opacity="0"/></radialGradient>
+      <filter id="s"><feGaussianBlur stdDeviation="22"/></filter>
+      <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs><rect width="800" height="420" rx="34" fill="url(#g)"/><circle cx="640" cy="110" r="180" fill="url(#r)" filter="url(#s)" opacity=".7"/><circle cx="160" cy="330" r="170" fill="#60a5fa" opacity=".08"/>
+<g opacity=".17" stroke="#bcd8ff" stroke-width="2"><path d="M0 330L220 110L410 320L650 60L800 210"/><path d="M0 390L250 155L470 370L690 150L800 250"/></g>
+<g filter="url(#glow)"><path d="M120 285l55-150 55 150-55-40z" fill="#d9efff"/><path d="M205 285l55-150 55 150-55-40z" fill="#7ab7ff"/><path d="M161 230l32-65 32 65-32-23z" fill="#fff"/></g>
+<g fill="#fff"><circle cx="535" cy="92" r="3"/><circle cx="580" cy="170" r="2"/><circle cx="690" cy="250" r="3"/><circle cx="430" cy="120" r="2"/></g>
+<g fill="#fff" font-family="Arial, sans-serif"><text x="355" y="115" font-size="46" font-weight="900">VEOXHUB</text><text x="359" y="150" font-size="18" letter-spacing="4" opacity=".9">DISCORD SELLER AUTOMATION</text></g>
+<g fill="#fff" opacity=".86" font-family="Arial, sans-serif"><text x="360" y="220" font-size="20" font-weight="700">SELLER TOOLKIT</text><text x="360" y="252" font-size="15">BOT · TEMPLATE · AUTOMATION · CUSTOM</text></g>
+<g transform="translate(360 292)"><rect width="150" height="54" rx="27" fill="#fff" fill-opacity=".12" stroke="#fff" stroke-opacity=".18"/><text x="75" y="34" text-anchor="middle" fill="#fff" font-size="14" font-weight="800">FAST DELIVERY</text></g>
+<g transform="translate(525 292)"><rect width="150" height="54" rx="27" fill="#fff" fill-opacity=".12" stroke="#fff" stroke-opacity=".18"/><text x="75" y="34" text-anchor="middle" fill="#fff" font-size="14" font-weight="800">SECURE ORDER</text></g></svg>

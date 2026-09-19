@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420"><defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071633"/><stop offset=".55" stop-color="#0c43a5"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+      <radialGradient id="r" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#4f8cff" stop-opacity=".9"/><stop offset="1" stop-color="#4f8cff" stop-opacity="0"/></radialGradient>
+      <filter id="s"><feGaussianBlur stdDeviation="22"/></filter>
+      <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs><rect width="800" height="480" rx="32" fill="url(#g)"/><rect x="0" y="0" width="800" height="480" rx="32" fill="#0d47a1" opacity=".35"/><circle cx="610" cy="130" r="160" fill="#60a5fa" opacity=".25" filter="url(#s)"/>
+    <g transform="translate(72 80)"><rect width="180" height="180" rx="44" fill="#fff" fill-opacity=".08" stroke="#fff" stroke-opacity=".18"/><path d="M48 125l42-82 42 82-42-28z" fill="#dff0ff"/><path d="M108 125l42-82 42 82-42-28z" fill="#60a5fa"/><path d="M90 94l25-49 25 49-25-18z" fill="#fff"/></g>
+    <g fill="#fff" font-family="Arial, sans-serif"><text x="300" y="125" font-size="38" font-weight="900">VEOXHUB</text><text x="300" y="170" font-size="44" font-weight="900">BASIC</text><text x="300" y="210" font-size="16" opacity=".9">DISCORD SELLER AUTOMATION</text></g>
+    <g fill="#fff" opacity=".85" font-family="Arial, sans-serif"><text x="300" y="275" font-size="18">상품 관리 · 주문 · 티켓 · 관리자 UI</text><text x="300" y="305" font-size="14">영구 구매 · 판매 서버용</text></g>
+    <g transform="translate(300 345)"><rect width="150" height="48" rx="24" fill="#fff" fill-opacity=".13" stroke="#fff" stroke-opacity=".2"/><text x="75" y="31" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">ONE-TIME</text></g></svg>
