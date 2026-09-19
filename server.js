@@ -64,9 +64,20 @@ try {
   db = JSON.parse(await fs.readFile(DB_PATH, 'utf8'));
 } catch {
   db = seed;
-  
+}
+if (!Array.isArray(db.users)) db.users = [];
+if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
+if (!Array.isArray(db.orders)) db.orders = [];
+if (!Array.isArray(db.inquiries)) db.inquiries = [];
+if (!Array.isArray(db.announcements)) db.announcements = [];
+if (!Array.isArray(db.coupons)) db.coupons = [];
+if (!Array.isArray(db.purchaseLogs)) db.purchaseLogs = [];
+
 // VEOX 5.1 permanent seller-operation products requested by the store owner.
 // Deliberately exclude the previously discussed #2 security, #3/4 customer-management items.
+// NOTE: this used to run only on first boot (inside the JSON-parse catch block), so it never
+// reached a store that already had a db.json. It now always runs, same as every other product
+// migration block below, so these 3 products reliably appear on existing deployments too.
 const VEOX_51_PRODUCTS = [
   { id:'vexo-digital-auto-delivery', name:'VEOX 디지털 자동지급팩', category:'봇 옵션', price:19900, badge:'DELIVERY PRO', description:'구매 완료 후 디지털 상품을 빠르게 전달할 수 있도록 자동 지급 흐름을 확장하는 영구 기능팩입니다.', features:['디지털 상품 자동 지급 흐름','다운로드 횟수 제한 옵션','재다운로드 지원','지급 이력 기록','지급 완료 처리 연동','1회 구매 후 영구 적용'] },
   { id:'vexo-alert-automation', name:'VEOX 알림 자동화팩', category:'봇 옵션', price:9900, badge:'ALERT', description:'주문·입금확인·문의·지급 완료 같은 운영 이벤트를 한눈에 확인하고 빠르게 알릴 수 있는 영구 알림 확장팩입니다.', features:['새 주문 알림','입금 확인 요청 알림','문의 도착 알림','지급 완료 알림','Discord 웹훅 알림 연동','1회 구매 후 영구 적용'] },
@@ -84,15 +95,6 @@ for (const p of VEOX_51_PRODUCTS) {
     db.products.push(p);
   }
 }
-
-await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
-}
-if (!Array.isArray(db.users)) db.users = [];
-if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
-if (!Array.isArray(db.orders)) db.orders = [];
-if (!Array.isArray(db.inquiries)) db.inquiries = [];
-if (!Array.isArray(db.announcements)) db.announcements = [];
-if (!Array.isArray(db.coupons)) db.coupons = [];
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; if (o.payerName === undefined) o.payerName = ''; if (!Array.isArray(o.messages)) o.messages = []; if (!o.updatedAt) o.updatedAt = o.createdAt || new Date().toISOString(); }
 if (!db.settings) db.settings = seed.settings;
 if (db.settings.siteName === 'VEOX STORE') { db.settings.siteName = 'VEOXHUB'; }
@@ -114,10 +116,21 @@ db.products = db.products.filter(p => !LEGACY_GAME_TERMS.some(term => String(p.n
 // Premium tiers are presented without inventing a price; the website routes buyers to Discord for final purchase details.
 const VEOX_PREMIUM_PRODUCTS = [
   { id:'vexo-bot-basic-premium', name:'VEOX 자판기봇 BASIC PREMIUM', category:'자판기봇', price:29000, badge:'PREMIUM', description:'BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 VEOX 브랜딩을 더한 프리미엄형입니다.', features:['BASIC 전체 기능 포함','고급 자판기 패널','상품 상세·선택 UI 강화','주문 티켓 UI 강화','지급 완료·구매 감사 로그 디자인','VEOX 브랜딩 구성'] },
-  { id:'vexo-bot-pro-premium', name:'VEOX 자판기봇 PRO PREMIUM', category:'자판기봇', price:59000, badge:'ULTIMATE', description:'PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.', features:['PRO 전체 기능 포함','페이지형 카테고리·상품 탐색','재고·수량·통계 운영','고급 주문 티켓 UI','지급 완료·구매 감사 로그','관리자 운영 편의 강화','VEOX 프리미엄 브랜딩'] }
+  { id:'vexo-bot-pro-premium', name:'VEOX 자판기봇 PRO PREMIUM', category:'자판기봇', price:59000, badge:'인기 ULTIMATE', description:'PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.', features:['PRO 전체 기능 포함','페이지형 카테고리·상품 탐색','재고·수량·통계 운영','고급 주문 티켓 UI','지급 완료·구매 감사 로그','관리자 운영 편의 강화','VEOX 프리미엄 브랜딩'] }
 ];
-const premiumExisting = new Set(db.products.map(p => p.name));
-for (const p of VEOX_PREMIUM_PRODUCTS) if (!premiumExisting.has(p.name)) db.products.push(p);
+// id(이름은 폴백) 기준으로 매번 배지/가격/설명을 동기화합니다. 예전처럼 "이미 있으면 skip"만
+// 하면 이미 운영 중인 스토어의 db.json에는 새 배지가 절대 반영되지 않습니다.
+for (const p of VEOX_PREMIUM_PRODUCTS) {
+  const existing = db.products.find(item => item.id === p.id) || db.products.find(item => item.name === p.name);
+  if (existing) {
+    existing.badge = p.badge;
+    existing.price = p.price;
+    existing.description = p.description;
+    existing.features = p.features;
+  } else {
+    db.products.push(p);
+  }
+}
 
 const VEOX_BOT_SERIES = [
   { key:'basic', name:'BASIC', productName:'VEOX 자판기봇 BASIC', status:'판매중', subtitle:'가볍게 시작하는 기본 자판기봇' },
@@ -434,6 +447,8 @@ app.post('/api/orders', requireAuth, async (req, res) => {
   if (!product) return res.status(404).json({ error: '상품을 찾을 수 없습니다.' });
   const quantity = Number.parseInt(req.body.quantity || 1, 10);
   if (!Number.isInteger(quantity) || quantity < 1 || quantity > 20) return res.status(400).json({ error: '수량은 1~20개 사이로 입력해 주세요.' });
+  const activeOrder = db.orders.find(o => { normalizeOrder(o); return String(o.userId) === String(req.user.id) && ORDER_ACTIVE_STATUSES.has(o.status); });
+  if (activeOrder) return res.status(409).json({ error: `이미 진행 중인 주문이 있습니다. 주문번호: ${activeOrder.id}` });
   const discordTag = String(req.body.discordTag || '').trim().slice(0, 60);
   const payerName = String(req.body.payerName || '').trim().slice(0, 40);
   const memo = String(req.body.memo || '').trim().slice(0, 500);
@@ -489,20 +504,103 @@ app.post('/api/orders', requireAuth, async (req, res) => {
   res.status(201).json({ order, discordInvite: invite, bankInfo: db.settings.bankInfo || '' });
 });
 
-async function sendDiscordOrderNotice(order) {
+function won(n) { return `${Number(n || 0).toLocaleString('ko-KR')}원`; }
+
+// Shared embed builder for every webhook notice, so order/payment/completion
+// alerts all look like one consistent VEOXHUB notification feed in Discord.
+function buildOrderEmbed(order, { emoji, title, color, extraFields = [], footer } = {}) {
+  const fields = [
+    { name: '🧾 주문번호', value: `\`${order.id}\``, inline: true },
+    { name: '👤 구매자', value: order.username || '-', inline: true },
+    { name: '💬 디스코드', value: order.discordTag || '-', inline: true },
+    { name: '📦 상품', value: `${order.productName} × ${order.quantity}`, inline: false },
+    { name: '💰 결제 금액', value: `**${won(order.total)}**`, inline: true },
+  ];
+  if (order.discountAmount) fields.push({ name: '🏷️ 쿠폰 할인', value: `-${won(order.discountAmount)}`, inline: true });
+  if (order.payerName) fields.push({ name: '🏦 입금자명', value: order.payerName, inline: true });
+  if (order.memo) fields.push({ name: '📝 요청사항', value: order.memo.slice(0, 500), inline: false });
+  fields.push(...extraFields);
+  return {
+    username: 'VEOXHUB 알림',
+    embeds: [{
+      title: `${emoji} ${title}`,
+      color,
+      fields,
+      footer: { text: footer || 'VEOXHUB · 웹사이트 자동 알림' },
+      timestamp: new Date().toISOString(),
+    }],
+  };
+}
+
+async function postWebhook(payload) {
   const url = getWebhookUrl();
   if (!url) return;
-  const memoLine = order.memo ? `\n요청사항: ${order.memo}` : '';
-  const payload = { content: `🛒 **VEOXHUB 주문 접수**\n주문번호: ${order.id}\n구매자: ${order.username}\n디스코드: ${order.discordTag}\n상품: ${order.productName} × ${order.quantity}\n금액: ${order.total.toLocaleString('ko-KR')}원${order.discountAmount ? `\n할인: -${order.discountAmount.toLocaleString('ko-KR')}원` : ''}\n입금자명: ${order.payerName || '-'}${memoLine}\n\n고객이 디스코드 티켓으로 입금·수령 진행합니다. 서버에서 티켓을 확인해 주세요.` };
-  await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
 }
+
+async function sendDiscordOrderNotice(order) {
+  await postWebhook(buildOrderEmbed(order, {
+    emoji: '🛒',
+    title: '새 주문이 접수되었습니다',
+    color: 0x8b5cf6,
+    footer: '구매자가 입금 후 확인 요청을 보내면 다시 알려드려요.',
+  }));
+}
+
+const ORDER_ACTIVE_STATUSES = new Set(['주문접수','입금확인요청','처리중']);
+const ORDER_TERMINAL_STATUSES = new Set(['지급완료','취소']);
+const ORDER_TRANSITIONS = {
+  '주문접수': new Set(['입금확인요청','취소']),
+  '입금확인요청': new Set(['처리중','취소']),
+  '처리중': new Set(['지급완료','취소']),
+  '지급완료': new Set(),
+  '취소': new Set()
+};
 
 function normalizeOrder(order) {
   if (!Array.isArray(order.messages)) order.messages = [];
+  const legacy = { '접수':'주문접수', '입금확인완료':'처리중', '완료':'지급완료', '마감':'취소' };
+  order.status = legacy[String(order.status || '')] || String(order.status || '주문접수');
+  if (!ORDER_ACTIVE_STATUSES.has(order.status) && !ORDER_TERMINAL_STATUSES.has(order.status)) order.status = '주문접수';
+  if (!Array.isArray(order.statusHistory)) order.statusHistory = [];
   if (!order.updatedAt) order.updatedAt = order.createdAt || new Date().toISOString();
   return order;
 }
-for (const order of db.orders) normalizeOrder(order);
+
+function appendSystemMessage(order, text, now = new Date().toISOString()) {
+  const message = { id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEOXHUB', senderRole:'system', text, attachment:null, createdAt:now };
+  order.messages.push(message);
+  return message;
+}
+
+function transitionOrder(order, target, actorId, actorName = 'VEOXHUB') {
+  normalizeOrder(order);
+  const current = order.status;
+  const allowed = ORDER_TRANSITIONS[current] || new Set();
+  if (!allowed.has(target)) return { ok:false, error:`현재 상태 \`${current}\`에서는 \`${target}\`로 변경할 수 없습니다.` };
+  const now = new Date().toISOString();
+  order.status = target;
+  order.updatedAt = now;
+  order.statusHistory.push({ from:current, to:target, actorId, actorName, createdAt:now });
+  if (target === '입금확인요청') order.paymentRequested = true;
+  if (target === '처리중') { order.paymentApprovedAt = now; order.processedAt = now; }
+  if (target === '지급완료') { order.completedAt = now; order.purchaseLogCreatedAt = now; }
+  if (target === '취소') order.cancelledAt = now;
+  return { ok:true, now, current };
+}
+
+function createPurchaseLog(order) {
+  if (order.status !== '지급완료') return null;
+  if (db.purchaseLogs.some(log => String(log.orderId) === String(order.id))) return null;
+  const log = {
+    id:'PL-' + nanoid(12).toUpperCase(), orderId:order.id, userId:order.userId,
+    username:order.username, email:order.email, productId:order.productId,
+    productName:order.productName, quantity:order.quantity, total:order.total,
+    createdAt:new Date().toISOString()
+  };
+  db.purchaseLogs.unshift(log);
+  return log;
+}
 
 function orderAccess(req) {
   const id = String(req.params.id || '');
@@ -544,12 +642,10 @@ app.post('/api/orders/:id/payment-request', requireAuth, async (req, res) => {
   const { order, allowed } = orderAccess(req);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
   if (!allowed || req.user.role === 'admin') return res.status(403).json({ error: '구매자만 입금 확인 요청을 할 수 있습니다.' });
-  if (['완료','취소'].includes(order.status)) return res.status(400).json({ error: '현재 주문 상태에서는 입금 확인 요청을 할 수 없습니다.' });
-  order.paymentRequested = true;
-  order.status = '입금확인요청';
-  order.paymentRequestedAt = new Date().toISOString();
-  order.updatedAt = order.paymentRequestedAt;
-  order.messages.push({ id: 'SYS-' + nanoid(10).toUpperCase(), senderId: 'system', senderName: 'VEOXHUB', senderRole: 'system', text: '💳 구매자가 입금 확인을 요청했습니다. 관리자 확인을 기다려 주세요.', attachment: null, createdAt: order.paymentRequestedAt });
+  if (order.status === '입금확인요청' && order.paymentRequested) return res.json({ order, alreadyRequested: true });
+  const result = transitionOrder(order, '입금확인요청', req.user.id, req.user.username);
+  if (!result.ok) return res.status(400).json({ error: result.error });
+  appendSystemMessage(order, '💳 구매자가 입금 확인을 요청했습니다. 관리자 확인을 기다려 주세요.', result.now);
   saveDb();
   await sendDiscordPaymentNotice(order).catch(() => {});
   res.json({ order });
@@ -604,10 +700,26 @@ app.get('/api/attachments/:id', requireAuth, async (req, res) => {
 });
 
 async function sendDiscordPaymentNotice(order) {
-  const url = getWebhookUrl();
-  if (!url) return;
-  const payload = { content: `💳 **입금확인 요청**\n주문번호: ${order.id}\n구매자: ${order.username}\n디스코드: ${order.discordTag || '-'}\n상품: ${order.productName} × ${order.quantity}\n금액: ${order.total.toLocaleString('ko-KR')}원${order.discountAmount ? `\n할인: -${order.discountAmount.toLocaleString('ko-KR')}원` : ''}\n입금자명: ${order.payerName || '-'}\n\n웹 관리자에서 입금 확인 후 **구매확정** 처리해 주세요.` };
-  await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  // Amber + a direct "action needed" cue: this is the notice that should make the seller
+  // stop what they're doing and check the bank app, since it's the moment buyers churn on.
+  await postWebhook(buildOrderEmbed(order, {
+    emoji: '💳',
+    title: '입금 확인 요청이 도착했습니다',
+    color: 0xf59e0b,
+    extraFields: [{ name: '⏳ 처리 안내', value: '웹 관리자 페이지에서 입금 확인 후 **구매확정** 처리해 주세요.', inline: false }],
+    footer: '빠른 확인일수록 구매 취소율이 낮아져요.',
+  }));
+}
+
+async function sendDiscordCompletionNotice(order) {
+  // Fires when an order reaches 지급완료, so completed sales show up in the same
+  // Discord feed in real time — handy for tracking progress toward a revenue goal.
+  await postWebhook(buildOrderEmbed(order, {
+    emoji: '✅',
+    title: '지급 완료 · 매출이 확정되었습니다',
+    color: 0x22c55e,
+    footer: 'VEOXHUB · 지급완료 매출은 관리자 대시보드 통계에도 반영됩니다.',
+  }));
 }
 
 app.get('/api/orders', requireAuth, (req, res) => {
@@ -704,7 +816,7 @@ app.delete('/api/admin/announcements/:id', requireAdmin, (req, res) => {
 app.get('/api/admin/notifications', requireAdmin, (req, res) => {
   const cutoff = Date.now() - (1000 * 60 * 60 * 24 * 7);
   const orders = db.orders
-    .filter(o => Date.parse(o.createdAt || 0) >= cutoff && !['완료','취소'].includes(String(o.status || '')))
+    .filter(o => Date.parse(o.createdAt || 0) >= cutoff && !['지급완료','취소'].includes(String(o.status || '')))
     .slice(0, 20)
     .map(o => ({ type:'order', id:o.id, title:'새 주문 또는 진행중 주문', text:`${o.username || '-'} · ${o.productName || '-'} · ${Number(o.total||0).toLocaleString('ko-KR')}원`, createdAt:o.createdAt, target:o.id }));
   const inquiries = db.inquiries
@@ -716,9 +828,9 @@ app.get('/api/admin/notifications', requireAdmin, (req, res) => {
 });
 
 app.get('/api/admin/summary', requireAdmin, (req, res) => {
-  const revenue = db.orders.filter(o => o.status !== '취소').reduce((s, o) => s + o.total, 0);
+  const paidOrders = db.orders.filter(o => o.status === '지급완료');
+  const revenue = paidOrders.reduce((s, o) => s + Number(o.total || 0), 0);
   const targetMonth = String(db.settings.targetMonth || '').trim();
-  const paidOrders = db.orders.filter(o => o.status !== '취소');
   const monthOrders = targetMonth ? paidOrders.filter(o => String(o.createdAt || '').startsWith(targetMonth)) : paidOrders;
   const monthRevenue = monthOrders.reduce((s, o) => s + o.total, 0);
   const goalAmount = Math.max(0, Number(db.settings.goalAmount || 0));
@@ -740,7 +852,7 @@ app.get('/api/admin/summary', requireAdmin, (req, res) => {
 });
 
 app.get('/api/admin/analytics', requireAdmin, (req, res) => {
-  const completed = db.orders.filter(o => o.status === '완료');
+  const completed = db.orders.filter(o => o.status === '지급완료');
   const now = new Date();
   const day = now.toISOString().slice(0,10);
   const month = now.toISOString().slice(0,7);
@@ -784,7 +896,7 @@ app.get('/api/admin/customers', requireAdmin, (req, res) => {
     if (!key) continue;
     const current = map.get(key) || { userId:key, username:order.username || '-', email:order.email || '-', discordTag:order.discordTag || '-', orders:0, completed:0, totalSpent:0, lastOrderAt:order.createdAt || '' };
     current.orders += 1;
-    if (order.status === '완료') { current.completed += 1; current.totalSpent += Number(order.total || 0); }
+    if (order.status === '지급완료') { current.completed += 1; current.totalSpent += Number(order.total || 0); }
     if (String(order.createdAt || '') > String(current.lastOrderAt || '')) current.lastOrderAt = order.createdAt || '';
     if (order.discordTag) current.discordTag = order.discordTag;
     map.set(key, current);
@@ -844,31 +956,34 @@ app.delete('/api/admin/products/:id', requireAdmin, (req, res) => {
   res.json({ ok: true });
 });
 
-app.patch('/api/admin/orders/:id', requireAdmin, (req, res) => {
+app.patch('/api/admin/orders/:id', requireAdmin, async (req, res) => {
   const order = db.orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
   normalizeOrder(order);
   const status = String(req.body.status || '');
-  if (!['주문접수','입금확인요청','입금확인완료','처리중','완료','취소'].includes(status)) return res.status(400).json({ error: '상태값이 올바르지 않습니다.' });
-  const now = new Date().toISOString();
-  order.status = status;
-  order.updatedAt = now;
-  if (status === '취소') order.cancelledAt = now;
-  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEOXHUB', senderRole:'system', text:`주문 상태가 \`${status}\`(으)로 변경되었습니다.`, attachment:null, createdAt:now });
+  if (![...ORDER_ACTIVE_STATUSES, ...ORDER_TERMINAL_STATUSES].includes(status)) return res.status(400).json({ error: '상태값이 올바르지 않습니다.' });
+  const result = transitionOrder(order, status, req.user.id, req.user.username);
+  if (!result.ok) return res.status(400).json({ error: result.error });
+  appendSystemMessage(order, `주문 상태가 \`${status}\`(으)로 변경되었습니다.`, result.now);
+  let rewardCoupon = null;
+  if (status === '지급완료') {
+    // Was missing here before: the quick status-dropdown path never called issueCompletionCoupon,
+    // so orders completed this way (as opposed to via /complete or /deliver) silently got no coupon.
+    rewardCoupon = issueCompletionCoupon(order);
+    if (rewardCoupon) { order.rewardCouponCode = rewardCoupon.code; appendSystemMessage(order, rewardCouponMessage(rewardCoupon), result.now); }
+    createPurchaseLog(order);
+    await sendDiscordCompletionNotice(order).catch(() => {});
+  }
   saveDb();
-  res.json({ order });
+  res.json({ order, rewardCoupon });
 });
 
 app.post('/api/admin/orders/:id/approve', requireAdmin, (req, res) => {
   const order = db.orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
-  normalizeOrder(order);
-  if (order.status === '취소') return res.status(400).json({ error: '취소된 주문은 승인할 수 없습니다.' });
-  const now = new Date().toISOString();
-  order.status = '입금확인완료';
-  order.paymentApprovedAt = now;
-  order.updatedAt = now;
-  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEOXHUB', senderRole:'system', text:'✅ 입금이 확인되었습니다. 상품 지급을 준비해 주세요.', attachment:null, createdAt:now });
+  const result = transitionOrder(order, '처리중', req.user.id, req.user.username);
+  if (!result.ok) return res.status(400).json({ error: result.error });
+  appendSystemMessage(order, '✅ 입금이 확인되었습니다. 상품 지급을 준비해 주세요.', result.now);
   saveDb();
   res.json({ order });
 });
@@ -890,19 +1005,25 @@ function issueCompletionCoupon(order) {
   return coupon;
 }
 
-app.post('/api/admin/orders/:id/complete', requireAdmin, (req, res) => {
+// Surfaces the reward coupon in the order room itself (not just the quiet "쿠폰·혜택"
+// page the buyer may never open) and asks for a review in the same breath, since
+// completion is the moment they're most likely to notice and act on it.
+function rewardCouponMessage(coupon) {
+  const expires = coupon.expiresAt ? new Date(coupon.expiresAt).toLocaleDateString('ko-KR') : '';
+  return `🎁 구매해 주셔서 감사합니다! 후기를 남겨주시면 큰 힘이 됩니다 :) 다음 구매에 바로 쓰실 수 있는 5% 할인 쿠폰도 이미 발급해 드렸어요 → 쿠폰 코드 \`${coupon.code}\`${expires ? ` (${expires}까지)` : ''} · 상단 "쿠폰·혜택" 메뉴에서도 확인하실 수 있어요.`;
+}
+
+app.post('/api/admin/orders/:id/complete', requireAdmin, async (req, res) => {
   const order = db.orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
-  normalizeOrder(order);
-  if (!['입금확인완료','처리중'].includes(order.status)) return res.status(400).json({ error: '먼저 입금을 확인해 주세요.' });
-  const now = new Date().toISOString();
-  order.status = '완료';
-  order.completedAt = now;
-  order.updatedAt = now;
-  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEOXHUB', senderRole:'system', text:'✅ 상품 지급이 완료되었습니다. 아래 주문실의 파일·사진·링크를 확인해 주세요.', attachment:null, createdAt:now });
+  const result = transitionOrder(order, '지급완료', req.user.id, req.user.username);
+  if (!result.ok) return res.status(400).json({ error: result.error });
+  appendSystemMessage(order, '✅ 상품 지급이 완료되었습니다. 아래 주문실의 파일·사진·링크를 확인해 주세요.', result.now);
   const rewardCoupon = issueCompletionCoupon(order);
-  if (rewardCoupon) order.rewardCouponCode = rewardCoupon.code;
+  if (rewardCoupon) { order.rewardCouponCode = rewardCoupon.code; appendSystemMessage(order, rewardCouponMessage(rewardCoupon), result.now); }
+  createPurchaseLog(order);
   saveDb();
+  await sendDiscordCompletionNotice(order).catch(() => {});
   res.json({ order, rewardCoupon });
 });
 
@@ -911,7 +1032,7 @@ app.post('/api/admin/orders/:id/deliver', requireAdmin, async (req, res) => {
   const order = db.orders.find(o => o.id === req.params.id);
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
   normalizeOrder(order);
-  if (!['입금확인완료','처리중'].includes(order.status)) return res.status(400).json({ error: '먼저 입금 확인을 완료해 주세요.' });
+  if (order.status !== '처리중') return res.status(400).json({ error: '먼저 입금 확인 요청을 처리해 `처리중`으로 변경해 주세요.' });
 
   const text = String(req.body.text || '').trim().slice(0, 2000);
   const link = String(req.body.link || '').trim().slice(0, 1000);
@@ -940,10 +1061,11 @@ app.post('/api/admin/orders/:id/deliver', requireAdmin, async (req, res) => {
   let rewardCoupon = null;
   const shouldComplete = req.body.complete !== false;
   if (shouldComplete) {
-    order.status = '완료';
-    order.completedAt = now;
+    const result = transitionOrder(order, '지급완료', req.user.id, req.user.username);
+    if (!result.ok) return res.status(400).json({ error: result.error });
     rewardCoupon = issueCompletionCoupon(order);
     if (rewardCoupon) order.rewardCouponCode = rewardCoupon.code;
+    createPurchaseLog(order);
     order.messages.push({
       id:'SYS-' + nanoid(10).toUpperCase(),
       senderId:'system',
@@ -953,8 +1075,10 @@ app.post('/api/admin/orders/:id/deliver', requireAdmin, async (req, res) => {
       attachment:null,
       createdAt:now
     });
+    if (rewardCoupon) appendSystemMessage(order, rewardCouponMessage(rewardCoupon), now);
   }
   saveDb();
+  if (shouldComplete) await sendDiscordCompletionNotice(order).catch(() => {});
   res.json({ order, message, rewardCoupon });
 });
 
@@ -970,9 +1094,16 @@ app.patch('/api/admin/settings' , requireAdmin, (req, res) => {
   res.json({ settings: siteSettingsFor(req) });
 });
 
+function fallbackSvg(res, label = 'VEOXHUB') {
+  const safe = String(label).replace(/[<>&"']/g, ' ').trim().slice(0, 28) || 'VEOXHUB';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6d28d9"/><stop offset="0.55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#c084fc"/></linearGradient><radialGradient id="r" cx="70%" cy="20%"><stop offset="0" stop-color="#f5eefe" stop-opacity=".55"/><stop offset="1" stop-color="#f5eefe" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="700" fill="#160d24"/><rect width="1200" height="700" fill="url(#g)" opacity=".88"/><circle cx="920" cy="100" r="300" fill="url(#r)"/><circle cx="170" cy="580" r="240" fill="#4c1d95" opacity=".42"/><rect x="85" y="92" width="1030" height="516" rx="42" fill="#120b1b" fill-opacity=".32" stroke="#f5eefe" stroke-opacity=".2"/><text x="100" y="255" fill="#fff" font-family="Arial, sans-serif" font-size="78" font-weight="800">VEOXHUB</text><text x="104" y="325" fill="#efe4ff" font-family="Arial, sans-serif" font-size="28" font-weight="700">DISCORD SELLER AUTOMATION</text><text x="104" y="405" fill="#eadcff" font-family="Arial, sans-serif" font-size="22">${safe}</text><circle cx="1030" cy="500" r="54" fill="#fff" fill-opacity=".12"/><path d="M1005 500h50M1030 475v50" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>`;
+  res.type('svg').send(svg);
+}
+
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
-app.use('/assets', express.static(path.join(__dirname, 'assets'), { index: false, fallthrough: false }));
-app.use('/public', express.static(path.join(__dirname, 'public'), { index: false }));
+app.use('/assets', express.static(path.join(__dirname, 'assets'), { index: false, fallthrough: true, maxAge: '1h' }));
+app.get('/assets/:file', (req, res) => fallbackSvg(res, req.params.file));
+app.use('/public', express.static(path.join(__dirname, 'public'), { index: false, fallthrough: true, maxAge: '1h' }));
 app.use((req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.listen(PORT, () => console.log(`VEOXHUB running on http://localhost:${PORT}`));
