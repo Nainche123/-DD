@@ -30,14 +30,14 @@ const SESSION_SECRET = process.env.SESSION_SECRET || await ensureSecret();
 const seed = {
   users: [],
   products: [
-    { id: nanoid(), name: 'VEXO 자판기봇 BASIC', tier: 'BASIC', category: '자판기봇', price: 19000, badge: '입문추천', description: '디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features: ['상품 버튼 주문 UI', '주문 접수 및 로그 기록', '관리자 확인 후 지급 안내', '기본 고객 응대 메시지', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
-    { id: nanoid(), name: 'VEXO 자판기봇 PRO', tier: 'PRO', category: '자판기봇', price: 39000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', ] },
-    { id: nanoid(), name: 'VEXO 디스코드 서버 템플릿', category: '서버 템플릿', price: 19000, badge: '빠른시작', description: '판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.', features: ['INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조', 'OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할', '공지·가격표·구매인증 채널', '문의·1대1 티켓용 채널', '관리자 전용 STAFF 카테고리', '서버 템플릿 링크 제공', '기본 세팅 가이드'] },
-    { id: nanoid(), name: 'VEXO 서버 템플릿 PRO', category: '서버 템플릿', price: 34000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '티켓 봇 연동 가이드', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '상세 세팅 설명서'] },
-    { id: nanoid(), name: 'VEXO 자동화 패키지', category: '자동화', price: 49000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '세팅 가이드 제공'] },
-    { id: nanoid(), name: 'VEXO 커스텀 봇 제작', category: '개발', price: 89000, badge: '상담필수', description: '원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.', features: ['요구사항 상담 후 제작', '슬래시/버튼 커맨드 지원', '서버 맞춤 기능 구현', '소스 또는 실행 파일 제공', '기본 설치 지원', '수정 범위 협의 가능'] },
-    { id: nanoid(), name: 'VEXO STORE 올인원', category: '패키지', price: 99000, badge: '목표추천', description: '서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.', features: ['서버 템플릿 PRO급 구조', '자판기봇 BASIC 또는 협의 버전', '자동화 기본 구성', '통합 세팅 가이드', '한 번에 판매 서버 구축', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
-    { id: nanoid(), name: 'VEXO 런칭 풀세팅', category: '패키지', price: 149000, badge: '프리미엄', description: '처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.', features: ['올인원 구성 포함', '판매 채널 문구 기본 작성', '후기·구매인증 동선 세팅', '운영 체크리스트 제공', '오픈 전 점검 1회', '주문 후 디스코드 티켓에서 범위 확정'] },
+    { id: nanoid(), name: 'VEOX 자판기봇 BASIC', tier: 'BASIC', category: '자판기봇', price: 19000, badge: '입문추천', description: '디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.', features: ['상품 버튼 주문 UI', '주문 접수 및 로그 기록', '관리자 확인 후 지급 안내', '기본 고객 응대 메시지', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
+    { id: nanoid(), name: 'VEOX 자판기봇 PRO', tier: 'PRO', category: '자판기봇', price: 39000, badge: '인기', description: '상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.', features: ['BASIC 전체 기능 포함', '상품 추가·수정·삭제 관리', '주문 상태 관리 패널', '구매자 역할 부여 지원', '상세 주문 로그 채널', '스태프 권한 분리', ] },
+    { id: nanoid(), name: 'VEOX 디스코드 서버 템플릿', category: '서버 템플릿', price: 19000, badge: '빠른시작', description: '판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.', features: ['INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조', 'OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할', '공지·가격표·구매인증 채널', '문의·1대1 티켓용 채널', '관리자 전용 STAFF 카테고리', '서버 템플릿 링크 제공', '기본 세팅 가이드'] },
+    { id: nanoid(), name: 'VEOX 서버 템플릿 PRO', category: '서버 템플릿', price: 34000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '티켓 봇 연동 가이드', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '상세 세팅 설명서'] },
+    { id: nanoid(), name: 'VEOX 자동화 패키지', category: '자동화', price: 49000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '세팅 가이드 제공'] },
+    { id: nanoid(), name: 'VEOX 커스텀 봇 제작', category: '개발', price: 89000, badge: '상담필수', description: '원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.', features: ['요구사항 상담 후 제작', '슬래시/버튼 커맨드 지원', '서버 맞춤 기능 구현', '소스 또는 실행 파일 제공', '기본 설치 지원', '수정 범위 협의 가능'] },
+    { id: nanoid(), name: 'VEOX STORE 올인원', category: '패키지', price: 99000, badge: '목표추천', description: '서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.', features: ['서버 템플릿 PRO급 구조', '자판기봇 BASIC 또는 협의 버전', '자동화 기본 구성', '통합 세팅 가이드', '한 번에 판매 서버 구축', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
+    { id: nanoid(), name: 'VEOX 런칭 풀세팅', category: '패키지', price: 149000, badge: '프리미엄', description: '처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.', features: ['올인원 구성 포함', '판매 채널 문구 기본 작성', '후기·구매인증 동선 세팅', '운영 체크리스트 제공', '오픈 전 점검 1회', '주문 후 디스코드 티켓에서 범위 확정'] },
     { id: nanoid(), name: '봇 설치 가이드', category: '가이드', price: 6000, badge: 'NEW', description: '디스코드 봇을 처음 설치·실행하는 방법을 단계별로 정리한 가이드입니다.', features: ['봇 계정 생성 방법', '토큰 발급·보관', '로컬 실행 방법', '필수 권한 설정', '자주 하는 오류 해결', '문서 형태로 제공'] },
     { id: nanoid(), name: '호스팅 가이드', category: '가이드', price: 7000, badge: '', description: '봇을 24시간 켜 두기 위한 호스팅 선택·세팅 가이드입니다.', features: ['무료/유료 호스팅 비교', 'VPS 기본 세팅', '프로세스 유지(PM2 등)', '재시작·로그 확인', '초보자용 체크리스트'] },
     { id: nanoid(), name: '서버 세팅 가이드', category: '가이드', price: 7000, badge: '', description: '판매용 디스코드 서버 채널·역할·권한을 구성하는 방법입니다.', features: ['역할 계층 설계', '카테고리/채널 구성', '권한 충돌 방지', '티켓·문의 채널 세팅', '구매 인증 채널 운영'] },
@@ -70,7 +70,7 @@ if (!Array.isArray(db.orders)) db.orders = [];
 if (!Array.isArray(db.coupons)) db.coupons = [];
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; if (o.payerName === undefined) o.payerName = ''; if (!Array.isArray(o.messages)) o.messages = []; if (!o.updatedAt) o.updatedAt = o.createdAt || new Date().toISOString(); }
 if (!db.settings) db.settings = seed.settings;
-if (db.settings.siteName === 'VEXO STORE') { db.settings.siteName = 'VEOXHUB'; }
+if (db.settings.siteName === 'VEOX STORE') { db.settings.siteName = 'VEOXHUB'; }
 if (db.settings.discordInvite === undefined) db.settings.discordInvite = process.env.DISCORD_INVITE_URL || '';
 if (db.settings.bankInfo === undefined) db.settings.bankInfo = process.env.BANK_INFO || '관리자에게 입금 계좌를 안내받아 주세요.';
 if (db.settings.webhookUrl === undefined) db.settings.webhookUrl = process.env.DISCORD_WEBHOOK_URL || '';
@@ -80,35 +80,38 @@ if (db.settings.targetMonth === undefined) db.settings.targetMonth = '2026-10';
 for (const p of db.products) { delete p.stock; if (p.category === '서버') p.category = '서버 템플릿'; }
 // Retire discontinued items from older deployments.
 db.products = db.products.filter(p => !['VEOX 멀티서버 관리팩','VEOX UPDATE PASS 1개월','VEOX UPDATE PASS 6개월','VEOX 봇 설치 & 기본 세팅'].includes(p.name));
+// Remove any legacy game-only SKUs from older deployments. VEOXHUB sells Discord bots, templates and seller tools.
+const LEGACY_GAME_TERMS = ['냥코','battle cats','555 패키지','999 패키지','81주년','광복절'];
+db.products = db.products.filter(p => !LEGACY_GAME_TERMS.some(term => String(p.name||'').toLowerCase().includes(term.toLowerCase())));
 
-// VEXO design / feature add-ons. These are separate from existing BOT/TEMPLATE/GUIDE products.
-// VEXO BOT SERIES metadata is shown as currently selling.
+// VEOX design / feature add-ons. These are separate from existing BOT/TEMPLATE/GUIDE products.
+// VEOX BOT SERIES metadata is shown as currently selling.
 // Premium tiers are presented without inventing a price; the website routes buyers to Discord for final purchase details.
-const VEXO_PREMIUM_PRODUCTS = [
-  { id:'vexo-bot-basic-premium', name:'VEXO 자판기봇 BASIC PREMIUM', category:'자판기봇', price:29000, badge:'PREMIUM', description:'BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 VEXO 브랜딩을 더한 프리미엄형입니다.', features:['BASIC 전체 기능 포함','고급 자판기 패널','상품 상세·선택 UI 강화','주문 티켓 UI 강화','지급 완료·구매 감사 로그 디자인','VEXO 브랜딩 구성'] },
-  { id:'vexo-bot-pro-premium', name:'VEXO 자판기봇 PRO PREMIUM', category:'자판기봇', price:59000, badge:'ULTIMATE', description:'PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.', features:['PRO 전체 기능 포함','페이지형 카테고리·상품 탐색','재고·수량·통계 운영','고급 주문 티켓 UI','지급 완료·구매 감사 로그','관리자 운영 편의 강화','VEXO 프리미엄 브랜딩'] }
+const VEOX_PREMIUM_PRODUCTS = [
+  { id:'vexo-bot-basic-premium', name:'VEOX 자판기봇 BASIC PREMIUM', category:'자판기봇', price:29000, badge:'PREMIUM', description:'BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 VEOX 브랜딩을 더한 프리미엄형입니다.', features:['BASIC 전체 기능 포함','고급 자판기 패널','상품 상세·선택 UI 강화','주문 티켓 UI 강화','지급 완료·구매 감사 로그 디자인','VEOX 브랜딩 구성'] },
+  { id:'vexo-bot-pro-premium', name:'VEOX 자판기봇 PRO PREMIUM', category:'자판기봇', price:59000, badge:'ULTIMATE', description:'PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.', features:['PRO 전체 기능 포함','페이지형 카테고리·상품 탐색','재고·수량·통계 운영','고급 주문 티켓 UI','지급 완료·구매 감사 로그','관리자 운영 편의 강화','VEOX 프리미엄 브랜딩'] }
 ];
 const premiumExisting = new Set(db.products.map(p => p.name));
-for (const p of VEXO_PREMIUM_PRODUCTS) if (!premiumExisting.has(p.name)) db.products.push(p);
+for (const p of VEOX_PREMIUM_PRODUCTS) if (!premiumExisting.has(p.name)) db.products.push(p);
 
-const VEXO_BOT_SERIES = [
-  { key:'basic', name:'BASIC', productName:'VEXO 자판기봇 BASIC', status:'판매중', subtitle:'가볍게 시작하는 기본 자판기봇' },
-  { key:'basic-premium', name:'BASIC PREMIUM', productName:'VEXO 자판기봇 BASIC PREMIUM', status:'판매중', price:29000, subtitle:'기본 기능 + Discord에서 구현 가능한 프리미엄 UI/브랜딩' },
-  { key:'pro', name:'PRO', productName:'VEXO 자판기봇 PRO', status:'판매중', subtitle:'판매 서버 운영을 위한 확장형' },
-  { key:'pro-premium', name:'PRO PREMIUM', productName:'VEXO 자판기봇 PRO PREMIUM', status:'판매중', price:59000, subtitle:'PRO 전체 + 고급 주문/관리 UI 및 브랜딩' }
+const VEOX_BOT_SERIES = [
+  { key:'basic', name:'BASIC', productName:'VEOX 자판기봇 BASIC', status:'판매중', subtitle:'가볍게 시작하는 기본 자판기봇' },
+  { key:'basic-premium', name:'BASIC PREMIUM', productName:'VEOX 자판기봇 BASIC PREMIUM', status:'판매중', price:29000, subtitle:'기본 기능 + Discord에서 구현 가능한 프리미엄 UI/브랜딩' },
+  { key:'pro', name:'PRO', productName:'VEOX 자판기봇 PRO', status:'판매중', subtitle:'판매 서버 운영을 위한 확장형' },
+  { key:'pro-premium', name:'PRO PREMIUM', productName:'VEOX 자판기봇 PRO PREMIUM', status:'판매중', price:59000, subtitle:'PRO 전체 + 고급 주문/관리 UI 및 브랜딩' }
 ];
 
-const VEXO_ADDON_PRODUCTS = [
-  { id: 'vexo-addon-embed-design', name: 'VEXO 임베드 디자인팩', category: '디자인', price: 9900, badge: 'DESIGN', description: '판매봇에 필요한 핵심 임베드를 VEXO 스타일로 통일하는 디자인팩입니다.', features: ['주문 접수 임베드', '입금 안내 임베드', '처리중·완료 임베드', '문의 접수 임베드', '후기 임베드', '다크 퍼플 글로우 테마'] },
-  { id: 'vexo-addon-panel-design', name: 'VEXO 버튼 & 패널 디자인팩', category: '디자인', price: 12900, badge: 'UI', description: '버튼·셀렉트·패널을 하나의 브랜드 UI처럼 보이게 만드는 디자인팩입니다.', features: ['메인 판매 패널', '카테고리 선택 UI', '상품 선택 UI', '문의 패널', '후기 패널', '버튼 라벨·이모지 가이드'] },
-  { id: 'vexo-addon-bot-skin', name: 'VEXO 봇 UI 스킨팩', category: '디자인', price: 14900, badge: 'HOT', description: '봇 전체의 색감·문구·임베드 스타일을 VEXO 전용 테마로 바꾸는 스킨팩입니다.', features: ['Purple Glow 테마', '임베드 타이포그래피 정리', '상태 메시지 디자인', '주문 티켓 디자인', '관리자 알림 디자인', '공통 푸터·브랜딩'] },
-  { id: 'vexo-addon-ticket-ui', name: 'VEXO 티켓 UI 커스텀', category: '디자인', price: 7900, badge: 'TICKET', description: '주문·문의 티켓을 한눈에 읽기 쉬운 화면으로 재구성합니다.', features: ['주문 요약 카드', '결제 안내 영역', '상태 표시 디자인', '관리자 처리 버튼 정리', '닫기·후기 버튼 디자인'] },
-  { id: 'vexo-addon-order-ui', name: 'VEXO 주문 UI 업그레이드', category: '봇 옵션', price: 10900, badge: 'ORDER', description: '주문 티켓의 상품·수량·금액·상태 정보를 더 고급스럽게 표현합니다.', features: ['상품 상세 요약', '수량·단가·총액 강조', '주문 상태 타임라인', '결제 안내 강조', '완료 메시지 디자인'] },
-  { id: 'vexo-addon-feature-pack', name: 'VEXO 봇 기능 확장팩', category: '봇 옵션', price: 14900, badge: 'FEATURE', description: '기존 봇에 적용할 수 있는 소형 기능 옵션을 묶은 추가 기능팩입니다.', features: ['자동 응답 문구 옵션', '추가 관리자 버튼', '주문 알림 옵션', '간단한 운영 보조 기능', '기능별 적용 범위 안내'] },
-  { id: 'vexo-addon-brand-kit', name: 'VEXO 봇 브랜딩팩', category: '디자인', price: 6900, badge: 'BRAND', description: '봇에 표시되는 이름·푸터·상태 문구를 한 브랜드처럼 통일합니다.', features: ['봇 이름 표기 가이드', '임베드 푸터 문구', '버튼 문구 세트', '상태/알림 문구 세트'] }
+const VEOX_ADDON_PRODUCTS = [
+  { id: 'vexo-addon-embed-design', name: 'VEOX 임베드 디자인팩', category: '디자인', price: 9900, badge: 'DESIGN', description: '판매봇에 필요한 핵심 임베드를 VEOX 스타일로 통일하는 디자인팩입니다.', features: ['주문 접수 임베드', '입금 안내 임베드', '처리중·완료 임베드', '문의 접수 임베드', '후기 임베드', '다크 퍼플 글로우 테마'] },
+  { id: 'vexo-addon-panel-design', name: 'VEOX 버튼 & 패널 디자인팩', category: '디자인', price: 12900, badge: 'UI', description: '버튼·셀렉트·패널을 하나의 브랜드 UI처럼 보이게 만드는 디자인팩입니다.', features: ['메인 판매 패널', '카테고리 선택 UI', '상품 선택 UI', '문의 패널', '후기 패널', '버튼 라벨·이모지 가이드'] },
+  { id: 'vexo-addon-bot-skin', name: 'VEOX 봇 UI 스킨팩', category: '디자인', price: 14900, badge: 'HOT', description: '봇 전체의 색감·문구·임베드 스타일을 VEOX 전용 테마로 바꾸는 스킨팩입니다.', features: ['Purple Glow 테마', '임베드 타이포그래피 정리', '상태 메시지 디자인', '주문 티켓 디자인', '관리자 알림 디자인', '공통 푸터·브랜딩'] },
+  { id: 'vexo-addon-ticket-ui', name: 'VEOX 티켓 UI 커스텀', category: '디자인', price: 7900, badge: 'TICKET', description: '주문·문의 티켓을 한눈에 읽기 쉬운 화면으로 재구성합니다.', features: ['주문 요약 카드', '결제 안내 영역', '상태 표시 디자인', '관리자 처리 버튼 정리', '닫기·후기 버튼 디자인'] },
+  { id: 'vexo-addon-order-ui', name: 'VEOX 주문 UI 업그레이드', category: '봇 옵션', price: 10900, badge: 'ORDER', description: '주문 티켓의 상품·수량·금액·상태 정보를 더 고급스럽게 표현합니다.', features: ['상품 상세 요약', '수량·단가·총액 강조', '주문 상태 타임라인', '결제 안내 강조', '완료 메시지 디자인'] },
+  { id: 'vexo-addon-feature-pack', name: 'VEOX 봇 기능 확장팩', category: '봇 옵션', price: 14900, badge: 'FEATURE', description: '기존 봇에 적용할 수 있는 소형 기능 옵션을 묶은 추가 기능팩입니다.', features: ['자동 응답 문구 옵션', '추가 관리자 버튼', '주문 알림 옵션', '간단한 운영 보조 기능', '기능별 적용 범위 안내'] },
+  { id: 'vexo-addon-brand-kit', name: 'VEOX 봇 브랜딩팩', category: '디자인', price: 6900, badge: 'BRAND', description: '봇에 표시되는 이름·푸터·상태 문구를 한 브랜드처럼 통일합니다.', features: ['봇 이름 표기 가이드', '임베드 푸터 문구', '버튼 문구 세트', '상태/알림 문구 세트'] }
 ];
 const existingIds = new Set(db.products.map(p => p.id));
-for (const p of VEXO_ADDON_PRODUCTS) if (!existingIds.has(p.id)) db.products.push(p);
+for (const p of VEOX_ADDON_PRODUCTS) if (!existingIds.has(p.id)) db.products.push(p);
 for (const p of db.products) {
   if (!p.features) p.features = [];
   // Keep installation guides separate from bot/template purchases.
@@ -191,13 +194,13 @@ if (!db.users.some(u => u.role === 'admin')) {
     const password = String(process.env.ADMIN_PASSWORD);
     const credErr = validateCredentials(username, email, password);
     if (credErr) {
-      console.log(`[VEXO] admin bootstrap skipped: ${credErr}`);
+      console.log(`[VEOX] admin bootstrap skipped: ${credErr}`);
     } else {
       const exists = db.users.some(u => u.username.toLowerCase() === username.toLowerCase() || u.email.toLowerCase() === email);
       if (!exists) {
         db.users.push({ id: nanoid(), username, email, passwordHash: await bcrypt.hash(password, 12), role: 'admin', createdAt: new Date().toISOString() });
         await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
-        console.log(`[VEXO] admin account created: ${username}`);
+        console.log(`[VEOX] admin account created: ${username}`);
       } else {
         // Promote existing matching user to admin on first bootstrap
         const user = db.users.find(u => u.username.toLowerCase() === username.toLowerCase() || u.email.toLowerCase() === email);
@@ -205,12 +208,12 @@ if (!db.users.some(u => u.role === 'admin')) {
           user.role = 'admin';
           user.passwordHash = await bcrypt.hash(password, 12);
           await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
-          console.log(`[VEXO] existing user promoted to admin: ${username}`);
+          console.log(`[VEOX] existing user promoted to admin: ${username}`);
         }
       }
     }
   } else {
-    console.log('[VEXO] No admin account. Set ADMIN_USERNAME, ADMIN_EMAIL, ADMIN_PASSWORD once then restart to create admin.');
+    console.log('[VEOX] No admin account. Set ADMIN_USERNAME, ADMIN_EMAIL, ADMIN_PASSWORD once then restart to create admin.');
   }
 }
 
@@ -318,7 +321,7 @@ app.get('/api/revenue-ladder', (req, res) => {
 });
 
 app.get('/api/bot-series', (req, res) => {
-  const items = VEXO_BOT_SERIES.map(series => ({
+  const items = VEOX_BOT_SERIES.map(series => ({
     ...series,
     product: series.productName ? db.products.find(p => p.name === series.productName) || null : null
   }));
@@ -721,7 +724,7 @@ app.patch('/api/admin/orders/:id', requireAdmin, (req, res) => {
   order.status = status;
   order.updatedAt = now;
   if (status === '취소') order.cancelledAt = now;
-  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEXO STORE', senderRole:'system', text:`주문 상태가 \`${status}\`(으)로 변경되었습니다.`, attachment:null, createdAt:now });
+  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEOXHUB', senderRole:'system', text:`주문 상태가 \`${status}\`(으)로 변경되었습니다.`, attachment:null, createdAt:now });
   saveDb();
   res.json({ order });
 });
@@ -735,7 +738,7 @@ app.post('/api/admin/orders/:id/approve', requireAdmin, (req, res) => {
   order.status = '입금확인완료';
   order.paymentApprovedAt = now;
   order.updatedAt = now;
-  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEXO STORE', senderRole:'system', text:'✅ 입금이 확인되었습니다. 상품 지급을 준비해 주세요.', attachment:null, createdAt:now });
+  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEOXHUB', senderRole:'system', text:'✅ 입금이 확인되었습니다. 상품 지급을 준비해 주세요.', attachment:null, createdAt:now });
   saveDb();
   res.json({ order });
 });
@@ -746,7 +749,7 @@ function issueCompletionCoupon(order) {
   if (already) return null;
   const coupon = {
     id:nanoid(12),
-    code:'VEXO-' + nanoid(7).toUpperCase(),
+    code:'VEOX-' + nanoid(7).toUpperCase(),
     label:'구매 완료 감사 5% 할인',
     type:'percent', value:5, maxDiscount:5000, minOrder:50000,
     expiresAt:new Date(Date.now()+30*24*60*60*1000).toISOString(),
@@ -766,7 +769,7 @@ app.post('/api/admin/orders/:id/complete', requireAdmin, (req, res) => {
   order.status = '완료';
   order.completedAt = now;
   order.updatedAt = now;
-  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEXO STORE', senderRole:'system', text:'✅ 상품 지급이 완료되었습니다. 아래 주문실의 파일·사진·링크를 확인해 주세요.', attachment:null, createdAt:now });
+  order.messages.push({ id:'SYS-' + nanoid(10).toUpperCase(), senderId:'system', senderName:'VEOXHUB', senderRole:'system', text:'✅ 상품 지급이 완료되었습니다. 아래 주문실의 파일·사진·링크를 확인해 주세요.', attachment:null, createdAt:now });
   const rewardCoupon = issueCompletionCoupon(order);
   if (rewardCoupon) order.rewardCouponCode = rewardCoupon.code;
   saveDb();
@@ -814,7 +817,7 @@ app.post('/api/admin/orders/:id/deliver', requireAdmin, async (req, res) => {
     order.messages.push({
       id:'SYS-' + nanoid(10).toUpperCase(),
       senderId:'system',
-      senderName:'VEXO STORE',
+      senderName:'VEOXHUB',
       senderRole:'system',
       text:'✅ 상품 지급이 완료되었습니다.',
       attachment:null,
@@ -838,6 +841,7 @@ app.patch('/api/admin/settings' , requireAdmin, (req, res) => {
 });
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.use('/assets', express.static(path.join(__dirname, 'assets'), { index: false, fallthrough: false }));
 app.use('/public', express.static(path.join(__dirname, 'public'), { index: false }));
 app.use((req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
