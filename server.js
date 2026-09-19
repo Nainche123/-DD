@@ -45,6 +45,8 @@ const seed = {
     { id: nanoid(), name: '올인원 세팅 가이드', category: '가이드', price: 19000, badge: 'BEST', description: '봇 설치, 호스팅, 서버 세팅, 운영까지 한 번에 담은 통합 가이드입니다.', features: ['설치·호스팅·서버 세팅 통합', '판매 시작 체크리스트', '문제 해결 FAQ', '추천 운영 순서', '개별 가이드 묶음보다 저렴'] }
   ],
   orders: [],
+  inquiries: [],
+  announcements: [],
   settings: {
     siteName: 'VEOXHUB',
     notice: '',
@@ -67,8 +69,8 @@ try {
 if (!Array.isArray(db.users)) db.users = [];
 if (!Array.isArray(db.products) || db.products.length === 0) db.products = seed.products;
 if (!Array.isArray(db.orders)) db.orders = [];
-if (!Array.isArray(db.supportInquiries)) db.supportInquiries = [];
-for (const q of db.supportInquiries) { if (!Array.isArray(q.replies)) q.replies=[]; if (!q.status) q.status='open'; if (!q.createdAt) q.createdAt=new Date().toISOString(); }
+if (!Array.isArray(db.inquiries)) db.inquiries = [];
+if (!Array.isArray(db.announcements)) db.announcements = [];
 if (!Array.isArray(db.coupons)) db.coupons = [];
 for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수'; if (o.paymentRequested === undefined) o.paymentRequested = false; if (o.deliveryLink === undefined) o.deliveryLink = ''; if (o.payerName === undefined) o.payerName = ''; if (!Array.isArray(o.messages)) o.messages = []; if (!o.updatedAt) o.updatedAt = o.createdAt || new Date().toISOString(); }
 if (!db.settings) db.settings = seed.settings;
@@ -558,10 +560,15 @@ app.post('/api/orders/:id/messages', requireAuth, async (req, res) => {
 
 app.get('/api/attachments/:id', requireAuth, async (req, res) => {
   const id = String(req.params.id || '');
-  const order = db.orders.find(o => Array.isArray(o.messages) && o.messages.some(m => m.attachment?.id === id));
-  if (!order) return res.status(404).send('첨부 파일을 찾을 수 없습니다.');
-  if (req.user.role !== 'admin' && order.userId !== req.user.id) return res.status(403).send('권한이 없습니다.');
-  const message = order.messages.find(m => m.attachment?.id === id);
+  let parent = db.orders.find(o => Array.isArray(o.messages) && o.messages.some(m => m.attachment?.id === id));
+  let parentType = 'order';
+  if (!parent) {
+    parent = db.inquiries.find(i => Array.isArray(i.messages) && i.messages.some(m => m.attachment?.id === id));
+    parentType = 'inquiry';
+  }
+  if (!parent) return res.status(404).send('첨부 파일을 찾을 수 없습니다.');
+  if (req.user.role !== 'admin' && parent.userId !== req.user.id) return res.status(403).send('권한이 없습니다.');
+  const message = parent.messages.find(m => m.attachment?.id === id);
   const file = message?.attachment;
   if (!file?.storedName) return res.status(404).send('첨부 파일을 찾을 수 없습니다.');
   const filePath = path.join(ATTACHMENT_DIR, file.storedName);
@@ -587,34 +594,89 @@ app.get('/api/orders', requireAuth, (req, res) => {
   res.json({ orders });
 });
 
-
-if (!Array.isArray(db.supportInquiries)) db.supportInquiries = [];
-async function sendDiscordSupportNotice(item) {
-  const url = getWebhookUrl();
-  if (!url) return;
-  const payload = { content: `💬 **VEOXHUB 고객 문의 접수**\n회원: ${item.username} (${item.email})\n문의: ${item.text}` };
-  await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-}
-
-app.post('/api/support/inquiries', requireAuth, async (req, res) => {
-  const text = String(req.body?.text || '').trim();
-  if (!text) return res.status(400).json({error:'문의 내용을 입력해 주세요.'});
-  if (text.length > 2000) return res.status(400).json({error:'문의 내용은 2,000자 이하로 작성해 주세요.'});
-  const user = getUser(req);
-  const item = { id:nanoid(), userId:user.id, username:user.username, email:user.email, text, status:'open', createdAt:new Date().toISOString(), replies:[] };
-  db.supportInquiries.push(item); await saveDb();
-  await sendDiscordSupportNotice(item).catch(() => {});
-  res.json({ok:true,message:'문의가 접수되었습니다. 관리자 답변을 확인해 주세요.', inquiry:safeInquiry(item)});
+app.get('/api/inquiries', requireAuth, (req, res) => {
+  const inquiries = db.inquiries.filter(i => req.user.role === 'admin' || i.userId === req.user.id);
+  res.json({ inquiries });
 });
-app.get('/api/support/inquiries', requireAuth, (req,res) => {
-  const user=getUser(req); res.json({inquiries:db.supportInquiries.filter(x=>x.userId===user.id).map(safeInquiry)});
+
+app.get('/api/inquiries/:id', requireAuth, (req, res) => {
+  const inquiry = db.inquiries.find(i => i.id === req.params.id);
+  if (!inquiry) return res.status(404).json({ error: '문의 내용을 찾을 수 없습니다.' });
+  if (req.user.role !== 'admin' && inquiry.userId !== req.user.id) return res.status(403).json({ error: '이 문의를 볼 권한이 없습니다.' });
+  res.json({ inquiry });
 });
-function safeInquiry(x){ return {id:x.id,userId:x.userId,username:x.username,email:x.email,text:x.text,status:x.status,createdAt:x.createdAt,replies:(x.replies||[]).map(r=>({id:r.id,text:r.text,createdAt:r.createdAt,by:r.by}))}; }
-app.get('/api/admin/support/inquiries', requireAdmin, (req,res) => res.json({inquiries:db.supportInquiries.map(safeInquiry).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)))}));
-app.post('/api/admin/support/inquiries/:id/reply', requireAdmin, async (req,res) => {
-  const item=db.supportInquiries.find(x=>x.id===req.params.id); if(!item) return res.status(404).json({error:'문의를 찾을 수 없습니다.'});
-  const text=String(req.body?.text||'').trim(); if(!text) return res.status(400).json({error:'답변 내용을 입력해 주세요.'});
-  const reply={id:nanoid(),text,createdAt:new Date().toISOString(),by:'admin'}; item.replies=item.replies||[]; item.replies.push(reply); item.status='answered'; await saveDb(); res.json({ok:true,inquiry:safeInquiry(item)});
+
+app.post('/api/inquiries', requireAuth, async (req, res) => {
+  const subject = String(req.body.subject || '').trim().slice(0, 120);
+  const category = String(req.body.category || '일반 문의').trim().slice(0, 40);
+  const text = String(req.body.text || '').trim().slice(0, 2000);
+  if (!subject || subject.length < 2) return res.status(400).json({ error: '문의 제목을 입력해 주세요.' });
+  if (!text) return res.status(400).json({ error: '문의 내용을 입력해 주세요.' });
+  const now = new Date().toISOString();
+  const inquiry = {
+    id:'INQ-' + nanoid(9).toUpperCase(),
+    userId:req.user.id,
+    username:req.user.username,
+    email:req.user.email,
+    category,
+    subject,
+    status:'답변대기',
+    createdAt:now,
+    updatedAt:now,
+    messages:[{ id:'MSG-' + nanoid(10).toUpperCase(), senderId:req.user.id, senderName:req.user.username, senderRole:'user', text, attachment:null, createdAt:now }]
+  };
+  db.inquiries.unshift(inquiry);
+  saveDb();
+  res.status(201).json({ inquiry });
+});
+
+app.post('/api/inquiries/:id/messages', requireAuth, async (req, res) => {
+  const inquiry = db.inquiries.find(i => i.id === req.params.id);
+  if (!inquiry) return res.status(404).json({ error: '문의 내용을 찾을 수 없습니다.' });
+  if (req.user.role !== 'admin' && inquiry.userId !== req.user.id) return res.status(403).json({ error: '이 문의에 메시지를 보낼 권한이 없습니다.' });
+  if (inquiry.status === '종료') return res.status(400).json({ error: '종료된 문의입니다.' });
+  const text = String(req.body.text || '').trim().slice(0, 2000);
+  let attachment = null;
+  try { attachment = await saveAttachment(req.body.attachment); } catch (e) { return res.status(400).json({ error: e.message || '첨부 파일을 저장하지 못했습니다.' }); }
+  if (!text && !attachment) return res.status(400).json({ error: '메시지 또는 파일을 입력해 주세요.' });
+  const now = new Date().toISOString();
+  inquiry.messages.push({ id:'MSG-' + nanoid(10).toUpperCase(), senderId:req.user.id, senderName:req.user.username, senderRole:req.user.role, text, attachment, createdAt:now });
+  inquiry.updatedAt = now;
+  inquiry.status = req.user.role === 'admin' ? '답변완료' : '답변대기';
+  saveDb();
+  res.status(201).json({ inquiry });
+});
+
+app.patch('/api/inquiries/:id', requireAuth, (req, res) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ error:'관리자 권한이 필요합니다.' });
+  const inquiry = db.inquiries.find(i => i.id === req.params.id);
+  if (!inquiry) return res.status(404).json({ error:'문의 내용을 찾을 수 없습니다.' });
+  const status = String(req.body.status || '').trim();
+  if (!['답변대기','답변완료','종료'].includes(status)) return res.status(400).json({ error:'문의 상태가 올바르지 않습니다.' });
+  inquiry.status = status;
+  inquiry.updatedAt = new Date().toISOString();
+  saveDb();
+  res.json({ inquiry });
+});
+
+app.get('/api/announcements', (req, res) => res.json({ announcements: db.announcements.slice(0, 12) }));
+
+app.get('/api/admin/announcements', requireAdmin, (req, res) => res.json({ announcements: db.announcements }));
+app.post('/api/admin/announcements', requireAdmin, (req, res) => {
+  const title = String(req.body.title || '').trim().slice(0, 120);
+  const text = String(req.body.text || '').trim().slice(0, 1200);
+  if (!title || !text) return res.status(400).json({ error:'공지 제목과 내용을 입력해 주세요.' });
+  const announcement = { id:'ANN-' + nanoid(9).toUpperCase(), title, text, createdAt:new Date().toISOString(), authorId:req.user.id, authorName:req.user.username };
+  db.announcements.unshift(announcement);
+  db.announcements = db.announcements.slice(0, 50);
+  saveDb();
+  res.status(201).json({ announcement });
+});
+
+app.delete('/api/admin/announcements/:id', requireAdmin, (req, res) => {
+  db.announcements = db.announcements.filter(a => a.id !== req.params.id);
+  saveDb();
+  res.json({ ok:true });
 });
 
 app.get('/api/admin/summary', requireAdmin, (req, res) => {
