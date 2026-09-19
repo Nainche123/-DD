@@ -208,24 +208,6 @@ for (const product of VEOX_35_PRODUCTS) {
   if (existing) existing.price = product.price;
   else if (!existing35.has(product.id)) db.products.push(product);
 }
-// Restore the complete official VEOXHUB catalog if an older database was created with a reduced list.
-// Existing custom products are preserved; missing official products are added only by name.
-const REQUIRED_VEOX_PRODUCTS = [
-  ...seed.products,
-  ...VEOX_PREMIUM_PRODUCTS,
-  ...VEOX_ADDON_PRODUCTS,
-  ...VEOX_UPGRADE_PRODUCTS,
-  ...VEOX_33_PRODUCTS,
-  ...VEOX_35_PRODUCTS,
-  ...VEOX_51_PRODUCTS,
-];
-const existingProductNames = new Set(db.products.map(p => String(p.name || '').trim()));
-for (const official of REQUIRED_VEOX_PRODUCTS) {
-  const name = String(official.name || '').trim();
-  if (!name || existingProductNames.has(name)) continue;
-  db.products.push({ ...official, id: official.id || nanoid() });
-  existingProductNames.add(name);
-}
 await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 
 // Optional first-admin bootstrap. Set ADMIN_USERNAME, ADMIN_EMAIL and ADMIN_PASSWORD
@@ -563,6 +545,7 @@ app.post('/api/orders/:id/payment-request', requireAuth, async (req, res) => {
   if (!order) return res.status(404).json({ error: '주문을 찾을 수 없습니다.' });
   if (!allowed || req.user.role === 'admin') return res.status(403).json({ error: '구매자만 입금 확인 요청을 할 수 있습니다.' });
   if (['완료','취소'].includes(order.status)) return res.status(400).json({ error: '현재 주문 상태에서는 입금 확인 요청을 할 수 없습니다.' });
+  if (order.paymentRequested && order.status === '입금확인요청') return res.json({ order, alreadyRequested: true });
   order.paymentRequested = true;
   order.status = '입금확인요청';
   order.paymentRequestedAt = new Date().toISOString();
