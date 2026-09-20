@@ -593,8 +593,20 @@ function buildOrderEmbed(order, { emoji, title, color, extraFields = [], footer 
 
 async function postWebhook(payload) {
   const url = getWebhookUrl();
-  if (!url) return;
-  await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+  if (!url) throw new Error('DISCORD_WEBHOOK_URL이 설정되어 있지 않습니다.');
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`Discord Webhook HTTP ${response.status}`);
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function sendDiscordOrderNotice(order) {
@@ -604,6 +616,47 @@ async function sendDiscordOrderNotice(order) {
     color: 0x8b5cf6,
     footer: '구매자가 입금 후 확인 요청을 보내면 다시 알려드려요.',
   }));
+}
+
+async function sendDiscordOrderMessageNotice(order, message) {
+  await postWebhook({
+    username: 'VEXOHUB 주문 알림',
+    embeds: [{
+      title: '💬 주문 채팅 새 메시지',
+      color: 0x2563eb,
+      fields: [
+        { name:'🧾 주문번호', value:`\`${order.id}\``, inline:true },
+        { name:'👤 보낸 사람', value: message.senderName || '-', inline:true },
+        { name:'📦 상품', value:`${order.productName || '-'} × ${order.quantity || 1}`, inline:false },
+        { name:'💬 메시지', value:String(message.text || '(첨부파일)').slice(0,1000), inline:false },
+      ],
+      footer:{text:'VEXOHUB · 주문 채팅 실시간 알림'},
+      timestamp:new Date().toISOString(),
+    }],
+  });
+}
+
+function buildInquiryEmbed(inquiry, message, title = '새 문의가 도착했습니다') {
+  return {
+    username:'VEXOHUB 문의 알림',
+    embeds:[{
+      title:`💬 ${title}`,
+      color:0x06b6d4,
+      fields:[
+        {name:'🧾 문의번호',value:`\`${inquiry.id}\``,inline:true},
+        {name:'👤 회원',value:inquiry.username || '-',inline:true},
+        {name:'📂 분류',value:inquiry.category || '-',inline:true},
+        {name:'📌 제목',value:inquiry.subject || '-',inline:false},
+        {name:'💬 메시지',value:String(message?.text || '(첨부파일)').slice(0,1000),inline:false},
+      ],
+      footer:{text:'VEXOHUB · 고객 문의 실시간 알림'},
+      timestamp:new Date().toISOString(),
+    }]
+  };
+}
+
+async function sendDiscordInquiryNotice(inquiry, message, title='새 문의가 도착했습니다') {
+  await postWebhook(buildInquiryEmbed(inquiry, message, title));
 }
 
 const ORDER_ACTIVE_STATUSES = new Set(['주문접수','입금확인요청','처리중']);
@@ -731,6 +784,7 @@ app.post('/api/orders/:id/messages', requireAuth, async (req, res) => {
   order.messages.push(message);
   order.updatedAt = now;
   saveDb();
+  await sendDiscordOrderMessageNotice(order, message).catch(err => console.error('[VEXO] 주문 채팅 웹훅 오류:', err.message));
   res.status(201).json({ message, order });
 });
 
@@ -819,6 +873,7 @@ app.post('/api/inquiries', requireAuth, async (req, res) => {
   };
   db.inquiries.unshift(inquiry);
   saveDb();
+  await sendDiscordInquiryNotice(inquiry, inquiry.messages[0], '새 고객 문의가 도착했습니다').catch(err => console.error('[VEXO] 문의 웹훅 오류:', err.message));
   res.status(201).json({ inquiry });
 });
 
@@ -836,6 +891,8 @@ app.post('/api/inquiries/:id/messages', requireAuth, async (req, res) => {
   inquiry.updatedAt = now;
   inquiry.status = req.user.role === 'admin' ? '답변완료' : '답변대기';
   saveDb();
+  const latestMessage = inquiry.messages[inquiry.messages.length - 1];
+  await sendDiscordInquiryNotice(inquiry, latestMessage, req.user.role === 'admin' ? '관리자 답변이 등록되었습니다' : '고객이 문의에 답변했습니다').catch(err => console.error('[VEXO] 문의 메시지 웹훅 오류:', err.message));
   res.status(201).json({ inquiry });
 });
 
@@ -849,6 +906,18 @@ app.patch('/api/inquiries/:id', requireAuth, (req, res) => {
   inquiry.updatedAt = new Date().toISOString();
   saveDb();
   res.json({ inquiry });
+});
+
+app.post('/api/admin/webhook-test', requireAdmin, async (req, res) => {
+  try {
+    await postWebhook({
+      username:'VEXOHUB 알림',
+      embeds:[{title:'✅ VEXOHUB Webhook 연결 테스트',description:'이 메시지가 보이면 Discord Webhook 연결이 정상입니다.',color:0x22c55e,footer:{text:'VEXOHUB · 웹훅 테스트'},timestamp:new Date().toISOString()}]
+    });
+    res.json({ok:true,message:'Discord Webhook으로 테스트 메시지를 전송했습니다.'});
+  } catch (e) {
+    res.status(400).json({ok:false,error:e.message || '웹훅 전송에 실패했습니다.'});
+  }
 });
 
 app.get('/api/announcements', (req, res) => res.json({ announcements: db.announcements.slice(0, 12) }));
