@@ -27,6 +27,8 @@ async function ensureSecret() {
 }
 const SESSION_SECRET = process.env.SESSION_SECRET || await ensureSecret();
 
+const DEFAULT_BANK_INFO = '토스뱅크 문성식 1908-8064-8818 로 입금 부탁드립니다!';
+
 const seed = {
   users: [],
   products: [
@@ -52,7 +54,7 @@ const seed = {
     notice: '',
     onlineLabel: '현재 접속자',
     discordInvite: process.env.DISCORD_INVITE_URL || '',
-    bankInfo: process.env.BANK_INFO || '디스코드 티켓에서 입금 계좌를 안내받아 주세요.',
+    bankInfo: process.env.BANK_INFO || DEFAULT_BANK_INFO,
     webhookUrl: process.env.DISCORD_WEBHOOK_URL || '',
     goalAmount: 500000,
     targetMonth: '2026-10'
@@ -99,7 +101,7 @@ for (const o of db.orders) { if (o.status === '접수') o.status = '주문접수
 if (!db.settings) db.settings = seed.settings;
 if (db.settings.siteName === 'VEXO STORE') { db.settings.siteName = 'VEXOHUB'; }
 if (db.settings.discordInvite === undefined || db.settings.discordInvite === '') { if (process.env.DISCORD_INVITE_URL) db.settings.discordInvite = process.env.DISCORD_INVITE_URL; }
-if (db.settings.bankInfo === undefined) db.settings.bankInfo = process.env.BANK_INFO || '관리자에게 입금 계좌를 안내받아 주세요.';
+if (db.settings.bankInfo === undefined || db.settings.bankInfo === '디스코드 티켓에서 입금 계좌를 안내받아 주세요.' || db.settings.bankInfo === '관리자에게 입금 계좌를 안내받아 주세요.') db.settings.bankInfo = process.env.BANK_INFO || DEFAULT_BANK_INFO;
 if (db.settings.webhookUrl === undefined) db.settings.webhookUrl = process.env.DISCORD_WEBHOOK_URL || '';
 if (db.settings.goalAmount === undefined) db.settings.goalAmount = 500000;
 if (db.settings.targetMonth === undefined) db.settings.targetMonth = '2026-10';
@@ -548,6 +550,7 @@ app.post('/api/orders', requireAuth, async (req, res) => {
     updatedAt: new Date().toISOString(),
     messages: []
   };
+  appendSystemMessage(order, `💳 결제 안내\n${db.settings.bankInfo || DEFAULT_BANK_INFO}`, order.createdAt);
   db.orders.unshift(order);
   if (coupon) {
     coupon.usedCount = Number(coupon.usedCount || 0) + 1;
@@ -614,6 +617,7 @@ async function sendDiscordOrderNotice(order) {
     emoji: '🛒',
     title: '새 주문이 접수되었습니다',
     color: 0x8b5cf6,
+    extraFields: [{ name: '💳 입금 안내', value: String(db.settings.bankInfo || DEFAULT_BANK_INFO).slice(0, 300), inline: false }],
     footer: '구매자가 입금 후 확인 요청을 보내면 다시 알려드려요.',
   }));
 }
