@@ -5,190 +5,236 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VEXO HUB | Discord Seller Automation</title>
 <meta name="description" content="VEXOHUB - 디스코드 판매 자동화 봇, 서버 템플릿, 자동화, 커스텀 봇, 운영 확장팩 판매 사이트">
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#0b2459">
 <meta name="color-scheme" content="light">
-<link rel="icon" href="/assets/veox-favicon.png?v=3" type="image/png">
-<link rel="shortcut icon" href="/assets/favicon.ico?v=3" type="image/x-icon">
-<link rel="apple-touch-icon" href="/assets/veox-favicon.png?v=3">
+<link rel="icon" href="/assets/vexo-favicon.png?v=9" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+
 :root{
-  --bg:#f4f8fd; --panel:#ffffff; --panel-2:#f7fafd; --text:#0f172a; --muted:#64748b;
-  --line:#e1e8f2; --blue:#2563eb; --blue2:#3b82f6; --blue3:#e8f0fe; --navy:#0f2a5c;
-  --green:#13b56a; --red:#ef476f; --shadow:0 16px 50px rgba(15,42,92,.10); --shadow2:0 8px 24px rgba(30,64,175,.08);
-  --r:18px;
+  --bg:#eef4ff; --surface:#ffffff; --surface-2:#f7faff; --surface-3:#edf3ff;
+  --text:#102447; --muted:#7182a1; --line:#dbe5f5;
+  --navy:#081a40; --navy-2:#0c2a63; --blue:#2b63f3; --blue-2:#5c8dff;
+  --cyan:#6ee7ff; --green:#11bf78; --amber:#f7b83f; --danger:#ef476f;
+  --shadow:0 22px 70px rgba(35,72,145,.12); --shadow-soft:0 12px 34px rgba(38,73,137,.08);
+  --radius:22px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:Pretendard,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 80% 0%,rgba(37,99,235,.11),transparent 26%),radial-gradient(circle at 5% 30%,rgba(96,165,250,.10),transparent 28%)}
+body{font-family:Pretendard,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+  radial-gradient(circle at 85% -5%,rgba(85,136,255,.15),transparent 28%),
+  linear-gradient(180deg,#edf4ff 0%,#f8fbff 60%,#eef5ff 100%);color:var(--text);line-height:1.55}
 body.locked{overflow:hidden}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.hidden{display:none!important}
-.wrap{width:min(1440px,100%);margin:auto;padding:0 22px}
-.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
-.sidebar{position:sticky;top:0;height:100vh;background:#fff;border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;z-index:40}
-.brand{display:flex;align-items:center;gap:12px;padding:6px 10px 20px;border-bottom:1px solid #edf1f7}
-.brand-mark{width:44px;height:44px;border-radius:14px;object-fit:cover;box-shadow:0 10px 25px rgba(37,99,235,.24)}
-.brand-copy b{display:block;font-size:17px}.brand-copy span{display:block;font-size:10px;letter-spacing:.08em;color:#64748b;margin-top:2px}
-.side-nav{display:grid;gap:6px;margin-top:20px}
-.side-nav button{border:1px solid transparent;background:transparent;color:#64748b;text-align:left;padding:12px 13px;border-radius:12px;display:flex;align-items:center;gap:11px;font-weight:800}
-.side-nav button:hover{background:#eaf3ff;color:var(--blue)}
-.side-nav button.active{background:#e8f0fe;color:var(--blue);border-color:#d7e6fb}
-.side-cta{margin-top:auto;padding:16px;border-radius:18px;background:linear-gradient(160deg,#1d4ed8,#3b82f6);color:#fff;box-shadow:0 18px 40px rgba(37,99,235,.22)}
-.side-cta strong{font-size:15px;display:block}.side-cta p{font-size:11px;opacity:.85;margin-top:6px}.side-cta .btn{margin-top:12px;width:100%}
-.sidebar-footer{padding-top:14px;color:#64748b;font-size:10px;text-align:center}
-.main{min-width:0}
-.topbar{position:sticky;top:0;z-index:35;background:rgba(244,248,253,.90);backdrop-filter:blur(16px);border-bottom:1px solid rgba(221,230,242,.8)}
-.topbar-inner{height:72px;display:flex;align-items:center;gap:18px}
-.mobile-menu{display:none}
-.top-links{display:flex;gap:20px;align-items:center}.top-links a{font-size:13px;font-weight:800;color:#64748b}.top-links a:hover{color:var(--blue)}
-.top-actions{margin-left:auto;display:flex;gap:8px;align-items:center}.online{display:flex;align-items:center;gap:7px;color:#64748b;font-size:11px;font-weight:800}.online i{width:7px;height:7px;border-radius:50%;background:var(--green)}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;color:#475569;font-weight:900;font-size:12px;transition:.16s}
-.btn:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(37,99,235,.08)}
-.btn.blue{background:linear-gradient(135deg,var(--blue),var(--blue2));border-color:transparent;color:#fff;box-shadow:0 10px 24px rgba(37,99,235,.22)}
-.btn.ghost{background:#f7fafd}.btn.lightblue{background:#e8f0fe;border-color:#d6e6ff;color:#1d4ed8}.btn.danger{background:#fff3f6;border-color:#ffd0db;color:var(--red)}
-.btn.sm{padding:8px 11px;font-size:11px;border-radius:10px}.btn.block{width:100%}
-.hero{padding:28px 0 18px}.hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(330px,.8fr);gap:18px}
-.hero-copy{min-height:430px;background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:42px;position:relative;overflow:hidden}
-.hero-copy::after{content:"";position:absolute;right:-120px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.20),transparent 65%)}
-.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:#dbe9ff;border:1px solid #d6e6ff;color:var(--blue);font-size:11px;font-weight:900}
-.hero h1{margin-top:20px;font-size:clamp(44px,6vw,80px);line-height:.98;letter-spacing:-.06em;max-width:780px}.hero h1 span{color:var(--blue)}
-.hero p{max-width:720px;color:#64748b;font-size:15px;line-height:1.8;margin-top:18px}.hero-actions{display:flex;gap:9px;margin-top:24px;flex-wrap:wrap}
-.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:30px}.stat{padding:16px;border:1px solid var(--line);border-radius:15px;background:#f7fafd}.stat b{font-size:20px}.stat span{display:block;color:#64748b;font-size:11px;margin-top:3px;font-weight:700}
-.hero-banner{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:12px;overflow:hidden}.hero-banner img{width:100%;height:270px;object-fit:cover;border-radius:18px;display:block;background:#0b1a33}.hero-banner-footer{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mini-card{border:1px solid var(--line);border-radius:15px;background:#f7fafd;padding:14px}.mini-card strong{display:block;font-size:14px}.mini-card span{display:block;color:#64748b;font-size:11px;margin-top:3px}
-.section{padding:24px 0}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}.section-head h2{font-size:24px;letter-spacing:-.03em}.section-head p{font-size:12px;color:#64748b;margin-top:3px}
-.product-tools{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}.product-search{display:flex;align-items:center;gap:8px;flex:1 1 260px;min-width:220px;position:relative}.product-search>span{position:absolute;left:12px;color:#64748b;font-weight:900;pointer-events:none}.product-search .input{padding-left:34px}.product-sort{width:170px;background:#fff}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;color:#64748b;font-size:11px;font-weight:900}.pill.active{background:var(--blue);border-color:var(--blue);color:#fff}
-.products-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.product{background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow2);overflow:hidden;display:flex;flex-direction:column;min-width:0}.product:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(30,64,175,.12)}
-.product-media{padding:10px;height:165px}.product-media img{width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;background:#0b1a33}.product-body{padding:16px}.product-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.badge{border-radius:999px;padding:5px 8px;background:#e8f0fe;color:var(--blue);font-size:9px;font-weight:900}.cat{font-size:10px;color:#64748b;font-weight:800}.product h3{font-size:16px;line-height:1.35;margin-top:11px}.product-desc{color:#64748b;font-size:11px;line-height:1.6;margin-top:7px;min-height:38px}.feature-list{display:grid;gap:5px;margin-top:11px}.feature-list span{font-size:10px;color:#64748b;display:flex;align-items:flex-start;gap:6px}.feature-list span::before{content:"";width:5px;height:5px;margin-top:5px;border-radius:50%;background:#60a5fa;flex:0 0 5px}.product-bottom{margin-top:auto;padding:0 16px 16px;display:flex;align-items:center;gap:8px}.price{font-size:18px;font-weight:900;color:#1e40af;margin-right:auto}.price small{font-size:10px;color:#64748b;font-weight:700}.product-bottom .btn{flex:0 0 auto}
-.info-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow2);padding:20px}.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.benefit{border:1px solid var(--line);border-radius:15px;padding:16px;background:#f7fafd}.benefit i{display:grid;place-items:center;width:35px;height:35px;border-radius:11px;background:#e8f0fe;color:var(--blue);font-style:normal}.benefit b{display:block;margin-top:10px;font-size:14px}.benefit p{margin-top:4px;font-size:11px;color:#64748b;line-height:1.6}.notice-list{display:grid;gap:9px}.notice{padding:12px;border:1px solid var(--line);border-radius:13px;background:#f7fafd}.notice strong{display:block;font-size:12px}.notice span{display:block;font-size:10px;color:#64748b;margin-top:4px;line-height:1.5}
-.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.category-card{border:1px solid var(--line);border-radius:18px;background:#fff;padding:10px;box-shadow:var(--shadow2)}.category-card img{width:100%;height:130px;object-fit:cover;border-radius:13px;display:block}.category-card div{padding:10px 4px}.category-card strong{font-size:14px}.category-card span{display:block;color:#64748b;font-size:10px;margin-top:4px}
-.orders-list{display:grid;gap:10px}.order-item{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.order-main{min-width:0}.order-main strong{font-size:14px}.order-meta{font-size:10px;color:#64748b;margin-top:3px}.order-price{margin-left:auto;text-align:right}.order-price b{font-size:15px}.status{display:inline-flex;margin-top:5px;padding:4px 7px;border-radius:999px;background:#dbe9ff;color:var(--blue);font-size:9px;font-weight:900}
-.admin-notify{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid #d7e6fb;background:#f7fafd;border-radius:14px;margin-bottom:12px}.admin-notify b{font-size:12px}.admin-notify span{font-size:10px;color:#64748b}.
-.admin{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.admin-tabs{display:flex;border-bottom:1px solid var(--line);overflow:auto}.admin-tabs button{border:0;background:#fff;padding:14px 16px;color:#64748b;font-size:12px;font-weight:900;white-space:nowrap}.admin-tabs button.active{color:var(--blue);box-shadow:inset 0 -2px 0 var(--blue)}.admin-body{padding:18px}.admin-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.kpi{border:1px solid var(--line);border-radius:14px;padding:15px;background:#f7fafd}.kpi span{font-size:10px;color:#64748b}.kpi b{display:block;font-size:21px;margin-top:4px}.admin-section-title{display:flex;align-items:center;justify-content:space-between;margin:15px 0 10px}.admin-section-title strong{font-size:14px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}.table{width:100%;border-collapse:collapse;min-width:780px}.table th,.table td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--line);font-size:11px;vertical-align:top}.table th{background:#f7fafd;color:#64748b}.table tr:last-child td{border-bottom:0}.admin-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:6px}.field label{font-size:10px;color:#64748b;font-weight:800}.input,.select,.textarea{width:100%;border:1px solid var(--line);background:#f7fafd;border-radius:12px;padding:11px 12px;outline:none;color:var(--text)}.input:focus,.select:focus,.textarea:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(37,99,235,.08)}.textarea{min-height:92px;resize:vertical}
-.footer{padding:32px 0 54px;color:#64748b;font-size:10px;text-align:center}
-/* drawers / modal */
-.modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.48);backdrop-filter:blur(5px);z-index:100;display:none}.modal-backdrop.open{display:block}
-.modal{position:fixed;z-index:110;inset:0;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modal-card{width:min(620px,100%);max-height:min(88vh,760px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 90px rgba(15,42,92,.25)}
-.modal-head{padding:17px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.modal-head h3{font-size:17px}.x{border:1px solid var(--line);background:#fff;border-radius:10px;width:34px;height:34px}.modal-body{padding:18px;display:grid;gap:12px}
-.drawer-wrap{position:fixed;inset:0;z-index:120;pointer-events:none}.drawer{position:absolute;right:0;top:0;height:100%;width:min(880px,100%);background:#f5f9ff;border-left:1px solid var(--line);box-shadow:-24px 0 70px rgba(15,42,92,.18);transform:translateX(100%);transition:transform .22s ease;pointer-events:auto;display:grid;grid-template-columns:minmax(330px,.8fr) minmax(360px,1fr)}.drawer.open{transform:translateX(0)}
-.drawer-side{overflow:auto;border-right:1px solid var(--line);background:#fff}.drawer-chat{min-width:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#f2f7fd}.drawer-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.drawer-head strong{font-size:16px}.drawer-head span{display:block;color:#64748b;font-size:10px;margin-top:3px}.drawer-close{border:1px solid var(--line);background:#fff;border-radius:10px;width:34px;height:34px}.room-pad{padding:18px;display:grid;gap:12px}.room-product{border:1px solid var(--line);border-radius:16px;background:#fff;padding:15px}.room-product .room-price{font-size:21px;font-weight:900;color:#1d4ed8}.room-label{font-size:10px;color:#64748b;font-weight:800}.room-value{font-size:12px;margin-top:3px;font-weight:700}.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.room-box{border:1px solid var(--line);border-radius:12px;padding:11px;background:#f7fafd}.room-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.room-step{border:1px solid var(--line);border-radius:11px;padding:10px;text-align:center;background:#fff;color:#64748b;font-size:9px;font-weight:800}.room-step.on{border-color:#93c5fd;background:#dbe9ff;color:var(--blue)}.room-step i{display:block;margin:auto auto 5px;width:20px;height:20px;border-radius:50%;background:#edf0f5;font-style:normal;font-size:9px;line-height:20px}.room-step.on i{background:var(--blue);color:#fff}.room-actions{display:grid;gap:8px}.room-help{font-size:10px;color:#64748b;line-height:1.6}
-.chat-head{padding:15px 18px;border-bottom:1px solid var(--line);background:#fff}.chat-person{display:flex;align-items:center;gap:10px}.chat-avatar{width:36px;height:36px;border-radius:12px;background:#e8f0fe;display:grid;place-items:center;color:var(--blue);font-weight:900}.chat-person b{font-size:14px}.chat-person span{display:block;font-size:10px;color:#64748b;margin-top:2px}.chat-messages{padding:18px;overflow:auto;display:flex;flex-direction:column;gap:10px;min-height:0}.bubble{max-width:78%;padding:11px 13px;border-radius:15px;background:#fff;border:1px solid var(--line);box-shadow:0 5px 15px rgba(15,42,92,.06);font-size:11px;white-space:pre-wrap;word-break:break-word}.bubble.mine{margin-left:auto;background:#e8f0fe;border-color:#cfe0fb}.bubble .who{font-size:9px;color:#64748b;margin-bottom:4px;font-weight:800}.bubble .time{font-size:8px;color:#64748b;margin-top:5px}.bubble .attach{display:block;margin-top:8px;padding:8px 9px;border:1px solid #d6e6ff;border-radius:10px;background:#fff;color:#1d4ed8;font-size:10px;font-weight:800}.chat-compose{padding:12px;border-top:1px solid var(--line);background:#fff}.quick-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.quick{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 9px;font-size:9px;color:#64748b;font-weight:900}.compose-row{display:flex;gap:8px;align-items:flex-end}.compose-row .textarea{min-height:48px;max-height:110px}.compose-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px}.file-name{font-size:9px;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file-label{display:inline-flex}
-.drawer-delivery{margin-top:10px;padding:12px;border:1px solid #cfe0fb;border-radius:13px;background:#dbe9ff}.drawer-delivery strong{font-size:12px}.drawer-delivery .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-
-.reopen-order-card{position:fixed;right:22px;bottom:22px;z-index:95;width:min(320px,calc(100vw - 28px));padding:15px 15px 14px;border:1px solid #cfe0fb;border-radius:18px;background:rgba(255,255,255,.97);box-shadow:0 20px 55px rgba(23,60,120,.16);backdrop-filter:blur(14px);display:none}
-.reopen-order-card.show{display:block;animation:reopenIn .22s ease}
-.reopen-order-card .reopen-title{display:flex;align-items:flex-start;gap:10px}
-.reopen-order-card .reopen-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#e8f0fe;color:#1d4ed8;font-size:16px;flex:0 0 34px}
-.reopen-order-card strong{font-size:13px;color:#17325d}.reopen-order-card p{margin-top:3px;color:#64748b;font-size:10px;line-height:1.55}
-.reopen-order-card .reopen-actions{display:flex;gap:8px;align-items:center;margin-top:12px}.reopen-order-card .reopen-actions .btn{flex:1}
-.reopen-dismiss{width:32px!important;height:32px;padding:0!important;flex:0 0 32px!important}
+button,input,select,textarea{font:inherit} button{cursor:pointer} a{color:inherit;text-decoration:none}.hidden{display:none!important}
+.app{min-height:100vh;display:grid;grid-template-columns:225px minmax(0,1fr)}
+.sidebar{position:sticky;top:0;height:100vh;z-index:50;padding:20px 16px 14px;background:linear-gradient(180deg,#071838 0%,#092653 58%,#071838 100%);color:#fff;display:flex;flex-direction:column;box-shadow:15px 0 45px rgba(6,26,63,.12)}
+.brand{display:flex;align-items:center;gap:11px;padding:3px 7px 20px;border-bottom:1px solid rgba(255,255,255,.10)}
+.brand-mark{width:43px;height:43px;border-radius:14px;object-fit:cover;box-shadow:0 12px 30px rgba(87,129,255,.32)}
+.brand-copy b{font-size:17px;letter-spacing:-.02em}.brand-copy span{display:block;margin-top:1px;font-size:9px;letter-spacing:.13em;color:#a8badb;font-weight:700}
+.side-nav{display:grid;gap:7px;margin-top:18px}.side-nav button{display:flex;align-items:center;gap:11px;border:1px solid transparent;background:transparent;color:#c7d7f4;padding:11px 12px;border-radius:12px;font-size:12px;font-weight:800;text-align:left;transition:.18s}.side-nav button:hover{background:rgba(255,255,255,.07);color:#fff}.side-nav button.active{background:linear-gradient(135deg,#265cf0,#3b78ff);color:#fff;box-shadow:0 10px 25px rgba(38,92,240,.25)}
+.side-cta{margin-top:auto;padding:16px;border:1px solid rgba(255,255,255,.10);border-radius:17px;background:linear-gradient(160deg,rgba(38,98,243,.42),rgba(25,56,129,.8));box-shadow:0 20px 45px rgba(3,15,40,.25)}
+.side-cta strong{display:block;font-size:14px;line-height:1.4}.side-cta p{margin-top:6px;color:#bfd0ee;font-size:10px;line-height:1.6}.side-cta .btn{width:100%;margin-top:13px}.sidebar-footer{padding-top:13px;text-align:center;color:#7f95b9;font-size:9px}
+.main{min-width:0}.topbar{position:sticky;top:0;z-index:40;background:rgba(248,251,255,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(211,223,243,.85)}
+.topbar-inner{height:72px;display:flex;align-items:center;gap:14px;padding:0 26px}.mobile-menu{display:none;width:38px;height:38px;border:1px solid var(--line);border-radius:11px;background:#fff}.top-links{display:flex;gap:18px;align-items:center}.top-links a{font-size:11px;color:#64789d;font-weight:900}.top-links a:hover{color:var(--blue)}
+.product-search{position:relative;display:flex;align-items:center;flex:1;max-width:510px;margin-left:6px}.product-search>span{position:absolute;left:14px;color:#5770a0;font-size:17px;font-weight:900;pointer-events:none}.product-search .input{padding-left:40px}.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}.online{display:flex;align-items:center;gap:7px;padding:9px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#6880a5;font-size:10px;font-weight:900}.online i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(17,191,120,.10)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;color:#536987;font-weight:900;font-size:11px;transition:transform .18s,box-shadow .18s,border-color .18s}.btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(39,83,155,.10)}.btn.blue{border-color:transparent;background:linear-gradient(135deg,#2460ec,#4e84ff);color:#fff;box-shadow:0 12px 28px rgba(40,97,238,.22)}.btn.lightblue{border-color:#d3e2fd;background:#edf4ff;color:#2560dc}.btn.ghost{background:#f8fbff}.btn.danger{background:#fff2f5;border-color:#ffd3dd;color:var(--danger)}.btn.sm{padding:8px 10px;font-size:10px;border-radius:10px}.btn.block{width:100%}
+.wrap{width:min(1500px,100%);margin:auto;padding:0 24px}.section{padding:27px 0}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:14px}.section-head h2{font-size:26px;letter-spacing:-.05em}.section-head p{margin-top:3px;color:#7586a3;font-size:11px}.mini{color:#7788a5;font-size:10px}
+.hero{padding:18px 0 10px}.hero-grid{display:block}.hero-copy{position:relative;min-height:0;padding:0;overflow:hidden;border:0;background:transparent;box-shadow:none}.hero-copy .eyebrow{position:absolute;z-index:2;left:34px;top:32px}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid rgba(160,203,255,.65);border-radius:999px;background:rgba(238,247,255,.96);color:#2665ec;font-size:9px;font-weight:900;box-shadow:0 8px 22px rgba(31,83,171,.13)}
+.hero-copy h1,.hero-copy>p,.hero-actions,.hero-stats{position:absolute;z-index:2;left:34px}.hero-copy h1{top:82px;max-width:700px;font-size:clamp(36px,4.8vw,72px);line-height:1.02;letter-spacing:-.065em;color:#fff;text-shadow:0 4px 25px rgba(4,18,52,.28)}.hero-copy h1 span{color:#69e7ff}.hero-copy>p{top:205px;max-width:650px;color:#d5e4ff;font-size:12px;line-height:1.7}.hero-actions{top:292px;display:flex;gap:9px;flex-wrap:wrap}.hero-actions .btn:first-child{background:#fff;color:#193668;box-shadow:0 16px 30px rgba(1,13,34,.22)}.hero-actions .btn.lightblue{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.28);color:#fff}.hero-stats{left:auto;right:28px;bottom:22px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:50%;max-width:620px}.stat{padding:11px 12px;background:rgba(5,20,52,.40);border:1px solid rgba(255,255,255,.15);border-radius:12px;backdrop-filter:blur(9px);color:#fff}.stat b{font-size:14px}.stat span{display:block;margin-top:2px;color:#bdd0ef;font-size:8px;font-weight:800}
+.hero-copy::before{content:"";display:block;min-height:470px;border-radius:26px;background:linear-gradient(90deg,rgba(4,17,48,.88) 0%,rgba(6,28,70,.62) 38%,rgba(10,52,133,.24) 75%,rgba(10,52,133,.08) 100%),url('/assets/vexo-hero.png') center/cover;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.26)}
+.hero-banner{display:none}
+.products-shell{position:relative}.product-tools{display:flex;justify-content:flex-end;margin-bottom:10px}.product-tools .product-search{display:none}.product-sort{width:165px;background:#fff}.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;color:#667b9f;font-size:10px;font-weight:900;box-shadow:0 4px 10px rgba(31,65,130,.04)}.pill.active{background:#245fed;border-color:#245fed;color:#fff;box-shadow:0 10px 20px rgba(40,95,235,.18)}
+.products-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.product{position:relative;overflow:hidden;display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-soft);transition:transform .18s,box-shadow .18s,border-color .18s}.product:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(31,76,155,.14);border-color:#cbdafb}.product::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:20px;box-shadow:inset 0 1px rgba(255,255,255,.9)}
+.product-media{height:158px;padding:10px}.product-media img{display:block;width:100%;height:100%;object-fit:cover;border-radius:14px;background:#0b1a33}.product-body{padding:4px 15px 13px}.product-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:5px 8px;background:#edf4ff;color:#2a64e8;font-size:8px;font-weight:900}.cat{color:#8a99b2;font-size:9px;font-weight:800}.product h3{margin-top:10px;font-size:15px;line-height:1.35;letter-spacing:-.025em}.product-desc{margin-top:6px;min-height:33px;color:#7183a1;font-size:10px;line-height:1.6}.feature-list{display:grid;gap:5px;margin-top:10px}.feature-list span{display:flex;align-items:flex-start;gap:6px;color:#7486a5;font-size:9px;line-height:1.45}.feature-list span::before{content:"";flex:0 0 5px;width:5px;height:5px;margin-top:5px;border-radius:50%;background:#5d95ff}.product-bottom{display:flex;align-items:center;gap:7px;margin-top:auto;padding:0 15px 15px}.price{margin-right:auto;color:#12356d;font-size:17px;font-weight:900}.price small{margin-left:2px;color:#7a8ca8;font-size:9px;font-weight:800}.product-bottom .btn{flex:0 0 auto}
+.series-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.category-card{overflow:hidden;padding:0;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow-soft)}.category-card img{display:block;width:100%;height:122px;object-fit:cover}.category-card div{padding:11px 12px 13px}.category-card strong{display:block;font-size:12px}.category-card span{display:block;margin-top:3px;color:#7385a4;font-size:9px}
+.assets-strip{display:grid;grid-template-columns:1.8fr repeat(6,1fr);gap:9px}.asset-card{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow-soft)}.asset-card img{display:block;width:100%;height:92px;object-fit:cover}.asset-card span{display:block;padding:8px 9px;color:#657b9e;font-size:9px;font-weight:900}.asset-card.feature img{height:116px}.asset-card.feature span{font-size:10px;color:#284a80}
+.info-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-soft);padding:20px}.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.benefit{padding:15px;border:1px solid var(--line);border-radius:14px;background:#f8fbff}.benefit i{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#e9f2ff;color:#2c67e8;font-style:normal}.benefit b{display:block;margin-top:9px;font-size:13px}.benefit p{margin-top:4px;color:#7486a3;font-size:10px;line-height:1.6}.notice-list{display:grid;gap:9px}.notice{padding:11px;border:1px solid var(--line);border-radius:13px;background:#f8fbff}.notice strong{display:block;font-size:11px}.notice span{display:block;margin-top:3px;color:#7586a3;font-size:9px;line-height:1.55}
+.orders-list{display:grid;gap:10px}.order-item{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}.order-main{min-width:0}.order-main strong{font-size:13px}.order-meta{margin-top:3px;color:#7587a4;font-size:9px}.order-price{margin-left:auto;text-align:right}.order-price b{font-size:14px}.status{display:inline-flex;margin-top:5px;padding:4px 7px;border-radius:999px;background:#e7f0ff;color:#2964df;font-size:8px;font-weight:900}
+.footer{padding:30px 0 50px;text-align:center;color:#7c8ca7;font-size:9px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(6,20,50,.54);backdrop-filter:blur(7px);z-index:100;display:none}.modal-backdrop.open{display:block}.modal{position:fixed;z-index:110;inset:0;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modal-card{width:min(620px,100%);max-height:90vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:23px;box-shadow:0 35px 100px rgba(7,28,69,.26)}.modal-head{display:flex;align-items:center;justify-content:space-between;padding:17px 19px;border-bottom:1px solid var(--line)}.modal-head h3{font-size:17px}.x{width:34px;height:34px;border:1px solid var(--line);border-radius:10px;background:#fff}.modal-body{display:grid;gap:12px;padding:18px}.field{display:grid;gap:6px}.field label{color:#7285a4;font-size:10px;font-weight:800}.input,.select,.textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#f8fbff;padding:11px 12px;color:var(--text);outline:none}.input:focus,.select:focus,.textarea:focus{border-color:#82a9ff;box-shadow:0 0 0 4px rgba(41,99,232,.08)}.textarea{min-height:94px;resize:vertical}.admin-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.drawer-wrap{position:fixed;inset:0;z-index:120;pointer-events:none}.drawer{position:absolute;right:0;top:0;width:min(920px,100%);height:100%;display:grid;grid-template-columns:minmax(300px,.8fr) minmax(390px,1fr);background:#f3f7ff;border-left:1px solid var(--line);box-shadow:-28px 0 80px rgba(7,26,63,.22);transform:translateX(100%);transition:transform .24s ease;pointer-events:auto}.drawer.open{transform:translateX(0)}.drawer-side{overflow:auto;background:#fff;border-right:1px solid var(--line)}.drawer-chat{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0;background:#f4f8ff}.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:15px 17px;border-bottom:1px solid var(--line)}.drawer-head strong{font-size:15px}.drawer-head span{display:block;margin-top:2px;color:#7587a4;font-size:9px}.drawer-close{width:34px;height:34px;border:1px solid var(--line);border-radius:10px;background:#fff}.room-pad{display:grid;gap:10px;padding:16px}.room-product,.room-box{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.room-label{color:#7285a2;font-size:9px;font-weight:800}.room-value{margin-top:3px;color:#23416f;font-size:11px;font-weight:700}.room-product .room-price{color:#2a64e4;font-size:21px;font-weight:900}.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.room-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.room-step{padding:9px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#7890b5;text-align:center;font-size:8px;font-weight:900}.room-step.on{border-color:#8eb2ff;background:#e8f1ff;color:#2764e7}.room-step i{display:block;width:19px;height:19px;margin:0 auto 4px;border-radius:50%;background:#eef2f8;line-height:19px;font-style:normal;font-size:8px}.room-step.on i{background:#2864eb;color:#fff}.room-actions{display:grid;gap:7px}.room-help{color:#7788a5;font-size:9px;line-height:1.6}.chat-head{padding:14px 17px;background:#fff;border-bottom:1px solid var(--line)}.chat-person{display:flex;align-items:center;gap:10px}.chat-avatar{display:grid;place-items:center;width:37px;height:37px;border-radius:12px;background:#e8f1ff;color:#2864eb}.chat-person b{font-size:13px}.chat-person span{display:block;margin-top:2px;color:#7587a4;font-size:9px}.chat-messages{display:flex;flex-direction:column;gap:9px;overflow:auto;min-height:0;padding:17px}.bubble{max-width:78%;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 5px 15px rgba(24,60,126,.06);font-size:10px;white-space:pre-wrap;word-break:break-word}.bubble.mine{margin-left:auto;border-color:#cbdcff;background:#eaf2ff}.bubble .who{margin-bottom:4px;color:#7586a5;font-size:8px;font-weight:900}.bubble .time{margin-top:4px;color:#7d8da8;font-size:7px}.bubble .attach{display:block;margin-top:7px;padding:7px 8px;border:1px solid #d3e2fd;border-radius:9px;background:#f5f9ff;color:#2863df;font-size:9px;font-weight:900}.chat-compose{padding:11px;border-top:1px solid var(--line);background:#fff}.quick-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.quick{padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#7183a0;font-size:8px;font-weight:900}.compose-row{display:flex;align-items:flex-end;gap:7px}.compose-row .textarea{min-height:48px;max-height:115px}.compose-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px}.file-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#7587a5;font-size:8px}.file-label{display:inline-flex}.drawer-delivery{margin-top:9px;padding:11px;border:1px solid #cadbff;border-radius:12px;background:#eaf2ff}.drawer-delivery strong{font-size:11px}.drawer-delivery .grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.reopen-order-card{position:fixed;right:22px;bottom:22px;z-index:135;width:min(350px,calc(100vw - 28px));padding:15px;border:1px solid #cadbff;border-radius:18px;background:rgba(255,255,255,.98);box-shadow:0 24px 65px rgba(30,68,140,.21);backdrop-filter:blur(16px);display:none}.reopen-order-card.show{display:block;animation:reopenIn .22s ease}.reopen-title{display:flex;align-items:flex-start;gap:10px}.reopen-icon{display:grid;place-items:center;width:35px;height:35px;flex:0 0 35px;border-radius:11px;background:#e9f1ff;color:#2865e9}.reopen-order-card strong{font-size:13px;color:#163561}.reopen-order-card p{margin-top:3px;color:#6e809f;font-size:9px;line-height:1.5}.reopen-link{display:block;margin-top:3px;color:#2865e9;font-size:9px;font-weight:900}.reopen-actions{display:flex;gap:7px;margin-top:11px}.reopen-actions .btn{flex:1}.reopen-dismiss{width:32px!important;height:32px;padding:0!important;flex:0 0 32px!important}.toast{position:fixed;left:50%;bottom:23px;z-index:300;transform:translate(-50%,18px);padding:10px 14px;border-radius:10px;background:#102a57;color:#fff;font-size:10px;font-weight:900;box-shadow:0 15px 35px rgba(15,42,92,.22);opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.empty{padding:29px;border:1px dashed #cbd8eb;border-radius:14px;background:#f8fbff;color:#7788a4;text-align:center;font-size:10px}
+.admin{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.admin-tabs{display:flex;overflow:auto;border-bottom:1px solid var(--line)}.admin-tabs button{border:0;background:#fff;padding:14px 15px;color:#7182a1;font-size:11px;font-weight:900;white-space:nowrap}.admin-tabs button.active{color:#2864ea;box-shadow:inset 0 -2px #2864ea}.admin-body{padding:18px}.admin-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:13px}.kpi{padding:14px;border:1px solid var(--line);border-radius:13px;background:#f8fbff}.kpi span{color:#7788a4;font-size:9px}.kpi b{display:block;margin-top:4px;font-size:19px}.admin-notify{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border:1px solid #d5e3fc;border-radius:13px;background:#f8fbff;margin-bottom:10px}.admin-notify b{font-size:11px}.admin-notify span{color:#7587a4;font-size:8px}.admin-section-title{display:flex;align-items:center;justify-content:space-between;margin:14px 0 9px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px}.table{width:100%;min-width:760px;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:9px}.table th{background:#f8fbff;color:#7587a3}.table tr:last-child td{border-bottom:0}
+.category-grid{display:none}
 @keyframes reopenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);padding:11px 15px;background:#0f2346;color:#fff;border-radius:11px;box-shadow:0 15px 35px rgba(15,42,92,.22);font-size:11px;font-weight:800;opacity:0;pointer-events:none;transition:.2s;z-index:300}.toast.show{opacity:1;transform:translate(-50%,0)}
-.empty{border:1px dashed #cbd9ec;border-radius:14px;padding:30px;text-align:center;color:#64748b;font-size:11px;background:#f7fafd}
+@media(max-width:1180px){.products-grid{grid-template-columns:repeat(3,1fr)}.assets-strip{grid-template-columns:1.4fr repeat(5,1fr)}.asset-card:nth-child(n+7){display:none}.top-links{display:none}.hero-stats{width:58%}}
+@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:0;width:245px;transform:translateX(-105%);transition:.22s;box-shadow:18px 0 50px rgba(5,20,50,.25)}body.side-open .sidebar{transform:translateX(0)}.mobile-menu{display:block}.topbar-inner{height:64px;padding:0 14px}.product-search{max-width:none;margin-left:0}.online{display:none}.hero-copy::before{min-height:410px}.hero-copy .eyebrow{left:24px;top:24px}.hero-copy h1{left:24px;top:74px;font-size:52px}.hero-copy>p{left:24px;top:195px;max-width:58%}.hero-actions{left:24px;top:290px}.hero-stats{left:24px;right:24px;bottom:20px;width:auto;max-width:none}.products-grid{grid-template-columns:repeat(2,1fr)}.series-strip{grid-template-columns:repeat(2,1fr)}.assets-strip{grid-template-columns:repeat(3,1fr)}.assets-strip .feature{grid-column:span 2}.info-grid{grid-template-columns:1fr}.drawer{grid-template-columns:1fr;width:100%}.drawer-side{display:none}.benefits{grid-template-columns:1fr 1fr}.admin-grid2{grid-template-columns:1fr}}
+@media(max-width:620px){.wrap{padding:0 12px}.topbar-inner{gap:8px}.account-compact{display:none}.hero{padding-top:12px}.hero-copy::before{min-height:490px;border-radius:20px;background:linear-gradient(180deg,rgba(4,17,48,.76) 0%,rgba(6,28,70,.60) 52%,rgba(10,52,133,.25) 100%),url('/assets/vexo-hero.png') center/cover}.hero-copy h1{left:18px;top:82px;font-size:43px}.hero-copy>p{left:18px;top:195px;max-width:calc(100% - 36px);font-size:10px}.hero-actions{left:18px;top:310px}.hero-copy .eyebrow{left:18px;top:22px}.hero-stats{left:18px;right:18px;bottom:17px;grid-template-columns:1fr 1fr}.section{padding:21px 0}.section-head h2{font-size:21px}.products-grid{grid-template-columns:1fr}.series-strip{grid-template-columns:1fr 1fr}.assets-strip{grid-template-columns:1fr 1fr}.assets-strip .feature{grid-column:1/-1}.assets-strip .asset-card:nth-child(n+6){display:none}.product-media{height:165px}.product-bottom{flex-wrap:wrap}.product-bottom .price{min-width:100%;margin-bottom:2px}.product-bottom .btn{flex:1}.benefits{grid-template-columns:1fr}.reopen-order-card{left:12px;right:12px;bottom:12px;width:auto}.room-grid,.drawer-delivery .grid{grid-template-columns:1fr}.room-flow{grid-template-columns:1fr 1fr}.compose-row{flex-direction:column}.compose-row .textarea,.compose-row .btn{width:100%}}
 
-/* VEXOHUB 2.0 visual polish */
-.hero-copy,.hero-banner,.product,.panel,.admin,.modal-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.hero-copy:hover,.hero-banner:hover{box-shadow:0 22px 70px rgba(15,42,92,.13)}
-.product-media img,.category-card img,.hero-banner img{background:linear-gradient(135deg,#0b1a33,#1e40af)}
-.product{position:relative}
-.product::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:19px;box-shadow:inset 0 1px rgba(255,255,255,.7)}
 
-@media (max-width:1180px){.products-grid{grid-template-columns:repeat(3,1fr)}.hero-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.top-links{display:none}}
-@media (max-width:900px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:0;width:250px;transform:translateX(-102%);transition:.2s;box-shadow:12px 0 40px rgba(15,42,92,.18)}body.side-open .sidebar{transform:translateX(0)}.mobile-menu{display:block;border:1px solid var(--line);background:#fff;border-radius:10px;width:38px;height:38px}.topbar-inner{height:62px}.hero-copy{padding:30px}.hero h1{font-size:55px}.products-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}.drawer{grid-template-columns:1fr;width:100%}.drawer-side{display:none}.admin-grid2{grid-template-columns:1fr}}
-@media (max-width:620px){.reopen-order-card{right:12px;left:12px;bottom:12px;width:auto}}
-@media (max-width:620px){.wrap{padding:0 12px}.top-actions .online{display:none}.hero-copy{padding:24px;border-radius:19px}.hero h1{font-size:42px}.hero-stats{grid-template-columns:1fr 1fr}.hero-banner{border-radius:19px}.hero-banner img{height:205px}.hero-banner-footer{grid-template-columns:1fr}.products-grid,.benefits{grid-template-columns:1fr}.category-grid{grid-template-columns:1fr 1fr}.product-search{min-width:100%}.product-sort{width:100%}.order-item{align-items:flex-start;flex-wrap:wrap}.order-price{margin-left:0;text-align:left}.modal{padding:10px}.modal-card{max-height:92vh}.drawer-chat{grid-template-rows:auto minmax(0,1fr) auto}.room-grid{grid-template-columns:1fr 1fr}.room-flow{grid-template-columns:1fr 1fr}.compose-row{flex-direction:column}.compose-row .textarea{width:100%}.compose-row .btn{width:100%}}
+/* ===== Screenshot-faithful storefront remodel ===== */
+:root{--sidebar-w:220px;--order-w:278px;--page-gap:18px;--ink:#102b57;--soft:#edf4ff;--blue:#2c66ee}
+html{background:#f7fbff}
+body{background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 54%,#eef5ff 100%);color:var(--ink)}
+.app{grid-template-columns:var(--sidebar-w) minmax(0,1fr)}
+.sidebar{width:var(--sidebar-w);padding:20px 16px 14px;background:linear-gradient(180deg,#071a40 0%,#0a2c6b 100%)}
+.topbar{background:rgba(248,251,255,.92)}
+.topbar-inner{height:72px;padding:0 24px}
+.top-links-hidden{display:none}
+.product-search{max-width:490px;margin-left:0}
+.product-search .input{height:34px;border-radius:10px;background:#edf4ff;border-color:#d8e5fb;font-size:11px}
+.online{padding:0;border:0;background:transparent;font-size:10px}
+.top-actions .btn{min-height:34px}
+.top-actions #accountBtn{padding:8px 11px;background:#fff}
+.top-actions #registerBtn{padding:8px 13px}
+.wrap{width:100%;max-width:none;padding:0 20px 0 20px}
+.store-grid{display:grid;grid-template-columns:minmax(0,1fr) var(--order-w);gap:var(--page-gap);align-items:start}
+.store-main{min-width:0}
+.hero{padding:0 0 10px}
+.hero-copy::before{min-height:208px;border-radius:16px;background:linear-gradient(90deg,rgba(2,16,51,.86) 0%,rgba(3,35,91,.52) 43%,rgba(14,75,190,.12) 100%),url('/assets/vexo-hero.png') center/cover;box-shadow:0 20px 50px rgba(21,58,132,.15);border:1px solid rgba(255,255,255,.22)}
+.hero-copy .eyebrow{left:26px;top:24px;font-size:8px;padding:6px 9px}
+.hero-copy h1{left:26px;top:61px;max-width:560px;font-size:42px;line-height:1.03}
+.hero-copy>p{left:26px;top:128px;max-width:500px;font-size:10px;line-height:1.55}
+.hero-actions{left:26px;top:166px}
+.hero-actions .btn{font-size:10px;padding:8px 11px}
+.hero-stats{display:none}
+.section{padding:14px 0}
+.section-head{margin-bottom:10px}
+.section-head h2{font-size:18px}
+.section-head p{font-size:9px}
+.product-tools{margin-bottom:8px}
+.product-tools .product-sort{height:32px;font-size:9px}
+.filters{margin-bottom:10px;gap:5px}
+.pill{padding:6px 9px;font-size:8px}
+.products-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.product{border-radius:13px;box-shadow:0 8px 24px rgba(37,82,156,.07)}
+.product-media{height:102px;padding:7px}
+.product-media img{border-radius:9px}
+.product-body{padding:3px 9px 8px}
+.product-top{gap:5px}
+.badge{padding:4px 6px;font-size:7px}
+.cat{font-size:7px}
+.product h3{font-size:11px;margin-top:7px}
+.product-desc{font-size:7.5px;line-height:1.5;min-height:26px;margin-top:4px}
+.feature-list{display:none}
+.product-bottom{padding:0 9px 9px;gap:5px}
+.price{font-size:12px}
+.price small{display:none}
+.product-bottom .btn{padding:6px 8px;font-size:7px;border-radius:8px}
+.products-shell .mini{font-size:8px}
+.series-strip{grid-template-columns:repeat(4,1fr);gap:8px}
+.category-card img{height:72px;border-radius:0}
+.category-card div{padding:7px 8px 9px}
+.category-card strong{font-size:9px}.category-card span{font-size:7px}
+.assets-strip{grid-template-columns:1.7fr repeat(6,1fr);gap:7px}
+.asset-card{border-radius:11px}.asset-card img{height:65px}.asset-card.feature img{height:82px}.asset-card span{font-size:7px;padding:6px 7px}
+.info-grid{gap:10px}.panel{border-radius:14px;padding:13px}.benefits{gap:7px}.benefit{padding:10px;border-radius:10px}.benefit i{width:28px;height:28px;border-radius:8px;font-size:11px}.benefit b{font-size:10px;margin-top:7px}.benefit p{font-size:7px}
+.notice{padding:9px;border-radius:10px}.notice strong{font-size:9px}.notice span{font-size:7px}
+.order-panel{position:sticky;top:72px;min-height:510px;background:rgba(255,255,255,.97);border:1px solid #d6e3f6;border-radius:16px;box-shadow:0 14px 44px rgba(31,69,137,.10);overflow:hidden}
+.order-panel-head{display:flex;align-items:flex-start;justify-content:space-between;padding:14px 14px 12px;border-bottom:1px solid #e1eaf6}
+.order-panel-head h3{font-size:15px;letter-spacing:-.03em}.order-panel-head span{display:block;color:#8092ae;font-size:8px;margin-top:3px}.order-panel-x{width:28px;height:28px;border:0;background:transparent;color:#0e2752;font-size:21px;line-height:1;border-radius:8px}
+.order-panel-empty{display:grid;place-items:center;text-align:center;padding:20px 12px 25px;color:#536b92}.cart-illustration{display:grid;place-items:center;width:116px;height:92px;margin:0 auto 11px;border-radius:24px;background:linear-gradient(180deg,#eff5ff,#f8fbff);font-size:52px;filter:saturate(.75)}.order-panel-empty strong{font-size:10px;line-height:1.65}
+.persistent-selected{padding:12px 12px 0}.persistent-selected .ps-card{border:1px solid #dbe6f6;border-radius:12px;padding:10px;background:#fbfdff}.persistent-selected .ps-row{display:flex;gap:9px;align-items:center}.persistent-selected img{width:52px;height:52px;object-fit:cover;border-radius:10px}.persistent-selected h4{font-size:10px;line-height:1.4}.persistent-selected p{font-size:8px;color:#778aa8;margin-top:2px}.persistent-selected b{display:block;color:#12356d;font-size:13px;margin-top:2px}
+.persistent-reopen{margin:0 10px 10px;padding:10px;border:1px solid #f5df9c;background:#fffbef;border-radius:11px}.persistent-reopen-title{display:flex;gap:7px;align-items:flex-start}.persistent-reopen-title>span{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#fff3bd;color:#9d7a00;font-size:11px}.persistent-reopen-title strong{font-size:9px;color:#22385e}.persistent-reopen-title p{font-size:7.5px;color:#7686a2;margin-top:2px;line-height:1.5}.persistent-reopen-title button{margin-left:auto;width:20px;height:20px;border:0;background:transparent;color:#b08a00;font-size:14px}.persistent-reopen .btn{margin-top:7px;font-size:8px;padding:7px 9px}
+.persistent-info{margin-top:2px;border-top:1px solid #e3ebf6}.persistent-info-head{display:flex;justify-content:space-between;align-items:center;padding:14px}.persistent-info-head strong{font-size:12px}.persistent-info-head span{font-size:12px;color:#8da0b8}.persistent-info-body{padding:0 14px 16px;color:#8091aa;font-size:8px;line-height:1.65}
+.footer{padding:18px 0 30px;font-size:8px}
+/* hide old floating reopen card on desktop: screenshot uses the inline right card */
+.reopen-order-card{display:none!important}
+@media(max-width:1100px){:root{--order-w:260px}.products-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.assets-strip{grid-template-columns:1.6fr repeat(4,1fr)}.asset-card:nth-child(n+6){display:none}}
+@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{width:245px}.store-grid{grid-template-columns:1fr}.order-panel{display:none}.wrap{padding:0 14px}.hero-copy::before{min-height:260px}.products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.assets-strip{grid-template-columns:1.4fr repeat(3,1fr)}}
+
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="sidebar" id="sidebar">
-    <div class="brand"><img class="brand-mark" src="/assets/veox-favicon.png?v=3" alt="VEXO HUB" loading="eager" decoding="async" onerror="this.onerror=null;this.src='/assets/veox-fallback.png'"><div class="brand-copy"><b>VEXO HUB</b><span>DISCORD SELLER AUTOMATION</span></div></div>
+    <div class="brand"><img class="brand-mark" src="/assets/vexo-favicon.png?v=9" alt="VEXO HUB" loading="eager"><div class="brand-copy"><b>VEXO HUB</b><span>DISCORD SELLER AUTOMATION</span></div></div>
     <nav class="side-nav">
       <button class="active" data-nav="home">⌂ <span>홈</span></button>
-      <button data-nav="products">▦ <span>상품목록</span></button>
-      <button data-nav="series">◫ <span>BOT SERIES</span></button>
-      <button data-nav="orders">▤ <span>내 주문</span></button>
-      <button data-nav="benefits">✦ <span>쿠폰·혜택</span></button>
-      <button data-nav="help">◉ <span>고객센터</span></button>
+      <button data-nav="products">▦ <span>상품 목록</span></button>
+      <button data-nav="orders">▤ <span>주문 내역</span></button>
+      <button data-nav="benefits">◇ <span>쿠폰 · 혜택</span></button>
+      <button data-nav="help">◉ <span>문의하기</span></button>
       <button data-nav="admin" id="sideAdmin" class="hidden">⚙ <span>관리자</span></button>
     </nav>
-    <div class="side-cta"><strong>디스코드 판매를<br>더 편하게.</strong><p>주문 · 티켓 · 자동화 · 운영을 한곳에서.</p><button class="btn" id="sideDiscord">Discord 서버 보기</button></div>
+    <div class="side-cta"><strong>디스코드 판매를<br>더 강하게.</strong><p>주문 · 티켓 · 자동화 · 운영을 한곳에서.</p><button class="btn blue" id="sideDiscord">Discord 서버 보기 ↗</button></div>
     <div class="sidebar-footer">© 2026 VEXO HUB · All Rights Reserved.</div>
   </aside>
 
   <main class="main">
-    <header class="topbar"><div class="wrap topbar-inner">
+    <header class="topbar"><div class="topbar-inner">
       <button class="mobile-menu" id="mobileMenu">☰</button>
-      <div class="top-links"><a href="#home" data-nav="home">홈</a><a href="#products" data-nav="products">상품</a><a href="#orders" data-nav="orders">주문내역</a><a href="#help" data-nav="help">고객센터</a></div>
-      <div class="top-actions"><div class="online"><i></i><span id="onlineCount">실시간 운영</span></div><button class="btn ghost hidden" id="adminNotifyBtn" title="관리자 알림">🔔 <span id="adminNotifyCount">0</span></button><button class="btn ghost" id="accountBtn">로그인</button><button class="btn blue" id="registerBtn">회원가입</button><button class="btn blue hidden" id="adminBtn">관리자</button></div>
+      <div class="product-search"><span>⌕</span><input id="productSearch" class="input" placeholder="원하는 상품을 검색해보세요..." autocomplete="off"></div>
+      <div class="top-links top-links-hidden"><a href="#home" data-nav="home">홈</a><a href="#products" data-nav="products">상품</a><a href="#orders" data-nav="orders">주문내역</a><a href="#help" data-nav="help">고객센터</a></div>
+      <div class="top-actions"><div class="online"><i></i><span id="onlineCount">실시간 운영</span></div><button class="btn ghost account-compact hidden" id="adminNotifyBtn" title="관리자 알림">🔔 <span id="adminNotifyCount">0</span></button><button class="btn ghost" id="accountBtn">로그인</button><button class="btn blue" id="registerBtn">회원가입</button><button class="btn blue hidden" id="adminBtn">관리자</button></div>
     </div></header>
 
     <div class="wrap" id="home">
+      <div class="store-grid">
+        <div class="store-main">
       <section class="hero">
         <div class="hero-grid">
           <div class="hero-copy">
-            <span class="eyebrow">Discord Seller Automation · VEXOHUB</span>
-            <h1>디스코드 판매를<br><span>더 쉽고, 더 빠르게.</span></h1>
-            <p>VEXO HUB는 BASIC → BASIC PREMIUM → PRO → PRO PREMIUM으로 확장되는 자판기봇 라인업과 서버 운영 상품을 제공합니다. 필요한 상품을 고르고, 주문과 문의는 전용 화면에서 깔끔하게 처리하세요.</p>
-            <div class="hero-actions"><button class="btn blue" onclick="scrollToId('products')">상품 둘러보기 →</button><button class="btn lightblue" id="heroInquiry">1:1 문의하기</button></div>
+            <span class="eyebrow">✦ 믿고 쓰는 Discord Seller Automation</span>
+            <h1>디스코드 판매 자동화의<br><span>모든 것, VEXOHUB.</span></h1>
+            <p>자판기봇부터 서버 템플릿, 자동화, 커스텀 봇까지. 필요한 상품만 골라 빠르게 주문하고 전용 주문실에서 진행 상황을 확인하세요.</p>
+            <div class="hero-actions"><button class="btn blue" onclick="scrollToId('products')">인기 상품 보기 →</button><button class="btn lightblue" id="heroInquiry">1:1 문의하기</button></div>
             <div class="hero-stats"><div class="stat"><b id="heroProductCount">-</b><span>판매 상품</span></div><div class="stat"><b>1-TIME</b><span>영구 구매 중심</span></div><div class="stat"><b>24/7</b><span>웹 주문 접수</span></div><div class="stat"><b>VEXO</b><span>Seller Hub</span></div></div>
           </div>
-          <div class="hero-banner"><img src="/assets/veox-hero.png" alt="VEXO HUB Seller Automation" loading="eager" decoding="async" onerror="this.onerror=null;this.src='/assets/veox-fallback.png'"><div class="hero-banner-footer"><div class="mini-card"><strong>⚡ 빠른 처리</strong><span>주문 후 전용 주문실에서 진행</span></div><div class="mini-card"><strong>🛡️ 안전한 거래</strong><span>주문·문의 정보는 계정별 분리</span></div><div class="mini-card"><strong>💬 1:1 문의</strong><span>필요할 때만 상담창을 열 수 있어요</span></div><div class="mini-card"><strong>📦 상품 지급</strong><span>파일 · 링크 · 안내문 전달 지원</span></div></div></div>
         </div>
-      </section>
-
-      <section class="section" id="series">
-        <div class="section-head"><div><h2>VEXO BOT SERIES</h2><p>자판기봇 중심의 핵심 라인업</p></div><button class="btn ghost sm" onclick="scrollToId('products')">전체 상품 보기</button></div>
-        <div class="category-grid" id="seriesGrid"></div>
       </section>
 
       <section class="section" id="products">
-        <div class="section-head">
-          <div><h2>전체 상품</h2><p>VEXOHUB의 모든 판매 상품을 가격순으로 확인하세요.</p></div>
-          <span class="mini" id="productCountText">상품 불러오는 중...</span>
-        </div>
-        <div class="product-tools">
-          <div class="product-search"><span>⌕</span><input id="productSearch" class="input" placeholder="상품명 검색..." autocomplete="off"></div>
-          <select id="productSort" class="select product-sort" aria-label="상품 정렬">
-            <option value="price-asc" selected>가격 낮은순</option>
-            <option value="price-desc">가격 높은순</option>
-            <option value="name">상품명순</option>
-          </select>
-        </div>
+        <div class="section-head"><div><h2>🔥 인기 상품</h2><p>지금 가장 많이 확인하는 VEXOHUB 상품을 만나보세요.</p></div><span class="mini" id="productCountText">상품 불러오는 중...</span></div>
+        <div class="product-tools"><select id="productSort" class="select product-sort" aria-label="상품 정렬"><option value="price-asc" selected>가격 낮은순</option><option value="price-desc">가격 높은순</option><option value="name">상품명순</option></select></div>
         <div class="filters" id="filters"></div>
         <div class="products-grid" id="productGrid"></div>
       </section>
 
-      <section class="section">
-        <div class="info-grid"><div class="panel"><div class="section-head"><div><h2>VEXOHUB가 드리는 것</h2><p>판매자 기준으로 필요한 흐름만 간결하게</p></div></div><div class="benefits"><div class="benefit"><i>⚡</i><b>빠른 주문</b><p>상품 선택 후 전용 주문실에서 결제를 진행합니다.</p></div><div class="benefit"><i>💬</i><b>1:1 문의</b><p>상담이 필요할 때만 문의창을 열어 대화할 수 있습니다.</p></div><div class="benefit"><i>📦</i><b>디지털 지급</b><p>파일·링크·안내문을 주문실에서 전달할 수 있습니다.</p></div></div></div><div class="panel"><div class="section-head"><div><h2>최근 공지</h2><p>VEXOHUB 운영 소식</p></div></div><div class="notice-list" id="noticeList"></div></div></div>
+      <section class="section" id="series">
+        <div class="section-head"><div><h2>VEXO BOT SERIES</h2><p>BASIC → PREMIUM → PRO로 확장되는 핵심 라인업</p></div><button class="btn ghost sm" onclick="scrollToId('products')">전체 상품 →</button></div>
+        <div class="series-strip" id="seriesGrid"></div>
       </section>
 
-      <section class="section" id="orders"><div class="section-head"><div><h2>내 주문</h2><p>주문을 선택하면 그때만 주문실과 채팅이 열립니다.</p></div></div><div id="ordersBox"><div class="empty">로그인하면 주문 내역을 확인할 수 있습니다.</div></div></section>
-      <section class="section" id="benefits"><div class="section-head"><div><h2>쿠폰·혜택</h2><p>보유한 할인 혜택을 확인하세요.</p></div></div><div class="panel" id="benefitsBox"><div class="empty">로그인하면 보유 혜택을 확인할 수 있습니다.</div></div></section>
-      <section class="section" id="help"><div class="section-head"><div><h2>고객센터</h2><p>주문 전 궁금한 내용이나 사용 중인 문제를 문의하세요.</p></div></div><div class="info-grid"><div class="panel"><h3>1:1 문의센터</h3><p class="mini" style="margin-top:5px">문의창은 버튼을 눌렀을 때만 열리며, 문의 내용은 회원별로 분리됩니다.</p><div style="margin-top:14px"><button class="btn blue" id="helpInquiry">문의 시작하기</button></div><div style="margin-top:18px" id="inquiriesBox"></div></div><div class="panel"><h3>주문 관련 안내</h3><div class="notice-list" style="margin-top:12px"><div class="notice"><strong>상품 선택</strong><span>상품 카드의 주문 버튼을 눌러 주문 정보를 입력합니다.</span></div><div class="notice"><strong>입금 확인</strong><span>주문실 내부에서 입금 확인 요청을 보낼 수 있습니다.</span></div><div class="notice"><strong>상품 지급</strong><span>관리자가 입금 확인 후 파일·링크·안내문으로 지급합니다.</span></div></div></div></div></section>
+      <section class="section">
+        <div class="section-head"><div><h2>새로 적용된 assets</h2><p>VEXOHUB 전체 상품 이미지를 같은 브랜드 언어로 통일했습니다.</p></div></div>
+        <div class="assets-strip">
+          <div class="asset-card feature"><img src="/assets/vexo-hero.png" alt="VEXO HUB Hero"><span>메인 배너 이미지</span></div>
+          <div class="asset-card"><img src="/assets/vexo-product-basic.png" alt="VEXO BASIC"><span>자판기봇</span></div>
+          <div class="asset-card"><img src="/assets/vexo-product-pro.png" alt="VEXO PRO"><span>PRO</span></div>
+          <div class="asset-card"><img src="/assets/vexo-product-template.png" alt="서버 템플릿"><span>서버 템플릿</span></div>
+          <div class="asset-card"><img src="/assets/vexo-product-automation.png" alt="자동화"><span>자동화</span></div>
+          <div class="asset-card"><img src="/assets/vexo-product-custom.png" alt="커스텀"><span>커스텀 봇</span></div>
+          <div class="asset-card"><img src="/assets/vexo-product-bundle.png" alt="올인원"><span>올인원 패키지</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="info-grid"><div class="panel"><div class="section-head"><div><h2>VEXOHUB가 드리는 것</h2><p>판매자 기준으로 필요한 흐름만 한곳에서</p></div></div><div class="benefits"><div class="benefit"><i>⚡</i><b>빠른 주문</b><p>상품을 선택하면 전용 주문실에서 결제를 진행합니다.</p></div><div class="benefit"><i>💬</i><b>1:1 문의</b><p>필요할 때만 상담창을 열어 관리자와 대화할 수 있습니다.</p></div><div class="benefit"><i>📦</i><b>디지털 지급</b><p>파일·링크·안내문을 주문실에서 전달받을 수 있습니다.</p></div></div></div><div class="panel"><div class="section-head"><div><h2>최근 공지</h2><p>VEXOHUB 운영 소식</p></div></div><div class="notice-list" id="noticeList"></div></div></div>
+      </section>
+
+      <section class="section" id="orders"><div class="section-head"><div><h2>주문 내역</h2><p>주문을 선택하면 그때만 주문실이 열립니다.</p></div></div><div id="ordersBox"><div class="empty">로그인하면 주문 내역을 확인할 수 있습니다.</div></div></section>
+      <section class="section" id="benefits"><div class="section-head"><div><h2>쿠폰 · 혜택</h2><p>보유한 할인 혜택을 확인하세요.</p></div></div><div class="panel" id="benefitsBox"><div class="empty">로그인하면 보유 혜택을 확인할 수 있습니다.</div></div></section>
+      <section class="section" id="help"><div class="section-head"><div><h2>고객센터</h2><p>주문 전 궁금한 내용이나 사용 중인 문제를 문의하세요.</p></div></div><div class="info-grid"><div class="panel"><h3>1:1 문의센터</h3><p class="mini" style="margin-top:5px">문의창은 버튼을 눌렀을 때만 열리며 회원별로 분리됩니다.</p><div style="margin-top:14px"><button class="btn blue" id="helpInquiry">문의 시작하기</button></div><div style="margin-top:18px" id="inquiriesBox"></div></div><div class="panel"><h3>주문 관련 안내</h3><div class="notice-list" style="margin-top:12px"><div class="notice"><strong>상품 선택</strong><span>상품 카드의 주문 버튼을 눌러 주문 정보를 입력합니다.</span></div><div class="notice"><strong>입금 확인</strong><span>주문실 내부에서 입금 확인 요청을 보낼 수 있습니다.</span></div><div class="notice"><strong>상품 지급</strong><span>관리자가 입금 확인 후 파일·링크·안내문으로 지급합니다.</span></div></div></div></div></section>
       <section class="section hidden" id="adminSection"><div class="admin"><div class="admin-tabs"><button class="active" data-admin-tab="overview">개요</button><button data-admin-tab="seller">셀러 대시보드</button><button data-admin-tab="orders">주문</button><button data-admin-tab="inquiries">문의</button><button data-admin-tab="customers">고객</button><button data-admin-tab="products">상품</button><button data-admin-tab="coupons">쿠폰</button><button data-admin-tab="settings">사이트</button></div><div class="admin-body" id="adminBody"></div></div></section>
+        </div>
+        <aside class="order-panel" id="persistentOrderPanel">
+          <div class="order-panel-head"><div><h3>주문하기</h3><span>선택한 상품으로 주문을 진행하세요.</span></div><button class="order-panel-x" type="button" aria-label="선택 초기화" onclick="clearPersistentOrder()">×</button></div>
+          <div class="order-panel-empty" id="persistentOrderEmpty">
+            <div class="cart-illustration">🛒</div>
+            <strong>상품을 선택하여<br>주문을 진행해주세요.</strong>
+          </div>
+          <div class="persistent-selected hidden" id="persistentSelected"></div>
+          <div class="persistent-reopen hidden" id="persistentReopen">
+            <div class="persistent-reopen-title"><span>⚠</span><div><strong>실수로 닫으셨나요?</strong><p>여기를 클릭하여 다시 주문창을 여세요!</p></div><button type="button" onclick="clearPersistentReopen()">×</button></div>
+            <button class="btn lightblue block" id="persistentReopenBtn">⟳ &nbsp;주문창 다시 열기</button>
+          </div>
+          <div class="persistent-info">
+            <div class="persistent-info-head"><strong>주문 정보</strong><span>⌄</span></div>
+            <div class="persistent-info-body" id="persistentInfoBody">선택한 상품이 없습니다.</div>
+          </div>
+        </aside>
+      </div>
       <footer class="footer">VEXOHUB · Discord Seller Automation · 주문 및 상담은 전용 화면에서 안전하게 관리됩니다.</footer>
     </div>
   </main>
 </div>
 
 <div class="modal" id="modal"><div class="modal-card"><div class="modal-head"><h3 id="modalTitle">VEXOHUB</h3><button class="x" onclick="closeModal()">×</button></div><div class="modal-body" id="modalBody"></div></div></div><div class="modal-backdrop" id="backdrop" onclick="closeModal();closeDrawer()"></div>
-<div class="drawer-wrap"><div class="drawer" id="drawer"><aside class="drawer-side" id="drawerSide"></aside><section class="drawer-chat"><div class="chat-head" id="chatHead"></div><div class="chat-messages" id="chatMessages"></div><div class="chat-compose" id="chatCompose"></div></section></div></div></div>
-<div class="reopen-order-card" id="reopenOrderCard">
-  <div class="reopen-title">
-    <div class="reopen-icon">💬</div>
-    <div><strong>열려 있던 주문실이 있어요</strong><p>진행 중인 주문의 채팅과 상태를 이어서 확인할 수 있습니다.</p></div>
-  </div>
-  <div class="reopen-actions">
-    <button class="btn ghost reopen-dismiss" id="dismissReopenBtn" title="닫기">×</button>
-    <button class="btn blue" id="reopenOrderBtn">주문실 다시 열기</button>
-  </div>
-</div>
+<div class="drawer-wrap"><div class="drawer" id="drawer"><aside class="drawer-side" id="drawerSide"></aside><section class="drawer-chat"><div class="chat-head" id="chatHead"></div><div class="chat-messages" id="chatMessages"></div><div class="chat-compose" id="chatCompose"></div></section></div></div>
+<div class="reopen-order-card" id="reopenOrderCard" role="status" aria-live="polite"><div class="reopen-title"><div class="reopen-icon">💬</div><div><strong>실수로 주문창을 닫으셨나요?</strong><p>진행 중인 주문은 그대로 보관되어 있어요.</p><span class="reopen-link">여기를 클릭하여 다시 주문창을 여세요!</span></div></div><div class="reopen-actions"><button class="btn ghost reopen-dismiss" id="dismissReopenBtn" title="안내 닫기">×</button><button class="btn blue" id="reopenOrderBtn">주문창 다시 열기</button></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -196,7 +242,16 @@ const $=s=>document.querySelector(s); const $$=s=>[...document.querySelectorAll(
 const won=n=>Number(n||0).toLocaleString('ko-KR')+'원'; const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let products=[], currentUser=null, orders=[], inquiries=[], currentCategory='전체', productSort='price-asc', productSearch='', currentDrawerType=null, currentDrawerId=null, roomTimer=null, selectedFile=null, adminTab='overview', lastClosedOrderId=null;
 const categoryImage={
-  '자판기봇':'/assets/veox-category-bot.png','서버 템플릿':'/assets/veox-category-template.png','자동화':'/assets/veox-category-automation.png','개발':'/assets/veox-category-custom.png','디자인':'/assets/veox-category-design.svg','가이드':'/assets/veox-category-guide.png','패키지':'/assets/veox-category-bundle.png','봇 옵션':'/assets/veox-category-automation.png','커스텀':'/assets/veox-category-custom.png','업그레이드':'/assets/veox-category-bundle.png'
+  '자판기봇':'/assets/vexo-product-basic.png',
+  '서버 템플릿':'/assets/vexo-product-template.png',
+  '자동화':'/assets/vexo-product-automation.png',
+  '개발':'/assets/vexo-product-custom.png',
+  '디자인':'/assets/vexo-category-design.png',
+  '가이드':'/assets/vexo-category-guide.png',
+  '패키지':'/assets/vexo-product-bundle.png',
+  '봇 옵션':'/assets/vexo-category-options.png',
+  '커스텀':'/assets/vexo-product-custom.png',
+  '업그레이드':'/assets/vexo-category-upgrade.png'
 };
 function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2400)}
 async function api(url,opt={}){const r=await fetch(url,{headers:{'Content-Type':'application/json',...(opt.headers||{})},...opt});let d={};try{d=await r.json()}catch{}if(!r.ok)throw new Error(d.error||'요청을 처리하지 못했습니다.');return d}
@@ -204,11 +259,48 @@ function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:'s
 function setNav(active){$$('[data-nav]').forEach(b=>b.classList.toggle('active',b.dataset.nav===active));}
 function openModal(title,body){$('#modalTitle').textContent=title;$('#modalBody').innerHTML=body;$('#modal').classList.add('open');$('#backdrop').classList.add('open');document.body.classList.add('locked')}
 function closeModal(){ $('#modal').classList.remove('open'); if(!$('#drawer').classList.contains('open')){$('#backdrop').classList.remove('open');document.body.classList.remove('locked')} }
-function hideReopenOrderCard(){ $('#reopenOrderCard')?.classList.remove('show') }
-function showReopenOrderCard(orderId){ const card=$('#reopenOrderCard'); if(!card||!currentUser||currentUser.role==='admin'||!orderId)return; lastClosedOrderId=String(orderId); try{localStorage.setItem('veox_last_closed_order',String(orderId))}catch{}; card.classList.add('show') }
+function hideReopenOrderCard(){ $('#reopenOrderCard')?.classList.remove('show'); clearPersistentReopen() }
+function showReopenOrderCard(orderId){ const card=$('#reopenOrderCard'); if(!currentUser||currentUser.role==='admin'||!orderId)return; lastClosedOrderId=String(orderId); try{localStorage.setItem('veox_last_closed_order',String(orderId))}catch{}; card?.classList.add('show'); showPersistentReopen(activeOrderSnapshot) }
 function openDrawer(){ hideReopenOrderCard(); $('#drawer').classList.add('open');$('#backdrop').classList.add('open');document.body.classList.add('locked') }
-function closeDrawer(){ const closedType=currentDrawerType, closedId=currentDrawerId; $('#drawer').classList.remove('open');$('#backdrop').classList.remove('open');document.body.classList.remove('locked');clearInterval(roomTimer);roomTimer=null;currentDrawerId=null;currentDrawerType=null; if(closedType==='order' && closedId && currentUser && currentUser.role!=='admin') showReopenOrderCard(closedId) }
-function productImage(p){const name=String(p?.name||'');if(/BASIC PREMIUM/i.test(name))return '/assets/veox-product-basic-premium.svg';if(/PRO PREMIUM/i.test(name))return '/assets/veox-product-pro-premium.svg';if(/^VEXO 자판기봇 PRO$/i.test(name)||p?.tier==='PRO')return '/assets/veox-product-pro.svg';if(/^VEXO 자판기봇 BASIC$/i.test(name)||p?.tier==='BASIC')return '/assets/veox-product-basic.svg';return categoryImage[p?.category]||'/assets/veox-category-bundle.png'}
+function closeDrawer(){ const closedType=currentDrawerType, closedId=currentDrawerId; $('#drawer').classList.remove('open');$('#backdrop').classList.remove('open');document.body.classList.remove('locked');clearInterval(roomTimer);roomTimer=null;currentDrawerId=null;currentDrawerType=null; if(closedType==='order' && closedId && currentUser && currentUser.role!=='admin') { showReopenOrderCard(closedId); } else if(closedType!=='order'){ clearPersistentReopen(); } }
+function productImage(p){
+  if(p?.__img)return p.__img;
+  const name=String(p?.name||'');
+  if(/VEXO 자판기봇 BASIC PREMIUM/i.test(name)) return '/assets/vexo-product-basic-premium.png';
+  if(/VEXO 자판기봇 PRO PREMIUM/i.test(name)) return '/assets/vexo-product-pro-premium.png';
+  if(/^VEXO 자판기봇 PRO$/i.test(name)||p?.tier==='PRO') return '/assets/vexo-product-pro.png';
+  if(/^VEXO 자판기봇 BASIC$/i.test(name)||p?.tier==='BASIC') return '/assets/vexo-product-basic.png';
+  if(/^VEXO 서버 템플릿 PRO$/i.test(name)) return '/assets/vexo-product-template-pro.png';
+  if(/^VEXO 디스코드 서버 템플릿$/i.test(name)) return '/assets/vexo-product-template.png';
+  if(/런칭 풀세팅/i.test(name)) return '/assets/vexo-product-launch.png';
+  if(/STORE 올인원|SELLER DASHBOARD|SELLER PACK|SELLER PRO|GROWTH BUNDLE/i.test(name)) return '/assets/vexo-product-bundle.png';
+  if(/자동화/i.test(name)) return '/assets/vexo-product-automation.png';
+  if(/커스텀|개발|화이트라벨/i.test(name)) return '/assets/vexo-product-custom.png';
+  if(/가이드/i.test(name)) return '/assets/vexo-category-guide.png';
+  if(/디자인/i.test(name)) return '/assets/vexo-category-design.png';
+  if(/업그레이드/i.test(name)) return '/assets/vexo-category-upgrade.png';
+  if(p?.category==='봇 옵션') return '/assets/vexo-category-options.png';
+  return categoryImage[p?.category]||'/assets/vexo-product-bundle.png';
+}
+
+let activeOrderSnapshot=null;
+function clearPersistentOrder(){activeOrderSnapshot=null;clearPersistentReopen();const e=$('#persistentSelected');if(e)e.classList.add('hidden');const empty=$('#persistentOrderEmpty');if(empty)empty.classList.remove('hidden');const info=$('#persistentInfoBody');if(info)info.textContent='선택한 상품이 없습니다.'}
+function clearPersistentReopen(){const el=$('#persistentReopen');if(el)el.classList.add('hidden')}
+function renderPersistentOrder(order){
+  if(!order)return;
+  activeOrderSnapshot=order;
+  const empty=$('#persistentOrderEmpty'); if(empty)empty.classList.add('hidden');
+  const selected=$('#persistentSelected');
+  const p=products.find(x=>x.id===order.productId)||{};
+  if(selected){selected.classList.remove('hidden');selected.innerHTML=`<div class="ps-card"><div class="ps-row"><img src="${productImage(p)}" alt=""><div><h4>${esc(order.productName||p.name||'선택 상품')}</h4><p>${esc(order.quantity||1)}개 · ${esc(statusText(order.status))}</p><b>${won(order.total)}</b></div></div></div>`}
+  const info=$('#persistentInfoBody'); if(info)info.innerHTML=`<strong style="color:#38557e">${esc(order.productName||'상품')}</strong><br>수량 ${esc(order.quantity||1)} · 상태 ${esc(statusText(order.status))}<br>주문 금액 ${won(order.total)}`;
+}
+function showPersistentReopen(order){
+  if(order)renderPersistentOrder(order);
+  const el=$('#persistentReopen'); if(el)el.classList.remove('hidden');
+  const btn=$('#persistentReopenBtn'); if(btn){btn.onclick=()=>{if(lastClosedOrderId)openOrderRoom(lastClosedOrderId)}}
+}
+
 function statusText(s){return s||'주문접수'}
 async function loadSite(){try{const d=await api('/api/site');$('#onlineCount').textContent=(d.online||0)+'명 접속중';if(d.settings?.discordInvite)$('#sideDiscord').dataset.url=d.settings.discordInvite}catch{}}
 async function heartbeat(){try{const d=await api('/api/heartbeat',{method:'POST',body:'{}'});$('#onlineCount').textContent=(d.online||0)+'명 접속중'}catch{}}
@@ -216,22 +308,54 @@ async function loadProducts(){const d=await api('/api/products');products=Array.
 function renderFilters(){const counts=new Map();for(const p of products){if(p.category)counts.set(p.category,(counts.get(p.category)||0)+1)}const cats=['전체',...counts.keys()];$('#filters').innerHTML=cats.map(c=>`<button class="pill ${c===currentCategory?'active':''}" onclick="selectCategory('${esc(c)}')">${esc(c)}${c!=='전체'?` · ${counts.get(c)}`:''}</button>`).join('')}
 function selectCategory(c){currentCategory=c;renderFilters();renderProducts()}
 function sortProductList(list){return list.slice().sort((a,b)=>{if(productSort==='name')return String(a.name||'').localeCompare(String(b.name||''),'ko');const priceDiff=Number(a.price||0)-Number(b.price||0);if(priceDiff!==0)return productSort==='price-desc'?-priceDiff:priceDiff;return String(a.name||'').localeCompare(String(b.name||''),'ko')})}
-function renderProducts(){const q=productSearch.trim().toLowerCase();let list=products.filter(p=>(currentCategory==='전체'||p.category===currentCategory)&&(!q||String(p.name||'').toLowerCase().includes(q)||String(p.description||'').toLowerCase().includes(q)||String(p.category||'').toLowerCase().includes(q)));list=sortProductList(list);$('#productGrid').innerHTML=list.length?list.map(p=>`<article class="product"><div class="product-media"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/veox-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"></div><div class="product-body"><div class="product-top"><span class="badge">${esc(p.badge||p.category||'VEXO')}</span><span class="cat">${esc(p.category||'기타')}</span></div><h3>${esc(p.name)}</h3><div class="product-desc">${esc(p.description||'VEXOHUB 판매 상품')}</div><div class="feature-list">${(p.features||[]).slice(0,3).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div class="product-bottom"><div class="price">${won(p.price)} <small>1회</small></div><button class="btn lightblue sm" onclick="openProduct('${esc(p.id)}')">자세히</button><button class="btn blue sm" onclick="startOrder('${esc(p.id)}')">주문하기</button></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">조건에 맞는 상품이 없습니다.</div>'}
-function renderSeries(){const order=['VEXO 자판기봇 BASIC','VEXO 자판기봇 BASIC PREMIUM','VEXO 자판기봇 PRO','VEXO 자판기봇 PRO PREMIUM'];const map=new Map(products.map(p=>[p.name,p]));const core=order.map(name=>map.get(name)).filter(Boolean);$('#seriesGrid').innerHTML=core.map(p=>`<div class="category-card"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/veox-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"><div><strong>${esc(p.name)}</strong><span>${won(p.price)} · ${esc(p.badge||'판매중')}</span></div></div>`).join('') || '<div class="empty" style="grid-column:1/-1">BOT SERIES를 불러오는 중입니다.</div>'}
-function openProduct(id){const p=products.find(x=>x.id===id);if(!p)return;openModal(p.name,`<img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/veox-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}" style="width:100%;height:190px;object-fit:cover;border-radius:16px;background:#0b1a33"><div><div class="mini">${esc(p.category)} · ${esc(p.badge||'VEXO')}</div><h4 style="font-size:22px;margin-top:5px">${esc(p.name)}</h4><p style="color:#64748b;font-size:11px;margin-top:7px;line-height:1.7">${esc(p.description||'')}</p></div><div class="panel" style="box-shadow:none;padding:14px"><div class="mini">구성</div><div class="feature-list" style="margin-top:8px">${(p.features||[]).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div style="display:flex;align-items:center;gap:10px"><b style="font-size:22px;color:#1e40af;margin-right:auto">${won(p.price)}</b><button class="btn blue" onclick="closeModal();startOrder('${esc(p.id)}')">이 상품 주문하기</button></div>`)}
+function renderProducts(){const q=productSearch.trim().toLowerCase();let list=products.filter(p=>(currentCategory==='전체'||p.category===currentCategory)&&(!q||String(p.name||'').toLowerCase().includes(q)||String(p.description||'').toLowerCase().includes(q)||String(p.category||'').toLowerCase().includes(q)));list=sortProductList(list);$('#productGrid').innerHTML=list.length?list.map(p=>`<article class="product"><div class="product-media"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"></div><div class="product-body"><div class="product-top"><span class="badge">${esc(p.badge||p.category||'VEXO')}</span><span class="cat">${esc(p.category||'기타')}</span></div><h3>${esc(p.name)}</h3><div class="product-desc">${esc(p.description||'VEXOHUB 판매 상품')}</div><div class="feature-list">${(p.features||[]).slice(0,3).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div class="product-bottom"><div class="price">${won(p.price)} <small>1회</small></div><button class="btn lightblue sm" onclick="openProduct('${esc(p.id)}')">자세히</button><button class="btn blue sm" onclick="startOrder('${esc(p.id)}')">주문하기</button></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">조건에 맞는 상품이 없습니다.</div>'}
+function renderSeries(){const order=['VEXO 자판기봇 BASIC','VEXO 자판기봇 BASIC PREMIUM','VEXO 자판기봇 PRO','VEXO 자판기봇 PRO PREMIUM'];const map=new Map(products.map(p=>[p.name,p]));const core=order.map(name=>map.get(name)).filter(Boolean);$('#seriesGrid').innerHTML=core.map(p=>`<div class="category-card"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"><div><strong>${esc(p.name)}</strong><span>${won(p.price)} · ${esc(p.badge||'판매중')}</span></div></div>`).join('') || '<div class="empty" style="grid-column:1/-1">BOT SERIES를 불러오는 중입니다.</div>'}
+function openProduct(id){const p=products.find(x=>x.id===id);if(!p)return;openModal(p.name,`<img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}" style="width:100%;height:190px;object-fit:cover;border-radius:16px;background:#0b1a33"><div><div class="mini">${esc(p.category)} · ${esc(p.badge||'VEXO')}</div><h4 style="font-size:22px;margin-top:5px">${esc(p.name)}</h4><p style="color:#64748b;font-size:11px;margin-top:7px;line-height:1.7">${esc(p.description||'')}</p></div><div class="panel" style="box-shadow:none;padding:14px"><div class="mini">구성</div><div class="feature-list" style="margin-top:8px">${(p.features||[]).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div style="display:flex;align-items:center;gap:10px"><b style="font-size:22px;color:#1e40af;margin-right:auto">${won(p.price)}</b><button class="btn blue" onclick="closeModal();startOrder('${esc(p.id)}')">이 상품 주문하기</button></div>`)}
 function startOrder(id){if(!currentUser){openLogin();return}const p=products.find(x=>x.id===id);if(!p)return;openModal('주문 정보 입력',`<div class="field"><label>상품</label><input class="input" value="${esc(p.name)}" disabled></div><div class="admin-grid2"><div class="field"><label>수량</label><input class="input" id="orderQty" type="number" min="1" max="20" value="1"></div><div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="orderDiscord" placeholder="예: veox_user"></div></div><div class="field"><label>입금자명 *</label><input class="input" id="orderPayer" placeholder="실제 송금자명"></div><div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="필요한 내용을 적어주세요."></textarea></div><div id="couponBox"></div><div class="notice" style="background:#eef6ff;border-color:#d6e8fb"><strong>💳 결제 안내</strong><span>주문 생성 후 전용 주문실에서 입금 확인 요청과 관리자 채팅을 진행할 수 있습니다.</span></div><button class="btn blue block" onclick="createOrder('${esc(p.id)}')">주문 생성하고 주문실 열기</button>`);loadCouponOptions()}
 async function loadCouponOptions(){if(!currentUser)return;try{const d=await api('/api/me/benefits');const cs=d.coupons||[];if(!cs.length){$('#couponBox').innerHTML='';return}$('#couponBox').innerHTML=`<div class="field"><label>쿠폰 코드 (선택)</label><select class="select" id="orderCoupon"><option value="">사용하지 않음</option>${cs.map(c=>`<option value="${esc(c.code)}">${esc(c.label||c.code)} · ${esc(c.code)}</option>`).join('')}</select></div>`}catch{}}
 async function createOrder(id){try{const p=products.find(x=>x.id===id);const body={productId:id,quantity:Number($('#orderQty').value||1),discordTag:$('#orderDiscord').value,payerName:$('#orderPayer').value,memo:$('#orderMemo').value,couponCode:$('#orderCoupon')?.value||''};const d=await api('/api/orders',{method:'POST',body:JSON.stringify(body)});closeModal();toast('주문이 생성되었습니다.');await loadMyOrders();openOrderRoom(d.order.id)}catch(e){toast(e.message)}}
 async function loadMyOrders(){if(!currentUser){orders=[];$('#ordersBox').innerHTML='<div class="empty">로그인하면 주문 내역을 확인할 수 있습니다.</div>';return}try{const d=await api('/api/orders');orders=d.orders||[];$('#ordersBox').innerHTML=orders.length?`<div class="orders-list">${orders.map(o=>`<div class="order-item"><div class="order-main"><strong>${esc(o.productName)} × ${o.quantity}</strong><div class="order-meta">${esc(o.id)} · ${new Date(o.createdAt).toLocaleString('ko-KR')}</div><span class="status">${esc(statusText(o.status))}</span></div><div class="order-price"><b>${won(o.total)}</b><div style="margin-top:6px"><button class="btn lightblue sm" onclick="openOrderRoom('${esc(o.id)}')">주문실 열기</button></div></div></div>`).join('')}</div>`:'<div class="empty">아직 주문 내역이 없습니다.</div>'}catch(e){$('#ordersBox').innerHTML=`<div class="empty">${esc(e.message)}</div>`}}
 async function loadBenefits(){const box=$('#benefitsBox');if(!currentUser){box.innerHTML='<div class="empty">로그인하면 보유 혜택을 확인할 수 있습니다.</div>';return}try{const d=await api('/api/me/benefits');const cs=d.coupons||[];box.innerHTML=cs.length?`<div class="orders-list">${cs.map(c=>`<div class="order-item"><div class="order-main"><strong>${esc(c.label||'할인 쿠폰')}</strong><div class="order-meta"><code>${esc(c.code)}</code> · ${c.type==='fixed'?won(c.value):c.value+'%'} 할인</div></div><div class="mini">${c.expiresAt?new Date(c.expiresAt).toLocaleDateString('ko-KR'):'제한 없음'}</div></div>`).join('')}</div>`:'<div class="empty">사용 가능한 쿠폰이 없습니다.</div>'}catch{box.innerHTML='<div class="empty">혜택 정보를 불러오지 못했습니다.</div>'}}
-async function openOrderRoom(id){if(!currentUser){openLogin();return}try{const d=await api('/api/orders/'+encodeURIComponent(id)+'/room'); if(!d.order || ['지급완료','취소'].includes(d.order.status)){try{localStorage.removeItem('veox_last_closed_order')}catch{};hideReopenOrderCard();return toast('다시 열 수 없는 주문입니다.')} currentDrawerType='order';currentDrawerId=id;lastClosedOrderId=String(id);try{localStorage.setItem('veox_last_closed_order',String(id))}catch{};hideReopenOrderCard();renderRoom(d.order);openDrawer();clearInterval(roomTimer);roomTimer=setInterval(async()=>{if(currentDrawerType==='order'&&currentDrawerId===id){try{const x=await api('/api/orders/'+encodeURIComponent(id)+'/room');renderRoom(x.order,false)}catch{}}},2500)}catch(e){toast(e.message)}}
+async function openOrderRoom(id){if(!currentUser){openLogin();return}try{const d=await api('/api/orders/'+encodeURIComponent(id)+'/room'); if(!d.order || ['지급완료','취소'].includes(d.order.status)){try{localStorage.removeItem('veox_last_closed_order')}catch{};hideReopenOrderCard();return toast('다시 열 수 없는 주문입니다.')} currentDrawerType='order';currentDrawerId=id;lastClosedOrderId=String(id);try{localStorage.setItem('veox_last_closed_order',String(id))}catch{};activeOrderSnapshot=d.order;hideReopenOrderCard();renderPersistentOrder(d.order);renderRoom(d.order);openDrawer();clearInterval(roomTimer);roomTimer=setInterval(async()=>{if(currentDrawerType==='order'&&currentDrawerId===id){try{const x=await api('/api/orders/'+encodeURIComponent(id)+'/room');renderRoom(x.order,false)}catch{}}},2500)}catch(e){toast(e.message)}}
 function progressHtml(status){const states=['주문접수','입금확인요청','처리중','지급완료'];const idx=Math.max(0,states.indexOf(status));return `<div class="room-flow">${states.map((s,i)=>`<div class="room-step ${i<=idx?'on':''}"><i>${i+1}</i>${s.replace('입금확인','확인')}</div>`).join('')}</div>`}
-function renderRoom(o,resetScroll=true){const isAdmin=currentUser?.role==='admin';$('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>주문 관리</strong><span>VEXOHUB · ${esc(o.id)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">주문 상품</div><div style="display:flex;align-items:center;gap:10px;margin-top:4px"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/veox-fallback.png'" src="${productImage(products.find(p=>p.id===o.productId)||{})}" style="width:54px;height:54px;object-fit:cover;border-radius:12px;background:#0b1a33"><div style="min-width:0"><div class="room-value">${esc(o.productName)} × ${o.quantity}</div><div class="room-price">${won(o.total)}</div></div></div></div>${progressHtml(o.status)}<div class="room-grid"><div class="room-box"><div class="room-label">구매자</div><div class="room-value">${esc(o.username)}</div></div><div class="room-box"><div class="room-label">Discord</div><div class="room-value">${esc(o.discordTag||'-')}</div></div><div class="room-box"><div class="room-label">입금자명</div><div class="room-value">${esc(o.payerName||'-')}</div></div><div class="room-box"><div class="room-label">금액</div><div class="room-value">${won(o.total)}</div></div></div><div class="room-box"><div class="room-label">요청사항</div><div class="room-value" style="white-space:pre-wrap">${esc(o.memo||'-')}</div></div><div class="room-actions">${isAdmin?`<button class="btn lightblue" onclick="approveOrder('${esc(o.id)}')">✅ 입금 확인</button>${['처리중'].includes(o.status)?`<button class="btn blue" onclick="focusDelivery()">📦 상품 지급</button>`:''}`:`${o.status==='주문접수'?`<button class="btn blue" onclick="requestPayment('${esc(o.id)}')">💳 입금 확인 요청</button>`:o.status==='입금확인요청'?`<button class="btn lightblue" disabled>✅ 입금 확인 요청 전송됨</button>`:''}`}</div><div class="room-help">주문·문의 채팅은 이 화면을 열었을 때만 표시됩니다. 페이지 다른 곳에서는 보이지 않습니다.</div></div>`;
-$('#chatHead').innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div class="chat-person"><div class="chat-avatar">${isAdmin?'⚙':'💬'}</div><div><b>${isAdmin?'관리자 채팅':'주문 채팅'}</b><span>${isAdmin?'구매자와 1:1로 응대합니다.':'관리자 확인용 주문 전용 채팅입니다.'}</span></div></div><button class="drawer-close" onclick="closeDrawer()">×</button></div>`;
-const ms=(o.messages||[]).map(m=>`<div class="bubble ${String(m.senderId)===String(currentUser.id)?'mine':''}"><div class="who">${esc(m.senderName||'VEXOHUB')}</div><div>${esc(m.text||'')}</div>${m.attachment?`<a class="attach" href="/api/attachments/${encodeURIComponent(m.attachment.id)}" target="_blank">📎 ${esc(m.attachment.name)}</a>`:''}<div class="time">${new Date(m.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('');$('#chatMessages').innerHTML=ms||'<div class="empty">아직 메시지가 없습니다.<br>필요한 내용을 남겨주세요.</div>';
-let delivery='';if(isAdmin&&['처리중'].includes(o.status)){delivery=`<div class="drawer-delivery" id="deliveryBox"><strong>📦 상품 지급</strong><div class="grid"><input class="input" id="deliveryLink" placeholder="지급 링크 (선택)"></div><textarea class="textarea" id="deliveryText" style="margin-top:8px" placeholder="지급 안내문"></textarea><div class="compose-tools"><label class="btn ghost sm file-label">📎 파일<input type="file" id="deliveryFile" hidden onchange="handleDeliveryFile(this)"></label><button class="btn blue sm" onclick="deliverOrder('${esc(o.id)}')">지급 + 완료</button></div></div>`}
-$('#chatCompose').innerHTML=`<div class="quick-row">${isAdmin?`<button class="quick" onclick="quickText('안녕하세요. 주문 내용 확인 후 안내드리겠습니다.')">👋 안내</button><button class="quick" onclick="quickText('입금 확인되었습니다. 상품 지급을 준비하겠습니다.')">✅ 입금 확인</button><button class="quick" onclick="focusDelivery()">📦 상품 지급</button>`:`<button class="quick" onclick="quickText('입금 완료했습니다. 확인 부탁드립니다.')">💳 입금 완료</button><button class="quick" onclick="quickText('주문 관련 문의가 있습니다.')">❓ 문의하기</button>`}</div><div class="compose-row"><textarea class="textarea" id="roomText" placeholder="메시지를 입력해 주세요."></textarea><button class="btn blue" onclick="sendRoomMessage('${esc(o.id)}')">전송</button></div><div class="compose-tools"><label class="btn ghost sm file-label">📎 파일 첨부<input type="file" id="roomFile" hidden onchange="handleRoomFile(this)"></label><span class="file-name" id="roomFileName">첨부 없음</span><span class="mini">Enter로 전송하려면 Shift 없이 Enter</span></div>${delivery}`;
-if(resetScroll){const el=$('#chatMessages');requestAnimationFrame(()=>el.scrollTop=el.scrollHeight)}else{$('#chatMessages').scrollTop=$('#chatMessages').scrollHeight}}
+function renderRoom(o,resetScroll=true){
+  activeOrderSnapshot=o; renderPersistentOrder(o);
+  const isAdmin=currentUser?.role==='admin';
+  const compose=$('#chatCompose');
+  const existingStatus=compose?.dataset.status||'';
+  const needsComposeRender=resetScroll||!$('#roomText')||existingStatus!==String(o.status);
+  const draftText=$('#roomText')?.value??'';
+  const draftDeliveryLink=$('#deliveryLink')?.value??'';
+  const draftDeliveryText=$('#deliveryText')?.value??'';
+  const draftSelectedFile=selectedFile;
+  const draftDeliveryFile=deliveryFile;
+
+  $('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>주문 관리</strong><span>VEXOHUB · ${esc(o.id)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">주문 상품</div><div style="display:flex;align-items:center;gap:10px;margin-top:4px"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(products.find(p=>p.id===o.productId)||{})}" style="width:54px;height:54px;object-fit:cover;border-radius:12px;background:#0b1a33"><div style="min-width:0"><div class="room-value">${esc(o.productName)} × ${o.quantity}</div><div class="room-price">${won(o.total)}</div></div></div></div>${progressHtml(o.status)}<div class="room-grid"><div class="room-box"><div class="room-label">구매자</div><div class="room-value">${esc(o.username)}</div></div><div class="room-box"><div class="room-label">Discord</div><div class="room-value">${esc(o.discordTag||'-')}</div></div><div class="room-box"><div class="room-label">입금자명</div><div class="room-value">${esc(o.payerName||'-')}</div></div><div class="room-box"><div class="room-label">금액</div><div class="room-value">${won(o.total)}</div></div></div><div class="room-box"><div class="room-label">요청사항</div><div class="room-value" style="white-space:pre-wrap">${esc(o.memo||'-')}</div></div><div class="room-actions">${isAdmin?`<button class="btn lightblue" onclick="approveOrder('${esc(o.id)}')">✅ 입금 확인</button>${['처리중'].includes(o.status)?`<button class="btn blue" onclick="focusDelivery()">📦 상품 지급</button>`:''}`:`${o.status==='주문접수'?`<button class="btn blue" onclick="requestPayment('${esc(o.id)}')">💳 입금 확인 요청</button>`:o.status==='입금확인요청'?`<button class="btn lightblue" disabled>✅ 입금 확인 요청 전송됨</button>`:''}`}</div><div class="room-help">주문·문의 채팅은 이 화면을 열었을 때만 표시됩니다. 페이지 다른 곳에서는 보이지 않습니다.</div></div>`;
+  $('#chatHead').innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div class="chat-person"><div class="chat-avatar">${isAdmin?'⚙':'💬'}</div><div><b>${isAdmin?'관리자 채팅':'주문 채팅'}</b><span>${isAdmin?'구매자와 1:1로 응대합니다.':'관리자 확인용 주문 전용 채팅입니다.'}</span></div></div><button class="drawer-close" onclick="closeDrawer()">×</button></div>`;
+  const ms=(o.messages||[]).map(m=>`<div class="bubble ${String(m.senderId)===String(currentUser.id)?'mine':''}"><div class="who">${esc(m.senderName||'VEXOHUB')}</div><div>${esc(m.text||'')}</div>${m.attachment?`<a class="attach" href="/api/attachments/${encodeURIComponent(m.attachment.id)}" target="_blank">📎 ${esc(m.attachment.name)}</a>`:''}<div class="time">${new Date(m.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('');
+  $('#chatMessages').innerHTML=ms||'<div class="empty">아직 메시지가 없습니다.<br>필요한 내용을 남겨주세요.</div>';
+
+  if(needsComposeRender){
+    let delivery='';
+    if(isAdmin&&['처리중'].includes(o.status)){
+      delivery=`<div class="drawer-delivery" id="deliveryBox"><strong>📦 상품 지급</strong><div class="grid"><input class="input" id="deliveryLink" placeholder="지급 링크 (선택)"></div><textarea class="textarea" id="deliveryText" style="margin-top:8px" placeholder="지급 안내문"></textarea><div class="compose-tools"><label class="btn ghost sm file-label">📎 파일<input type="file" id="deliveryFile" hidden onchange="handleDeliveryFile(this)"></label><button class="btn blue sm" onclick="deliverOrder('${esc(o.id)}')">지급 + 완료</button></div></div>`;
+    }
+    $('#chatCompose').innerHTML=`<div class="quick-row">${isAdmin?`<button class="quick" onclick="quickText('안녕하세요. 주문 내용 확인 후 안내드리겠습니다.')">👋 안내</button><button class="quick" onclick="quickText('입금 확인되었습니다. 상품 지급을 준비하겠습니다.')">✅ 입금 확인</button><button class="quick" onclick="focusDelivery()">📦 상품 지급</button>`:`<button class="quick" onclick="quickText('입금 완료했습니다. 확인 부탁드립니다.')">💳 입금 완료</button><button class="quick" onclick="quickText('주문 관련 문의가 있습니다.')">❓ 문의하기</button>`}</div><div class="compose-row"><textarea class="textarea" id="roomText" placeholder="메시지를 입력해 주세요."></textarea><button class="btn blue" onclick="sendRoomMessage('${esc(o.id)}')">전송</button></div><div class="compose-tools"><label class="btn ghost sm file-label">📎 파일 첨부<input type="file" id="roomFile" hidden onchange="handleRoomFile(this)"></label><span class="file-name" id="roomFileName">첨부 없음</span><span class="mini">Enter로 전송하려면 Shift 없이 Enter</span></div>${delivery}`;
+    $('#chatCompose').dataset.status=String(o.status);
+    // Preserve whatever the visitor was typing when a status change forced a compose redraw.
+    if(!resetScroll){
+      const roomText=$('#roomText'); if(roomText) roomText.value=draftText;
+      const dl=$('#deliveryLink'); if(dl) dl.value=draftDeliveryLink;
+      const dt=$('#deliveryText'); if(dt) dt.value=draftDeliveryText;
+      selectedFile=draftSelectedFile;
+      deliveryFile=draftDeliveryFile;
+      if($('#roomFileName')) $('#roomFileName').textContent=selectedFile?selectedFile.name:'첨부 없음';
+    }
+  }
+
+  if(resetScroll){const el=$('#chatMessages');requestAnimationFrame(()=>el.scrollTop=el.scrollHeight)}
+  else{$('#chatMessages').scrollTop=$('#chatMessages').scrollHeight}
+}
 function quickText(t){const el=$('#roomText');if(el){el.value=t;el.focus()}}
 function handleRoomFile(inp){selectedFile=inp.files?.[0]||null;$('#roomFileName').textContent=selectedFile?selectedFile.name:'첨부 없음'}
 let deliveryFile=null;function handleDeliveryFile(inp){deliveryFile=inp.files?.[0]||null}
@@ -245,7 +369,29 @@ async function openInquiryCreate(){if(!currentUser){openLogin();return}openModal
 async function createInquiry(){try{const d=await api('/api/inquiries',{method:'POST',body:JSON.stringify({category:$('#inqCat').value,subject:$('#inqSubject').value,text:$('#inqText').value})});closeModal();loadInquiries();openInquiryRoom(d.inquiry.id)}catch(e){toast(e.message)}}
 async function loadInquiries(){if(!currentUser){inquiries=[];$('#inquiriesBox').innerHTML='<div class="empty">로그인하면 문의 내역을 확인할 수 있습니다.</div>';return}try{const d=await api('/api/inquiries');inquiries=d.inquiries||[];const own=inquiries.filter(i=>i.userId===currentUser.id);$('#inquiriesBox').innerHTML=own.length?`<div class="orders-list">${own.map(i=>`<div class="order-item"><div class="order-main"><strong>${esc(i.subject)}</strong><div class="order-meta">${esc(i.id)} · ${esc(i.category)}</div><span class="status">${esc(i.status)}</span></div><button class="btn lightblue sm" onclick="openInquiryRoom('${esc(i.id)}')">상담 열기</button></div>`).join('')}</div>`:'<div class="empty">등록된 문의가 없습니다.</div>'}catch{}}
 async function openInquiryRoom(id){try{const d=await api('/api/inquiries/'+encodeURIComponent(id));currentDrawerType='inquiry';currentDrawerId=id;renderInquiry(d.inquiry);openDrawer();clearInterval(roomTimer);roomTimer=setInterval(async()=>{if(currentDrawerType==='inquiry'&&currentDrawerId===id){try{const x=await api('/api/inquiries/'+encodeURIComponent(id));renderInquiry(x.inquiry,false)}catch{}}},2500)}catch(e){toast(e.message)}}
-function renderInquiry(i,reset=true){const isAdmin=currentUser?.role==='admin';$('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>문의 관리</strong><span>${esc(i.id)} · ${esc(i.category)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">문의 제목</div><div class="room-value" style="font-size:15px;margin-top:5px">${esc(i.subject)}</div><div class="room-label" style="margin-top:12px">회원</div><div class="room-value">${esc(i.username)} · ${esc(i.email)}</div></div>${isAdmin?`<div class="room-actions"><button class="btn lightblue" onclick="setInquiryStatus('${esc(i.id)}','답변완료')">✅ 답변 완료</button><button class="btn ghost" onclick="setInquiryStatus('${esc(i.id)}','종료')">🔒 문의 종료</button></div>`:''}<div class="room-help">문의창은 상담이 필요한 경우에만 열립니다. 홈 화면에는 채팅창이 상시 표시되지 않습니다.</div></div>`;$('#chatHead').innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div class="chat-person"><div class="chat-avatar">💬</div><div><b>${isAdmin?'고객 문의 채팅':'VEXOHUB 고객센터'}</b><span>${esc(i.category)} · ${esc(i.status)}</span></div></div><button class="drawer-close" onclick="closeDrawer()">×</button></div>`;$('#chatMessages').innerHTML=(i.messages||[]).map(m=>`<div class="bubble ${String(m.senderId)===String(currentUser.id)?'mine':''}"><div class="who">${esc(m.senderName||'VEXOHUB')}</div><div>${esc(m.text||'')}</div>${m.attachment?`<a class="attach" href="/api/attachments/${encodeURIComponent(m.attachment.id)}" target="_blank">📎 ${esc(m.attachment.name)}</a>`:''}<div class="time">${new Date(m.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('')||'<div class="empty">아직 메시지가 없습니다.</div>';$('#chatCompose').innerHTML=`<div class="compose-row"><textarea class="textarea" id="inqRoomText" placeholder="메시지를 입력해 주세요."></textarea><button class="btn blue" onclick="sendInquiryMessage('${esc(i.id)}')">전송</button></div><div class="compose-tools"><label class="btn ghost sm file-label">📎 파일 첨부<input type="file" id="inqFile" hidden onchange="handleInquiryFile(this)"></label><span class="file-name" id="inqFileName">첨부 없음</span></div>`;if(reset){const el=$('#chatMessages');requestAnimationFrame(()=>el.scrollTop=el.scrollHeight)}else{$('#chatMessages').scrollTop=$('#chatMessages').scrollHeight}}
+function renderInquiry(i,reset=true){
+  const isAdmin=currentUser?.role==='admin';
+  const compose=$('#chatCompose');
+  const existingStatus=compose?.dataset.status||'';
+  const needsComposeRender=reset||!$('#inqRoomText')||existingStatus!==String(i.status);
+  const draftText=$('#inqRoomText')?.value??'';
+  const draftFile=inquiryFile;
+
+  $('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>문의 관리</strong><span>${esc(i.id)} · ${esc(i.category)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">문의 제목</div><div class="room-value" style="font-size:15px;margin-top:5px">${esc(i.subject)}</div><div class="room-label" style="margin-top:12px">회원</div><div class="room-value">${esc(i.username)} · ${esc(i.email)}</div></div>${isAdmin?`<div class="room-actions"><button class="btn lightblue" onclick="setInquiryStatus('${esc(i.id)}','답변완료')">✅ 답변 완료</button><button class="btn ghost" onclick="setInquiryStatus('${esc(i.id)}','종료')">🔒 문의 종료</button></div>`:''}<div class="room-help">문의창은 상담이 필요한 경우에만 열립니다. 홈 화면에는 채팅창이 상시 표시되지 않습니다.</div></div>`;
+  $('#chatHead').innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div class="chat-person"><div class="chat-avatar">💬</div><div><b>${isAdmin?'고객 문의 채팅':'VEXOHUB 고객센터'}</b><span>${esc(i.category)} · ${esc(i.status)}</span></div></div><button class="drawer-close" onclick="closeDrawer()">×</button></div>`;
+  $('#chatMessages').innerHTML=(i.messages||[]).map(m=>`<div class="bubble ${String(m.senderId)===String(currentUser.id)?'mine':''}"><div class="who">${esc(m.senderName||'VEXOHUB')}</div><div>${esc(m.text||'')}</div>${m.attachment?`<a class="attach" href="/api/attachments/${encodeURIComponent(m.attachment.id)}" target="_blank">📎 ${esc(m.attachment.name)}</a>`:''}<div class="time">${new Date(m.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('')||'<div class="empty">아직 메시지가 없습니다.</div>';
+  if(needsComposeRender){
+    $('#chatCompose').innerHTML=`<div class="compose-row"><textarea class="textarea" id="inqRoomText" placeholder="메시지를 입력해 주세요."></textarea><button class="btn blue" onclick="sendInquiryMessage('${esc(i.id)}')">전송</button></div><div class="compose-tools"><label class="btn ghost sm file-label">📎 파일 첨부<input type="file" id="inqFile" hidden onchange="handleInquiryFile(this)"></label><span class="file-name" id="inqFileName">첨부 없음</span></div>`;
+    $('#chatCompose').dataset.status=String(i.status);
+    if(!reset){
+      const el=$('#inqRoomText'); if(el) el.value=draftText;
+      inquiryFile=draftFile;
+      if($('#inqFileName')) $('#inqFileName').textContent=inquiryFile?inquiryFile.name:'첨부 없음';
+    }
+  }
+  if(reset){const el=$('#chatMessages');requestAnimationFrame(()=>el.scrollTop=el.scrollHeight)}
+  else{$('#chatMessages').scrollTop=$('#chatMessages').scrollHeight}
+}
 let inquiryFile=null;function handleInquiryFile(i){inquiryFile=i.files?.[0]||null;$('#inqFileName').textContent=inquiryFile?inquiryFile.name:'첨부 없음'}
 async function sendInquiryMessage(id){try{const attachment=await filePayload(inquiryFile);await api('/api/inquiries/'+encodeURIComponent(id)+'/messages',{method:'POST',body:JSON.stringify({text:$('#inqRoomText').value,attachment})});inquiryFile=null;openInquiryRoom(id)}catch(e){toast(e.message)}}
 async function setInquiryStatus(id,status){try{await api('/api/inquiries/'+encodeURIComponent(id),{method:'PATCH',body:JSON.stringify({status})});openInquiryRoom(id)}catch(e){toast(e.message)}}
@@ -373,9 +519,9 @@ $('#sideDiscord').onclick=()=>{const u=$('#sideDiscord').dataset.url;if(u)window
 $('#mobileMenu').onclick=()=>document.body.classList.toggle('side-open');
 $('#reopenOrderBtn').onclick=()=>{if(lastClosedOrderId)openOrderRoom(lastClosedOrderId)};
 $('#dismissReopenBtn').onclick=()=>{hideReopenOrderCard();try{localStorage.removeItem('veox_last_closed_order')}catch{};lastClosedOrderId=null};
-async function restoreLastClosedOrderPrompt(){ if(!currentUser||currentUser.role==='admin'){hideReopenOrderCard();return} let id=''; try{id=localStorage.getItem('veox_last_closed_order')||''}catch{} if(!id)return; try{const d=await api('/api/orders/'+encodeURIComponent(id)+'/room'); if(d.order && !['지급완료','취소'].includes(d.order.status) && String(d.order.userId)===String(currentUser.id)){ lastClosedOrderId=String(id); showReopenOrderCard(id);} else {try{localStorage.removeItem('veox_last_closed_order')}catch{}} }catch{try{localStorage.removeItem('veox_last_closed_order')}catch{}} }
+async function restoreLastClosedOrderPrompt(){ if(!currentUser||currentUser.role==='admin'){hideReopenOrderCard();return} let id=''; try{id=localStorage.getItem('veox_last_closed_order')||''}catch{} if(!id)return; try{const d=await api('/api/orders/'+encodeURIComponent(id)+'/room'); if(d.order && !['지급완료','취소'].includes(d.order.status) && String(d.order.userId)===String(currentUser.id)){ lastClosedOrderId=String(id); activeOrderSnapshot=d.order; renderPersistentOrder(d.order); showReopenOrderCard(id); showPersistentReopen(d.order);} else {try{localStorage.removeItem('veox_last_closed_order')}catch{}} }catch{try{localStorage.removeItem('veox_last_closed_order')}catch{}} }
 
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer()} if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='roomText'){e.preventDefault();sendRoomMessage(currentDrawerId)}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer()} if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='roomText'){e.preventDefault();sendRoomMessage(currentDrawerId)} if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='inqRoomText'){e.preventDefault();sendInquiryMessage(currentDrawerId)}});
 setInterval(()=>{heartbeat();if(currentUser?.role==='admin') refreshAdminNotifications()},15000);
 (async function init(){await Promise.all([loadSite(),heartbeat(),loadProducts(),loadAnnouncements()]);try{const d=await api('/api/me');currentUser=d.user}catch{}refreshAccount();await restoreLastClosedOrderPrompt()})();
 </script>
