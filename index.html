@@ -129,6 +129,7 @@ body{background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 54%,#eef5ff 100%);colo
 .persistent-selected{padding:12px 12px 0}.persistent-selected .ps-card{border:1px solid #dbe6f6;border-radius:12px;padding:10px;background:#fbfdff}.persistent-selected .ps-row{display:flex;gap:9px;align-items:center}.persistent-selected img{width:52px;height:52px;object-fit:cover;border-radius:10px}.persistent-selected h4{font-size:10px;line-height:1.4}.persistent-selected p{font-size:8px;color:#778aa8;margin-top:2px}.persistent-selected b{display:block;color:#12356d;font-size:13px;margin-top:2px}
 .persistent-reopen{margin:0 10px 10px;padding:10px;border:1px solid #f5df9c;background:#fffbef;border-radius:11px}.persistent-reopen-title{display:flex;gap:7px;align-items:flex-start}.persistent-reopen-title>span{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#fff3bd;color:#9d7a00;font-size:11px}.persistent-reopen-title strong{font-size:9px;color:#22385e}.persistent-reopen-title p{font-size:7.5px;color:#7686a2;margin-top:2px;line-height:1.5}.persistent-reopen-title button{margin-left:auto;width:20px;height:20px;border:0;background:transparent;color:#b08a00;font-size:14px}.persistent-reopen .btn{margin-top:7px;font-size:8px;padding:7px 9px}
 .persistent-info{margin-top:2px;border-top:1px solid #e3ebf6}.persistent-info-head{display:flex;justify-content:space-between;align-items:center;padding:14px}.persistent-info-head strong{font-size:12px}.persistent-info-head span{font-size:12px;color:#8da0b8}.persistent-info-body{padding:0 14px 16px;color:#8091aa;font-size:8px;line-height:1.65}
+.persistent-cart{padding:12px}.persistent-cart-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}.persistent-cart-head strong{display:block;font-size:12px}.persistent-cart-head span{display:block;font-size:8px;color:#7b8ca7;margin-top:2px}.persistent-cart-clear{border:0;background:transparent;color:#8a9ab3;font-size:8px;cursor:pointer}.persistent-cart-list{display:grid;gap:8px;max-height:270px;overflow:auto;padding-right:2px}.persistent-cart-item{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px;border:1px solid #dce7f7;border-radius:11px;background:#f8fbff}.persistent-cart-item img{width:44px;height:44px;object-fit:cover;border-radius:9px;background:#0b1a33}.persistent-cart-main{min-width:0}.persistent-cart-main strong{display:block;font-size:9px;line-height:1.35;white-space:normal}.persistent-cart-main span{display:block;color:#7789a5;font-size:8px;margin-top:3px}.persistent-cart-side{display:grid;justify-items:end;gap:3px}.persistent-cart-side .cart-item-controls{gap:2px}.persistent-cart-side .cart-step{width:22px;height:22px}.persistent-cart-side .cart-qty{min-width:19px;font-size:9px}.persistent-cart-remove{border:0;background:transparent;color:#9aa8bb;font-size:7px;cursor:pointer}.persistent-cart-total{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid #e1e9f5;font-size:8px;color:#7183a1}.persistent-cart-total b{margin-left:auto;color:#164398;font-size:17px}.persistent-cart-checkout{margin-top:10px;font-size:9px}.persistent-cart-note{margin-top:7px;font-size:7.5px;line-height:1.45;color:#8394ad;text-align:center}
 .footer{padding:18px 0 30px;font-size:8px}
 /* hide old floating reopen card on desktop: screenshot uses the inline right card */
 .reopen-order-card{display:none!important}
@@ -301,7 +302,7 @@ function productImage(p){
 }
 
 let activeOrderSnapshot=null;
-function clearPersistentOrder(){activeOrderSnapshot=null;clearPersistentReopen();const e=$('#persistentSelected');if(e)e.classList.add('hidden');const empty=$('#persistentOrderEmpty');if(empty)empty.classList.remove('hidden');const info=$('#persistentInfoBody');if(info)info.textContent='선택한 상품이 없습니다.'}
+function clearPersistentOrder(){activeOrderSnapshot=null;clearPersistentReopen();renderPersistentCart()}
 function clearPersistentReopen(){const el=$('#persistentReopen');if(el)el.classList.add('hidden')}
 function renderPersistentOrder(order){
   if(!order)return;
@@ -398,8 +399,52 @@ function cartTotal(){return cartItems.reduce((sum,it)=>{const p=findProduct(it.i
 function cartRows(){return cartItems.map(it=>({it,p:findProduct(it.id)})).filter(x=>x.p)}
 function openCart(){openModal('장바구니',`<div id="cartModalBody"></div>`);renderCartModal()}
 function renderCartModal(){const box=$('#cartModalBody');if(!box)return;const rows=cartRows();if(!rows.length){box.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛒</div><strong>장바구니가 비어있습니다.</strong><p style="margin-top:5px;font-size:10px">상품에서 🛒 담기를 누르면 여기에 담깁니다.</p></div>';return}
-  box.innerHTML=`<div class="cart-list">${rows.map(({it,p})=>`<div class="cart-item"><img src="${productImage(p)}" alt=""><div><h4>${esc(p.name)}</h4><p>${won(p.price)} · ${Number(it.qty||1)}개</p></div><div class="cart-item-controls"><button class="cart-step" onclick="changeCartQty('${esc(p.id)}',-1)">−</button><span class="cart-qty">${Number(it.qty||1)}</span><button class="cart-step" onclick="changeCartQty('${esc(p.id)}',1)">+</button><button class="cart-item-remove" onclick="removeFromCart('${esc(p.id)}')">삭제</button></div></div>`).join('')}</div><div class="cart-total"><span>총 ${cartCount()}개</span><b>${won(cartTotal())}</b></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><button class="btn ghost block" onclick="clearCart()">장바구니 비우기</button><button class="btn blue block" onclick="closeModal();toast('상품별 주문하기를 눌러 주문을 진행해 주세요.')">상품별 주문하기</button></div><div class="notice" style="margin-top:10px"><strong>안내</strong><span>현재 주문은 상품별로 진행됩니다. 장바구니에서 수량을 정리한 뒤 원하는 상품의 주문하기를 눌러주세요.</span></div>`}
-function renderPersistentCart(){const btn=$('#cartBtn');if(btn)updateCartBadge()}
+  box.innerHTML=`<div class="cart-list">${rows.map(({it,p})=>`<div class="cart-item"><img src="${productImage(p)}" alt=""><div><h4>${esc(p.name)}</h4><p>${won(p.price)} · ${Number(it.qty||1)}개</p></div><div class="cart-item-controls"><button class="cart-step" onclick="changeCartQty('${esc(p.id)}',-1)">−</button><span class="cart-qty">${Number(it.qty||1)}</span><button class="cart-step" onclick="changeCartQty('${esc(p.id)}',1)">+</button><button class="cart-item-remove" onclick="removeFromCart('${esc(p.id)}')">삭제</button></div></div>`).join('')}</div><div class="cart-total"><span>총 ${cartCount()}개</span><b>${won(cartTotal())}</b></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><button class="btn ghost block" onclick="clearCart()">장바구니 비우기</button><button class="btn blue block" onclick="checkoutCartToInquiry()">구매하기</button></div><div class="notice" style="margin-top:10px"><strong>안내</strong><span>현재 주문은 상품별로 진행됩니다. 장바구니에서 수량을 정리한 뒤 원하는 상품의 주문하기를 눌러주세요.</span></div>`}
+function renderPersistentCart(){
+  updateCartBadge();
+  const panel=$('#persistentSelected'), empty=$('#persistentOrderEmpty'), info=$('#persistentInfoBody');
+  if(!panel||!empty)return;
+  if(activeOrderSnapshot){
+    renderPersistentOrder(activeOrderSnapshot);
+    return;
+  }
+  const rows=cartRows();
+  clearPersistentReopen();
+  if(!rows.length){
+    panel.classList.add('hidden');
+    empty.classList.remove('hidden');
+    empty.innerHTML='<div class="cart-illustration">🛒</div><strong>상품을 선택하여<br>주문을 진행해주세요.</strong>';
+    if(info)info.textContent='선택한 상품이 없습니다.';
+    return;
+  }
+  empty.classList.add('hidden');
+  panel.classList.remove('hidden');
+  const total=cartTotal(), count=cartCount();
+  panel.innerHTML=`<div class="persistent-cart"><div class="persistent-cart-head"><div><strong>🛒 장바구니</strong><span>${count}개 상품</span></div><button type="button" class="persistent-cart-clear" onclick="clearCart()">비우기</button></div><div class="persistent-cart-list">${rows.map(({it,p})=>`<div class="persistent-cart-item"><img src="${productImage(p)}" alt=""><div class="persistent-cart-main"><strong>${esc(p.name)}</strong><span>${won(p.price)} · ${Number(it.qty||1)}개</span></div><div class="persistent-cart-side"><div class="cart-item-controls"><button class="cart-step" onclick="changeCartQty('${esc(p.id)}',-1)">−</button><span class="cart-qty">${Number(it.qty||1)}</span><button class="cart-step" onclick="changeCartQty('${esc(p.id)}',1)">+</button></div><button class="persistent-cart-remove" onclick="removeFromCart('${esc(p.id)}')">삭제</button></div></div>`).join('')}</div><div class="persistent-cart-total"><span>총 결제 예상금액</span><b>${won(total)}</b></div><button class="btn blue block persistent-cart-checkout" onclick="checkoutCartToInquiry()">🛒 이 상품들 구매하기</button><div class="persistent-cart-note">구매하기를 누르면 바로 고객센터 문의창으로 이동해 주문 상담을 시작합니다.</div></div>`;
+  if(info)info.innerHTML='<strong style="color:#38557e">장바구니 준비 완료</strong><br>상품 '+count+'개 · 예상 금액 '+won(total)+'<br>아래 구매하기를 눌러 문의를 시작하세요.';
+}
+
+async function checkoutCartToInquiry(){
+  const rows=cartRows();
+  if(!rows.length){toast('장바구니가 비어 있습니다.');return;}
+  if(!currentUser){openLogin();return;}
+  const subject='장바구니 구매 문의';
+  const lines=rows.map(({it,p})=>`• ${p.name} × ${Number(it.qty||1)}개 = ${won(Number(p.price||0)*Number(it.qty||1))}`);
+  const text='아래 상품 구매를 문의드립니다.\n\n'+lines.join('\n')+'\n\n총 '+cartCount()+'개 / '+won(cartTotal())+'\n\n구매 진행 방법과 입금 안내 부탁드립니다.';
+  try{
+    const d=await api('/api/inquiries',{method:'POST',body:JSON.stringify({category:'주문/결제 문의',subject,text})});
+    cartItems=[]; writeCart(); updateCartBadge(); clearPersistentOrder(); closeModal(); loadInquiries(); openInquiryRoom(d.inquiry.id); toast('구매 문의창으로 이동했습니다.');
+  }catch(e){toast(e.message)}
+}
+
+async function submitCartInquiry(){
+  const payload=window.__pendingCartInquiry;
+  if(!payload||!currentUser)return;
+  try{
+    const d=await api('/api/inquiries',{method:'POST',body:JSON.stringify({category:'주문/결제 문의',subject:payload.subject,text:payload.text})});
+    cartItems=[]; writeCart(); updateCartBadge(); clearPersistentOrder(); window.__pendingCartInquiry=null; closeModal(); loadInquiries(); openInquiryRoom(d.inquiry.id); toast('문의창을 열었습니다.');
+  }catch(e){toast(e.message)}
+}
 
 function openProduct(id){const p=products.find(x=>x.id===id);if(!p)return;openModal(p.name,`<img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}" style="width:100%;height:190px;object-fit:cover;border-radius:16px;background:#0b1a33"><div><div class="mini">${esc(p.category)} · ${esc(p.badge||'VEXO')}</div><h4 style="font-size:22px;margin-top:5px">${esc(p.name)}</h4><p style="color:#64748b;font-size:11px;margin-top:7px;line-height:1.7">${esc(p.description||'')}</p></div><div class="panel" style="box-shadow:none;padding:14px"><div class="mini">구성</div><div class="feature-list" style="margin-top:8px">${(p.features||[]).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div style="display:flex;align-items:center;gap:10px"><b style="font-size:22px;color:#1e40af;margin-right:auto">${won(p.price)}</b><button class="btn ghost" onclick="addToCart('${esc(p.id)}')">🛒 장바구니</button><button class="btn blue" onclick="closeModal();startOrder('${esc(p.id)}')">이 상품 주문하기</button></div>`)}
 function startOrder(id){if(!currentUser){openLogin();return}const p=products.find(x=>x.id===id);if(!p)return;if(p.__offlineFallback){toast('현재 서버 연결이 지연되고 있어요. 잠시 후 다시 주문해 주세요.');return}openModal('주문 정보 입력',`<div class="field"><label>상품</label><input class="input" value="${esc(p.name)}" disabled></div><div class="admin-grid2"><div class="field"><label>수량</label><input class="input" id="orderQty" type="number" min="1" max="20" value="1"></div><div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="orderDiscord" placeholder="예: veox_user"></div></div><div class="field"><label>입금자명 *</label><input class="input" id="orderPayer" placeholder="실제 송금자명"></div><div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="필요한 내용을 적어주세요."></textarea></div><div id="couponBox"></div><div class="notice" style="background:#eef6ff;border-color:#d6e8fb"><strong>💳 결제 안내</strong><span>주문 생성 후 전용 주문실에서 입금 확인 요청과 관리자 채팅을 진행할 수 있습니다.</span></div><button class="btn blue block" onclick="createOrder('${esc(p.id)}')">주문 생성하고 주문실 열기</button>`);loadCouponOptions()}
