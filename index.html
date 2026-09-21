@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VEXOHUB | Premium Digital Store</title>
 <meta name="description" content="VEXOHUB - 디스코드 판매 자동화 봇, 서버 템플릿, 자동화, 커스텀 봇, 운영 확장팩 판매 사이트">
-<meta name="theme-color" content="#0b2459">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#090a12">
+<meta name="color-scheme" content="dark">
 <link rel="icon" href="/assets/vexo-favicon.png?v=9" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -227,6 +227,31 @@ body{background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 54%,#eef5ff 100%);colo
 @media(max-width:900px){.hero-copy{min-height:420px;padding:28px 24px}.hero-copy h1{font-size:48px}.hero-copy>p{max-width:680px}.hero-stats{align-self:stretch}.quick-start-card{padding:17px}.quick-start-head h2{font-size:20px}.quick-choice{min-height:70px}.my-products-grid{grid-template-columns:1fr}.recent-card{grid-template-columns:64px minmax(0,1fr) auto}.recent-card img{width:64px;height:48px}}
 @media(max-width:620px){.hero-copy{min-height:500px;padding:22px 18px}.hero-copy h1{font-size:40px;line-height:1.06;max-width:100%}.hero-copy>p{font-size:9px;line-height:1.65;max-width:100%}.hero-actions{gap:6px}.hero-actions .btn{font-size:9px;padding:9px 11px}.hero-stats{grid-template-columns:1fr 1fr;width:100%;gap:6px}.stat{padding:9px}.stat b{font-size:12px}.stat span{font-size:7px}.quick-start-grid{grid-template-columns:1fr 1fr;gap:7px}.quick-choice{min-height:66px;padding:9px}.quick-choice-icon{width:34px;height:34px;flex-basis:34px;font-size:15px}.quick-choice strong{font-size:9px}.quick-choice span{font-size:7px}.quick-start-head p{font-size:8px}.recent-grid{grid-template-columns:1fr}.recent-card{grid-template-columns:62px minmax(0,1fr) auto}.recent-card img{width:62px;height:46px}}
 
+
+/* ===== FINAL PRODUCT VISIBILITY + READABILITY FIX ===== */
+html{background:#07080f !important;color-scheme:dark !important}
+body{background:#07080f !important;color:#f7f4fb !important}
+.app.vexo-app{grid-template-columns:1fr !important}
+.sidebar.legacy-hooks{display:none !important}
+.vexo-topbar{background:rgba(7,8,15,.96) !important;border-bottom:1px solid rgba(160,106,255,.16) !important}
+.vexo-nav .vnav{font-size:12px !important;color:#cdc5d8 !important;background:transparent;border:0}
+.vexo-nav .vnav:hover,.vexo-nav .vnav.active{color:#fff !important}
+.vexo-search .input{color:#fff !important;background:#0e1019 !important;border-color:rgba(157,108,255,.25) !important}
+.vexo-search .input::placeholder{color:#847a91 !important}
+.vhero h1,.vhero h2{color:#fff !important}.vhero-copy>p{color:#d1c7dd !important}.hero-kicker{color:#c195ff !important}
+.hero-trust b{color:#f4eff8 !important}.hero-trust small{color:#aaa1b5 !important}
+.vsection-head h2{font-size:20px !important;color:#faf8fc !important}.vsection-head p{font-size:11px !important;color:#a69caf !important}.product-count{color:#aaa1b0 !important}
+.vfilters .pill{font-size:10px !important;color:#c7bed2 !important;background:#0b0d15 !important;border-color:rgba(157,108,255,.22) !important}.vfilters .pill.active{color:#fff !important}
+.v-products-grid .product{background:linear-gradient(180deg,#0d0f18,#090b12) !important;border-color:rgba(156,108,255,.22) !important}.v-products-grid .product-media{height:178px !important;background:#090a12 !important}.v-products-grid .product-media img{object-fit:contain !important}
+.v-products-grid .product h3{color:#fff !important;font-size:15px !important}.v-products-grid .product-desc{color:#b8afc1 !important;font-size:10px !important;line-height:1.6 !important}.v-products-grid .feature-list span{color:#aaa0b1 !important;font-size:8.5px !important}.v-products-grid .cat{color:#a097aa !important;font-size:8px !important}.v-products-grid .badge{color:#c8a9ff !important;font-size:8px !important}.v-products-grid .price{color:#fff !important;font-size:17px !important}.v-products-grid .btn.ghost{color:#d0c8d9 !important;background:#11131c !important}
+.vexo-rail .rail-card{background:linear-gradient(180deg,#0d0f18,#090b12) !important;border-color:rgba(156,108,255,.22) !important}.rail-head h3,.account-card h3{color:#f7f3fa !important}.account-card p,.compact-cta p{color:#aaa0b2 !important}.account-card small{color:#81778c !important}.rail-recent-list .recent-card{background:#0a0c14 !important}.rail-recent-list .recent-card strong{color:#eeeaf3 !important}.rail-recent-list .recent-card span{color:#948a9e !important}
+.dark-panel{background:linear-gradient(180deg,#0d0f18,#090b12) !important;border-color:rgba(156,108,255,.22) !important}.real-steps div,.dark-notices .notice{background:#0c0e16 !important;border-color:rgba(255,255,255,.06) !important}.real-steps span,.dark-notices .notice strong{color:#eeeaf5 !important}.real-steps small,.dark-notices .notice span{color:#978e9f !important}
+.modal-card{background:#0b0d15 !important;border-color:rgba(156,108,255,.25) !important}.modal-head h3{color:#fff !important}.modal-body{color:#eeeaf4 !important}.field label{color:#b0a6b7 !important}.input,.select,.textarea{color:#f5f1f8 !important;background:#0e1019 !important;border-color:rgba(156,108,255,.25) !important}.input::placeholder,.textarea::placeholder{color:#756c80 !important}
+.vfooter{color:#948a9e !important}.vfooter strong{color:#f1ecf7 !important}.vfooter a{color:#aaa0b1 !important}
+.empty{background:#0b0d15 !important;color:#a59aaa !important;border-color:rgba(156,108,255,.18) !important}
+@media(max-width:920px){.v-products-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media(max-width:620px){.v-products-grid{grid-template-columns:1fr !important}.v-products-grid .product-media{height:190px !important}}
+
 </style>
 
 <style id="vexo-target-style">
@@ -393,6 +418,7 @@ body.locked{overflow:hidden}
 <div class="drawer-wrap"><div class="drawer" id="drawer"><aside class="drawer-side" id="drawerSide"></aside><section class="drawer-chat"><div class="chat-head" id="chatHead"></div><div class="chat-messages" id="chatMessages"></div><div class="chat-compose" id="chatCompose"></div></section></div></div>
 <div class="reopen-order-card" id="reopenOrderCard" role="status" aria-live="polite"><div class="reopen-title"><div class="reopen-icon">💬</div><div><strong>실수로 주문창을 닫으셨나요?</strong><p>진행 중인 주문은 그대로 보관되어 있어요.</p><span class="reopen-link">여기를 클릭하여 다시 주문창을 여세요!</span></div></div><div class="reopen-actions"><button class="btn ghost reopen-dismiss" id="dismissReopenBtn" title="안내 닫기">×</button><button class="btn blue" id="reopenOrderBtn">주문창 다시 열기</button></div></div>
 <div class="toast" id="toast"></div>
+<script src="/products.js?v=5"></script>
 <script>
 const $=s=>document.querySelector(s); const $$=s=>[...document.querySelectorAll(s)];
 const won=n=>Number(n||0).toLocaleString('ko-KR')+'원'; const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -473,7 +499,7 @@ function renderPersistentOrder(order){
   activeOrderSnapshot=order;
   const empty=$('#persistentOrderEmpty'); if(empty)empty.classList.add('hidden');
   const selected=$('#persistentSelected');
-  const p=products.find(x=>x.id===order.productId)||{};
+  const p=findProduct(order.productId)||{};
   if(selected){selected.classList.remove('hidden');selected.innerHTML=`<div class="ps-card"><div class="ps-row"><img src="${productImage(p)}" alt=""><div><h4>${esc(order.productName||p.name||'선택 상품')}</h4><p>${esc(order.quantity||1)}개 · ${esc(statusText(order.status))}</p><b>${won(order.total)}</b></div></div></div>`}
   const info=$('#persistentInfoBody'); if(info)info.innerHTML=`<strong style="color:#38557e">${esc(order.productName||'상품')}</strong><br>수량 ${esc(order.quantity||1)} · 상태 ${esc(statusText(order.status))}<br>주문 금액 ${won(order.total)}`;
 }
@@ -487,54 +513,66 @@ function statusText(s){return s||'주문접수'}
 async function loadSite(){try{const d=await api('/api/site');$('#onlineCount').textContent=(d.online||0)+'명 접속중';if(d.settings?.discordInvite)$('#sideDiscord').dataset.url=d.settings.discordInvite}catch{}}
 async function heartbeat(){try{const d=await api('/api/heartbeat',{method:'POST',body:'{}'});$('#onlineCount').textContent=(d.online||0)+'명 접속중'}catch{}}
 const PRODUCT_CACHE_KEY='vexohub_products_cache_v3';
-const PRODUCT_FALLBACK=[
-  {id:'vexo-fallback-basic',name:'VEXO 자판기봇 BASIC',tier:'BASIC',category:'자판기봇',price:19000,badge:'입문추천',description:'디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.',features:['상품 버튼 주문 UI','주문 접수 및 로그 기록','관리자 확인 후 지급 안내']},
-  {id:'vexo-fallback-pro',name:'VEXO 자판기봇 PRO',tier:'PRO',category:'자판기봇',price:39000,badge:'인기',description:'상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.',features:['상품 추가·수정·삭제 관리','주문 상태 관리 패널','상세 주문 로그']},
-  {id:'vexo-fallback-template',name:'VEXO 디스코드 서버 템플릿',category:'서버 템플릿',price:19000,badge:'빠른시작',description:'판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.',features:['STORE / ORDER / SUPPORT 구조','OWNER·ADMIN·STAFF 역할','공지·가격표·구매인증 채널']},
-  {id:'vexo-fallback-template-pro',name:'VEXO 서버 템플릿 PRO',category:'서버 템플릿',price:34000,badge:'BEST',description:'고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.',features:['세분화된 권한 구조','티켓 운영 구조','후기·파트너 채널 구성']},
-  {id:'vexo-fallback-auto',name:'VEXO 자동화 패키지',category:'자동화',price:49000,badge:'업무절약',description:'반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.',features:['환영·역할 자동화','반복 공지 자동화','주문 알림 연동']},
-  {id:'vexo-fallback-custom',name:'VEXO 커스텀 봇 제작',category:'개발',price:89000,badge:'상담필수',description:'원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.',features:['요구사항 상담','슬래시/버튼 커맨드','서버 맞춤 기능']},
-  {id:'vexo-fallback-bundle',name:'VEXO STORE 올인원',category:'패키지',price:99000,badge:'올인원',description:'서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 패키지입니다.',features:['서버 템플릿 구성','자판기봇 구성','자동화 기본 구성']},
-  {id:'vexo-fallback-launch',name:'VEXO 런칭 풀세팅',category:'패키지',price:149000,badge:'프리미엄',description:'처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.',features:['올인원 구성','판매 채널 문구','오픈 전 점검']}
-].map(p=>({...p,__offlineFallback:true}));
+const PRODUCT_FALLBACK=(window.VEXOHUB_PRODUCTS||[]).map(p=>({...p,__static:true}));
 function setProductLoading(message='상품을 불러오는 중...'){
   const grid=$('#productGrid'); if(grid) grid.innerHTML=`<div class="empty product-loading" style="grid-column:1/-1"><div class="loading-orb" aria-hidden="true"></div><strong>${esc(message)}</strong><span style="display:block;margin-top:5px">잠시만 기다려 주세요.</span></div>`;
 }
 function readProductCache(){try{const raw=localStorage.getItem(PRODUCT_CACHE_KEY);const data=raw?JSON.parse(raw):[];return Array.isArray(data)&&data.length?data:[]}catch{return[]}}
 function writeProductCache(items){try{if(Array.isArray(items)&&items.length)localStorage.setItem(PRODUCT_CACHE_KEY,JSON.stringify(items))}catch{}}
 async function fetchWithTimeout(url,ms=7000){const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),ms);try{return await api(url,{signal:ctrl.signal})}finally{clearTimeout(timer)}}
-async function loadProducts(){
-  setProductLoading();
-  let lastError=null;
-  for(let attempt=0;attempt<4;attempt++){
-    try{
-      const d=await fetchWithTimeout('/api/products?category=all',7000);
-      const items=Array.isArray(d.products)?d.products:[];
-      if(items.length){
-        products=items; writeProductCache(items);
-        if($('#heroProductCount'))if($('#heroProductCount'))$('#heroProductCount').textContent=products.length;
-        $('#productCountText').textContent=products.length+'개 상품';
-        renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();return true;
-      }
-      lastError=new Error('상품 데이터가 비어 있습니다.');
-    }catch(e){lastError=e}
-    await new Promise(r=>setTimeout(r,400*Math.pow(2,attempt)));
+function productNameKey(v){return String(v||'').trim().replace(/\s+/g,' ').toLowerCase()}
+function mergeServerProducts(serverItems){
+  const byName=new Map((serverItems||[]).map(p=>[productNameKey(p.name),p]));
+  const merged=[]; const used=new Set();
+  for(const local of PRODUCT_FALLBACK){
+    const server=byName.get(productNameKey(local.name));
+    if(server){
+      used.add(productNameKey(local.name));
+      merged.push({...local,...server,id:local.id,localId:local.localId||local.id,serverId:server.id,__static:false,image:local.image||server.image});
+    }else merged.push({...local});
   }
+  for(const p of serverItems||[]){
+    const k=productNameKey(p.name);
+    if(!used.has(k) && !merged.some(x=>productNameKey(x.name)===k)) merged.push({...p,serverId:p.id});
+  }
+  return merged;
+}
+async function loadProducts(){
+  products=PRODUCT_FALLBACK.slice();
+  if($('#heroProductCount')) $('#heroProductCount').textContent=products.length;
+  $('#productCountText').textContent=products.length+'개 상품';
+  renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
+  try{
+    const d=await fetchWithTimeout('/api/products?category=all',5000);
+    const items=Array.isArray(d.products)?d.products:[];
+    if(items.length){
+      products=mergeServerProducts(items);
+      writeProductCache(items);
+      $('#productCountText').textContent=products.length+'개 상품';
+      renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
+      return true;
+    }
+  }catch{}
   const cached=readProductCache();
   if(cached.length){
-    products=cached;
-    if($('#heroProductCount'))if($('#heroProductCount'))$('#heroProductCount').textContent=products.length;
+    products=mergeServerProducts(cached);
     $('#productCountText').textContent=products.length+'개 상품 · 저장된 목록';
     renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
-    toast('서버 연결이 지연되어 저장된 상품 목록을 표시했습니다.');
-    return true;
   }
-  products=PRODUCT_FALLBACK.slice();
-  if($('#heroProductCount'))$('#heroProductCount').textContent=products.length+'+';
-  $('#productCountText').textContent='상품 목록 준비됨';
-  renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
-  toast('상품 목록을 불러오지 못해 기본 상품을 표시했습니다.');
   return false;
+}
+async function resolveServerProduct(p){
+  if(!p)return null;
+  if(p.serverId)return p;
+  try{
+    const d=await fetchWithTimeout('/api/products?category=all',5000);
+    const items=Array.isArray(d.products)?d.products:[];
+    const hit=items.find(x=>productNameKey(x.name)===productNameKey(p.name));
+    if(!hit)return null;
+    products=mergeServerProducts(items);
+    renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
+    return findProduct(p.id)||products.find(x=>productNameKey(x.name)===productNameKey(p.name));
+  }catch{return null}
 }
 function renderFilters(){const counts=new Map();for(const p of products){if(p.category)counts.set(p.category,(counts.get(p.category)||0)+1)}const cats=['전체',...counts.keys()];$('#filters').innerHTML=cats.map(c=>`<button class="pill ${c===currentCategory?'active':''}" onclick="selectCategory('${esc(c)}')">${esc(c)}${c!=='전체'?` · ${counts.get(c)}`:''}</button>`).join('')}
 function selectCategory(c){currentCategory=c;renderFilters();renderProducts()}
@@ -554,7 +592,7 @@ function renderProducts(){
   const q=productSearch.trim().toLowerCase();
   let list=products.filter(p=>(currentCategory==='전체'||p.category===currentCategory)&&(!q||String(p.name||'').toLowerCase().includes(q)||String(p.description||'').toLowerCase().includes(q)||String(p.category||'').toLowerCase().includes(q)));
   list=sortProductList(list);
-  $('#productGrid').innerHTML=list.length?list.map(p=>`<article class="product">
+  const grid=$('#productGrid'); if(!grid)return; grid.innerHTML=list.length?list.map(p=>`<article class="product">
     <div class="product-media"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"></div>
     <div class="product-body">
       <div class="product-top"><span class="badge">${esc(p.badge||'VEXOHUB')}</span><span class="cat">${esc(p.category||'기타')}</span></div>
@@ -576,10 +614,10 @@ function readCart(){try{const raw=localStorage.getItem(CART_KEY);const x=raw?JSO
 function writeCart(){try{localStorage.setItem(CART_KEY,JSON.stringify(cartItems))}catch{}}
 function cartCount(){return cartItems.reduce((s,x)=>s+Number(x.qty||1),0)}
 function updateCartBadge(){const el=$('#cartCount');if(el)el.textContent=cartCount()}
-function findProduct(id){return products.find(x=>String(x.id)===String(id))}
+function findProduct(id){return products.find(x=>String(x.id)===String(id)||String(x.localId||'')===String(id)||String(x.serverId||'')===String(id))}
 function addToCart(id){
   const p=findProduct(id); if(!p)return;
-  if(p.__offlineFallback){toast('현재 서버 연결이 지연되고 있어요. 잠시 후 다시 담아주세요.');return}
+  
   const found=cartItems.find(x=>String(x.id)===String(id));
   if(found){found.qty=Math.min(20,Number(found.qty||1)+1)}else cartItems.push({id:String(id),qty:1});
   writeCart(); updateCartBadge(); recordRecentViewed(id); renderPersistentCart(); toast('장바구니에 추가했습니다.');
@@ -616,14 +654,7 @@ async function checkoutCartToInquiry(){
   if(!currentUser){openLogin();return;}
   const subject='장바구니 구매 문의';
   const lines=rows.map(({it,p})=>`• ${p.name} × ${Number(it.qty||1)}개 = ${won(Number(p.price||0)*Number(it.qty||1))}`);
-  const text='아래 상품 구매를 문의드립니다.
-
-'+lines.join('
-')+'
-
-총 '+cartCount()+'개 / '+won(cartTotal())+'
-
-구매 진행 방법과 입금 안내 부탁드립니다.';
+  const text=`아래 상품 구매를 문의드립니다.\n\n${lines.join('\n')}\n\n총 ${cartCount()}개 / ${won(cartTotal())}\n\n구매 진행 방법과 입금 안내 부탁드립니다.`;
   try{
     const d=await api('/api/inquiries',{method:'POST',body:JSON.stringify({category:'주문/결제 문의',subject,text})});
     cartItems=[]; writeCart(); updateCartBadge(); clearPersistentOrder(); closeModal(); loadInquiries(); openInquiryRoom(d.inquiry.id); toast('구매 문의창으로 이동했습니다.');
@@ -639,10 +670,20 @@ async function submitCartInquiry(){
   }catch(e){toast(e.message)}
 }
 
-function openProduct(id){const p=products.find(x=>x.id===id);if(!p)return;recordRecentViewed(p.id);openModal(p.name,`<img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}" style="width:100%;height:190px;object-fit:contain;border-radius:16px;background:#090a12;border:1px solid rgba(143,92,255,.16)"><div><div class="mini">${esc(p.category)} · ${esc(p.badge||'VEXO')}</div><h4 style="font-size:22px;margin-top:5px">${esc(p.name)}</h4><p style="color:#64748b;font-size:11px;margin-top:7px;line-height:1.7">${esc(p.description||'')}</p></div><div class="panel" style="box-shadow:none;padding:14px"><div class="mini">구성</div><div class="feature-list" style="margin-top:8px">${(p.features||[]).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div style="display:flex;align-items:center;gap:10px"><b style="font-size:22px;color:#1e40af;margin-right:auto">${won(p.price)}</b><button class="btn ghost" onclick="addToCart('${esc(p.id)}')">🛒 장바구니</button><button class="btn blue" onclick="closeModal();startOrder('${esc(p.id)}')">이 상품 주문하기</button></div>`)}
-function startOrder(id){if(!currentUser){openLogin();return}const p=products.find(x=>x.id===id);if(!p)return;if(p.__offlineFallback){toast('현재 서버 연결이 지연되고 있어요. 잠시 후 다시 주문해 주세요.');return}openModal('주문 정보 입력',`<div class="field"><label>상품</label><input class="input" value="${esc(p.name)}" disabled></div><div class="admin-grid2"><div class="field"><label>수량</label><input class="input" id="orderQty" type="number" min="1" max="20" value="1"></div><div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="orderDiscord" placeholder="예: veox_user"></div></div><div class="field"><label>입금자명 *</label><input class="input" id="orderPayer" placeholder="실제 송금자명"></div><div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="필요한 내용을 적어주세요."></textarea></div><div id="couponBox"></div><div class="notice" style="background:#eef6ff;border-color:#d6e8fb"><strong>💳 결제 안내</strong><span>주문 생성 후 전용 주문실에서 입금 확인 요청과 관리자 채팅을 진행할 수 있습니다.</span></div><button class="btn blue block" onclick="createOrder('${esc(p.id)}')">주문 생성하고 주문실 열기</button>`);loadCouponOptions()}
+function openProduct(id){const p=findProduct(id);if(!p)return;recordRecentViewed(p.id);openModal(p.name,`<img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}" style="width:100%;height:190px;object-fit:contain;border-radius:16px;background:#090a12;border:1px solid rgba(143,92,255,.16)"><div><div class="mini">${esc(p.category)} · ${esc(p.badge||'VEXO')}</div><h4 style="font-size:22px;margin-top:5px">${esc(p.name)}</h4><p style="color:#64748b;font-size:11px;margin-top:7px;line-height:1.7">${esc(p.description||'')}</p></div><div class="panel" style="box-shadow:none;padding:14px"><div class="mini">구성</div><div class="feature-list" style="margin-top:8px">${(p.features||[]).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div style="display:flex;align-items:center;gap:10px"><b style="font-size:22px;color:#1e40af;margin-right:auto">${won(p.price)}</b><button class="btn ghost" onclick="addToCart('${esc(p.id)}')">🛒 장바구니</button><button class="btn blue" onclick="closeModal();startOrder('${esc(p.id)}')">이 상품 주문하기</button></div>`)}
+async function startOrder(id){
+  if(!currentUser){openLogin();return}
+  let p=findProduct(id); if(!p)return;
+  if(!p.serverId && String(p.id).startsWith('static-')){
+    const real=await resolveServerProduct(p);
+    if(!real){toast('주문 서버에 연결되지 않았습니다. 잠시 후 다시 시도해주세요.');return;}
+    p=real;
+  }
+  openModal('주문 정보 입력',`<div class="field"><label>상품</label><input class="input" value="${esc(p.name)}" disabled></div><div class="admin-grid2"><div class="field"><label>수량</label><input class="input" id="orderQty" type="number" min="1" max="20" value="1"></div><div class="field"><label>디스코드 닉네임 또는 아이디</label><input class="input" id="orderDiscord" placeholder="예: vexohub_user"></div></div><div class="field"><label>입금자명 *</label><input class="input" id="orderPayer" placeholder="실제 송금자명"></div><div class="field"><label>요청사항</label><textarea class="textarea" id="orderMemo" placeholder="필요한 내용을 적어주세요."></textarea></div><div id="couponBox"></div><div class="notice"><strong>💳 결제 안내</strong><span>주문 생성 후 전용 주문실에서 입금 확인 요청과 관리자 채팅을 진행할 수 있습니다.</span></div><button class="btn blue block" onclick="createOrder('${esc(p.id)}')">주문 생성하고 주문실 열기</button>`);
+  loadCouponOptions();
+}
 async function loadCouponOptions(){if(!currentUser)return;try{const d=await api('/api/me/benefits');const cs=d.coupons||[];if(!cs.length){$('#couponBox').innerHTML='';return}$('#couponBox').innerHTML=`<div class="field"><label>쿠폰 코드 (선택)</label><select class="select" id="orderCoupon"><option value="">사용하지 않음</option>${cs.map(c=>`<option value="${esc(c.code)}">${esc(c.label||c.code)} · ${esc(c.code)}</option>`).join('')}</select></div>`}catch{}}
-async function createOrder(id){try{const p=products.find(x=>x.id===id);const body={productId:id,quantity:Number($('#orderQty').value||1),discordTag:$('#orderDiscord').value,payerName:$('#orderPayer').value,memo:$('#orderMemo').value,couponCode:$('#orderCoupon')?.value||''};const d=await api('/api/orders',{method:'POST',body:JSON.stringify(body)});closeModal();toast('주문이 생성되었습니다.');await loadMyOrders();openOrderRoom(d.order.id)}catch(e){toast(e.message)}}
+async function createOrder(id){try{const p=findProduct(id);if(!p){toast('상품 정보를 찾을 수 없습니다.');return}const body={productId:p.serverId||p.id,quantity:Number($('#orderQty').value||1),discordTag:$('#orderDiscord').value,payerName:$('#orderPayer').value,memo:$('#orderMemo').value,couponCode:$('#orderCoupon')?.value||''};const d=await api('/api/orders',{method:'POST',body:JSON.stringify(body)});closeModal();toast('주문이 생성되었습니다.');await loadMyOrders();openOrderRoom(d.order.id)}catch(e){toast(e.message)}}
 function renderMyProducts(){
   const box=$('#myProductsBox'); if(!box)return;
   if(!currentUser){box.innerHTML='<div class="empty" style="grid-column:1/-1">로그인하면 구매한 상품이 여기에 표시됩니다.</div>';return}
@@ -673,7 +714,7 @@ function renderRoom(o,resetScroll=true){
   const draftSelectedFile=selectedFile;
   const draftDeliveryFile=deliveryFile;
 
-  $('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>주문 관리</strong><span>VEXOHUB · ${esc(o.id)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">주문 상품</div><div style="display:flex;align-items:center;gap:10px;margin-top:4px"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(products.find(p=>p.id===o.productId)||{})}" style="width:54px;height:54px;object-fit:cover;border-radius:12px;background:#0b1a33"><div style="min-width:0"><div class="room-value">${esc(o.productName)} × ${o.quantity}</div><div class="room-price">${won(o.total)}</div></div></div></div>${progressHtml(o.status)}<div class="room-grid"><div class="room-box"><div class="room-label">구매자</div><div class="room-value">${esc(o.username)}</div></div><div class="room-box"><div class="room-label">Discord</div><div class="room-value">${esc(o.discordTag||'-')}</div></div><div class="room-box"><div class="room-label">입금자명</div><div class="room-value">${esc(o.payerName||'-')}</div></div><div class="room-box"><div class="room-label">금액</div><div class="room-value">${won(o.total)}</div></div></div><div class="room-box"><div class="room-label">요청사항</div><div class="room-value" style="white-space:pre-wrap">${esc(o.memo||'-')}</div></div><div class="room-actions">${isAdmin?`<button class="btn lightblue" onclick="approveOrder('${esc(o.id)}')">✅ 입금 확인</button>${['처리중'].includes(o.status)?`<button class="btn blue" onclick="focusDelivery()">📦 상품 지급</button>`:''}`:`${o.status==='주문접수'?`<button class="btn blue" onclick="requestPayment('${esc(o.id)}')">💳 입금 확인 요청</button>`:o.status==='입금확인요청'?`<button class="btn lightblue" disabled>✅ 입금 확인 요청 전송됨</button>`:''}`}</div><div class="room-help">주문·문의 채팅은 이 화면을 열었을 때만 표시됩니다. 페이지 다른 곳에서는 보이지 않습니다.</div></div>`;
+  $('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>주문 관리</strong><span>VEXOHUB · ${esc(o.id)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">주문 상품</div><div style="display:flex;align-items:center;gap:10px;margin-top:4px"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(findProduct(o.productId)||{})}" style="width:54px;height:54px;object-fit:cover;border-radius:12px;background:#0b1a33"><div style="min-width:0"><div class="room-value">${esc(o.productName)} × ${o.quantity}</div><div class="room-price">${won(o.total)}</div></div></div></div>${progressHtml(o.status)}<div class="room-grid"><div class="room-box"><div class="room-label">구매자</div><div class="room-value">${esc(o.username)}</div></div><div class="room-box"><div class="room-label">Discord</div><div class="room-value">${esc(o.discordTag||'-')}</div></div><div class="room-box"><div class="room-label">입금자명</div><div class="room-value">${esc(o.payerName||'-')}</div></div><div class="room-box"><div class="room-label">금액</div><div class="room-value">${won(o.total)}</div></div></div><div class="room-box"><div class="room-label">요청사항</div><div class="room-value" style="white-space:pre-wrap">${esc(o.memo||'-')}</div></div><div class="room-actions">${isAdmin?`<button class="btn lightblue" onclick="approveOrder('${esc(o.id)}')">✅ 입금 확인</button>${['처리중'].includes(o.status)?`<button class="btn blue" onclick="focusDelivery()">📦 상품 지급</button>`:''}`:`${o.status==='주문접수'?`<button class="btn blue" onclick="requestPayment('${esc(o.id)}')">💳 입금 확인 요청</button>`:o.status==='입금확인요청'?`<button class="btn lightblue" disabled>✅ 입금 확인 요청 전송됨</button>`:''}`}</div><div class="room-help">주문·문의 채팅은 이 화면을 열었을 때만 표시됩니다. 페이지 다른 곳에서는 보이지 않습니다.</div></div>`;
   $('#chatHead').innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div class="chat-person"><div class="chat-avatar">${isAdmin?'⚙':'💬'}</div><div><b>${isAdmin?'관리자 채팅':'주문 채팅'}</b><span>${isAdmin?'구매자와 1:1로 응대합니다.':'관리자 확인용 주문 전용 채팅입니다.'}</span></div></div><button class="drawer-close" onclick="closeDrawer()">×</button></div>`;
   const ms=(o.messages||[]).map(m=>{const isSystem=String(m.senderRole||'')==='system'||String(m.senderId||'')==='system';const cls=isSystem?'system':(String(m.senderId)===String(currentUser.id)?'mine':'');const label=isSystem?'<span class="system-label">자동 결제 안내</span>':'';const payment=isSystem&&String(m.text||'').includes('토스뱅크')?`<div class="payment-notice">${esc(m.text||'')}</div>`: `<div>${esc(m.text||'')}</div>`;return `<div class="bubble ${cls}"><div class="who">${esc(m.senderName||'VEXOHUB')}</div>${label}${payment}${m.attachment?`<a class="attach" href="/api/attachments/${encodeURIComponent(m.attachment.id)}" target="_blank">📎 ${esc(m.attachment.name)}</a>`:''}<div class="time">${new Date(m.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</div></div>`}).join('');
   $('#chatMessages').innerHTML=ms||'<div class="empty">아직 메시지가 없습니다.<br>필요한 내용을 남겨주세요.</div>';
