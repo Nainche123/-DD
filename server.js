@@ -13,7 +13,6 @@ const __dirname = path.dirname(__filename);
 const PORT = Number(process.env.PORT || 3000);
 const DATA_DIR = path.join(__dirname, 'data');
 const DB_PATH = path.join(DATA_DIR, 'db.json');
-const PRODUCTS_PATH = path.join(__dirname, 'products.json');
 const SECRET_PATH = path.join(DATA_DIR, 'session-secret.txt');
 
 await fs.mkdir(DATA_DIR, { recursive: true });
@@ -28,7 +27,7 @@ async function ensureSecret() {
 }
 const SESSION_SECRET = process.env.SESSION_SECRET || await ensureSecret();
 
-const DEFAULT_BANK_INFO = '관리자가 결제 안내에 입력한 계좌로 입금해 주세요.';
+const DEFAULT_BANK_INFO = '토스뱅크 문성식 1908-8064-8818 로 입금 부탁드립니다!';
 
 const seed = {
   users: [],
@@ -39,7 +38,7 @@ const seed = {
     { id: nanoid(), name: 'VEXO 서버 템플릿 PRO', category: '서버 템플릿', price: 34000, badge: 'BEST', description: '고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.', features: ['기본 템플릿 전체 포함', '세분화된 권한 구조', '티켓 봇 연동 가이드', '주문·고객·상품 관리 채널 분리', '후기·파트너 채널 구성', '자판기봇 배치 위치 안내', '상세 세팅 설명서'] },
     { id: nanoid(), name: 'VEXO 자동화 패키지', category: '자동화', price: 49000, badge: '업무절약', description: '반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.', features: ['환영·역할 자동 부여 지원', '반복 공지/안내 자동화', '주문 알림 연동 구성', '스태프 업무 보조 기능', '기본 자판기 흐름 포함', '세팅 가이드 제공'] },
     { id: nanoid(), name: 'VEXO 커스텀 봇 제작', category: '개발', price: 89000, badge: '상담필수', description: '원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.', features: ['요구사항 상담 후 제작', '슬래시/버튼 커맨드 지원', '서버 맞춤 기능 구현', '소스 또는 실행 파일 제공', '기본 설치 지원', '수정 범위 협의 가능'] },
-    { id: nanoid(), name: 'VEXO STORE 올인원', category: '패키지', price: 99000, badge: 'ALL-IN-ONE', description: '서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 판매 운영 패키지입니다.', features: ['서버 템플릿 PRO급 구조', '자판기봇 BASIC 또는 협의 버전', '자동화 기본 구성', '통합 세팅 가이드', '한 번에 판매 서버 구축', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
+    { id: nanoid(), name: 'VEXO STORE 올인원', category: '패키지', price: 99000, badge: '목표추천', description: '서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.', features: ['서버 템플릿 PRO급 구조', '자판기봇 BASIC 또는 협의 버전', '자동화 기본 구성', '통합 세팅 가이드', '한 번에 판매 서버 구축', '계좌입금 확인·상품 지급은 티켓에서 수동 진행'] },
     { id: nanoid(), name: 'VEXO 런칭 풀세팅', category: '패키지', price: 149000, badge: '프리미엄', description: '처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.', features: ['올인원 구성 포함', '판매 채널 문구 기본 작성', '후기·구매인증 동선 세팅', '운영 체크리스트 제공', '오픈 전 점검 1회', '주문 후 디스코드 티켓에서 범위 확정'] },
     { id: nanoid(), name: '봇 설치 가이드', category: '가이드', price: 6000, badge: 'NEW', description: '디스코드 봇을 처음 설치·실행하는 방법을 단계별로 정리한 가이드입니다.', features: ['봇 계정 생성 방법', '토큰 발급·보관', '로컬 실행 방법', '필수 권한 설정', '자주 하는 오류 해결', '문서 형태로 제공'] },
     { id: nanoid(), name: '호스팅 가이드', category: '가이드', price: 7000, badge: '', description: '봇을 24시간 켜 두기 위한 호스팅 선택·세팅 가이드입니다.', features: ['무료/유료 호스팅 비교', 'VPS 기본 세팅', '프로세스 유지(PM2 등)', '재시작·로그 확인', '초보자용 체크리스트'] },
@@ -57,6 +56,8 @@ const seed = {
     discordInvite: process.env.DISCORD_INVITE_URL || '',
     bankInfo: process.env.BANK_INFO || DEFAULT_BANK_INFO,
     webhookUrl: process.env.DISCORD_WEBHOOK_URL || '',
+    goalAmount: 500000,
+    targetMonth: '2026-10'
   }
 };
 
@@ -102,6 +103,8 @@ if (db.settings.siteName === 'VEXO STORE') { db.settings.siteName = 'VEXOHUB'; }
 if (db.settings.discordInvite === undefined || db.settings.discordInvite === '') { if (process.env.DISCORD_INVITE_URL) db.settings.discordInvite = process.env.DISCORD_INVITE_URL; }
 if (db.settings.bankInfo === undefined || db.settings.bankInfo === '디스코드 티켓에서 입금 계좌를 안내받아 주세요.' || db.settings.bankInfo === '관리자에게 입금 계좌를 안내받아 주세요.') db.settings.bankInfo = process.env.BANK_INFO || DEFAULT_BANK_INFO;
 if (db.settings.webhookUrl === undefined) db.settings.webhookUrl = process.env.DISCORD_WEBHOOK_URL || '';
+if (db.settings.goalAmount === undefined) db.settings.goalAmount = 500000;
+if (db.settings.targetMonth === undefined) db.settings.targetMonth = '2026-10';
 // Migrate persisted text from the previous brand spelling to VEXO.
 // Product IDs stay unchanged so existing orders/links remain compatible.
 function migrateBrandText() {
@@ -260,42 +263,6 @@ for (const product of VEXO_35_PRODUCTS) {
   if (existing) existing.price = product.price;
   else if (!existing35.has(product.id)) db.products.push(product);
 }
-// Editable live catalog: products.json is the owner-friendly source for new installs/updates.
-// Existing orders keep their IDs; matching is performed by id first, then by product name.
-async function syncEditableCatalog() {
-  try {
-    const raw = await fs.readFile(PRODUCTS_PATH, 'utf8');
-    const catalog = JSON.parse(raw);
-    if (!Array.isArray(catalog) || !catalog.length) return;
-    for (const item of catalog) {
-      if (!item || !item.name || !item.category) continue;
-      const clean = {
-        id: String(item.id || nanoid(16)),
-        name: String(item.name).trim().slice(0, 120),
-        category: String(item.category).trim().slice(0, 60),
-        price: Math.max(0, Math.round(Number(item.price || 0))),
-        badge: String(item.badge || '').trim().slice(0, 40),
-        description: String(item.description || '').trim().slice(0, 1000),
-        features: normalizeFeatures(item.features)
-      };
-      const existing = db.products.find(p => String(p.id) === clean.id) || db.products.find(p => String(p.name || '') === clean.name);
-      if (existing) {
-        existing.name = clean.name;
-        existing.category = clean.category;
-        existing.price = clean.price;
-        existing.badge = clean.badge;
-        existing.description = clean.description;
-        existing.features = clean.features;
-      } else {
-        db.products.push(clean);
-      }
-    }
-    console.log(`[VEXO] products.json 동기화 완료: ${catalog.length}개 항목`);
-  } catch (e) {
-    console.log('[VEXO] products.json 동기화 건너뜀:', e.message);
-  }
-}
-await syncEditableCatalog();
 await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
 console.log(`[VEXO] 상품 카탈로그 준비 완료: ${db.products.length}개`);
 
@@ -857,13 +824,13 @@ async function sendDiscordPaymentNotice(order) {
     title: '입금 확인 요청이 도착했습니다',
     color: 0xf59e0b,
     extraFields: [{ name: '⏳ 처리 안내', value: '웹 관리자 페이지에서 입금 확인 후 **구매확정** 처리해 주세요.', inline: false }],
-    footer: '입금 확인 후 상품 지급을 진행해 주세요.',
+    footer: '빠른 확인일수록 구매 취소율이 낮아져요.',
   }));
 }
 
 async function sendDiscordCompletionNotice(order) {
   // Fires when an order reaches 지급완료, so completed sales show up in the same
-  // Discord feed in real time so completed orders are visible immediately.
+  // Discord feed in real time — handy for tracking progress toward a revenue goal.
   await postWebhook(buildOrderEmbed(order, {
     emoji: '✅',
     title: '지급 완료 · 매출이 확정되었습니다',
@@ -995,9 +962,10 @@ app.get('/api/admin/notifications', requireAdmin, (req, res) => {
 app.get('/api/admin/summary', requireAdmin, (req, res) => {
   const paidOrders = db.orders.filter(o => o.status === '지급완료');
   const revenue = paidOrders.reduce((s, o) => s + Number(o.total || 0), 0);
-  const currentMonth = new Date().toISOString().slice(0, 7);
-  const monthOrders = paidOrders.filter(o => String(o.createdAt || '').startsWith(currentMonth));
+  const targetMonth = String(db.settings.targetMonth || '').trim();
+  const monthOrders = targetMonth ? paidOrders.filter(o => String(o.createdAt || '').startsWith(targetMonth)) : paidOrders;
   const monthRevenue = monthOrders.reduce((s, o) => s + o.total, 0);
+  const goalAmount = Math.max(0, Number(db.settings.goalAmount || 0));
   const averageOrderValue = paidOrders.length ? Math.round(revenue / paidOrders.length) : 0;
   res.json({
     users: db.users.filter(u => u.role !== 'admin').length,
@@ -1005,7 +973,10 @@ app.get('/api/admin/summary', requireAdmin, (req, res) => {
     orders: db.orders.length,
     revenue,
     monthRevenue,
-
+    goalAmount,
+    targetMonth,
+    remainingGoal: Math.max(0, goalAmount - monthRevenue),
+    goalProgress: goalAmount ? Math.min(100, Math.round((monthRevenue / goalAmount) * 100)) : 0,
     averageOrderValue,
     online: online.size,
     admin: safeUser(req.user)
@@ -1232,6 +1203,8 @@ app.patch('/api/admin/settings' , requireAdmin, (req, res) => {
   if (req.body.discordInvite !== undefined) db.settings.discordInvite = String(req.body.discordInvite).slice(0, 300);
   if (req.body.bankInfo !== undefined) db.settings.bankInfo = String(req.body.bankInfo).slice(0, 300);
   if (req.body.webhookUrl !== undefined) db.settings.webhookUrl = String(req.body.webhookUrl).slice(0, 500);
+  if (req.body.goalAmount !== undefined) db.settings.goalAmount = Math.max(0, Math.round(Number(req.body.goalAmount || 0)));
+  if (req.body.targetMonth !== undefined) db.settings.targetMonth = String(req.body.targetMonth).slice(0, 7);
   saveDb();
   res.json({ settings: siteSettingsFor(req) });
 });
@@ -1242,17 +1215,9 @@ function fallbackSvg(res, label = 'VEXOHUB') {
   res.type('svg').send(svg);
 }
 
-app.get('/products.json', async (req, res) => {
-  try {
-    const raw = await fs.readFile(PRODUCTS_PATH, 'utf8');
-    res.type('application/json').send(raw);
-  } catch {
-    res.status(404).json({ products: [] });
-  }
-});
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.use('/assets', express.static(path.join(__dirname, 'assets'), { index: false, fallthrough: true, maxAge: '1h' }));
-app.get('assets/:file', (req, res) => fallbackSvg(res, req.params.file));
+app.get('/assets/:file', (req, res) => fallbackSvg(res, req.params.file));
 app.use('/public', express.static(path.join(__dirname, 'public'), { index: false, fallthrough: true, maxAge: '1h' }));
 app.use((req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
