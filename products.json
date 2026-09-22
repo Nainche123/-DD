@@ -1,389 +1,801 @@
-[
+window.VEXOHUB_PRODUCTS = [
   {
-    "id": "catalog-vexo-basic",
     "name": "VEXO 자판기봇 BASIC",
+    "tier": "BASIC",
     "category": "자판기봇",
     "price": 19000,
     "badge": "입문추천",
     "description": "디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.",
-    "image": "assets/products/01-vending-basic.png"
+    "features": [
+      "상품 버튼 주문 UI",
+      "주문 접수 및 로그 기록",
+      "관리자 확인 후 지급 안내",
+      "기본 고객 응대 메시지",
+      "계좌입금 확인·상품 지급은 티켓에서 수동 진행"
+    ],
+    "localId": "static-p01",
+    "id": "static-p01",
+    "__static": true,
+    "image": "/assets/products/01-vending-basic.png"
   },
   {
-    "id": "catalog-vexo-pro",
     "name": "VEXO 자판기봇 PRO",
+    "tier": "PRO",
     "category": "자판기봇",
     "price": 39000,
     "badge": "인기",
     "description": "상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.",
-    "image": "assets/products/02-vending-pro.png"
+    "features": [
+      "BASIC 전체 기능 포함",
+      "상품 추가·수정·삭제 관리",
+      "주문 상태 관리 패널",
+      "구매자 역할 부여 지원",
+      "상세 주문 로그 채널",
+      "스태프 권한 분리"
+    ],
+    "localId": "static-p02",
+    "id": "static-p02",
+    "__static": true,
+    "image": "/assets/products/02-vending-pro.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 디스코드 서버 템플릿",
     "category": "서버 템플릿",
     "price": 19000,
     "badge": "빠른시작",
     "description": "판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.",
-    "image": "assets/products/03-shop-template.png"
+    "features": [
+      "INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조",
+      "OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할",
+      "공지·가격표·구매인증 채널",
+      "문의·1대1 티켓용 채널",
+      "관리자 전용 STAFF 카테고리",
+      "서버 템플릿 링크 제공",
+      "기본 세팅 가이드"
+    ],
+    "localId": "static-p03",
+    "id": "static-p03",
+    "__static": true,
+    "image": "/assets/products/03-shop-template.png"
   },
   {
-    "id": "catalog-vexo-pro",
     "name": "VEXO 서버 템플릿 PRO",
     "category": "서버 템플릿",
     "price": 34000,
     "badge": "BEST",
     "description": "고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.",
-    "image": "assets/products/04-community-template.png"
+    "features": [
+      "기본 템플릿 전체 포함",
+      "세분화된 권한 구조",
+      "티켓 봇 연동 가이드",
+      "주문·고객·상품 관리 채널 분리",
+      "후기·파트너 채널 구성",
+      "자판기봇 배치 위치 안내",
+      "상세 세팅 설명서"
+    ],
+    "localId": "static-p04",
+    "id": "static-p04",
+    "__static": true,
+    "image": "/assets/products/04-community-template.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 자동화 패키지",
     "category": "자동화",
     "price": 49000,
     "badge": "업무절약",
     "description": "반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "환영·역할 자동 부여 지원",
+      "반복 공지/안내 자동화",
+      "주문 알림 연동 구성",
+      "스태프 업무 보조 기능",
+      "기본 자판기 흐름 포함",
+      "세팅 가이드 제공"
+    ],
+    "localId": "static-p05",
+    "id": "static-p05",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 커스텀 봇 제작",
     "category": "개발",
     "price": 89000,
     "badge": "상담필수",
     "description": "원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "요구사항 상담 후 제작",
+      "슬래시/버튼 커맨드 지원",
+      "서버 맞춤 기능 구현",
+      "소스 또는 실행 파일 제공",
+      "기본 설치 지원",
+      "수정 범위 협의 가능"
+    ],
+    "localId": "static-p06",
+    "id": "static-p06",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo-store",
     "name": "VEXO STORE 올인원",
     "category": "패키지",
     "price": 99000,
     "badge": "목표추천",
     "description": "서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.",
-    "image": "assets/vexo-fallback.png"
+    "features": [
+      "서버 템플릿 PRO급 구조",
+      "자판기봇 BASIC 또는 협의 버전",
+      "자동화 기본 구성",
+      "통합 세팅 가이드",
+      "한 번에 판매 서버 구축",
+      "계좌입금 확인·상품 지급은 티켓에서 수동 진행"
+    ],
+    "localId": "static-p07",
+    "id": "static-p07",
+    "__static": true,
+    "image": "/assets/vexo-fallback.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 런칭 풀세팅",
     "category": "패키지",
     "price": 149000,
     "badge": "프리미엄",
     "description": "처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.",
-    "image": "assets/products/05-server-setup.png"
+    "features": [
+      "올인원 구성 포함",
+      "판매 채널 문구 기본 작성",
+      "후기·구매인증 동선 세팅",
+      "운영 체크리스트 제공",
+      "오픈 전 점검 1회",
+      "주문 후 디스코드 티켓에서 범위 확정"
+    ],
+    "localId": "static-p08",
+    "id": "static-p08",
+    "__static": true,
+    "image": "/assets/products/05-server-setup.png"
   },
   {
-    "id": "catalog-",
     "name": "봇 설치 가이드",
     "category": "가이드",
     "price": 6000,
     "badge": "NEW",
     "description": "디스코드 봇을 처음 설치·실행하는 방법을 단계별로 정리한 가이드입니다.",
-    "image": "assets/vexo-category-guide.png"
+    "features": [
+      "봇 계정 생성 방법",
+      "토큰 발급·보관",
+      "로컬 실행 방법",
+      "필수 권한 설정",
+      "자주 하는 오류 해결",
+      "문서 형태로 제공"
+    ],
+    "localId": "static-p09",
+    "id": "static-p09",
+    "__static": true,
+    "image": "/assets/vexo-category-guide.png"
   },
   {
-    "id": "catalog-",
     "name": "호스팅 가이드",
     "category": "가이드",
     "price": 7000,
     "badge": "",
     "description": "봇을 24시간 켜 두기 위한 호스팅 선택·세팅 가이드입니다.",
-    "image": "assets/vexo-category-guide.png"
+    "features": [
+      "무료/유료 호스팅 비교",
+      "VPS 기본 세팅",
+      "프로세스 유지(PM2 등)",
+      "재시작·로그 확인",
+      "초보자용 체크리스트"
+    ],
+    "localId": "static-p10",
+    "id": "static-p10",
+    "__static": true,
+    "image": "/assets/vexo-category-guide.png"
   },
   {
-    "id": "catalog-",
     "name": "서버 세팅 가이드",
     "category": "가이드",
     "price": 7000,
     "badge": "",
     "description": "판매용 디스코드 서버 채널·역할·권한을 구성하는 방법입니다.",
-    "image": "assets/products/05-server-setup.png"
+    "features": [
+      "역할 계층 설계",
+      "카테고리/채널 구성",
+      "권한 충돌 방지",
+      "티켓·문의 채널 세팅",
+      "구매 인증 채널 운영"
+    ],
+    "localId": "static-p11",
+    "id": "static-p11",
+    "__static": true,
+    "image": "/assets/products/05-server-setup.png"
   },
   {
-    "id": "catalog-",
     "name": "자판기봇 운영 가이드",
     "category": "가이드",
     "price": 9000,
     "badge": "HOT",
     "description": "자판기봇으로 실제 판매할 때 필요한 운영 흐름을 정리한 가이드입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "상품 등록 예시",
+      "입금 확인 체크 포인트",
+      "지급 전 확인 사항",
+      "분쟁 예방 팁",
+      "후기·인증 채널 활용"
+    ],
+    "localId": "static-p12",
+    "id": "static-p12",
+    "__static": true,
+    "image": "/assets/vexo-category-guide.png"
   },
   {
-    "id": "catalog-",
     "name": "올인원 세팅 가이드",
     "category": "가이드",
     "price": 19000,
     "badge": "BEST",
     "description": "봇 설치, 호스팅, 서버 세팅, 운영까지 한 번에 담은 통합 가이드입니다.",
-    "image": "assets/vexo-category-guide.png"
+    "features": [
+      "설치·호스팅·서버 세팅 통합",
+      "판매 시작 체크리스트",
+      "문제 해결 FAQ",
+      "추천 운영 순서",
+      "개별 가이드 묶음보다 저렴"
+    ],
+    "localId": "static-p13",
+    "id": "static-p13",
+    "__static": true,
+    "image": "/assets/vexo-category-guide.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 디지털 자동지급팩",
     "category": "봇 옵션",
     "price": 19900,
     "badge": "DELIVERY PRO",
     "description": "구매 완료 후 디지털 상품을 빠르게 전달할 수 있도록 자동 지급 흐름을 확장하는 영구 기능팩입니다.",
-    "image": "assets/vexo-fallback.png"
+    "features": [
+      "디지털 상품 자동 지급 흐름",
+      "다운로드 횟수 제한 옵션",
+      "재다운로드 지원",
+      "지급 이력 기록",
+      "지급 완료 처리 연동",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p14",
+    "id": "static-p14",
+    "__static": true,
+    "image": "/assets/vexo-fallback.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 알림 자동화팩",
     "category": "봇 옵션",
     "price": 9900,
     "badge": "ALERT",
     "description": "주문·입금확인·문의·지급 완료 같은 운영 이벤트를 한눈에 확인하고 빠르게 알릴 수 있는 영구 알림 확장팩입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "새 주문 알림",
+      "입금 확인 요청 알림",
+      "문의 도착 알림",
+      "지급 완료 알림",
+      "Discord 웹훅 알림 연동",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p15",
+    "id": "static-p15",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo-seller-dashboard",
     "name": "VEXO SELLER DASHBOARD",
     "category": "패키지",
     "price": 29900,
     "badge": "DASHBOARD",
     "description": "판매자가 주문·매출·상품 성과를 한 화면에서 확인할 수 있도록 운영 대시보드를 강화하는 영구 패키지입니다.",
-    "image": "assets/products/08-admin-panel.png"
+    "features": [
+      "실시간 주문 현황",
+      "일/월 매출 요약",
+      "상품별 판매량·매출",
+      "진행 단계별 주문 분석",
+      "최근 운영 활동 위젯",
+      "CSV 운영 데이터 내보내기",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p16",
+    "id": "static-p16",
+    "__static": true,
+    "image": "/assets/products/08-admin-panel.png"
   },
   {
-    "id": "catalog-vexo-basic-premium",
     "name": "VEXO 자판기봇 BASIC PREMIUM",
     "category": "자판기봇",
     "price": 29000,
     "badge": "PREMIUM",
     "description": "BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 VEXO 브랜딩을 더한 프리미엄형입니다.",
-    "image": "assets/products/01-vending-basic.png"
+    "features": [
+      "BASIC 전체 기능 포함",
+      "고급 자판기 패널",
+      "상품 상세·선택 UI 강화",
+      "주문 티켓 UI 강화",
+      "지급 완료·구매 감사 로그 디자인",
+      "VEXO 브랜딩 구성"
+    ],
+    "localId": "static-p17",
+    "id": "static-p17",
+    "__static": true,
+    "image": "/assets/products/01-vending-basic.png"
   },
   {
-    "id": "catalog-vexo-pro-premium",
     "name": "VEXO 자판기봇 PRO PREMIUM",
     "category": "자판기봇",
     "price": 59000,
     "badge": "ULTIMATE",
     "description": "PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.",
-    "image": "assets/products/02-vending-pro.png"
+    "features": [
+      "PRO 전체 기능 포함",
+      "페이지형 카테고리·상품 탐색",
+      "재고·수량·통계 운영",
+      "고급 주문 티켓 UI",
+      "지급 완료·구매 감사 로그",
+      "관리자 운영 편의 강화",
+      "VEXO 프리미엄 브랜딩"
+    ],
+    "localId": "static-p18",
+    "id": "static-p18",
+    "__static": true,
+    "image": "/assets/products/02-vending-pro.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 임베드 디자인팩",
     "category": "디자인",
     "price": 9900,
     "badge": "DESIGN",
     "description": "판매봇에 필요한 핵심 임베드를 VEXO 스타일로 통일하는 디자인팩입니다.",
-    "image": "assets/products/10-panel-design.png"
+    "features": [
+      "주문 접수 임베드",
+      "입금 안내 임베드",
+      "처리중·완료 임베드",
+      "문의 접수 임베드",
+      "후기 임베드",
+      "다크 퍼플 글로우 테마"
+    ],
+    "localId": "static-p19",
+    "id": "static-p19",
+    "__static": true,
+    "image": "/assets/products/10-panel-design.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 버튼 & 패널 디자인팩",
     "category": "디자인",
     "price": 12900,
     "badge": "UI",
     "description": "버튼·셀렉트·패널을 하나의 브랜드 UI처럼 보이게 만드는 디자인팩입니다.",
-    "image": "assets/products/10-panel-design.png"
+    "features": [
+      "메인 판매 패널",
+      "카테고리 선택 UI",
+      "상품 선택 UI",
+      "문의 패널",
+      "후기 패널",
+      "버튼 라벨·이모지 가이드"
+    ],
+    "localId": "static-p20",
+    "id": "static-p20",
+    "__static": true,
+    "image": "/assets/products/10-panel-design.png"
   },
   {
-    "id": "catalog-vexo-ui",
     "name": "VEXO 봇 UI 스킨팩",
     "category": "디자인",
     "price": 14900,
     "badge": "HOT",
     "description": "봇 전체의 색감·문구·임베드 스타일을 VEXO 전용 테마로 바꾸는 스킨팩입니다.",
-    "image": "assets/vexo-fallback.png"
+    "features": [
+      "Purple Glow 테마",
+      "임베드 타이포그래피 정리",
+      "상태 메시지 디자인",
+      "주문 티켓 디자인",
+      "관리자 알림 디자인",
+      "공통 푸터·브랜딩"
+    ],
+    "localId": "static-p21",
+    "id": "static-p21",
+    "__static": true,
+    "image": "/assets/products/10-panel-design.png"
   },
   {
-    "id": "catalog-vexo-ui",
     "name": "VEXO 티켓 UI 커스텀",
     "category": "디자인",
     "price": 7900,
     "badge": "TICKET",
     "description": "주문·문의 티켓을 한눈에 읽기 쉬운 화면으로 재구성합니다.",
-    "image": "assets/products/06-ticket-bot.png"
+    "features": [
+      "주문 요약 카드",
+      "결제 안내 영역",
+      "상태 표시 디자인",
+      "관리자 처리 버튼 정리",
+      "닫기·후기 버튼 디자인"
+    ],
+    "localId": "static-p22",
+    "id": "static-p22",
+    "__static": true,
+    "image": "/assets/products/06-ticket-bot.png"
   },
   {
-    "id": "catalog-vexo-ui",
     "name": "VEXO 주문 UI 업그레이드",
     "category": "봇 옵션",
     "price": 10900,
     "badge": "ORDER",
     "description": "주문 티켓의 상품·수량·금액·상태 정보를 더 고급스럽게 표현합니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "상품 상세 요약",
+      "수량·단가·총액 강조",
+      "주문 상태 타임라인",
+      "결제 안내 강조",
+      "완료 메시지 디자인"
+    ],
+    "localId": "static-p23",
+    "id": "static-p23",
+    "__static": true,
+    "image": "/assets/vexo-category-upgrade.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 봇 기능 확장팩",
     "category": "봇 옵션",
     "price": 14900,
     "badge": "FEATURE",
     "description": "기존 봇에 적용할 수 있는 소형 기능 옵션을 묶은 추가 기능팩입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "자동 응답 문구 옵션",
+      "추가 관리자 버튼",
+      "주문 알림 옵션",
+      "간단한 운영 보조 기능",
+      "기능별 적용 범위 안내"
+    ],
+    "localId": "static-p24",
+    "id": "static-p24",
+    "__static": true,
+    "image": "/assets/vexo-category-options.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 봇 브랜딩팩",
     "category": "디자인",
     "price": 6900,
     "badge": "BRAND",
     "description": "봇에 표시되는 이름·푸터·상태 문구를 한 브랜드처럼 통일합니다.",
-    "image": "assets/products/10-panel-design.png"
+    "features": [
+      "봇 이름 표기 가이드",
+      "임베드 푸터 문구",
+      "버튼 문구 세트",
+      "상태/알림 문구 세트"
+    ],
+    "localId": "static-p25",
+    "id": "static-p25",
+    "__static": true,
+    "image": "/assets/products/10-panel-design.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 티켓 자동화 확장팩",
     "category": "봇 옵션",
     "price": 9900,
     "badge": "TICKET",
     "description": "주문·문의 티켓의 반복 작업을 줄이고 처리 흐름을 더 빠르게 만드는 영구 기능 확장팩입니다.",
-    "image": "assets/products/06-ticket-bot.png"
+    "features": [
+      "티켓 자동 제목·안내 문구 옵션",
+      "처리 상태 안내 개선",
+      "자동 닫기/정리 옵션",
+      "주문자 접근 보호",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p26",
+    "id": "static-p26",
+    "__static": true,
+    "image": "/assets/products/06-ticket-bot.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 결제 자동화 확장팩",
     "category": "봇 옵션",
     "price": 14900,
     "badge": "PAYMENT",
     "description": "입금확인 요청과 결제 상태 전달을 더 체계적으로 관리하는 영구 기능 확장팩입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "입금확인 요청 상태 관리",
+      "관리자 결제 알림 강화",
+      "결제 상태 임베드 개선",
+      "미처리 주문 확인 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p27",
+    "id": "static-p27",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 운영 자동화 확장팩",
     "category": "봇 옵션",
     "price": 19900,
     "badge": "AUTO",
     "description": "반복 운영 업무를 줄이는 실전형 자동화 기능을 묶은 영구 확장팩입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "주문 상태 자동화 보조",
+      "운영 알림 강화",
+      "자동 만료·정리 옵션",
+      "주기적 데이터 백업 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p28",
+    "id": "static-p28",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 보안 강화팩",
     "category": "봇 옵션",
     "price": 14900,
     "badge": "SECURITY",
     "description": "권한 분리와 운영 영역 보호를 강화하는 영구 보안 옵션입니다.",
-    "image": "assets/vexo-fallback.png"
+    "features": [
+      "관리 기능 접근 보호",
+      "위험 권한 차단 보조",
+      "스태프 영역 보호",
+      "주요 작업 감사 로그 강화",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p29",
+    "id": "static-p29",
+    "__static": true,
+    "image": "/assets/vexo-fallback.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 통계 대시보드팩",
     "category": "봇 옵션",
     "price": 12900,
     "badge": "STATS",
     "description": "판매·주문·매출을 한눈에 확인할 수 있도록 운영 통계를 확장하는 영구 옵션입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "주문량 통계",
+      "완료 매출 통계",
+      "평균 주문액",
+      "진행중 주문 현황",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p30",
+    "id": "static-p30",
+    "__static": true,
+    "image": "/assets/vexo-fallback.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 간단 커스텀 옵션",
     "category": "커스텀",
     "price": 19900,
     "badge": "LITE",
     "description": "기존 VEXO 봇의 작은 UI·문구·버튼·동작 변경을 위한 1회성 커스텀 상품입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "문구 변경",
+      "버튼/임베드 수정",
+      "소규모 UI 변경",
+      "기존 기능 내 간단 동작 수정",
+      "주문 전 범위 확인"
+    ],
+    "localId": "static-p31",
+    "id": "static-p31",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 중급 커스텀 옵션",
     "category": "커스텀",
     "price": 34900,
     "badge": "STANDARD",
     "description": "기존 기능을 조합하거나 소규모 신규 자동화를 추가하는 1회성 커스텀 상품입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "기능 조합/확장",
+      "소규모 신규 자동화",
+      "관리자 버튼·패널 추가",
+      "기존 데이터 구조 연동",
+      "주문 전 범위 확정"
+    ],
+    "localId": "static-p32",
+    "id": "static-p32",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 대형 커스텀 옵션",
     "category": "커스텀",
     "price": 69900,
     "badge": "LARGE",
     "description": "기존 VEXO 시스템에 비교적 큰 신규 기능을 제작하는 1회성 커스텀 상품입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "대형 기능 추가",
+      "복수 기능 연동",
+      "고급 관리자 흐름",
+      "별도 테스트·검수",
+      "주문 전 상세 견적 및 범위 확정"
+    ],
+    "localId": "static-p33",
+    "id": "static-p33",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 메이저 버전 업그레이드",
     "category": "업그레이드",
     "price": 19900,
     "badge": "VERSION",
     "description": "VEXO의 새로운 메이저 버전이 출시될 때 기존 구매자가 해당 버전으로 업그레이드하는 영구 업그레이드 상품입니다.",
-    "image": "assets/vexo-category-upgrade.png"
+    "features": [
+      "메이저 버전 1회 업그레이드",
+      "출시 버전별 적용 범위 공지",
+      "기존 구매 정보 확인",
+      "업그레이드 안내 제공",
+      "기간 제한 없음"
+    ],
+    "localId": "static-p34",
+    "id": "static-p34",
+    "__static": true,
+    "image": "/assets/vexo-category-upgrade.png"
   },
   {
-    "id": "catalog-vexo-seller-pack",
     "name": "VEXO SELLER PACK",
     "category": "패키지",
     "price": 44900,
     "badge": "SELLER",
     "description": "디스코드에서 실제 판매를 운영하는 데 필요한 핵심 기능을 한 번에 묶은 영구 패키지입니다.",
-    "image": "assets/products/08-admin-panel.png"
+    "features": [
+      "티켓 자동화 확장팩",
+      "결제 자동화 확장팩",
+      "통계 대시보드팩",
+      "운영 보조 기능",
+      "판매 운영용 관리자 구성",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p35",
+    "id": "static-p35",
+    "__static": true,
+    "image": "/assets/products/08-admin-panel.png"
   },
   {
-    "id": "catalog-vexo-seller-pro",
     "name": "VEXO SELLER PRO",
     "category": "패키지",
     "price": 69900,
     "badge": "PRO SELLER",
     "description": "SELLER PACK에 고급 디자인과 보안·운영 옵션을 더한 상위 영구 패키지입니다.",
-    "image": "assets/products/08-admin-panel.png"
+    "features": [
+      "SELLER PACK 구성 포함",
+      "보안 강화팩",
+      "VEXO DESIGN BUNDLE",
+      "고급 운영 UI 구성",
+      "브랜딩 일괄 적용",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p36",
+    "id": "static-p36",
+    "__static": true,
+    "image": "/assets/products/08-admin-panel.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 화이트라벨 패키지",
     "category": "개발",
     "price": 79900,
     "badge": "WHITE LABEL",
     "description": "VEXO 브랜드 대신 고객의 자체 브랜드로 봇 UI와 표기를 구성하는 영구 화이트라벨 상품입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "봇 표시명 브랜딩",
+      "임베드·푸터 문구 변경",
+      "버튼·패널 브랜딩",
+      "기본 색상·문구 일괄 적용",
+      "브랜드 기준 맞춤 안내",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p37",
+    "id": "static-p37",
+    "__static": true,
+    "image": "/assets/products/12-custom-automation.png"
   },
   {
-    "id": "catalog-vexo-growth-bundle",
     "name": "VEXO GROWTH BUNDLE",
     "category": "패키지",
     "price": 49900,
     "badge": "BUNDLE",
     "description": "티켓·결제·운영·통계를 한 번에 확장하는 실전형 영구 기능 번들입니다.",
-    "image": "assets/vexo-product-bundle.png"
+    "features": [
+      "티켓 자동화 확장팩",
+      "결제 자동화 확장팩",
+      "운영 자동화 확장팩",
+      "통계 대시보드팩",
+      "개별 구매 대비 묶음가",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p38",
+    "id": "static-p38",
+    "__static": true,
+    "image": "/assets/vexo-product-bundle.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 고객관리 확장팩",
     "category": "봇 옵션",
     "price": 19900,
     "badge": "CRM",
     "description": "구매자·주문·후속 응대를 더 편하게 관리하기 위한 영구 고객관리 확장팩입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "구매자별 주문 이력 확인",
+      "고객 메모/응대 정보 정리",
+      "재구매 고객 확인 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p39",
+    "id": "static-p39",
+    "__static": true,
+    "image": "/assets/products/08-admin-panel.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 백업·복구 강화팩",
     "category": "봇 옵션",
     "price": 12900,
     "badge": "BACKUP",
     "description": "판매 데이터와 운영 기록을 더 안전하게 보관하고 복구하기 위한 영구 백업 강화팩입니다.",
-    "image": "assets/products/12-custom-automation.png"
+    "features": [
+      "주기적 데이터 백업 강화",
+      "백업 파일 보존 관리",
+      "복구 절차 안내",
+      "운영 기록 보호 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p40",
+    "id": "static-p40",
+    "__static": true,
+    "image": "/assets/vexo-fallback.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 쿠폰 & 프로모션 팩",
     "category": "봇 옵션",
     "price": 14900,
     "badge": "COUPON",
     "description": "할인 코드와 프로모션 운영을 편하게 만드는 영구 상점 운영 확장팩입니다.",
-    "image": "assets/products/10-panel-design.png"
+    "features": [
+      "퍼센트/정액 쿠폰 운영",
+      "사용기간·사용횟수 제한",
+      "최소주문금액 설정",
+      "관리자 쿠폰 발급·회수",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p41",
+    "id": "static-p41",
+    "__static": true,
+    "image": "/assets/vexo-fallback.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 주문·매출 분석팩",
     "category": "봇 옵션",
     "price": 19900,
     "badge": "ANALYTICS",
     "description": "주문·매출·상품 판매 흐름을 한눈에 볼 수 있도록 운영 통계를 확장하는 영구 옵션입니다.",
-    "image": "assets/vexo-fallback.png"
+    "features": [
+      "일/월 매출 분석",
+      "완료 주문 통계",
+      "상품별 판매량",
+      "평균 객단가",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p42",
+    "id": "static-p42",
+    "__static": true,
+    "image": "/assets/products/08-admin-panel.png"
   },
   {
-    "id": "catalog-vexo",
     "name": "VEXO 고급 티켓팩",
     "category": "봇 옵션",
     "price": 19900,
     "badge": "TICKET PRO",
     "description": "주문 티켓을 더 깔끔하고 빠르게 운영할 수 있도록 고급 티켓 UI와 처리 흐름을 추가하는 영구 옵션입니다.",
-    "image": "assets/products/06-ticket-bot.png"
+    "features": [
+      "고급 주문 요약 카드",
+      "처리 상태 타임라인",
+      "담당자/상태 표시",
+      "처리 버튼 정리",
+      "완료 화면 강화",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p43",
+    "id": "static-p43",
+    "__static": true,
+    "image": "/assets/products/06-ticket-bot.png"
   }
-]
+];
