@@ -74,6 +74,109 @@ if (!Array.isArray(db.inquiries)) db.inquiries = [];
 if (!Array.isArray(db.announcements)) db.announcements = [];
 if (!Array.isArray(db.coupons)) db.coupons = [];
 if (!Array.isArray(db.purchaseLogs)) db.purchaseLogs = [];
+if (!Array.isArray(db.licenses)) db.licenses = [];
+if (!Array.isArray(db.licenseAudit)) db.licenseAudit = [];
+
+const LICENSE_ADMIN_SECRET = String(process.env.LICENSE_ADMIN_SECRET || '').trim();
+const LICENSE_TIERS = new Set(['BASIC', 'BASIC PREMIUM', 'PRO', 'PRO PREMIUM']);
+
+function normalizeLicenseTier(value) {
+  const tier = String(value || '').trim().toUpperCase().replace(/\s+/g, ' ');
+  return LICENSE_TIERS.has(tier) ? tier : null;
+}
+function licenseKeyHash(key) {
+  return crypto.createHash('sha256').update(String(key || '').trim().toUpperCase() + '|' + SESSION_SECRET).digest('hex');
+}
+function generateLicenseKey(tier) {
+  const code = () => crypto.randomBytes(4).toString('hex').toUpperCase();
+  const compact = tier.replace(/[^A-Z0-9]/g, '').slice(0, 10);
+  return `VEXO-${compact}-${code()}-${code()}`;
+}
+function durationLabel(days) {
+  const n = Number(days || 0);
+  return n > 0 ? `${n}일` : '영구';
+}
+function createLicenseRecord({ tier, days, key, issuedBy = 'admin', orderId = '' }) {
+  const now = new Date();
+  const id = 'LIC-' + nanoid(12).toUpperCase();
+  const record = {
+    id,
+    keyHash: licenseKeyHash(key),
+    tier,
+    durationDays: Number(days || 0),
+    status: 'unused',
+    issuedBy,
+    issuedAt: now.toISOString(),
+    activatedAt: null,
+    expiresAt: null,
+    boundBotId: null,
+    boundOwnerId: null,
+    boundGuildId: null,
+    boundInstallId: null,
+    activationCount: 0,
+    lastVerifiedAt: null,
+    orderId: orderId || null,
+  };
+  db.licenses.unshift(record);
+  db.licenseAudit.unshift({ id:'LA-'+nanoid(10).toUpperCase(), action:'issue', licenseId:id, tier, actor:issuedBy, at:now.toISOString() });
+  return record;
+}
+function publicLicense(record, includeKey = false, key = '') {
+  if (!record) return null;
+  return {
+    id: record.id,
+    tier: record.tier,
+    durationDays: record.durationDays,
+    durationLabel: durationLabel(record.durationDays),
+    status: record.status,
+    issuedAt: record.issuedAt,
+    activatedAt: record.activatedAt,
+    expiresAt: record.expiresAt,
+    boundBotId: record.boundBotId,
+    boundOwnerId: record.boundOwnerId,
+    boundGuildId: record.boundGuildId,
+    activationCount: record.activationCount,
+    lastVerifiedAt: record.lastVerifiedAt,
+    orderId: record.orderId,
+    ...(includeKey ? { key } : {}),
+  };
+}
+function findLicenseByKey(key) {
+  const normalized = String(key || '').trim().toUpperCase();
+  if (!normalized) return null;
+  return db.licenses.find(item => item.keyHash === licenseKeyHash(normalized)) || null;
+}
+function refreshLicenseStatus(record) {
+  if (!record) return;
+  if (record.status === 'active' && record.expiresAt && Date.parse(record.expiresAt) <= Date.now()) record.status = 'expired';
+}
+function licenseBindingMatches(record, body) {
+  return String(record.boundBotId || '') === String(body.botId || '') &&
+         String(record.boundOwnerId || '') === String(body.ownerId || '') &&
+         String(record.boundGuildId || '') === String(body.guildId || '') &&
+         String(record.boundInstallId || '') === String(body.installId || '');
+}
+function validateLicenseBinding(body) {
+  const botId = String(body.botId || '').trim();
+  const ownerId = String(body.ownerId || '').trim();
+  const guildId = String(body.guildId || '').trim();
+  const installId = String(body.installId || '').trim();
+  if (!/^\d{10,25}$/.test(botId)) return 'botId가 올바르지 않습니다.';
+  if (!/^\d{10,25}$/.test(ownerId)) return 'ownerId가 올바르지 않습니다.';
+  if (!/^\d{10,25}$/.test(guildId)) return 'guildId가 올바르지 않습니다.';
+  if (!/^[A-Za-z0-9_-]{8,100}$/.test(installId)) return 'installId가 올바르지 않습니다.';
+  return null;
+}
+function requireLicenseAdminSecret(req, res, next) {
+  const supplied = String(req.get('x-license-admin-secret') || req.body?.adminSecret || '').trim();
+  if (!LICENSE_ADMIN_SECRET || supplied !== LICENSE_ADMIN_SECRET) return res.status(403).json({ error:'라이선스 관리자 인증이 필요합니다.' });
+  next();
+}
+function auditLicense(action, record, actor = 'system', extra = {}) {
+  db.licenseAudit.unshift({ id:'LA-'+nanoid(10).toUpperCase(), action, licenseId:record?.id || null, tier:record?.tier || null, actor, at:new Date().toISOString(), ...extra });
+  db.licenseAudit = db.licenseAudit.slice(0, 5000);
+}
+
 
 // VEXO 5.1 permanent seller-operation products requested by the store owner.
 // Deliberately exclude the previously discussed #2 security, #3/4 customer-management items.
@@ -369,6 +472,138 @@ function validateCredentials(username, email, password) {
   if (typeof password !== 'string' || password.length < 6 || password.length > 72) return '비밀번호는 6~72자로 입력해 주세요.';
   return null;
 }
+
+
+// -----------------------------------------------------------------------------
+// VEXOHUB License Center
+// -----------------------------------------------------------------------------
+app.post('/api/license/activate', async (req, res) => {
+  const key = String(req.body?.key || '').trim().toUpperCase();
+  const tier = normalizeLicenseTier(req.body?.tier);
+  const bindingError = validateLicenseBinding(req.body || {});
+  if (!key || !/^VEXO-[A-Z0-9]{2,16}(?:-[A-Z0-9]{4,12}){2,4}$/.test(key)) return res.status(400).json({ error:'라이선스 키 형식이 올바르지 않습니다.' });
+  if (!tier) return res.status(400).json({ error:'지원하지 않는 라이선스 등급입니다.' });
+  if (bindingError) return res.status(400).json({ error:bindingError });
+  const record = findLicenseByKey(key);
+  if (!record) return res.status(404).json({ error:'라이선스를 찾을 수 없습니다.' });
+  refreshLicenseStatus(record);
+  if (record.tier !== tier) return res.status(409).json({ error:`이 키는 ${record.tier}용입니다.` });
+  if (record.status === 'revoked' || record.status === 'expired') return res.status(409).json({ error:'만료되었거나 취소된 라이선스입니다.', status:record.status });
+  if (record.status !== 'unused') return res.status(409).json({ error:'이미 활성화된 라이선스입니다. 기존에 귀속된 봇에서만 사용할 수 있습니다.', status:record.status });
+  const now = new Date();
+  record.status = 'active';
+  record.activatedAt = now.toISOString();
+  record.expiresAt = record.durationDays > 0 ? new Date(now.getTime() + record.durationDays * 86400000).toISOString() : null;
+  record.boundBotId = String(req.body.botId);
+  record.boundOwnerId = String(req.body.ownerId);
+  record.boundGuildId = String(req.body.guildId);
+  record.boundInstallId = String(req.body.installId);
+  record.activationCount = 1;
+  record.lastVerifiedAt = now.toISOString();
+  auditLicense('activate', record, String(req.body.ownerId));
+  saveDb();
+  res.json({ valid:true, license:publicLicense(record) });
+});
+
+app.post('/api/license/verify', async (req, res) => {
+  const key = String(req.body?.key || '').trim().toUpperCase();
+  const tier = normalizeLicenseTier(req.body?.tier);
+  const bindingError = validateLicenseBinding(req.body || {});
+  if (!key || !tier || bindingError) return res.status(400).json({ error:bindingError || '라이선스 검증 정보가 올바르지 않습니다.' });
+  const record = findLicenseByKey(key);
+  if (!record) return res.status(404).json({ valid:false, error:'라이선스를 찾을 수 없습니다.' });
+  refreshLicenseStatus(record);
+  if (record.tier !== tier) return res.status(409).json({ valid:false, error:`이 키는 ${record.tier}용입니다.`, license:publicLicense(record) });
+  if (record.status !== 'active') {
+    saveDb();
+    return res.status(409).json({ valid:false, error:record.status === 'expired' ? '라이선스가 만료되었습니다.' : '사용할 수 없는 라이선스입니다.', license:publicLicense(record) });
+  }
+  if (!licenseBindingMatches(record, req.body)) return res.status(409).json({ valid:false, error:'이 라이선스는 다른 봇/사용자/서버에 귀속되어 있습니다.', license:publicLicense(record) });
+  record.lastVerifiedAt = new Date().toISOString();
+  saveDb();
+  res.json({ valid:true, license:publicLicense(record) });
+});
+
+app.get('/api/admin/licenses', requireAdmin, (req, res) => {
+  db.licenses.forEach(refreshLicenseStatus);
+  res.json({ licenses:db.licenses.map(item => publicLicense(item)), count:db.licenses.length });
+});
+
+app.post('/api/admin/licenses/issue', requireAdmin, (req, res) => {
+  const tier = normalizeLicenseTier(req.body?.tier);
+  const days = Math.max(0, Math.min(3650, Number.parseInt(req.body?.days || 0, 10) || 0));
+  const count = Math.max(1, Math.min(100, Number.parseInt(req.body?.count || 1, 10) || 1));
+  if (!tier) return res.status(400).json({ error:'등급을 선택해주세요.' });
+  const issued = [];
+  for (let i=0;i<count;i++) {
+    let key;
+    do { key = generateLicenseKey(tier); } while (findLicenseByKey(key));
+    const record = createLicenseRecord({ tier, days, key, issuedBy:req.user.username });
+    issued.push({ ...publicLicense(record, true, key), key });
+  }
+  saveDb();
+  res.status(201).json({ licenses:issued, count:issued.length });
+});
+
+app.post('/api/admin/licenses/:id/extend', requireAdmin, (req, res) => {
+  const record = db.licenses.find(x => x.id === req.params.id);
+  if (!record) return res.status(404).json({ error:'라이선스를 찾을 수 없습니다.' });
+  const days = Math.max(1, Math.min(3650, Number.parseInt(req.body?.days || 0, 10) || 0));
+  const base = record.expiresAt && Date.parse(record.expiresAt) > Date.now() ? Date.parse(record.expiresAt) : Date.now();
+  record.expiresAt = new Date(base + days * 86400000).toISOString();
+  record.durationDays = Number(record.durationDays || 0) + days;
+  record.status = 'active';
+  auditLicense('extend', record, req.user.username, { days });
+  saveDb();
+  res.json({ license:publicLicense(record) });
+});
+
+app.post('/api/admin/licenses/:id/revoke', requireAdmin, (req, res) => {
+  const record = db.licenses.find(x => x.id === req.params.id);
+  if (!record) return res.status(404).json({ error:'라이선스를 찾을 수 없습니다.' });
+  record.status = 'revoked';
+  record.revokedAt = new Date().toISOString();
+  record.revokedBy = req.user.username;
+  auditLicense('revoke', record, req.user.username);
+  saveDb();
+  res.json({ license:publicLicense(record) });
+});
+
+// Secret-protected endpoints for the master Discord bot.
+app.post('/api/license/admin/issue', requireLicenseAdminSecret, (req, res) => {
+  const tier = normalizeLicenseTier(req.body?.tier);
+  const days = Math.max(0, Math.min(3650, Number.parseInt(req.body?.days || 0, 10) || 0));
+  const count = Math.max(1, Math.min(100, Number.parseInt(req.body?.count || 1, 10) || 1));
+  if (!tier) return res.status(400).json({ error:'등급이 올바르지 않습니다.' });
+  const issued = [];
+  for (let i=0;i<count;i++) {
+    let key;
+    do { key = generateLicenseKey(tier); } while (findLicenseByKey(key));
+    const record = createLicenseRecord({ tier, days, key, issuedBy:'master-bot' });
+    issued.push({ ...publicLicense(record, true, key), key });
+  }
+  saveDb();
+  res.status(201).json({ licenses:issued, count:issued.length });
+});
+
+app.get('/api/license/admin/list', requireLicenseAdminSecret, (req, res) => {
+  db.licenses.forEach(refreshLicenseStatus);
+  res.json({ licenses:db.licenses.map(item => publicLicense(item)), count:db.licenses.length });
+});
+
+app.post('/api/license/admin/:id/extend', requireLicenseAdminSecret, (req, res) => {
+  const record = db.licenses.find(x => x.id === req.params.id);
+  if (!record) return res.status(404).json({ error:'라이선스를 찾을 수 없습니다.' });
+  const days = Math.max(1, Math.min(3650, Number.parseInt(req.body?.days || 0, 10) || 0));
+  const base = record.expiresAt && Date.parse(record.expiresAt) > Date.now() ? Date.parse(record.expiresAt) : Date.now();
+  record.expiresAt = new Date(base + days * 86400000).toISOString(); record.durationDays = Number(record.durationDays || 0) + days; record.status='active';
+  auditLicense('extend', record, 'master-bot', { days }); saveDb(); res.json({ license:publicLicense(record) });
+});
+app.post('/api/license/admin/:id/revoke', requireLicenseAdminSecret, (req, res) => {
+  const record = db.licenses.find(x => x.id === req.params.id);
+  if (!record) return res.status(404).json({ error:'라이선스를 찾을 수 없습니다.' });
+  record.status='revoked'; record.revokedAt=new Date().toISOString(); auditLicense('revoke',record,'master-bot'); saveDb(); res.json({ license:publicLicense(record) });
+});
 
 app.get('/api/site', (req, res) => {
   res.json({ settings: siteSettingsFor(req), online: online.size });
@@ -1208,6 +1443,8 @@ app.patch('/api/admin/settings' , requireAdmin, (req, res) => {
   saveDb();
   res.json({ settings: siteSettingsFor(req) });
 });
+
+app.get('/admin/licenses', requireAdmin, (req, res) => res.sendFile(path.join(__dirname, 'admin', 'licenses.html')));
 
 function fallbackSvg(res, label = 'VEXOHUB') {
   const safe = String(label).replace(/[<>&"']/g, ' ').trim().slice(0, 28) || 'VEXOHUB';
