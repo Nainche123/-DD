@@ -7,7 +7,7 @@
 <meta name="description" content="VEXOHUB - 디스코드 판매 자동화 봇, 서버 템플릿, 자동화, 커스텀 봇, 운영 확장팩 판매 사이트">
 <meta name="theme-color" content="#090a12">
 <meta name="color-scheme" content="dark">
-<link rel="icon" href="/assets/vexo-favicon.png?v=9" type="image/png">
+<link rel="icon" href="./assets/vexo-favicon.png?v=9" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} a{color:inheri
 .wrap{width:min(1500px,100%);margin:auto;padding:0 24px}.section{padding:27px 0}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:14px}.section-head h2{font-size:26px;letter-spacing:-.05em}.section-head p{margin-top:3px;color:#7586a3;font-size:11px}.mini{color:#7788a5;font-size:10px}
 .hero{padding:18px 0 10px}.hero-grid{display:block}.hero-copy{position:relative;min-height:0;padding:0;overflow:hidden;border:0;background:transparent;box-shadow:none}.hero-copy .eyebrow{position:absolute;z-index:2;left:34px;top:32px}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid rgba(160,203,255,.65);border-radius:999px;background:rgba(238,247,255,.96);color:#2665ec;font-size:9px;font-weight:900;box-shadow:0 8px 22px rgba(31,83,171,.13)}
 .hero-copy h1,.hero-copy>p,.hero-actions,.hero-stats{position:absolute;z-index:2;left:34px}.hero-copy h1{top:82px;max-width:700px;font-size:clamp(36px,4.8vw,72px);line-height:1.02;letter-spacing:-.065em;color:#fff;text-shadow:0 4px 25px rgba(4,18,52,.28)}.hero-copy h1 span{color:#69e7ff}.hero-copy>p{top:205px;max-width:650px;color:#d5e4ff;font-size:12px;line-height:1.7}.hero-actions{top:292px;display:flex;gap:9px;flex-wrap:wrap}.hero-actions .btn:first-child{background:#fff;color:#193668;box-shadow:0 16px 30px rgba(1,13,34,.22)}.hero-actions .btn.lightblue{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.28);color:#fff}.hero-stats{left:auto;right:28px;bottom:22px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:50%;max-width:620px}.stat{padding:11px 12px;background:rgba(5,20,52,.40);border:1px solid rgba(255,255,255,.15);border-radius:12px;backdrop-filter:blur(9px);color:#fff}.stat b{font-size:14px}.stat span{display:block;margin-top:2px;color:#bdd0ef;font-size:8px;font-weight:800}
-.hero-copy::before{content:"";display:block;min-height:470px;border-radius:26px;background:linear-gradient(90deg,rgba(4,17,48,.88) 0%,rgba(6,28,70,.62) 38%,rgba(10,52,133,.24) 75%,rgba(10,52,133,.08) 100%),url('/assets/vexo-hero.png') center/cover;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.26)}
+.hero-copy::before{content:"";display:block;min-height:470px;border-radius:26px;background:linear-gradient(90deg,rgba(4,17,48,.88) 0%,rgba(6,28,70,.62) 38%,rgba(10,52,133,.24) 75%,rgba(10,52,133,.08) 100%),url('./assets/vexo-hero.png') center/cover;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.26)}
 .hero-banner{display:none}
 .products-shell{position:relative}.product-tools{display:flex;justify-content:flex-end;margin-bottom:10px}.product-tools .product-search{display:none}.product-sort{width:165px;background:#fff}.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;color:#667b9f;font-size:10px;font-weight:900;box-shadow:0 4px 10px rgba(31,65,130,.04)}.pill.active{background:#245fed;border-color:#245fed;color:#fff;box-shadow:0 10px 20px rgba(40,95,235,.18)}
 .products-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.product{position:relative;overflow:hidden;display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-soft);transition:transform .18s,box-shadow .18s,border-color .18s}.product:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(31,76,155,.14);border-color:#cbdafb}.product::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:20px;box-shadow:inset 0 1px rgba(255,255,255,.9)}
@@ -61,7 +61,7 @@ button,input,select,textarea{font:inherit} button{cursor:pointer} a{color:inheri
 @keyframes reopenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:1180px){.products-grid{grid-template-columns:repeat(3,1fr)}.asset-card:nth-child(n+7){display:none}.top-links{display:none}.hero-stats{width:58%}}
 @media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:0;width:245px;transform:translateX(-105%);transition:.22s;box-shadow:18px 0 50px rgba(5,20,50,.25)}body.side-open .sidebar{transform:translateX(0)}.mobile-menu{display:block}.topbar-inner{height:64px;padding:0 14px}.product-search{max-width:none;margin-left:0}.online{display:none}.hero-copy::before{min-height:410px}.hero-copy .eyebrow{left:24px;top:24px}.hero-copy h1{left:24px;top:74px;font-size:52px}.hero-copy>p{left:24px;top:195px;max-width:58%}.hero-actions{left:24px;top:290px}.hero-stats{left:24px;right:24px;bottom:20px;width:auto;max-width:none}.products-grid{grid-template-columns:repeat(2,1fr)}.series-strip{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:1fr}.drawer{grid-template-columns:1fr;width:100%}.drawer-side{display:none}.benefits{grid-template-columns:1fr 1fr}.admin-grid2{grid-template-columns:1fr}}
-@media(max-width:620px){.wrap{padding:0 12px}.topbar-inner{gap:8px}.account-compact{display:none}.hero{padding-top:12px}.hero-copy::before{min-height:490px;border-radius:20px;background:linear-gradient(180deg,rgba(4,17,48,.76) 0%,rgba(6,28,70,.60) 52%,rgba(10,52,133,.25) 100%),url('/assets/vexo-hero.png') center/cover}.hero-copy h1{left:18px;top:82px;font-size:43px}.hero-copy>p{left:18px;top:195px;max-width:calc(100% - 36px);font-size:10px}.hero-actions{left:18px;top:310px}.hero-copy .eyebrow{left:18px;top:22px}.hero-stats{left:18px;right:18px;bottom:17px;grid-template-columns:1fr 1fr}.section{padding:21px 0}.section-head h2{font-size:21px}.products-grid{grid-template-columns:1fr}.series-strip{grid-template-columns:1fr 1fr}.product-media{height:165px}.product-bottom{flex-wrap:wrap}.product-bottom .price{min-width:100%;margin-bottom:2px}.product-bottom .btn{flex:1}.benefits{grid-template-columns:1fr}.reopen-order-card{left:12px;right:12px;bottom:12px;width:auto}.room-grid,.drawer-delivery .grid{grid-template-columns:1fr}.room-flow{grid-template-columns:1fr 1fr}.compose-row{flex-direction:column}.compose-row .textarea,.compose-row .btn{width:100%}}
+@media(max-width:620px){.wrap{padding:0 12px}.topbar-inner{gap:8px}.account-compact{display:none}.hero{padding-top:12px}.hero-copy::before{min-height:490px;border-radius:20px;background:linear-gradient(180deg,rgba(4,17,48,.76) 0%,rgba(6,28,70,.60) 52%,rgba(10,52,133,.25) 100%),url('./assets/vexo-hero.png') center/cover}.hero-copy h1{left:18px;top:82px;font-size:43px}.hero-copy>p{left:18px;top:195px;max-width:calc(100% - 36px);font-size:10px}.hero-actions{left:18px;top:310px}.hero-copy .eyebrow{left:18px;top:22px}.hero-stats{left:18px;right:18px;bottom:17px;grid-template-columns:1fr 1fr}.section{padding:21px 0}.section-head h2{font-size:21px}.products-grid{grid-template-columns:1fr}.series-strip{grid-template-columns:1fr 1fr}.product-media{height:165px}.product-bottom{flex-wrap:wrap}.product-bottom .price{min-width:100%;margin-bottom:2px}.product-bottom .btn{flex:1}.benefits{grid-template-columns:1fr}.reopen-order-card{left:12px;right:12px;bottom:12px;width:auto}.room-grid,.drawer-delivery .grid{grid-template-columns:1fr}.room-flow{grid-template-columns:1fr 1fr}.compose-row{flex-direction:column}.compose-row .textarea,.compose-row .btn{width:100%}}
 
 
 /* ===== Screenshot-faithful storefront remodel ===== */
@@ -83,7 +83,7 @@ body{background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 54%,#eef5ff 100%);colo
 .store-grid{display:grid;grid-template-columns:minmax(0,1fr) var(--order-w);gap:var(--page-gap);align-items:start}
 .store-main{min-width:0}
 .hero{padding:0 0 10px}
-.hero-copy::before{min-height:208px;border-radius:16px;background:linear-gradient(90deg,rgba(2,16,51,.86) 0%,rgba(3,35,91,.52) 43%,rgba(14,75,190,.12) 100%),url('/assets/vexo-hero.png') center/cover;box-shadow:0 20px 50px rgba(21,58,132,.15);border:1px solid rgba(255,255,255,.22)}
+.hero-copy::before{min-height:208px;border-radius:16px;background:linear-gradient(90deg,rgba(2,16,51,.86) 0%,rgba(3,35,91,.52) 43%,rgba(14,75,190,.12) 100%),url('./assets/vexo-hero.png') center/cover;box-shadow:0 20px 50px rgba(21,58,132,.15);border:1px solid rgba(255,255,255,.22)}
 .hero-copy .eyebrow{left:26px;top:24px;font-size:8px;padding:6px 9px}
 .hero-copy h1{left:26px;top:61px;max-width:560px;font-size:42px;line-height:1.03}
 .hero-copy>p{left:26px;top:128px;max-width:500px;font-size:10px;line-height:1.55}
@@ -141,7 +141,7 @@ body{background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 54%,#eef5ff 100%);colo
 
 /* ===== FINAL NO-OVERLAP + CART POLISH ===== */
 .hero-copy{position:relative;min-height:276px;display:flex;flex-direction:column;justify-content:flex-start;padding:30px 360px 28px 34px;overflow:hidden;border-radius:16px}
-.hero-copy::before{position:absolute;inset:0;z-index:0;display:block;min-height:0;height:100%;content:"";border-radius:16px;background:linear-gradient(90deg,rgba(3,15,45,.90) 0%,rgba(5,29,75,.76) 42%,rgba(12,67,170,.24) 77%,rgba(12,67,170,.08) 100%),url('/assets/vexo-hero.png') center/cover;box-shadow:0 20px 50px rgba(21,58,132,.15);border:1px solid rgba(255,255,255,.22)}
+.hero-copy::before{position:absolute;inset:0;z-index:0;display:block;min-height:0;height:100%;content:"";border-radius:16px;background:linear-gradient(90deg,rgba(3,15,45,.90) 0%,rgba(5,29,75,.76) 42%,rgba(12,67,170,.24) 77%,rgba(12,67,170,.08) 100%),url('./assets/vexo-hero.png') center/cover;box-shadow:0 20px 50px rgba(21,58,132,.15);border:1px solid rgba(255,255,255,.22)}
 .hero-copy .eyebrow,.hero-copy h1,.hero-copy>p,.hero-actions{position:relative;left:auto;top:auto;z-index:2}
 .hero-copy .eyebrow{align-self:flex-start;font-size:9px;padding:7px 10px}
 .hero-copy h1{margin-top:18px;max-width:670px;font-size:clamp(32px,3.9vw,62px);line-height:1.02;letter-spacing:-.055em;color:#fff;text-shadow:0 4px 25px rgba(4,18,52,.28)}
@@ -165,7 +165,7 @@ body{background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 54%,#eef5ff 100%);colo
 .cart-empty{padding:30px 18px;text-align:center;color:#7789a5}.cart-empty-icon{width:72px;height:72px;margin:0 auto 10px;display:grid;place-items:center;border-radius:22px;background:#edf4ff;font-size:30px}
 @media(max-width:1180px){.hero-copy{padding-right:270px}.hero-copy h1{font-size:46px}.product-actions .btn{font-size:7px;padding:6px 7px}}
 @media(max-width:900px){.hero-copy{min-height:290px;padding:28px 24px}.hero-copy h1{font-size:48px}.hero-copy>p{max-width:64%}.product-actions{width:100%;justify-content:stretch}.product-actions .btn{flex:1}.cart-btn span{display:none}}
-@media(max-width:620px){.hero-copy{min-height:330px;padding:22px 18px}.hero-copy::before{background:linear-gradient(180deg,rgba(3,15,45,.80) 0%,rgba(5,29,75,.72) 52%,rgba(12,67,170,.24) 100%),url('/assets/vexo-hero.png') center/cover}.hero-copy .eyebrow{font-size:8px}.hero-copy h1{font-size:40px;margin-top:14px}.hero-copy>p{max-width:100%;font-size:9px;margin-top:12px}.hero-actions{margin-top:14px}.hero-actions .btn{font-size:9px}.product-actions .btn{font-size:8px}.cart-item{grid-template-columns:46px minmax(0,1fr)}.cart-item>div:last-child{grid-column:2}.cart-item img{width:46px;height:46px}}
+@media(max-width:620px){.hero-copy{min-height:330px;padding:22px 18px}.hero-copy::before{background:linear-gradient(180deg,rgba(3,15,45,.80) 0%,rgba(5,29,75,.72) 52%,rgba(12,67,170,.24) 100%),url('./assets/vexo-hero.png') center/cover}.hero-copy .eyebrow{font-size:8px}.hero-copy h1{font-size:40px;margin-top:14px}.hero-copy>p{max-width:100%;font-size:9px;margin-top:12px}.hero-actions{margin-top:14px}.hero-actions .btn{font-size:9px}.product-actions .btn{font-size:8px}.cart-item{grid-template-columns:46px minmax(0,1fr)}.cart-item>div:last-child{grid-column:2}.cart-item img{width:46px;height:46px}}
 
 
 /* ===== INQUIRY UX + WEBHOOK POLISH ===== */
@@ -243,7 +243,7 @@ body{background:#07080f !important;color:#f7f4fb !important}
 .vsection-head h2{font-size:20px !important;color:#faf8fc !important}.vsection-head p{font-size:11px !important;color:#a69caf !important}.product-count{color:#aaa1b0 !important}
 .vfilters .pill{font-size:10px !important;color:#c7bed2 !important;background:#0b0d15 !important;border-color:rgba(157,108,255,.22) !important}.vfilters .pill.active{color:#fff !important}
 .v-products-grid .product{background:linear-gradient(180deg,#0d0f18,#090b12) !important;border-color:rgba(156,108,255,.22) !important}.v-products-grid .product-media{height:178px !important;background:#090a12 !important}.v-products-grid .product-media img{object-fit:contain !important}
-.v-products-grid .product h3{color:#fff !important;font-size:15px !important}.v-products-grid .product-desc{color:#b8afc1 !important;font-size:10px !important;line-height:1.6 !important}.v-products-grid .feature-list span{color:#aaa0b1 !important;font-size:8.5px !important}.v-products-grid .cat{color:#a097aa !important;font-size:8px !important}.v-products-grid .badge{color:#c8a9ff !important;font-size:8px !important}.v-products-grid .price{color:#fff !important;font-size:17px !important}.v-products-grid .btn.ghost{color:#d0c8d9 !important;background:#11131c !important}
+.v-products-grid .product h3{color:#ffffff !important;font-size:15px !important;font-weight:800 !important}.v-products-grid .product-desc{color:#d2cbdc !important;font-size:10.5px !important;line-height:1.6 !important}.v-products-grid .feature-list span{color:#c7becf !important;font-size:9px !important}.v-products-grid .cat{color:#beb6c8 !important;font-size:8.5px !important}.v-products-grid .badge{color:#d2baff !important;font-size:8.5px !important}.v-products-grid .price{color:#fff !important;font-size:17px !important}.v-products-grid .btn.ghost{color:#d0c8d9 !important;background:#11131c !important}
 .vexo-rail .rail-card{background:linear-gradient(180deg,#0d0f18,#090b12) !important;border-color:rgba(156,108,255,.22) !important}.rail-head h3,.account-card h3{color:#f7f3fa !important}.account-card p,.compact-cta p{color:#aaa0b2 !important}.account-card small{color:#81778c !important}.rail-recent-list .recent-card{background:#0a0c14 !important}.rail-recent-list .recent-card strong{color:#eeeaf3 !important}.rail-recent-list .recent-card span{color:#948a9e !important}
 .dark-panel{background:linear-gradient(180deg,#0d0f18,#090b12) !important;border-color:rgba(156,108,255,.22) !important}.real-steps div,.dark-notices .notice{background:#0c0e16 !important;border-color:rgba(255,255,255,.06) !important}.real-steps span,.dark-notices .notice strong{color:#eeeaf5 !important}.real-steps small,.dark-notices .notice span{color:#978e9f !important}
 .modal-card{background:#0b0d15 !important;border-color:rgba(156,108,255,.25) !important}.modal-head h3{color:#fff !important}.modal-body{color:#eeeaf4 !important}.field label{color:#b0a6b7 !important}.input,.select,.textarea{color:#f5f1f8 !important;background:#0e1019 !important;border-color:rgba(156,108,255,.25) !important}.input::placeholder,.textarea::placeholder{color:#756c80 !important}
@@ -274,7 +274,7 @@ body.locked{overflow:hidden}
 .vexo-search{margin-left:auto;position:relative;width:min(320px,30vw)}.vexo-search>span{position:absolute;left:14px;top:7px;color:#7b748f;font-size:18px;pointer-events:none}.vexo-search .input{height:38px;padding-left:38px;background:#0a0c15;border:1px solid rgba(143,92,255,.28);color:#eeeaff;border-radius:20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}.vexo-search .input::placeholder{color:#5f5a70}.vexo-search .input:focus{border-color:rgba(161,117,255,.62);box-shadow:0 0 0 4px rgba(143,92,255,.08)}
 .icon-round{position:relative;width:38px;height:38px;border:1px solid rgba(143,92,255,.28);border-radius:50%;background:#0a0c15;color:#f8f6ff;display:grid;place-items:center;cursor:pointer;transition:.18s}.icon-round:hover{border-color:rgba(178,124,255,.65);transform:translateY(-1px)}.icon-round b{position:absolute;right:-4px;top:-4px;min-width:17px;height:17px;padding:0 4px;border-radius:99px;background:var(--vp);font-size:9px;display:grid;place-items:center;color:#fff}.vtop-btn{height:38px;padding:0 15px;border-radius:18px;font-size:11px;font-weight:900;cursor:pointer;transition:.18s}.vtop-btn.ghost{border:1px solid rgba(143,92,255,.28);background:#090b14;color:#ddd7eb}.vtop-btn.primary{border:1px solid transparent;background:linear-gradient(135deg,#7a4df7,#a36aff);color:#fff;box-shadow:0 10px 28px rgba(116,61,255,.24)}.vtop-btn:hover{transform:translateY(-1px)}
 .vexo-wrap{width:min(1460px,100%);margin:0 auto;padding:22px 20px 0}.vexo-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:16px;align-items:start}.vexo-main-column{min-width:0}
-.vhero{position:relative;min-height:330px;border:1px solid rgba(143,92,255,.28);border-radius:18px;overflow:hidden;box-shadow:0 25px 70px rgba(34,8,88,.25)}.vhero-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,16,.96) 0%,rgba(6,8,17,.83) 38%,rgba(13,7,28,.44) 68%,rgba(11,6,23,.18) 100%),url('/assets/vexo-hero.png') center/cover}.vhero-copy{position:relative;z-index:2;padding:35px 48px;min-height:330px;display:flex;flex-direction:column;justify-content:flex-start}.hero-kicker{font-size:13px;font-weight:900;letter-spacing:.14em;color:#b27cff}.vhero h1{margin-top:4px;font-size:58px;line-height:1;letter-spacing:-.055em;color:#fff;text-shadow:0 8px 30px rgba(0,0,0,.32)}.vhero h2{margin-top:12px;font-size:21px;letter-spacing:-.04em;color:#fff}.vhero-copy>p{margin-top:7px;color:#b4afc7;font-size:12px}.hero-trust{display:flex;gap:32px;margin-top:25px}.hero-trust div{display:grid;grid-template-columns:32px 1fr;column-gap:8px;align-items:center}.hero-trust span{width:28px;height:28px;border-radius:9px;background:rgba(142,92,255,.13);border:1px solid rgba(155,114,255,.28);display:grid;place-items:center;color:#b986ff;grid-row:span 2}.hero-trust b{font-size:10px;color:#efebf8}.hero-trust small{font-size:8px;color:#777286;margin-top:-1px}.hero-actions{display:flex;gap:8px;margin-top:22px}.btn.primary-hero{background:linear-gradient(135deg,#7547f4,#a56bff);border:0;color:#fff;border-radius:11px;padding:10px 16px;box-shadow:0 12px 30px rgba(116,61,255,.28)}.btn.ghost-hero{background:rgba(12,13,22,.62);border:1px solid rgba(193,162,255,.35);color:#eeeaff;border-radius:11px;padding:10px 16px}.btn.primary-hero:hover,.btn.ghost-hero:hover{transform:translateY(-1px)}
+.vhero{position:relative;min-height:330px;border:1px solid rgba(143,92,255,.28);border-radius:18px;overflow:hidden;box-shadow:0 25px 70px rgba(34,8,88,.25)}.vhero-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,16,.96) 0%,rgba(6,8,17,.83) 38%,rgba(13,7,28,.44) 68%,rgba(11,6,23,.18) 100%),url('./assets/vexo-hero.png') center/cover}.vhero-copy{position:relative;z-index:2;padding:35px 48px;min-height:330px;display:flex;flex-direction:column;justify-content:flex-start}.hero-kicker{font-size:13px;font-weight:900;letter-spacing:.14em;color:#b27cff}.vhero h1{margin-top:4px;font-size:58px;line-height:1;letter-spacing:-.055em;color:#fff;text-shadow:0 8px 30px rgba(0,0,0,.32)}.vhero h2{margin-top:12px;font-size:21px;letter-spacing:-.04em;color:#fff}.vhero-copy>p{margin-top:7px;color:#b4afc7;font-size:12px}.hero-trust{display:flex;gap:32px;margin-top:25px}.hero-trust div{display:grid;grid-template-columns:32px 1fr;column-gap:8px;align-items:center}.hero-trust span{width:28px;height:28px;border-radius:9px;background:rgba(142,92,255,.13);border:1px solid rgba(155,114,255,.28);display:grid;place-items:center;color:#b986ff;grid-row:span 2}.hero-trust b{font-size:10px;color:#efebf8}.hero-trust small{font-size:8px;color:#777286;margin-top:-1px}.hero-actions{display:flex;gap:8px;margin-top:22px}.btn.primary-hero{background:linear-gradient(135deg,#7547f4,#a56bff);border:0;color:#fff;border-radius:11px;padding:10px 16px;box-shadow:0 12px 30px rgba(116,61,255,.28)}.btn.ghost-hero{background:rgba(12,13,22,.62);border:1px solid rgba(193,162,255,.35);color:#eeeaff;border-radius:11px;padding:10px 16px}.btn.primary-hero:hover,.btn.ghost-hero:hover{transform:translateY(-1px)}
 .vsection{padding-top:24px}.vsection-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}.vsection-head h2{font-size:18px;letter-spacing:-.045em;color:#f7f5fb}.vsection-head p{margin-top:3px;font-size:9px;color:#726d80}.small-link{border:0;background:transparent;color:#a986ff;font-size:9px;font-weight:900;cursor:pointer}.product-count{font-size:9px;color:#666175}
 .vfilters{display:flex;gap:8px;flex-wrap:wrap}.vfilters .pill{border:1px solid rgba(143,92,255,.18);background:#0a0c15;color:#aaa3b7;border-radius:11px;padding:10px 13px;font-size:9px;box-shadow:none}.vfilters .pill.active{background:linear-gradient(135deg,#7747f3,#a26aff);border-color:transparent;color:#fff;box-shadow:0 10px 25px rgba(111,58,240,.22)}
 .v-products-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.v-products-grid .product{background:linear-gradient(180deg,#0a0c15,#090b13);border:1px solid rgba(143,92,255,.2);border-radius:15px;overflow:hidden;box-shadow:0 15px 45px rgba(0,0,0,.24);min-width:0;transition:transform .18s,border-color .18s,box-shadow .18s}.v-products-grid .product:hover{transform:translateY(-3px);border-color:rgba(170,123,255,.5);box-shadow:0 22px 55px rgba(59,18,129,.25)}
@@ -285,7 +285,21 @@ body.locked{overflow:hidden}
 .modal-card{background:#0a0c15;border-color:rgba(143,92,255,.2);color:#f4f1f8;box-shadow:0 30px 100px rgba(0,0,0,.6)}.modal-head{border-color:rgba(255,255,255,.06)}.modal-head h3{color:#fff}.x{background:#0e101a;border-color:rgba(143,92,255,.2);color:#aaa3b4}.modal-body{color:#e7e2ee}.field label{color:#8e879c}.input,.select,.textarea{background:#0d0f18;border-color:rgba(143,92,255,.2);color:#eeeaf5}.input:focus,.select:focus,.textarea:focus{border-color:rgba(163,117,255,.55);box-shadow:0 0 0 4px rgba(143,92,255,.08)}.notice{background:#0d0f18;border-color:rgba(255,255,255,.06)}.notice strong{color:#f0edf5}.notice span{color:#7a7386}.btn{background:#0d0f18;border-color:rgba(143,92,255,.18);color:#bab3c7}.btn.blue{background:linear-gradient(135deg,#7547f4,#a56bff);border-color:transparent;color:#fff}.btn.lightblue{background:#0d0f18;border-color:rgba(143,92,255,.18);color:#b78cff}
 @media(max-width:1200px){.vhero h1{font-size:52px}.vexo-top-inner{gap:16px}.vexo-nav{gap:16px}.v-products-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vexo-layout{grid-template-columns:minmax(0,1fr) 230px}}
 @media(max-width:920px){.vexo-layout{grid-template-columns:1fr}.vexo-rail{grid-template-columns:repeat(3,minmax(0,1fr));order:2}.account-card{text-align:left}.rail-icon{margin:0 0 8px}.account-card .btn{width:auto;min-width:120px}.vexo-top-inner{padding:0 18px}.vexo-brand{min-width:auto}.vexo-nav{display:none}.vexo-search{width:min(340px,48vw)}.vtop-btn.ghost:not(#adminNotifyBtn){display:none}.v-products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lower-grid{grid-template-columns:1fr}.real-steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:620px){.vexo-wrap{padding:12px 11px 0}.vexo-top-inner{height:62px;gap:8px}.vexo-brand-mark{width:34px;height:34px;border-radius:10px}.vexo-brand strong{font-size:16px}.vexo-search{width:auto;flex:1;order:3}.vexo-search .input{height:34px;font-size:9px}.icon-round{width:34px;height:34px;font-size:12px}.vtop-btn.primary{height:34px;padding:0 11px;font-size:9px}.vtop-btn.ghost{display:none}.vhero{min-height:410px}.vhero-bg{background:linear-gradient(180deg,rgba(5,7,14,.9),rgba(6,7,14,.76)),url('/assets/vexo-hero.png') center/cover}.vhero-copy{min-height:410px;padding:28px 22px}.hero-kicker{font-size:10px}.vhero h1{font-size:45px}.vhero h2{font-size:17px}.vhero-copy>p{font-size:9px}.hero-trust{display:grid;grid-template-columns:1fr 1fr;gap:11px}.hero-trust div{grid-template-columns:28px 1fr}.hero-trust b{font-size:8px}.hero-trust small{font-size:7px}.vfilters{gap:6px}.vfilters .pill{padding:8px 10px;font-size:8px}.v-products-grid{grid-template-columns:1fr}.v-products-grid .product-media{height:185px}.v-products-grid .product h3{font-size:14px}.vexo-rail{grid-template-columns:1fr}.real-steps{grid-template-columns:1fr 1fr}.vfooter{flex-direction:column;align-items:flex-start}.vfooter nav{flex-wrap:wrap;gap:10px}.product-actions .btn{font-size:8px;padding:8px 10px}}
+@media(max-width:620px){.vexo-wrap{padding:12px 11px 0}.vexo-top-inner{height:62px;gap:8px}.vexo-brand-mark{width:34px;height:34px;border-radius:10px}.vexo-brand strong{font-size:16px}.vexo-search{width:auto;flex:1;order:3}.vexo-search .input{height:34px;font-size:9px}.icon-round{width:34px;height:34px;font-size:12px}.vtop-btn.primary{height:34px;padding:0 11px;font-size:9px}.vtop-btn.ghost{display:none}.vhero{min-height:410px}.vhero-bg{background:linear-gradient(180deg,rgba(5,7,14,.9),rgba(6,7,14,.76)),url('./assets/vexo-hero.png') center/cover}.vhero-copy{min-height:410px;padding:28px 22px}.hero-kicker{font-size:10px}.vhero h1{font-size:45px}.vhero h2{font-size:17px}.vhero-copy>p{font-size:9px}.hero-trust{display:grid;grid-template-columns:1fr 1fr;gap:11px}.hero-trust div{grid-template-columns:28px 1fr}.hero-trust b{font-size:8px}.hero-trust small{font-size:7px}.vfilters{gap:6px}.vfilters .pill{padding:8px 10px;font-size:8px}.v-products-grid{grid-template-columns:1fr}.v-products-grid .product-media{height:185px}.v-products-grid .product h3{font-size:14px}.vexo-rail{grid-template-columns:1fr}.real-steps{grid-template-columns:1fr 1fr}.vfooter{flex-direction:column;align-items:flex-start}.vfooter nav{flex-wrap:wrap;gap:10px}.product-actions .btn{font-size:8px;padding:8px 10px}}
+
+/* Product readability + guaranteed visible catalog */
+.v-products-grid .product-desc{color:#ded7e8!important;font-size:10.5px!important}
+.v-products-grid .feature-list span{color:#cfc7da!important;font-size:9px!important}
+.v-products-grid .cat{color:#d1c8dc!important;font-size:8.5px!important}
+.v-products-grid .badge{color:#d9c4ff!important;font-size:8.5px!important}
+.v-products-grid .price{color:#fff!important;font-size:17px!important;font-weight:800!important}
+.v-products-grid .product h3{color:#fff!important;font-weight:850!important}
+</style>
+
+<style id="vexo-final-readability">
+body{background:radial-gradient(circle at 80% -10%,rgba(125,72,255,.12),transparent 30%),linear-gradient(180deg,#070812 0%,#0a0b12 55%,#08090f 100%)!important;color:#f6f3fb!important}
+.topbar{background:rgba(8,9,16,.88)!important;border-bottom-color:rgba(160,125,255,.18)!important}.top-links a,.online{color:#cfc6dc!important}.online{background:#0e1019!important;border-color:rgba(160,125,255,.18)!important}.vsection-head h2,.vsection-head p,.product h3,.product-desc,.feature-list span,.cat,.product-count{color:#fff!important}.vsection-head p,.product-desc,.feature-list span,.cat{color:#bdb3c9!important}.product{background:linear-gradient(180deg,#10121c,#0a0b12)!important;border-color:rgba(157,108,255,.24)!important;box-shadow:0 18px 45px rgba(0,0,0,.28)!important}.product-media{background:#090a11!important}.product-media img{object-fit:contain!important}.vfilters .pill{color:#cfc6dc!important;background:#0e1019!important;border-color:rgba(157,108,255,.2)!important}.vfilters .pill.active{color:#fff!important;background:linear-gradient(135deg,#6c42ff,#925dff)!important;border-color:transparent!important}.badge{background:rgba(126,86,255,.14)!important;color:#d4c2ff!important}.price{color:#fff!important}.btn.ghost{background:#11131c!important;color:#e0d8e8!important;border-color:rgba(157,108,255,.2)!important}
+.product-media{height:190px!important;padding:12px!important}.product-media img{width:100%!important;height:100%!important}
 </style>
 </head>
 <body>
@@ -297,7 +311,7 @@ body.locked{overflow:hidden}
     <header class="topbar vexo-topbar">
       <div class="topbar-inner vexo-top-inner">
         <div class="vexo-brand" onclick="scrollToId('home')" role="button" tabindex="0">
-          <img src="/assets/vexo-favicon.png" alt="VEXOHUB" class="vexo-brand-mark">
+          <img src="./assets/vexo-favicon.png" alt="VEXOHUB" class="vexo-brand-mark">
           <strong>VEXOHUB</strong>
         </div>
         <nav class="vexo-nav" aria-label="주요 메뉴">
@@ -351,7 +365,7 @@ body.locked{overflow:hidden}
               <div><h2>🔥 인기 상품</h2><p>VEXOHUB의 핵심 디지털 상품을 확인해보세요.</p></div>
               <span class="product-count" id="productCountText">상품 목록을 불러오는 중...</span><span id="heroProductCount" class="hidden">-</span>
             </div>
-            <div class="products-grid v-products-grid" id="productGrid"></div>
+            <div class="products-grid v-products-grid" id="productGrid" aria-live="polite"></div>
           </section>
 
           <section class="vsection lower-section" id="announcements">
@@ -418,22 +432,842 @@ body.locked{overflow:hidden}
 <div class="drawer-wrap"><div class="drawer" id="drawer"><aside class="drawer-side" id="drawerSide"></aside><section class="drawer-chat"><div class="chat-head" id="chatHead"></div><div class="chat-messages" id="chatMessages"></div><div class="chat-compose" id="chatCompose"></div></section></div></div>
 <div class="reopen-order-card" id="reopenOrderCard" role="status" aria-live="polite"><div class="reopen-title"><div class="reopen-icon">💬</div><div><strong>실수로 주문창을 닫으셨나요?</strong><p>진행 중인 주문은 그대로 보관되어 있어요.</p><span class="reopen-link">여기를 클릭하여 다시 주문창을 여세요!</span></div></div><div class="reopen-actions"><button class="btn ghost reopen-dismiss" id="dismissReopenBtn" title="안내 닫기">×</button><button class="btn blue" id="reopenOrderBtn">주문창 다시 열기</button></div></div>
 <div class="toast" id="toast"></div>
-<script src="/products.js?v=5"></script>
+<script>window.VEXOHUB_PRODUCTS = [
+  {
+    "name": "VEXO 자판기봇 BASIC",
+    "tier": "BASIC",
+    "category": "자판기봇",
+    "price": 19000,
+    "badge": "입문추천",
+    "description": "디스코드에서 바로 주문을 받을 수 있는 기본 판매 봇 구성입니다.",
+    "features": [
+      "상품 버튼 주문 UI",
+      "주문 접수 및 로그 기록",
+      "관리자 확인 후 지급 안내",
+      "기본 고객 응대 메시지",
+      "계좌입금 확인·상품 지급은 티켓에서 수동 진행"
+    ],
+    "localId": "static-p01",
+    "id": "static-p01",
+    "__static": true,
+    "image": "./assets/products/01-vending-basic.png"
+  },
+  {
+    "name": "VEXO 자판기봇 PRO",
+    "tier": "PRO",
+    "category": "자판기봇",
+    "price": 39000,
+    "badge": "인기",
+    "description": "상품 관리, 주문 흐름, 스태프 운영까지 확장한 실전 판매용 봇입니다.",
+    "features": [
+      "BASIC 전체 기능 포함",
+      "상품 추가·수정·삭제 관리",
+      "주문 상태 관리 패널",
+      "구매자 역할 부여 지원",
+      "상세 주문 로그 채널",
+      "스태프 권한 분리"
+    ],
+    "localId": "static-p02",
+    "id": "static-p02",
+    "__static": true,
+    "image": "./assets/products/02-vending-pro.png"
+  },
+  {
+    "name": "VEXO 디스코드 서버 템플릿",
+    "category": "서버 템플릿",
+    "price": 19000,
+    "badge": "빠른시작",
+    "description": "판매, 문의, 티켓, 인증 채널이 정리된 바로 사용 가능한 서버 템플릿입니다.",
+    "features": [
+      "INFORMATION / STORE / ORDER / SUPPORT / COMMUNITY 구조",
+      "OWNER·ADMIN·STAFF·CUSTOMER·MEMBER 역할",
+      "공지·가격표·구매인증 채널",
+      "문의·1대1 티켓용 채널",
+      "관리자 전용 STAFF 카테고리",
+      "서버 템플릿 링크 제공",
+      "기본 세팅 가이드"
+    ],
+    "localId": "static-p03",
+    "id": "static-p03",
+    "__static": true,
+    "image": "./assets/products/03-shop-template.png"
+  },
+  {
+    "name": "VEXO 서버 템플릿 PRO",
+    "category": "서버 템플릿",
+    "price": 34000,
+    "badge": "BEST",
+    "description": "고급 권한, 티켓 운영, 후기 동선까지 포함한 프리미엄 서버 구조입니다.",
+    "features": [
+      "기본 템플릿 전체 포함",
+      "세분화된 권한 구조",
+      "티켓 봇 연동 가이드",
+      "주문·고객·상품 관리 채널 분리",
+      "후기·파트너 채널 구성",
+      "자판기봇 배치 위치 안내",
+      "상세 세팅 설명서"
+    ],
+    "localId": "static-p04",
+    "id": "static-p04",
+    "__static": true,
+    "image": "./assets/products/04-community-template.png"
+  },
+  {
+    "name": "VEXO 자동화 패키지",
+    "category": "자동화",
+    "price": 49000,
+    "badge": "업무절약",
+    "description": "반복 공지, 역할, 주문 알림을 줄여 운영 시간을 아끼는 자동화 구성입니다.",
+    "features": [
+      "환영·역할 자동 부여 지원",
+      "반복 공지/안내 자동화",
+      "주문 알림 연동 구성",
+      "스태프 업무 보조 기능",
+      "기본 자판기 흐름 포함",
+      "세팅 가이드 제공"
+    ],
+    "localId": "static-p05",
+    "id": "static-p05",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO 커스텀 봇 제작",
+    "category": "개발",
+    "price": 89000,
+    "badge": "상담필수",
+    "description": "원하는 기능을 기준으로 제작하는 맞춤형 디스코드 봇입니다.",
+    "features": [
+      "요구사항 상담 후 제작",
+      "슬래시/버튼 커맨드 지원",
+      "서버 맞춤 기능 구현",
+      "소스 또는 실행 파일 제공",
+      "기본 설치 지원",
+      "수정 범위 협의 가능"
+    ],
+    "localId": "static-p06",
+    "id": "static-p06",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO STORE 올인원",
+    "category": "패키지",
+    "price": 99000,
+    "badge": "목표추천",
+    "description": "서버 템플릿, 자판기봇, 기본 자동화를 한 번에 맞추는 수익형 패키지입니다.",
+    "features": [
+      "서버 템플릿 PRO급 구조",
+      "자판기봇 BASIC 또는 협의 버전",
+      "자동화 기본 구성",
+      "통합 세팅 가이드",
+      "한 번에 판매 서버 구축",
+      "계좌입금 확인·상품 지급은 티켓에서 수동 진행"
+    ],
+    "localId": "static-p07",
+    "id": "static-p07",
+    "__static": true,
+    "image": "./assets/vexo-fallback.png"
+  },
+  {
+    "name": "VEXO 런칭 풀세팅",
+    "category": "패키지",
+    "price": 149000,
+    "badge": "프리미엄",
+    "description": "처음 판매 서버를 여는 사람을 위한 서버 구축, 봇 연결, 운영 동선 세팅 상품입니다.",
+    "features": [
+      "올인원 구성 포함",
+      "판매 채널 문구 기본 작성",
+      "후기·구매인증 동선 세팅",
+      "운영 체크리스트 제공",
+      "오픈 전 점검 1회",
+      "주문 후 디스코드 티켓에서 범위 확정"
+    ],
+    "localId": "static-p08",
+    "id": "static-p08",
+    "__static": true,
+    "image": "./assets/products/05-server-setup.png"
+  },
+  {
+    "name": "봇 설치 가이드",
+    "category": "가이드",
+    "price": 6000,
+    "badge": "NEW",
+    "description": "디스코드 봇을 처음 설치·실행하는 방법을 단계별로 정리한 가이드입니다.",
+    "features": [
+      "봇 계정 생성 방법",
+      "토큰 발급·보관",
+      "로컬 실행 방법",
+      "필수 권한 설정",
+      "자주 하는 오류 해결",
+      "문서 형태로 제공"
+    ],
+    "localId": "static-p09",
+    "id": "static-p09",
+    "__static": true,
+    "image": "./assets/vexo-category-guide.png"
+  },
+  {
+    "name": "호스팅 가이드",
+    "category": "가이드",
+    "price": 7000,
+    "badge": "",
+    "description": "봇을 24시간 켜 두기 위한 호스팅 선택·세팅 가이드입니다.",
+    "features": [
+      "무료/유료 호스팅 비교",
+      "VPS 기본 세팅",
+      "프로세스 유지(PM2 등)",
+      "재시작·로그 확인",
+      "초보자용 체크리스트"
+    ],
+    "localId": "static-p10",
+    "id": "static-p10",
+    "__static": true,
+    "image": "./assets/vexo-category-guide.png"
+  },
+  {
+    "name": "서버 세팅 가이드",
+    "category": "가이드",
+    "price": 7000,
+    "badge": "",
+    "description": "판매용 디스코드 서버 채널·역할·권한을 구성하는 방법입니다.",
+    "features": [
+      "역할 계층 설계",
+      "카테고리/채널 구성",
+      "권한 충돌 방지",
+      "티켓·문의 채널 세팅",
+      "구매 인증 채널 운영"
+    ],
+    "localId": "static-p11",
+    "id": "static-p11",
+    "__static": true,
+    "image": "./assets/products/05-server-setup.png"
+  },
+  {
+    "name": "자판기봇 운영 가이드",
+    "category": "가이드",
+    "price": 9000,
+    "badge": "HOT",
+    "description": "자판기봇으로 실제 판매할 때 필요한 운영 흐름을 정리한 가이드입니다.",
+    "features": [
+      "상품 등록 예시",
+      "입금 확인 체크 포인트",
+      "지급 전 확인 사항",
+      "분쟁 예방 팁",
+      "후기·인증 채널 활용"
+    ],
+    "localId": "static-p12",
+    "id": "static-p12",
+    "__static": true,
+    "image": "./assets/vexo-category-guide.png"
+  },
+  {
+    "name": "올인원 세팅 가이드",
+    "category": "가이드",
+    "price": 19000,
+    "badge": "BEST",
+    "description": "봇 설치, 호스팅, 서버 세팅, 운영까지 한 번에 담은 통합 가이드입니다.",
+    "features": [
+      "설치·호스팅·서버 세팅 통합",
+      "판매 시작 체크리스트",
+      "문제 해결 FAQ",
+      "추천 운영 순서",
+      "개별 가이드 묶음보다 저렴"
+    ],
+    "localId": "static-p13",
+    "id": "static-p13",
+    "__static": true,
+    "image": "./assets/vexo-category-guide.png"
+  },
+  {
+    "name": "VEXO 디지털 자동지급팩",
+    "category": "봇 옵션",
+    "price": 19900,
+    "badge": "DELIVERY PRO",
+    "description": "구매 완료 후 디지털 상품을 빠르게 전달할 수 있도록 자동 지급 흐름을 확장하는 영구 기능팩입니다.",
+    "features": [
+      "디지털 상품 자동 지급 흐름",
+      "다운로드 횟수 제한 옵션",
+      "재다운로드 지원",
+      "지급 이력 기록",
+      "지급 완료 처리 연동",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p14",
+    "id": "static-p14",
+    "__static": true,
+    "image": "./assets/vexo-fallback.png"
+  },
+  {
+    "name": "VEXO 알림 자동화팩",
+    "category": "봇 옵션",
+    "price": 9900,
+    "badge": "ALERT",
+    "description": "주문·입금확인·문의·지급 완료 같은 운영 이벤트를 한눈에 확인하고 빠르게 알릴 수 있는 영구 알림 확장팩입니다.",
+    "features": [
+      "새 주문 알림",
+      "입금 확인 요청 알림",
+      "문의 도착 알림",
+      "지급 완료 알림",
+      "Discord 웹훅 알림 연동",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p15",
+    "id": "static-p15",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO SELLER DASHBOARD",
+    "category": "패키지",
+    "price": 29900,
+    "badge": "DASHBOARD",
+    "description": "판매자가 주문·매출·상품 성과를 한 화면에서 확인할 수 있도록 운영 대시보드를 강화하는 영구 패키지입니다.",
+    "features": [
+      "실시간 주문 현황",
+      "일/월 매출 요약",
+      "상품별 판매량·매출",
+      "진행 단계별 주문 분석",
+      "최근 운영 활동 위젯",
+      "CSV 운영 데이터 내보내기",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p16",
+    "id": "static-p16",
+    "__static": true,
+    "image": "./assets/products/08-admin-panel.png"
+  },
+  {
+    "name": "VEXO 자판기봇 BASIC PREMIUM",
+    "category": "자판기봇",
+    "price": 29000,
+    "badge": "PREMIUM",
+    "description": "BASIC의 핵심 판매 기능에 Discord에서 구현 가능한 고급 자판기·주문·티켓 UI와 VEXO 브랜딩을 더한 프리미엄형입니다.",
+    "features": [
+      "BASIC 전체 기능 포함",
+      "고급 자판기 패널",
+      "상품 상세·선택 UI 강화",
+      "주문 티켓 UI 강화",
+      "지급 완료·구매 감사 로그 디자인",
+      "VEXO 브랜딩 구성"
+    ],
+    "localId": "static-p17",
+    "id": "static-p17",
+    "__static": true,
+    "image": "./assets/products/01-vending-basic.png"
+  },
+  {
+    "name": "VEXO 자판기봇 PRO PREMIUM",
+    "category": "자판기봇",
+    "price": 59000,
+    "badge": "ULTIMATE",
+    "description": "PRO의 상품·재고·수량·통계 기능에 고급 주문 UI, 관리자 편의, 완료 로그와 브랜딩을 결합한 상위형입니다.",
+    "features": [
+      "PRO 전체 기능 포함",
+      "페이지형 카테고리·상품 탐색",
+      "재고·수량·통계 운영",
+      "고급 주문 티켓 UI",
+      "지급 완료·구매 감사 로그",
+      "관리자 운영 편의 강화",
+      "VEXO 프리미엄 브랜딩"
+    ],
+    "localId": "static-p18",
+    "id": "static-p18",
+    "__static": true,
+    "image": "./assets/products/02-vending-pro.png"
+  },
+  {
+    "name": "VEXO 임베드 디자인팩",
+    "category": "디자인",
+    "price": 9900,
+    "badge": "DESIGN",
+    "description": "판매봇에 필요한 핵심 임베드를 VEXO 스타일로 통일하는 디자인팩입니다.",
+    "features": [
+      "주문 접수 임베드",
+      "입금 안내 임베드",
+      "처리중·완료 임베드",
+      "문의 접수 임베드",
+      "후기 임베드",
+      "다크 퍼플 글로우 테마"
+    ],
+    "localId": "static-p19",
+    "id": "static-p19",
+    "__static": true,
+    "image": "./assets/products/10-panel-design.png"
+  },
+  {
+    "name": "VEXO 버튼 & 패널 디자인팩",
+    "category": "디자인",
+    "price": 12900,
+    "badge": "UI",
+    "description": "버튼·셀렉트·패널을 하나의 브랜드 UI처럼 보이게 만드는 디자인팩입니다.",
+    "features": [
+      "메인 판매 패널",
+      "카테고리 선택 UI",
+      "상품 선택 UI",
+      "문의 패널",
+      "후기 패널",
+      "버튼 라벨·이모지 가이드"
+    ],
+    "localId": "static-p20",
+    "id": "static-p20",
+    "__static": true,
+    "image": "./assets/products/10-panel-design.png"
+  },
+  {
+    "name": "VEXO 봇 UI 스킨팩",
+    "category": "디자인",
+    "price": 14900,
+    "badge": "HOT",
+    "description": "봇 전체의 색감·문구·임베드 스타일을 VEXO 전용 테마로 바꾸는 스킨팩입니다.",
+    "features": [
+      "Purple Glow 테마",
+      "임베드 타이포그래피 정리",
+      "상태 메시지 디자인",
+      "주문 티켓 디자인",
+      "관리자 알림 디자인",
+      "공통 푸터·브랜딩"
+    ],
+    "localId": "static-p21",
+    "id": "static-p21",
+    "__static": true,
+    "image": "./assets/products/10-panel-design.png"
+  },
+  {
+    "name": "VEXO 티켓 UI 커스텀",
+    "category": "디자인",
+    "price": 7900,
+    "badge": "TICKET",
+    "description": "주문·문의 티켓을 한눈에 읽기 쉬운 화면으로 재구성합니다.",
+    "features": [
+      "주문 요약 카드",
+      "결제 안내 영역",
+      "상태 표시 디자인",
+      "관리자 처리 버튼 정리",
+      "닫기·후기 버튼 디자인"
+    ],
+    "localId": "static-p22",
+    "id": "static-p22",
+    "__static": true,
+    "image": "./assets/products/06-ticket-bot.png"
+  },
+  {
+    "name": "VEXO 주문 UI 업그레이드",
+    "category": "봇 옵션",
+    "price": 10900,
+    "badge": "ORDER",
+    "description": "주문 티켓의 상품·수량·금액·상태 정보를 더 고급스럽게 표현합니다.",
+    "features": [
+      "상품 상세 요약",
+      "수량·단가·총액 강조",
+      "주문 상태 타임라인",
+      "결제 안내 강조",
+      "완료 메시지 디자인"
+    ],
+    "localId": "static-p23",
+    "id": "static-p23",
+    "__static": true,
+    "image": "./assets/vexo-category-upgrade.png"
+  },
+  {
+    "name": "VEXO 봇 기능 확장팩",
+    "category": "봇 옵션",
+    "price": 14900,
+    "badge": "FEATURE",
+    "description": "기존 봇에 적용할 수 있는 소형 기능 옵션을 묶은 추가 기능팩입니다.",
+    "features": [
+      "자동 응답 문구 옵션",
+      "추가 관리자 버튼",
+      "주문 알림 옵션",
+      "간단한 운영 보조 기능",
+      "기능별 적용 범위 안내"
+    ],
+    "localId": "static-p24",
+    "id": "static-p24",
+    "__static": true,
+    "image": "./assets/vexo-category-options.png"
+  },
+  {
+    "name": "VEXO 봇 브랜딩팩",
+    "category": "디자인",
+    "price": 6900,
+    "badge": "BRAND",
+    "description": "봇에 표시되는 이름·푸터·상태 문구를 한 브랜드처럼 통일합니다.",
+    "features": [
+      "봇 이름 표기 가이드",
+      "임베드 푸터 문구",
+      "버튼 문구 세트",
+      "상태/알림 문구 세트"
+    ],
+    "localId": "static-p25",
+    "id": "static-p25",
+    "__static": true,
+    "image": "./assets/products/10-panel-design.png"
+  },
+  {
+    "name": "VEXO 티켓 자동화 확장팩",
+    "category": "봇 옵션",
+    "price": 9900,
+    "badge": "TICKET",
+    "description": "주문·문의 티켓의 반복 작업을 줄이고 처리 흐름을 더 빠르게 만드는 영구 기능 확장팩입니다.",
+    "features": [
+      "티켓 자동 제목·안내 문구 옵션",
+      "처리 상태 안내 개선",
+      "자동 닫기/정리 옵션",
+      "주문자 접근 보호",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p26",
+    "id": "static-p26",
+    "__static": true,
+    "image": "./assets/products/06-ticket-bot.png"
+  },
+  {
+    "name": "VEXO 결제 자동화 확장팩",
+    "category": "봇 옵션",
+    "price": 14900,
+    "badge": "PAYMENT",
+    "description": "입금확인 요청과 결제 상태 전달을 더 체계적으로 관리하는 영구 기능 확장팩입니다.",
+    "features": [
+      "입금확인 요청 상태 관리",
+      "관리자 결제 알림 강화",
+      "결제 상태 임베드 개선",
+      "미처리 주문 확인 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p27",
+    "id": "static-p27",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO 운영 자동화 확장팩",
+    "category": "봇 옵션",
+    "price": 19900,
+    "badge": "AUTO",
+    "description": "반복 운영 업무를 줄이는 실전형 자동화 기능을 묶은 영구 확장팩입니다.",
+    "features": [
+      "주문 상태 자동화 보조",
+      "운영 알림 강화",
+      "자동 만료·정리 옵션",
+      "주기적 데이터 백업 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p28",
+    "id": "static-p28",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO 보안 강화팩",
+    "category": "봇 옵션",
+    "price": 14900,
+    "badge": "SECURITY",
+    "description": "권한 분리와 운영 영역 보호를 강화하는 영구 보안 옵션입니다.",
+    "features": [
+      "관리 기능 접근 보호",
+      "위험 권한 차단 보조",
+      "스태프 영역 보호",
+      "주요 작업 감사 로그 강화",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p29",
+    "id": "static-p29",
+    "__static": true,
+    "image": "./assets/vexo-fallback.png"
+  },
+  {
+    "name": "VEXO 통계 대시보드팩",
+    "category": "봇 옵션",
+    "price": 12900,
+    "badge": "STATS",
+    "description": "판매·주문·매출을 한눈에 확인할 수 있도록 운영 통계를 확장하는 영구 옵션입니다.",
+    "features": [
+      "주문량 통계",
+      "완료 매출 통계",
+      "평균 주문액",
+      "진행중 주문 현황",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p30",
+    "id": "static-p30",
+    "__static": true,
+    "image": "./assets/vexo-fallback.png"
+  },
+  {
+    "name": "VEXO 간단 커스텀 옵션",
+    "category": "커스텀",
+    "price": 19900,
+    "badge": "LITE",
+    "description": "기존 VEXO 봇의 작은 UI·문구·버튼·동작 변경을 위한 1회성 커스텀 상품입니다.",
+    "features": [
+      "문구 변경",
+      "버튼/임베드 수정",
+      "소규모 UI 변경",
+      "기존 기능 내 간단 동작 수정",
+      "주문 전 범위 확인"
+    ],
+    "localId": "static-p31",
+    "id": "static-p31",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO 중급 커스텀 옵션",
+    "category": "커스텀",
+    "price": 34900,
+    "badge": "STANDARD",
+    "description": "기존 기능을 조합하거나 소규모 신규 자동화를 추가하는 1회성 커스텀 상품입니다.",
+    "features": [
+      "기능 조합/확장",
+      "소규모 신규 자동화",
+      "관리자 버튼·패널 추가",
+      "기존 데이터 구조 연동",
+      "주문 전 범위 확정"
+    ],
+    "localId": "static-p32",
+    "id": "static-p32",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO 대형 커스텀 옵션",
+    "category": "커스텀",
+    "price": 69900,
+    "badge": "LARGE",
+    "description": "기존 VEXO 시스템에 비교적 큰 신규 기능을 제작하는 1회성 커스텀 상품입니다.",
+    "features": [
+      "대형 기능 추가",
+      "복수 기능 연동",
+      "고급 관리자 흐름",
+      "별도 테스트·검수",
+      "주문 전 상세 견적 및 범위 확정"
+    ],
+    "localId": "static-p33",
+    "id": "static-p33",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO 메이저 버전 업그레이드",
+    "category": "업그레이드",
+    "price": 19900,
+    "badge": "VERSION",
+    "description": "VEXO의 새로운 메이저 버전이 출시될 때 기존 구매자가 해당 버전으로 업그레이드하는 영구 업그레이드 상품입니다.",
+    "features": [
+      "메이저 버전 1회 업그레이드",
+      "출시 버전별 적용 범위 공지",
+      "기존 구매 정보 확인",
+      "업그레이드 안내 제공",
+      "기간 제한 없음"
+    ],
+    "localId": "static-p34",
+    "id": "static-p34",
+    "__static": true,
+    "image": "./assets/vexo-category-upgrade.png"
+  },
+  {
+    "name": "VEXO SELLER PACK",
+    "category": "패키지",
+    "price": 44900,
+    "badge": "SELLER",
+    "description": "디스코드에서 실제 판매를 운영하는 데 필요한 핵심 기능을 한 번에 묶은 영구 패키지입니다.",
+    "features": [
+      "티켓 자동화 확장팩",
+      "결제 자동화 확장팩",
+      "통계 대시보드팩",
+      "운영 보조 기능",
+      "판매 운영용 관리자 구성",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p35",
+    "id": "static-p35",
+    "__static": true,
+    "image": "./assets/products/08-admin-panel.png"
+  },
+  {
+    "name": "VEXO SELLER PRO",
+    "category": "패키지",
+    "price": 69900,
+    "badge": "PRO SELLER",
+    "description": "SELLER PACK에 고급 디자인과 보안·운영 옵션을 더한 상위 영구 패키지입니다.",
+    "features": [
+      "SELLER PACK 구성 포함",
+      "보안 강화팩",
+      "VEXO DESIGN BUNDLE",
+      "고급 운영 UI 구성",
+      "브랜딩 일괄 적용",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p36",
+    "id": "static-p36",
+    "__static": true,
+    "image": "./assets/products/08-admin-panel.png"
+  },
+  {
+    "name": "VEXO 화이트라벨 패키지",
+    "category": "개발",
+    "price": 79900,
+    "badge": "WHITE LABEL",
+    "description": "VEXO 브랜드 대신 고객의 자체 브랜드로 봇 UI와 표기를 구성하는 영구 화이트라벨 상품입니다.",
+    "features": [
+      "봇 표시명 브랜딩",
+      "임베드·푸터 문구 변경",
+      "버튼·패널 브랜딩",
+      "기본 색상·문구 일괄 적용",
+      "브랜드 기준 맞춤 안내",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p37",
+    "id": "static-p37",
+    "__static": true,
+    "image": "./assets/products/12-custom-automation.png"
+  },
+  {
+    "name": "VEXO GROWTH BUNDLE",
+    "category": "패키지",
+    "price": 49900,
+    "badge": "BUNDLE",
+    "description": "티켓·결제·운영·통계를 한 번에 확장하는 실전형 영구 기능 번들입니다.",
+    "features": [
+      "티켓 자동화 확장팩",
+      "결제 자동화 확장팩",
+      "운영 자동화 확장팩",
+      "통계 대시보드팩",
+      "개별 구매 대비 묶음가",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p38",
+    "id": "static-p38",
+    "__static": true,
+    "image": "./assets/vexo-product-bundle.png"
+  },
+  {
+    "name": "VEXO 고객관리 확장팩",
+    "category": "봇 옵션",
+    "price": 19900,
+    "badge": "CRM",
+    "description": "구매자·주문·후속 응대를 더 편하게 관리하기 위한 영구 고객관리 확장팩입니다.",
+    "features": [
+      "구매자별 주문 이력 확인",
+      "고객 메모/응대 정보 정리",
+      "재구매 고객 확인 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p39",
+    "id": "static-p39",
+    "__static": true,
+    "image": "./assets/products/08-admin-panel.png"
+  },
+  {
+    "name": "VEXO 백업·복구 강화팩",
+    "category": "봇 옵션",
+    "price": 12900,
+    "badge": "BACKUP",
+    "description": "판매 데이터와 운영 기록을 더 안전하게 보관하고 복구하기 위한 영구 백업 강화팩입니다.",
+    "features": [
+      "주기적 데이터 백업 강화",
+      "백업 파일 보존 관리",
+      "복구 절차 안내",
+      "운영 기록 보호 보조",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p40",
+    "id": "static-p40",
+    "__static": true,
+    "image": "./assets/vexo-fallback.png"
+  },
+  {
+    "name": "VEXO 쿠폰 & 프로모션 팩",
+    "category": "봇 옵션",
+    "price": 14900,
+    "badge": "COUPON",
+    "description": "할인 코드와 프로모션 운영을 편하게 만드는 영구 상점 운영 확장팩입니다.",
+    "features": [
+      "퍼센트/정액 쿠폰 운영",
+      "사용기간·사용횟수 제한",
+      "최소주문금액 설정",
+      "관리자 쿠폰 발급·회수",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p41",
+    "id": "static-p41",
+    "__static": true,
+    "image": "./assets/vexo-fallback.png"
+  },
+  {
+    "name": "VEXO 주문·매출 분석팩",
+    "category": "봇 옵션",
+    "price": 19900,
+    "badge": "ANALYTICS",
+    "description": "주문·매출·상품 판매 흐름을 한눈에 볼 수 있도록 운영 통계를 확장하는 영구 옵션입니다.",
+    "features": [
+      "일/월 매출 분석",
+      "완료 주문 통계",
+      "상품별 판매량",
+      "평균 객단가",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p42",
+    "id": "static-p42",
+    "__static": true,
+    "image": "./assets/products/08-admin-panel.png"
+  },
+  {
+    "name": "VEXO 고급 티켓팩",
+    "category": "봇 옵션",
+    "price": 19900,
+    "badge": "TICKET PRO",
+    "description": "주문 티켓을 더 깔끔하고 빠르게 운영할 수 있도록 고급 티켓 UI와 처리 흐름을 추가하는 영구 옵션입니다.",
+    "features": [
+      "고급 주문 요약 카드",
+      "처리 상태 타임라인",
+      "담당자/상태 표시",
+      "처리 버튼 정리",
+      "완료 화면 강화",
+      "1회 구매 후 영구 적용"
+    ],
+    "localId": "static-p43",
+    "id": "static-p43",
+    "__static": true,
+    "image": "./assets/products/06-ticket-bot.png"
+  }
+];</script>
 <script>
-const $=s=>document.querySelector(s); const $$=s=>[...document.querySelectorAll(s)];
+/* Product failsafe: paint the bundled catalog immediately; never wait for Render/API. */
+(function(){
+  try{
+    const grid=document.getElementById('productGrid');
+    const catalog=Array.isArray(window.VEXOHUB_PRODUCTS)?window.VEXOHUB_PRODUCTS:[];
+    if(!grid || !catalog.length) return;
+    const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const won=v=>Number(v||0).toLocaleString('ko-KR')+'원';
+    const image=v=>String(v||'./assets/vexo-fallback.png').replace(/^\/(assets\/)/,'./$1');
+    grid.innerHTML=catalog.map(p=>`<article class="product" data-product-failsafe="1">
+      <div class="product-media"><img src="${image(p.image)}" alt="${esc(p.name)}" loading="eager" decoding="async" onerror="this.onerror=null;this.src='./assets/vexo-fallback.png'"></div>
+      <div class="product-body"><div class="product-top"><span class="badge">${esc(p.badge||'VEXOHUB')}</span><span class="cat">${esc(p.category||'기타')}</span></div><h3>${esc(p.name)}</h3><div class="product-desc">${esc(p.description||'VEXOHUB 디지털 상품')}</div><div class="feature-list">${(p.features||[]).slice(0,3).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div>
+      <div class="product-bottom"><div class="price">${won(p.price)}</div><button class="btn blue failsafe-detail" type="button" data-product-id="${esc(p.id||p.localId||p.name)}">상세보기 →</button></div>
+    </article>`).join('');
+    const count=document.getElementById('productCountText'); if(count) count.textContent=catalog.length+'개 상품';
+    // Keep buttons usable even if the larger script fails later.
+    grid.querySelectorAll('.failsafe-detail').forEach(btn=>btn.addEventListener('click',()=>{if(typeof window.openProduct==='function') window.openProduct(btn.dataset.productId); else document.dispatchEvent(new CustomEvent('vexo:open-product',{detail:btn.dataset.productId}));}));
+  }catch(e){console.error('VEXOHUB failsafe render failed',e)}
+})();
+</script>
+<script>const $=s=>document.querySelector(s); const $$=s=>[...document.querySelectorAll(s)];
 const won=n=>Number(n||0).toLocaleString('ko-KR')+'원'; const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let products=[], currentUser=null, orders=[], inquiries=[], currentCategory='전체', productSort='featured', productSearch='', currentDrawerType=null, currentDrawerId=null, roomTimer=null, selectedFile=null, adminTab='overview', lastClosedOrderId=null;
 const categoryImage={
-  '자판기봇':'/assets/vexo-product-basic.png',
-  '서버 템플릿':'/assets/vexo-product-template.png',
-  '자동화':'/assets/vexo-product-automation.png',
-  '개발':'/assets/vexo-product-custom.png',
-  '디자인':'/assets/vexo-category-design.png',
-  '가이드':'/assets/vexo-category-guide.png',
-  '패키지':'/assets/vexo-product-bundle.png',
-  '봇 옵션':'/assets/vexo-category-options.png',
-  '커스텀':'/assets/vexo-product-custom.png',
-  '업그레이드':'/assets/vexo-category-upgrade.png'
+  '자판기봇':'./assets/vexo-product-basic.png',
+  '서버 템플릿':'./assets/vexo-product-template.png',
+  '자동화':'./assets/vexo-product-automation.png',
+  '개발':'./assets/vexo-product-custom.png',
+  '디자인':'./assets/vexo-category-design.png',
+  '가이드':'./assets/vexo-category-guide.png',
+  '패키지':'./assets/vexo-product-bundle.png',
+  '봇 옵션':'./assets/vexo-category-options.png',
+  '커스텀':'./assets/vexo-product-custom.png',
+  '업그레이드':'./assets/vexo-category-upgrade.png'
 };
 function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2400)}
 async function api(url,opt={}){const r=await fetch(url,{headers:{'Content-Type':'application/json',...(opt.headers||{})},...opt});let d={};try{d=await r.json()}catch{}if(!r.ok)throw new Error(d.error||'요청을 처리하지 못했습니다.');return d}
@@ -450,28 +1284,28 @@ function productImage(p){
   if(p?.__img) return p.__img;
   const name=String(p?.name||'');
   const map=[
-    [/VEXO 자판기봇 BASIC PREMIUM/i,'/assets/products/01-vending-basic.png'],
-    [/^VEXO 자판기봇 BASIC$/i,'/assets/products/01-vending-basic.png'],
-    [/VEXO 자판기봇 PRO PREMIUM/i,'/assets/products/02-vending-pro.png'],
-    [/^VEXO 자판기봇 PRO$/i,'/assets/products/02-vending-pro.png'],
-    [/VEXO 서버 템플릿 PRO/i,'/assets/products/04-community-template.png'],
-    [/VEXO 디스코드 서버 템플릿/i,'/assets/products/03-shop-template.png'],
-    [/런칭 풀세팅|^VEXO 서버 세팅$/i,'/assets/products/05-server-setup.png'],
-    [/티켓/i,'/assets/products/06-ticket-bot.png'],
-    [/인증/i,'/assets/products/07-verify-bot.png'],
-    [/판매자 패널|SELLER DASHBOARD|SELLER PACK|SELLER PRO|주문·매출 분석|고객관리/i,'/assets/products/08-admin-panel.png'],
-    [/배너/i,'/assets/products/09-banner-design.png'],
-    [/패널|임베드|버튼.*패널/i,'/assets/products/10-panel-design.png'],
-    [/프로필/i,'/assets/products/11-profile-pack.png'],
-    [/자동화|커스텀|개발|화이트라벨/i,'/assets/products/12-custom-automation.png']
+    [/VEXO 자판기봇 BASIC PREMIUM/i,'./assets/products/01-vending-basic.png'],
+    [/^VEXO 자판기봇 BASIC$/i,'./assets/products/01-vending-basic.png'],
+    [/VEXO 자판기봇 PRO PREMIUM/i,'./assets/products/02-vending-pro.png'],
+    [/^VEXO 자판기봇 PRO$/i,'./assets/products/02-vending-pro.png'],
+    [/VEXO 서버 템플릿 PRO/i,'./assets/products/04-community-template.png'],
+    [/VEXO 디스코드 서버 템플릿/i,'./assets/products/03-shop-template.png'],
+    [/런칭 풀세팅|^VEXO 서버 세팅$/i,'./assets/products/05-server-setup.png'],
+    [/티켓/i,'./assets/products/06-ticket-bot.png'],
+    [/인증/i,'./assets/products/07-verify-bot.png'],
+    [/판매자 패널|SELLER DASHBOARD|SELLER PACK|SELLER PRO|주문·매출 분석|고객관리/i,'./assets/products/08-admin-panel.png'],
+    [/배너/i,'./assets/products/09-banner-design.png'],
+    [/패널|임베드|버튼.*패널/i,'./assets/products/10-panel-design.png'],
+    [/프로필/i,'./assets/products/11-profile-pack.png'],
+    [/자동화|커스텀|개발|화이트라벨/i,'./assets/products/12-custom-automation.png']
   ];
   for(const [rx,path] of map) if(rx.test(name)) return path;
-  if(/가이드/i.test(name)) return '/assets/vexo-category-guide.png';
-  if(/디자인/i.test(name)) return '/assets/vexo-category-design.png';
-  if(/업그레이드/i.test(name)) return '/assets/vexo-category-upgrade.png';
-  if(p?.category==='봇 옵션') return '/assets/vexo-category-options.png';
-  if(p?.category==='패키지') return '/assets/vexo-product-bundle.png';
-  return categoryImage[p?.category]||'/assets/vexo-fallback.png';
+  if(/가이드/i.test(name)) return './assets/vexo-category-guide.png';
+  if(/디자인/i.test(name)) return './assets/vexo-category-design.png';
+  if(/업그레이드/i.test(name)) return './assets/vexo-category-upgrade.png';
+  if(p?.category==='봇 옵션') return './assets/vexo-category-options.png';
+  if(p?.category==='패키지') return './assets/vexo-product-bundle.png';
+  return categoryImage[p?.category]||'./assets/vexo-fallback.png';
 }
 
 const RECENT_KEY='vexohub_recent_products_v1';
@@ -538,26 +1372,42 @@ function mergeServerProducts(serverItems){
   return merged;
 }
 async function loadProducts(){
+  // Render the local catalog FIRST so a slow/sleeping API can never leave the shop blank.
   products=PRODUCT_FALLBACK.slice();
   if($('#heroProductCount')) $('#heroProductCount').textContent=products.length;
-  $('#productCountText').textContent=products.length+'개 상품';
-  renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
+  const count=$('#productCountText'); if(count) count.textContent=products.length+'개 상품';
+  try{renderFilters();}catch(e){console.error('renderFilters',e)}
+  try{renderProducts();}catch(e){console.error('renderProducts',e)}
+  try{renderSeries();}catch(e){console.error('renderSeries',e)}
+  try{renderRecentViewed();}catch(e){console.error('renderRecentViewed',e)}
+  try{renderPersistentRecent();}catch(e){console.error('renderPersistentRecent',e)}
+  try{renderPersistentCart();}catch(e){console.error('renderPersistentCart',e)}
   try{
     const d=await fetchWithTimeout('/api/products?category=all',5000);
     const items=Array.isArray(d.products)?d.products:[];
     if(items.length){
       products=mergeServerProducts(items);
       writeProductCache(items);
-      $('#productCountText').textContent=products.length+'개 상품';
-      renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
+      if(count) count.textContent=products.length+'개 상품';
+      try{renderFilters();}catch(e){console.error('renderFilters(server)',e)}
+      try{renderProducts();}catch(e){console.error('renderProducts(server)',e)}
+      try{renderSeries();}catch(e){console.error('renderSeries(server)',e)}
+      try{renderRecentViewed();}catch(e){console.error('renderRecentViewed(server)',e)}
+      try{renderPersistentRecent();}catch(e){console.error('renderPersistentRecent(server)',e)}
+      try{renderPersistentCart();}catch(e){console.error('renderPersistentCart(server)',e)}
       return true;
     }
-  }catch{}
+  }catch(e){/* keep local catalog */}
   const cached=readProductCache();
   if(cached.length){
     products=mergeServerProducts(cached);
-    $('#productCountText').textContent=products.length+'개 상품 · 저장된 목록';
-    renderFilters();renderProducts();renderSeries();renderRecentViewed();renderPersistentRecent();renderPersistentCart();
+    if(count) count.textContent=products.length+'개 상품 · 저장된 목록';
+    try{renderFilters();}catch(e){console.error('renderFilters(cache)',e)}
+    try{renderProducts();}catch(e){console.error('renderProducts(cache)',e)}
+    try{renderSeries();}catch(e){console.error('renderSeries(cache)',e)}
+    try{renderRecentViewed();}catch(e){console.error('renderRecentViewed(cache)',e)}
+    try{renderPersistentRecent();}catch(e){console.error('renderPersistentRecent(cache)',e)}
+    try{renderPersistentCart();}catch(e){console.error('renderPersistentCart(cache)',e)}
   }
   return false;
 }
@@ -593,7 +1443,7 @@ function renderProducts(){
   let list=products.filter(p=>(currentCategory==='전체'||p.category===currentCategory)&&(!q||String(p.name||'').toLowerCase().includes(q)||String(p.description||'').toLowerCase().includes(q)||String(p.category||'').toLowerCase().includes(q)));
   list=sortProductList(list);
   const grid=$('#productGrid'); if(!grid)return; grid.innerHTML=list.length?list.map(p=>`<article class="product">
-    <div class="product-media"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"></div>
+    <div class="product-media"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"></div>
     <div class="product-body">
       <div class="product-top"><span class="badge">${esc(p.badge||'VEXOHUB')}</span><span class="cat">${esc(p.category||'기타')}</span></div>
       <h3>${esc(p.name)}</h3>
@@ -606,7 +1456,7 @@ function renderProducts(){
     </div>
   </article>`).join(''):'<div class="empty" style="grid-column:1/-1">조건에 맞는 상품이 없습니다.</div>'
 }
-function renderSeries(){const order=['VEXO 자판기봇 BASIC','VEXO 자판기봇 BASIC PREMIUM','VEXO 자판기봇 PRO','VEXO 자판기봇 PRO PREMIUM'];const map=new Map(products.map(p=>[p.name,p]));const core=order.map(name=>map.get(name)).filter(Boolean);$('#seriesGrid').innerHTML=core.map(p=>`<div class="category-card"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"><div><strong>${esc(p.name)}</strong><span>${won(p.price)} · ${esc(p.badge||'판매중')}</span></div></div>`).join('') || '<div class="empty" style="grid-column:1/-1">BOT SERIES를 불러오는 중입니다.</div>'}
+function renderSeries(){const order=['VEXO 자판기봇 BASIC','VEXO 자판기봇 BASIC PREMIUM','VEXO 자판기봇 PRO','VEXO 자판기봇 PRO PREMIUM'];const map=new Map(products.map(p=>[p.name,p]));const core=order.map(name=>map.get(name)).filter(Boolean);$('#seriesGrid').innerHTML=core.map(p=>`<div class="category-card"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}"><div><strong>${esc(p.name)}</strong><span>${won(p.price)} · ${esc(p.badge||'판매중')}</span></div></div>`).join('') || '<div class="empty" style="grid-column:1/-1">BOT SERIES를 불러오는 중입니다.</div>'}
 
 const CART_KEY='vexohub_cart_v2';
 let cartItems=readCart();
@@ -670,7 +1520,7 @@ async function submitCartInquiry(){
   }catch(e){toast(e.message)}
 }
 
-function openProduct(id){const p=findProduct(id);if(!p)return;recordRecentViewed(p.id);openModal(p.name,`<img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}" style="width:100%;height:190px;object-fit:contain;border-radius:16px;background:#090a12;border:1px solid rgba(143,92,255,.16)"><div><div class="mini">${esc(p.category)} · ${esc(p.badge||'VEXO')}</div><h4 style="font-size:22px;margin-top:5px">${esc(p.name)}</h4><p style="color:#64748b;font-size:11px;margin-top:7px;line-height:1.7">${esc(p.description||'')}</p></div><div class="panel" style="box-shadow:none;padding:14px"><div class="mini">구성</div><div class="feature-list" style="margin-top:8px">${(p.features||[]).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div style="display:flex;align-items:center;gap:10px"><b style="font-size:22px;color:#1e40af;margin-right:auto">${won(p.price)}</b><button class="btn ghost" onclick="addToCart('${esc(p.id)}')">🛒 장바구니</button><button class="btn blue" onclick="closeModal();startOrder('${esc(p.id)}')">이 상품 주문하기</button></div>`)}
+function openProduct(id){const p=findProduct(id);if(!p)return;recordRecentViewed(p.id);openModal(p.name,`<img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./assets/vexo-fallback.png'" src="${productImage(p)}" alt="${esc(p.name)}" style="width:100%;height:190px;object-fit:contain;border-radius:16px;background:#090a12;border:1px solid rgba(143,92,255,.16)"><div><div class="mini">${esc(p.category)} · ${esc(p.badge||'VEXO')}</div><h4 style="font-size:22px;margin-top:5px">${esc(p.name)}</h4><p style="color:#64748b;font-size:11px;margin-top:7px;line-height:1.7">${esc(p.description||'')}</p></div><div class="panel" style="box-shadow:none;padding:14px"><div class="mini">구성</div><div class="feature-list" style="margin-top:8px">${(p.features||[]).map(f=>`<span>${esc(f)}</span>`).join('')}</div></div><div style="display:flex;align-items:center;gap:10px"><b style="font-size:22px;color:#1e40af;margin-right:auto">${won(p.price)}</b><button class="btn ghost" onclick="addToCart('${esc(p.id)}')">🛒 장바구니</button><button class="btn blue" onclick="closeModal();startOrder('${esc(p.id)}')">이 상품 주문하기</button></div>`)}
 async function startOrder(id){
   if(!currentUser){openLogin();return}
   let p=findProduct(id); if(!p)return;
@@ -714,7 +1564,7 @@ function renderRoom(o,resetScroll=true){
   const draftSelectedFile=selectedFile;
   const draftDeliveryFile=deliveryFile;
 
-  $('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>주문 관리</strong><span>VEXOHUB · ${esc(o.id)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">주문 상품</div><div style="display:flex;align-items:center;gap:10px;margin-top:4px"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/assets/vexo-fallback.png'" src="${productImage(findProduct(o.productId)||{})}" style="width:54px;height:54px;object-fit:cover;border-radius:12px;background:#0b1a33"><div style="min-width:0"><div class="room-value">${esc(o.productName)} × ${o.quantity}</div><div class="room-price">${won(o.total)}</div></div></div></div>${progressHtml(o.status)}<div class="room-grid"><div class="room-box"><div class="room-label">구매자</div><div class="room-value">${esc(o.username)}</div></div><div class="room-box"><div class="room-label">Discord</div><div class="room-value">${esc(o.discordTag||'-')}</div></div><div class="room-box"><div class="room-label">입금자명</div><div class="room-value">${esc(o.payerName||'-')}</div></div><div class="room-box"><div class="room-label">금액</div><div class="room-value">${won(o.total)}</div></div></div><div class="room-box"><div class="room-label">요청사항</div><div class="room-value" style="white-space:pre-wrap">${esc(o.memo||'-')}</div></div><div class="room-actions">${isAdmin?`<button class="btn lightblue" onclick="approveOrder('${esc(o.id)}')">✅ 입금 확인</button>${['처리중'].includes(o.status)?`<button class="btn blue" onclick="focusDelivery()">📦 상품 지급</button>`:''}`:`${o.status==='주문접수'?`<button class="btn blue" onclick="requestPayment('${esc(o.id)}')">💳 입금 확인 요청</button>`:o.status==='입금확인요청'?`<button class="btn lightblue" disabled>✅ 입금 확인 요청 전송됨</button>`:''}`}</div><div class="room-help">주문·문의 채팅은 이 화면을 열었을 때만 표시됩니다. 페이지 다른 곳에서는 보이지 않습니다.</div></div>`;
+  $('#drawerSide').innerHTML=`<div class="drawer-head"><div><strong>주문 관리</strong><span>VEXOHUB · ${esc(o.id)}</span></div><button class="drawer-close" onclick="closeDrawer()">×</button></div><div class="room-pad"><div class="room-product"><div class="room-label">주문 상품</div><div style="display:flex;align-items:center;gap:10px;margin-top:4px"><img loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./assets/vexo-fallback.png'" src="${productImage(findProduct(o.productId)||{})}" style="width:54px;height:54px;object-fit:cover;border-radius:12px;background:#0b1a33"><div style="min-width:0"><div class="room-value">${esc(o.productName)} × ${o.quantity}</div><div class="room-price">${won(o.total)}</div></div></div></div>${progressHtml(o.status)}<div class="room-grid"><div class="room-box"><div class="room-label">구매자</div><div class="room-value">${esc(o.username)}</div></div><div class="room-box"><div class="room-label">Discord</div><div class="room-value">${esc(o.discordTag||'-')}</div></div><div class="room-box"><div class="room-label">입금자명</div><div class="room-value">${esc(o.payerName||'-')}</div></div><div class="room-box"><div class="room-label">금액</div><div class="room-value">${won(o.total)}</div></div></div><div class="room-box"><div class="room-label">요청사항</div><div class="room-value" style="white-space:pre-wrap">${esc(o.memo||'-')}</div></div><div class="room-actions">${isAdmin?`<button class="btn lightblue" onclick="approveOrder('${esc(o.id)}')">✅ 입금 확인</button>${['처리중'].includes(o.status)?`<button class="btn blue" onclick="focusDelivery()">📦 상품 지급</button>`:''}`:`${o.status==='주문접수'?`<button class="btn blue" onclick="requestPayment('${esc(o.id)}')">💳 입금 확인 요청</button>`:o.status==='입금확인요청'?`<button class="btn lightblue" disabled>✅ 입금 확인 요청 전송됨</button>`:''}`}</div><div class="room-help">주문·문의 채팅은 이 화면을 열었을 때만 표시됩니다. 페이지 다른 곳에서는 보이지 않습니다.</div></div>`;
   $('#chatHead').innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div class="chat-person"><div class="chat-avatar">${isAdmin?'⚙':'💬'}</div><div><b>${isAdmin?'관리자 채팅':'주문 채팅'}</b><span>${isAdmin?'구매자와 1:1로 응대합니다.':'관리자 확인용 주문 전용 채팅입니다.'}</span></div></div><button class="drawer-close" onclick="closeDrawer()">×</button></div>`;
   const ms=(o.messages||[]).map(m=>{const isSystem=String(m.senderRole||'')==='system'||String(m.senderId||'')==='system';const cls=isSystem?'system':(String(m.senderId)===String(currentUser.id)?'mine':'');const label=isSystem?'<span class="system-label">자동 결제 안내</span>':'';const payment=isSystem&&String(m.text||'').includes('토스뱅크')?`<div class="payment-notice">${esc(m.text||'')}</div>`: `<div>${esc(m.text||'')}</div>`;return `<div class="bubble ${cls}"><div class="who">${esc(m.senderName||'VEXOHUB')}</div>${label}${payment}${m.attachment?`<a class="attach" href="/api/attachments/${encodeURIComponent(m.attachment.id)}" target="_blank">📎 ${esc(m.attachment.name)}</a>`:''}<div class="time">${new Date(m.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</div></div>`}).join('');
   $('#chatMessages').innerHTML=ms||'<div class="empty">아직 메시지가 없습니다.<br>필요한 내용을 남겨주세요.</div>';
@@ -919,7 +1769,19 @@ async function restoreLastClosedOrderPrompt(){ if(!currentUser||currentUser.role
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer()} if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='roomText'){e.preventDefault();sendRoomMessage(currentDrawerId)} if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='inqRoomText'){e.preventDefault();sendInquiryMessage(currentDrawerId)}});
 setInterval(()=>{heartbeat();if(currentUser?.role==='admin') refreshAdminNotifications()},15000);
-(async function init(){updateCartBadge();await loadSite();await heartbeat();await loadProducts();loadAnnouncements();try{const d=await api('/api/me');currentUser=d.user}catch{}refreshAccount();await restoreLastClosedOrderPrompt();await restoreLastClosedInquiry()})();
+(async function init(){
+  updateCartBadge();
+  // Never block first paint/product rendering on Render wake-up or another API call.
+  const productTask=loadProducts();
+  loadSite().catch(()=>{});
+  heartbeat().catch(()=>{});
+  try{const d=await api('/api/me');currentUser=d.user}catch{}
+  refreshAccount();
+  loadAnnouncements().catch(()=>{});
+  try{await restoreLastClosedOrderPrompt()}catch{}
+  try{await restoreLastClosedInquiry()}catch{}
+  await productTask;
+})();
 </script>
 </body>
 </html>
